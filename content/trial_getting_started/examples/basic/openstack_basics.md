@@ -23,6 +23,8 @@ In this example we will deploy only the infrastructure.
 Later, in the more advanced examples (multi cloud examples)
 we will leverage this setup as the basis for deploying a generic application server and an application.
 
+You should already be familiar with the concepts from the [Fundamentals Example.]({{< relref "/trial_getting_started/examples/fundamentals/" >}})
+
 ## Prerequisites
 This example expects the following prerequisites:
 
@@ -30,252 +32,79 @@ This example expects the following prerequisites:
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
 * An available **CentOS 7** cloud image in OpenStack (Glance)
 
-#### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
-
-{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
-
-* [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
-* [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
-
-{{% note %}}
-Community version - Some of the options described in the guide are not available in the community version management console (web UI). An example would be setting up secrets. You can still perform all of the functionality using the {{< param cfy_cli_name >}}.
-{{% /note %}}
-
-## {{< param cfy_console_name >}}
-
-This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
-The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all {{< param product_name >}} activities.
-
-
+## Deployment Steps
 
 ### Create Secrets
 
-To connect to {{< param cloud >}}, credentials are required.
-{{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
-Secrets are kept encrypted in a secure way and used in run-time by the system.
-Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
+Credentials and access information are required to connect to {{< param cloud >}}. {{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
 
-{{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to create secrets using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#create-secrets" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#create-secrets-1" >}})
 
-To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
+Create the following secrets in the {{< param cfy_manager_name >}}:
 
-```bash   
-* openstack_username
-* openstack_password
-* openstack_tenant_name
-* openstack_auth_url
-* openstack_external_network
-* openstack_region
-* base_image_id
-* base_flavor_id
-* openstack_user_domain_name
-* openstack_project_domain_name
-```
-
-**Notes**
-
-* `openstack_auth_url` - a Keystone v3 authentication url.
-* `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
-* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
-* `openstack_user_domain_name` - usually "default".
-* `openstack_project_domain_name` - usually "default".
+|                           Secret Name                            |             Description              |
+| ---------------------------------------------------------------- | ------------------------------------ |
+| `openstack_username` | Username to access OpenStack API |
+| `openstack_password` | Password to access OpenStack API |
+| `openstack_tenant_name` | Openstack tenant |
+| `openstack_auth_url` | Keystone v3 authentication url |
+| `openstack_external_network` |Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET". |
+| `openstack_region` | Openstack region |
+| `base_image_id` | Image ID of a CentOS 7 image in your OpenStack account |
+| `base_flavor_id` | Image flavor ID (size of the VM) |
+| `openstack_user_domain_name` | Typically "default" |
+| `openstack_project_domain_name` | Typically "default" |
 
 ![Required secrets for this example]( /images/trial_getting_started/openstack_basic/create_secrets.png )
 
 
 ### Upload Plugins
 
-Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
-I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
+Connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin. This example also requires the Utilities plugin.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload plugins using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-plugins" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-plugins-1" >}})
 
-For this example, upload the following plugins:
+Upload the following plugins to the {{< param cfy_manager_name >}}:
 
 * Utilities
 * {{< param cloud >}} v3
 
-
-
 ### Upload Blueprint
 
-A blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
-Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-The {{< param cloud >}} infrastructure blueprint is available [here]({{< param basic_blueprint_master >}}/{{< param blueprint_name >}}).
+The blueprint for this example handles describes all of the components in the environment's topology. Upload a new blueprint to the {{< param cfy_manager_name >}} with the values below.
 
-The flow required to setup a service consists of:
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload a blueprint using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
-1. Upload the blueprint describing the service to the {{< param cfy_manager_name >}}.
-1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
-1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
+* **Blueprint package**: `https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip`
+* **Blueprint name**: virtual-machine (or any name of your choosing)
+* **Blueprint YAML file**: openstack.yaml
 
-Let's run these one by one.
+### Deploy and Install
 
-To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
+Once the blueprint has been uploaded, it will be displayed on the Blueprints page. Create a new deployment, adjusting any inputs as needed.
 
-
-### Deploy & Install
-
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs (such as the {{< param cloud >}} region), and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to create a deployment using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#deploy-and-install" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
 ![Create a Deployment]( /images/trial_getting_started/openstack_basic/deploy.png)
 
-You will be directed to the **Deployment** page and will be able to track the progress of the execution.
-
-The deployment you have created should be displayed in the deployments list in the **Deployments** page.
+You will be directed to the **Deployment** page and will be able to track the progress of the execution:
 
 ![Track the progress of a Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
 
 ### Validate
 
-In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
+This example deployed a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs along with a new network and other resources. You can validate this deployment by:
 
-* Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
-* Examine the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, and view the installation logs.
+* Navigating to the {{< param cloud >}} console and verifying that the new instance and other resources were created.
+* Examining the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, installation logs.
 
-To login to your new {{< param cloud >}} instance, you can look at the **Deployment Outputs/Capabilities** widget on the Deployment screen to find your {{< param cloud >}} instance public IP, SSH username, and SSH private key.
+
+You can log in to the newly deployed {{< param cloud >}} instance by obtaining the public IP, SSH username, and SSH private key ouputs and capabilities.
+
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of verification steps, including how to obtain outputs and capabilities using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#validate" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#validate-1" >}})
 
 ![Get Deployment outputs]( /images/trial_getting_started/aws_basic/Screenshot263.png )
 
 ### Teardown
 
-To remove the deployment and destroy the orchestrated infrastructure resources, run the **Uninstall** workflow by clicking the **Execute workflow** menu next to the deployment, expanding **Default workflows**, and selecting **Uninstall**.
-
-
-____
-
-
-## {{< param cfy_cli_name >}}
-
-Create a CLI profile instructing your CLI how to connect with the {{< param cfy_manager_name >}} by running the following CLI commands
-
-```bash
-cfy init
-cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
-cfy profiles set --manager-tenant default_tenant
-```
-
-### Create Secrets
-
-To enable {{< param product_name >}} to connect to {{< param cloud >}}, credentials are required.
-{{< param product_name >}} recommends storing such sensitive information as a {{< param product_name >}} secret.
-Secrets are encrypted in a secure way and used during run-time by the system.
-Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
-
-{{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_cli_link>}}).
-
-To store the access keys as secrets via the {{< param cfy_cli_name >}}, run the following (replacing <value> with the actual string retrieved from {{< param cloud >}}):
-
-```bash   
-cfy secrets create openstack_username --secret-string <user_name>
-cfy secrets create openstack_password --secret-string <password>
-cfy secrets create openstack_tenant_name --secret-string <tenant_name>
-cfy secrets create openstack_auth_url --secret-string <url>
-cfy secrets create openstack_external_network --secret-string <external_network_name>
-cfy secrets create openstack_region --secret-string <openstack_region>
-cfy secrets create base_image_id --secret-string <base_image_id>
-cfy secrets create base_flavor_id --secret-string <base_flavor_id>
-cfy secrets create openstack_user_domain_name --secret-string <value>
-cfy secrets create openstack_project_domain_name --secret-string <value>
-```
-
-**Notes**
-
-* `openstack_auth_url` - a Keystone v3 authentication url.
-* `openstack_external_network` - the Floating IP network name in OpenStack. For example, in RackSpace it is "GATEWAY_NET".
-* `base_image_id` - the image_id of a CentOS 7 image in your OpenStack account.
-* `base_flavor_id` - the image flavor id (the "t-shirt" size of the VM).
-* `openstack_user_domain_name` - usually "default".
-* `openstack_project_domain_name` - usually "default".
-
-**Advanced users tip**:
-
-You can also source the OpenStack RC file, then use the environment variables, for example:
-```
-cfy secrets create openstack_username -s ${OS_USERNAME}
-```
-### Upload Plugins
-
-Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers, and automation tools.
-Connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin. You may upload specific plugins or, for simplicity, upload the plugin bundle containing all of the basic, pre-packaged, plugins.
-
-To upload the default plugins bundle (this may take a few minutes depending on your internet speed):
-```bash
-cfy plugins bundle-upload
-```
-
-**Tip**: Read more about [plugins]({{< relref "/working_with/official_plugins/_index.md" >}}) and [writing your own plugins]({{< relref "/developer/writing_plugins/_index.md" >}}).
-
-### Upload Blueprint and Deploy
-
-A blueprint is a general purpose model for describing systems, services or any orchestrated object topology. Blueprints are represented as descriptive code (YAML-based files) and are typically stored and managed as part of the source code repository.
-
-The {{< param cloud >}} infrastructure blueprint is available [here]({{< param basic_blueprint_master >}}/{{< param blueprint_name >}}).
-
-Uploading a blueprint to {{< param product_name >}} can be done by direct upload or by providing the link in the source code repository.
-The flow to do that is:
-
- 1. Upload the blueprint.
- 1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
- 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
-
-In order to perform this flow as a single unit, we will use the **install** command.
-
-```bash
-cfy install {{< param basic_blueprint_zip >}} -n {{< param blueprint_name >}}
-```
-
-### Validate
-
-In this example we have setup a simple infrastructure. A virtual instance (VM) was created in the region specified in the Deployment inputs alongside a new network and various other resources.
-
-* Go to your {{< param cloud >}} console and see the new instance and other resources that were created.
-* You can easily get a list of all deployed nodes by running:
-
-```bash
-cfy nodes list -d {{< param deployment_name >}}
-```
-
-which will return:
-
-```bash
-
-Nodes:
-+------------------+---------------------------+---------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|        id        |       deployment_id       |        blueprint_id       | host_id |                  type                  | visibility |  tenant_name   | number_of_instances | planned_number_of_instances | created_by |
-+------------------+---------------------------+---------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-|      subnet      | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.nodes.openstack.Subnet     |   tenant   | default_tenant |          1          |              1              |   admin    |
-|     network      | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.nodes.openstack.Network    |   tenant   | default_tenant |          1          |              1              |   admin    |
-|  security-group  | {{< param deployment_name >}} | {{< param deployment_name >}} |         | cloudify.nodes.openstack.SecurityGroup |   tenant   | default_tenant |          1          |              1              |   admin    |
-|        ip        | {{< param deployment_name >}} | {{< param deployment_name >}} |         |  cloudify.nodes.openstack.FloatingIP   |   tenant   | default_tenant |          1          |              1              |   admin    |
-|    cloud_init    | {{< param deployment_name >}} | {{< param deployment_name >}} |         |  cloudify.nodes.CloudInit.CloudConfig  |   tenant   | default_tenant |          1          |              1              |   admin    |
-|        vm        | {{< param deployment_name >}} | {{< param deployment_name >}} |    vm   |    cloudify.nodes.openstack.Server     |   tenant   | default_tenant |          1          |              1              |   admin    |
-| external-network | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.nodes.openstack.Network    |   tenant   | default_tenant |          1          |              1              |   admin    |
-|      router      | {{< param deployment_name >}} | {{< param deployment_name >}} |         |    cloudify.nodes.openstack.Router     |   tenant   | default_tenant |          1          |              1              |   admin    |
-|       port       | {{< param deployment_name >}} | {{< param deployment_name >}} |         |     cloudify.nodes.openstack.Port      |   tenant   | default_tenant |          1          |              1              |   admin    |
-+------------------+---------------------------+---------------------------+---------+----------------------------------------+------------+----------------+---------------------+-----------------------------+------------+
-
-Showing 9 of 9 nodes
-
-```
-
-**Tip**: To check out some more commands to use with the {{< param cfy_console_name >}}, run `cfy --help`
-
-An even easier way to review your deployment is through the [{{< param cfy_console_name >}}](#validate).
-Login to the console and browse to the **Deployments** page.
-Select the deployment (`{{< param deployment_name >}}`) and explore the topology, inputs, outputs, nodes, and logs.
-
-![openstack_simple_vm_topology.png]( /images/trial_getting_started/openstack_simple_vm_topology.png )
-
-This is also a good time to examine the blueprint used in the example.
-The blueprint can be examined in the {{< param cfy_console_name >}}, however in this case
-we will go to the {{< param product_name >}} examples repository in Github and examine it there: [{{< param blueprint_name >}}]({{< param basic_blueprint_master >}}/{{< param blueprint_name >}})
-
-
-### Teardown
-
-To remove the deployment and delete all resources from {{< param cloud >}} simply run the uninstall command:
-```bash
-cfy uninstall {{< param deployment_name >}}
-```
+Once you are done testing the environment, you can teardown the deployed resources. Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of teardown steps using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#teardown" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#teardown-1" >}})
