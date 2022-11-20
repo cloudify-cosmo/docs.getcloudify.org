@@ -1,7 +1,7 @@
 +++
 title = "AWS AMI"
 description = "AWS AMI Installation (BYOL)"
-weight = 30
+weight = 35
 alwaysopen = false
 +++
 
