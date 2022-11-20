@@ -1,9 +1,9 @@
-+++
-title = "Best practices for agile blueprint development"
-description = "Best practices for agile blueprint development"
-weight = 10
-alwaysopen = false
-+++
+---
+title: "Best practices for agile blueprint development"
+description: "Best practices for agile blueprint development"
+weight: 96
+alwaysopen: false
+---
 
 
 

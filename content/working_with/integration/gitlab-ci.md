@@ -21,7 +21,7 @@ update-aws-deployment:
   rules:
     - changes:
         - inputs/inputs-aws.yaml
-  image: jrzeszutek/cfyci:6.2.0
+  image: cloudifyplatform/cloudify-cli:6.4.0
   variables:
     GIT_CHECKOUT: "true"
     INPUTS_FILE: "inputs/inputs-aws.yaml" # in inputs file from repo
@@ -56,5 +56,10 @@ Extra variables need to be set:
 - CLOUDIFY_TENANT
 - CLOUDIFY_USERNAME
 - EAAS_BLUEPRINT_ID
+- CLOUDIFY_TOKEN
+
+{{% note title="Note" %}}
+to make use of ``CLOUDIFY_TOKEN`` you must not set ``CLOUDIFY_USERNAME`` and ``CLOUDIFY_PASSWORD``
+{{% /note %}}
 
 Instructions how to set [GitLab CI/CD variables](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project).
