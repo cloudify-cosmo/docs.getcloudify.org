@@ -1,6 +1,6 @@
 +++
 title = "SaaS"
-description = "Overview on how to sign up to Cloudify SaaS"
+description = "Overview of how to sign up for the Cloudify SaaS."
 weight = 40
 alwaysopen = false
 +++

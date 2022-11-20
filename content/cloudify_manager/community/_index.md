@@ -1,6 +1,6 @@
 +++
 title = "Community"
-description = "Provides requirments and installation of Community version"
+description = "Provides requirments and installation instructions for the Community version."
 weight = 20
 alwaysopen = false
 +++

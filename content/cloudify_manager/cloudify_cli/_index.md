@@ -1,6 +1,6 @@
 +++
 title = "Cloudify CLI"
-description = "Cloudify CLI is a command line client to interact with Cloudify Manager. The section provides all the details to install and setup CFY CLI"
+description = "Cloudify CLI is a command line client to interact with Cloudify Manager. The section provides all the details to install and setup CFY CLI."
 weight = 50
 alwaysopen = false
 +++

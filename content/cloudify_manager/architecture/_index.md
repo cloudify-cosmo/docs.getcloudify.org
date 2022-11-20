@@ -1,6 +1,6 @@
 +++
 title = "Architecture"
-description = "Covers High Level Archiecture and security aspects"
+description = "Covers high level architecture and security aspects."
 weight = 10
 +++
 
