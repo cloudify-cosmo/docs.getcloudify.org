@@ -9,13 +9,13 @@ alwaysopen = false
 
 Snapshots provide a way for backing up the state of the {{< param cfy_manager_name >}}.  A snapshot should be taken on a daily basis (suggest in an off-peak time) and can be automated using the REST API as an alternative to an operator manually running the snapshot as shown here in this user guide.
 
-Backing up the virtual machine that the {{< param cfy_manager_name >}}s run on should be done at regular intervals, this would be dictated by a backup policy and would likely involve daily, weekly, monthly and yearly backups as required.  The method for backing up the {{< param cfy_manager_name >}} virtual machines falls outside the scope of this document.
+Backing up the virtual machine that the {{< param cfy_manager_name >}} runs on should be done at regular intervals, this would be dictated by a backup policy and would likely involve daily, weekly, monthly, and yearly backups as required.  The method for backing up the {{< param cfy_manager_name >}} virtual machines falls outside the scope of this document.
 
 ## Snapshots
 
 Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at regular intervals (suggest daily), this can be automated through the REST-based Service API or can be done manually by an operator using the UI or CFY CLI.  The screenshot below shows the menu presented to the operator when the settings button (i.e. cog icon on the right top of the menu) is clicked.
 
-### Creating snapshot
+### Creating Snapshot
 
 1. Create snapshot:
 
@@ -51,7 +51,7 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
 
     Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#download-snapshot).
 
-### Applying snapshot
+### Applying Snapshot
 
 
 
@@ -127,7 +127,7 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
     1. {'status': 'Snapshot restore in progress...\nThis may take a while, depending on the snapshot size.'}
     1. {'status': 'No `restore_snapshot` workflow currently running.'}
 
-**If the restore is done as part of the upgrade to a newer {{< param cfy_manager_name >}} version, consider performing also:**
+**If the Restore is done as part of the upgrade to a newer {{< param cfy_manager_name >}} version, consider performing also:**
 
 1. Execute [install_new_agents workflow]({{< relref "working_with/workflows/built-in-workflows.md#the-install-new-agents-workflow" >}}) on the new {{< param cfy_manager_name >}} so that all hosts agents are updated and connected to RabbitMQ on the new {{< param cfy_manager_name >}}.
 
@@ -157,9 +157,9 @@ Snapshots of the HA {{< param cfy_manager_name >}} cluster should be taken at re
 Parameters specification available in the [{{< param product_name >}} API documentation](http://docs.cloudify.co/api/latest/#the-plugins-update-resource).
 
 
-#### Special case -- restoring scheduled executions {#special-case-restoring-scheduled-executions}
+#### Special Case - Restoring Scheduled Executions {#special-case-restoring-scheduled-executions}
 
-During a snapshot-restore procedure pending scheduled execution tasks are added to the message queue, overdue executions on the other hand are marked as failed.
+During a snapshot restore procedure pending scheduled execution tasks are added to the message queue, overdue executions on the other hand are marked as failed.
 For example assume the following flow:
 
 * at 01:00 user adds a scheduled workflow set to take place at 4:00

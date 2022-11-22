@@ -20,12 +20,12 @@ By searching through the {{< param product_name >}} logs and events you should b
 
 ## Where are the {{< param product_name >}} service log files?
 
-There are many different services running on the {{< param cfy_manager_name >}} most of which an operator should not need to access in the day-to-day operation of the platform. However, in the case where a {{< param product_name >}} service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this document.
+There are many different services running on the {{< param cfy_manager_name >}} most of which an operator should not need to access to in the day-to-day operation of the platform. However, in the case where a {{< param product_name >}} service cannot be restarted or appears to not be working these service log files are detailed [here]({{< relref "working_with/manager/service-logs.md" >}}) in this document.
 
 
 ## What do the different status badges shown on the topology diagram in the {{< param cfy_console_name >}} mean?
 
-The following document details these status badges [here]({{< relref "working_with/console/pages/services-page.md" >}}).
+this [document]({{< relref "working_with/console/pages/services-page.md" >}}) details these status badges.
 
 
 ## How do I know if a deployment is installed or not?
@@ -39,7 +39,7 @@ You can see these in {{< param cfy_console_name >}} in deployment page (in **Dep
 
 
 ## How can I fix a failing deployment install?
-If a deployment installation is failing with a runtime error (for example, the wrong credentials were provided), you should stop the installation and remove the deployment before you run the command again. To do that, run (replace `DEPLOYMENT_NAME` with an appropriate value):
+If a deployment installation is failing with a runtime error (for example, the wrong credentials were provided), you should stop the installation and remove the deployment before you run the command again. To do that, run: replace `DEPLOYMENT_NAME` with an appropriate value.
 
 ```
 cfy executions start stop -d DEPLOYMENT_NAME -p ignore_failure=true
@@ -63,7 +63,7 @@ There is a way to find out this information using the {{< param cfy_cli_name >}}
 
 ## We have a stuck deployment with a starting or canceling state
 
-Sometimes you will have deployments you can't delete via the UI / CLI / API. These simple instructions will help you remove these.
+Sometimes you will have deployments you can't delete via the UI/ CLI /API. These simple instructions will help you remove these.
 
 First, make sure to cancel the stuck execution:
 
@@ -124,7 +124,7 @@ Please ensure the system is in the maintanance mode. If the system is in the mai
 ## Troubleshooting techniques
 
 
-### How to run {{< param cfy_cli_name >}} commands
+### How to run {{< param cfy_cli_name >}} commands?
 
 In order to run the {{< param cfy_cli_name >}} command 'cfy' you need to ensure that you have installed the {{< param cfy_cli_name >}}
 
@@ -142,9 +142,9 @@ cfy profiles use <manager IP>
 Alternatively, the {{< param cfy_cli_name >}} tool can be installed on your system by following one of the methods  [here]({{< relref "cloudify_manager/cloudify_cli" >}}).
 
 
-### How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the CLI
+### How to retrieve the status of the {{< param cfy_manager_name >}} or cluster via the CLI?
 
-login to a server
+Login to a server
 
 ```
 $ [centos@cm-1 ~]$ cfy status

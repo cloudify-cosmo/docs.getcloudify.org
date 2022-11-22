@@ -9,19 +9,19 @@ alwaysopen = false
 
 A {{< param product_name >}} cluster has up to three component clusters: Database, Message Queue, and Manager.
 
-During operation of a {{< param product_name >}} cluster, it may become necessary to perform operations on these components such as removing faulty/missing nodes, adding new nodes, or other maintenance operations.
+During operation of a {{< param product_name >}} cluster, it may become necessary to perform operations on these components such as removing faulty/ missing nodes, adding new nodes, or other maintenance operations.
 
 All day 2 operations should only be conducted while the cluster is in maintenance mode.
 
 When working on a three node cluster, don't forget to specify the config file to use with cfy_manager.
 
-e.g. if you are intending to work on the first node set up using the cluster management tool, on the broker you might use:
+For example: if you intend to work on the first node set up using the cluster management tool, on the broker you might use:
 
 ```bash
 cfy_manager brokers list -c /etc/cloudify/rabbitmq-1.config.yaml
 ```
 
-## {{< param product_name >}} manager operations  
+## {{< param product_name >}} Manager Operations
 
 ### List
 
@@ -35,8 +35,8 @@ cfy cluster managers list
 
 ### Remove
 
-To remove a manager from the cluster, first ensure that the manager itself is uninstalled or the VM/container it is on has been deleted.
-If you are in any doubt about the state of the old manager node, it is recommended to ensure that its VM/container has been deleted.
+To remove a manager from the cluster, first ensure that the manager itself is uninstalled or the VM/ container it is on was deleted.
+If you are in any doubt about the state of the old manager node, it is recommended to ensure that its VM/ container was deleted.
 
 Then, from any machine with a CLI configured to access the cluster, run the following command:
 
@@ -44,26 +44,26 @@ Then, from any machine with a CLI configured to access the cluster, run the foll
 cfy cluster remove <manager name as it appears in the hostname field of the managers list command>
 ``` 
 
-After removal is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
+After the removal is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
 ```bash
 cfy cluster managers list
 cfy cluster status
 ```
-All expected managers should be listed, and the status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
+All expected managers should be listed, and the status should be healthy. Note that the cluster status can take up to ~30 seconds to stabilize.
 
 ### Add
 
 To add a new manager node, install the node with the same network, DB and broker settings in the config.yaml as the existing managers.
 
-After install is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
+After the install is complete, you can verify that the cluster is healthy by checking the managers list, and the cluster status:
 ```bash
 cfy cluster managers list
 cfy cluster status
 ```
-All expected managers should be listed, and the status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
+All expected managers should be listed and the status should be healthy. Note that the cluster status can take up to ~30 seconds to stabilize.
 
 
-## Message queue operations
+## Message Queue Operations
 
 ### List
 
@@ -81,8 +81,8 @@ cfy_manager brokers list
 
 ### Remove
 
-To remove a broker from a cluster, first ensure that the broker itself is uninstalled or the VM/container it is on has been deleted.
-If you are in any doubt about the state of the old broker node, it is recommended to ensure that its VM/container has been deleted.
+To remove a broker from a cluster, first ensure that the broker itself is uninstalled or the VM/ container it is on was deleted.
+If you are in any doubt about the state of the old broker node, it is recommended to ensure that its VM/ container was deleted.
 
 Next, both of the following steps must be performed:
 
@@ -101,7 +101,7 @@ After removing the broker, you can verify that the cluster is healthy by checkin
 cfy cluster brokers list
 cfy cluster status
 ```
-All expected brokers should be listed, and the status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
+All expected brokers should be listed, and the status should be healthy. Note that cluster status can take up to ~30 seconds to stabilize.
 
 ### Add
 
@@ -125,7 +125,7 @@ cfy cluster status
 All expected brokers should be listed, and the status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
 
 
-## Database operations
+## Database Operations
 
 ### List
 
@@ -138,8 +138,8 @@ cfy_manager dbs list
 
 ### Remove
 
-To remove a DB from a cluster, first ensure that the DB itself is uninstalled or the VM/container it is on has been deleted.
-If you are in any doubt about the state of the old DB node, it is recommended to ensure that its VM/container has been deleted.
+To remove a DB from a cluster, first ensure that the DB itself is uninstalled or the VM/ container it is on was deleted.
+If you are in any doubt about the state of the old DB node, it is recommended to ensure that its VM/ container was deleted.
 
 Next, the DB must be removed from the DB cluster using the following command on any current DB node:
 ```bash
@@ -165,7 +165,7 @@ Then, you can confirm the cluster is healthy with:
 ```bash
 cfy cluster status
 ```
-The status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
+The status should be healthy. Note that cluster status can take up to ~30 seconds to stabilize.
 
 ### Add
 
@@ -190,16 +190,16 @@ Then, you can confirm the cluster is healthy with:
 ```bash
 cfy cluster status
 ```
-The status should be healthy. Note that cluster status can take up to ~30 seconds to stabilise.
+The status should be healthy. Note that cluster status can take up to ~30 seconds to stabilize.
 
-### Set master
+### Set Master
 
 If you wish to change the current DB master node, e.g. because the current master node is going to be undergoing maintenance operations, run the following command on a DB node:
 ```bash
 cfy_manager dbs set-master -a <intended new master's DB address as it appears in the node_ip field of the cfy_manager dbs list>
 ```
 
-### Re-initialise
+### Re-Initialise
 
 If one of the DB replicas is failing to replicate, with an ever-growing lag it can be fixed by running the following command on a DB node:
 ```bash
