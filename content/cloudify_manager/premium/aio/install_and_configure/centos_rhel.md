@@ -1,5 +1,5 @@
 +++
-title = "CentOS/RHEL"
+title = "CentOS/ RHEL"
 description = "Install a single All-In-One Cloudify Manager."
 weight = 30
 +++
@@ -10,25 +10,25 @@ A {{< param cfy_manager_name >}} is a compute host running {{< param product_nam
 
 ## Deploying {{< param cfy_manager_name >}} RPM
 
-{{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, and the installation process does not require an Internet connection.
+The {{< param cfy_manager_name >}} RPM file includes all the {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained and the installation process does not require an internet connection.
 
-1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file.
+1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file
 
-1. Copy the RPM file to your target host.
+1. Copy the RPM file to your target host
 
 1. From the terminal of your target host, run:
     ```
     sudo yum install <RPM file path>
     ```
-1. Customize [{{< param cfy_manager_name >}}'s settings]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}).
-1. {{< param product_name >}} License can be applied [before installation]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}) or [after installation]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}})
+1. Customize the [{{< param cfy_manager_name >}}'s settings]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}})
+1. The {{< param product_name >}} License can be applied [before installation]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}) or [after installation]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}})
 1. Install on a single [All-In-One]({{< ref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#all-in-one-installation" >}}) host
-1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
+1. The {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
 
 ## {{< param cfy_manager_name >}} Configuration {#cfy-manager-configuration}
 
-Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains all installation options, including
+Once RPM is deployed, file `/etc/cloudify/config.yaml` ([View in GitHub](https://github.com/cloudify-cosmo/cloudify-manager-install/blob/master/config.yaml)) contains all installation options, including.
 
 
 | Setting                  | Description                                                       | Comments                                                                                                                                                                                                        |
@@ -48,7 +48,7 @@ You can validate the configurations are valid using `cfy_manager validate` comma
 
 ### Adding Environment Variables
 
-In certain cases, it may be required to add environment variables to the processes that run {{< param cfy_manager_name >}}.
+In certain cases, it may be required to add environment variables to the processes that run the {{< param cfy_manager_name >}}.
 For example, certain organizations impose restrictions on the installation-default temporary files directory (usually
 `/tmp`), requiring the adjustment of the `TEMP` / `TMP` / `TMPDIR` environment variables accordingly.
 
@@ -75,7 +75,7 @@ restservice:
 
 ### Multi-Network Management {#multi-network-management}
 
-{{< param cfy_manager_name >}} uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the {{< param cfy_manager_name >}} IP addresses or DNS names that your agents will use to communicate with it.
+The {{< param cfy_manager_name >}} uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the {{< param cfy_manager_name >}} IP addresses or DNS names that your agents will use to communicate with it.
 
 {{% note %}}
 * You cannot configure multi-network management on [{{< param cfy_manager_name >}} images]({{< relref "cloudify_manager/premium/aio/install_and_configure/image.md" >}}).
@@ -84,7 +84,7 @@ restservice:
 
 Multi-network management can be configured before installing a new Manager and after.
 
-#### Option 1: Configure multi-network management before installing a new Manager:
+#### Option 1: Configure Multi-network Management before Installing a New Manager:
 
 The {{< param cfy_manager_name >}} networks are configured in the `networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
@@ -109,7 +109,7 @@ You must specify the name of the {{< param cfy_manager_name >}} network for each
       ip: { get_input: host_ip }
 ```
 
-#### Option 2: Add  new networks to a running Manager:
+#### Option 2: Add New Networks to a Running Manager:
 * In order to add networks to a running Manager use the `cfy_manager add-networks` command.
 * New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
 * Please note that you can only add networks with unique names, otherwise an error will be raised.
@@ -121,7 +121,7 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 
 ## All In One Installation {#all-in-one-installation}
 
-To install {{< param cfy_manager_name >}}, run:
+To install the {{< param cfy_manager_name >}}, run:
 
 
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]

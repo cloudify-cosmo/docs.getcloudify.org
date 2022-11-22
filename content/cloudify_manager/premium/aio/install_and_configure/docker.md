@@ -13,7 +13,7 @@ Cloudify Premium provides a fully functional Premium manager as a Docker contain
 
 Deploying Cloudify trial manager as a Docker container is the easiest way to go. This tutorial assumes that you have Docker installed on a local or remote machine.
 
-Open your terminal and create/start the Docker container
+Open your terminal and create/ start the Docker container.
 
 ```
 docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest -p 80:80
@@ -29,8 +29,8 @@ A Cloudify license is provided to all Cloudify Premium subscribed customers by C
 
 Once you receive your license activation key, use it to activate your Cloudify Manager. Manager activation (and most other Cloudify actions) can be performed through either Cloudify Management Console (UI) or via Cloudify CLI. In this tutorial, we will demonstrate the usage of the Management Console.
 
-1. Log in to the Cloudify Management Console (as done in step 1 above). username and password are admin/admin.
-2. Submit your Cloudify subscription/trial key. Learn more here.
+1. Log in to the Cloudify Management Console (as done in step 1 above). username and password are _admin/ admin_.
+2. Submit your Cloudify subscription/ trial key. Learn more here.
 
 ## Configure
 
