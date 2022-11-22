@@ -1,5 +1,5 @@
 +++
-title = "CentOS/RHEL"
+title = "CentOS/ RHEL"
 description = "Install a single All-In-One Cloudify Manager."
 weight = 40
 +++
@@ -10,17 +10,17 @@ A {{< param cfy_manager_name >}} is a compute host running {{< param product_nam
 
 ## Deploying {{< param cfy_manager_name >}} RPM
 
-{{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained, and the installation process does not require an Internet connection.
+The {{< param cfy_manager_name >}} RPM file includes all {{< param cfy_manager_name >}} components and their dependencies. The RPM is self-contained and the installation process does not require an internet connection.
 
-1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file.
+1. [Download]({{< relref "trial_getting_started/set_trial_manager/other-deployments.md" >}}) the {{< param cfy_manager_name >}} RPM file
 
-1. Copy the RPM file to your target host.
+1. Copy the RPM file to your target host
 
 1. From the terminal of your target host, run:
     ```
     sudo yum install <RPM file path>
     ```
-1. Customize [{{< param cfy_manager_name >}}'s settings]({{< ref "cloudify_manager/community/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}}).
+1. Customize [{{< param cfy_manager_name >}}'s settings]({{< ref "cloudify_manager/community/install_and_configure/centos_rhel.md#cfy-manager-configuration" >}})
 1. Install on a single [All-In-One]({{< ref "cloudify_manager/community/install_and_configure/centos_rhel.md#all-in-one-installation" >}}) host
 1. {{< param cfy_manager_name >}} is ready for use at `http(s)://<manager_public_address>`
 
@@ -83,7 +83,7 @@ restservice:
 
 Multi-network management can be configured before installing a new Manager and after.
 
-#### Option 1: Configure multi-network management before installing a new Manager:
+#### Option 1: Configure Multi-network Management before Installing a New Manager
 
 The {{< param cfy_manager_name >}} networks are configured in the `networks` section of the `/etc/cloudify/config.yaml` file, for example:
 
@@ -108,7 +108,7 @@ You must specify the name of the {{< param cfy_manager_name >}} network for each
       ip: { get_input: host_ip }
 ```
 
-#### Option 2: Add  new networks to a running Manager:
+#### Option 2: Add New Networks to a Running Manager
 * In order to add networks to a running Manager use the `cfy_manager add-networks` command.
 * New networks should be supplied as a JSON string. It is possible to add multiple new networks using one command (as shown in the example below).
 * Please note that you can only add networks with unique names, otherwise an error will be raised.
@@ -120,7 +120,7 @@ cfy_manager add-networks --networks '{"<network-name>": "<ip>", "<network-name>"
 
 ## All-In-One Installation {#all-in-one-installation}
 
-To install {{< param cfy_manager_name >}}, run:
+To install the {{< param cfy_manager_name >}}, run:
 
 
     cfy_manager install [--private-ip <PRIVATE_IP>] [--public-ip <PUBLIC_IP>] [--admin-password <password>] [-v]

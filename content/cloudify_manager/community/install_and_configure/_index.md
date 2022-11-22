@@ -7,10 +7,10 @@ alwaysopen = false
 
 ## Overview
 
-This section covers Cloudify Manager Community installation. Cloudify Manager Community is available in All-in-One mode only.
+This section covers the Cloudify Manager Community installation. The Cloudify Manager Community is available in All-in-One mode only.
 
-Cloudify Manager Community can be installed:
+The Cloudify Manager Community can be installed:
 
 * Docker Container - Docker container can be installed on any virtual machine that run Docker Server.
-* CentOS/RHEL - Provides instruction how to install RPM on CentOS/RHEL.
-* QCOW2 - QCOW2 is OpenStack image. The section provides a details on how to download and provision a virtual machine based on the downloaded image.
+* CentOS/ RHEL - Provides instructions on how to install RPM on CentOS/ RHEL.
+* QCOW2 - QCOW2 is an OpenStack image. The section provides details on how to download and provision a virtual machine based on the downloaded image.
