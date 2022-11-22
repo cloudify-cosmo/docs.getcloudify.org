@@ -40,13 +40,7 @@ This is the base node type, which represents a Terraform installation.
 
   * `terraform_config`: Configuration regarding installation of Terraform.
     * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
-<<<<<<< Updated upstream
-        
-        **required:** false
-
-=======
     **required:** false
->>>>>>> Stashed changes
   * `resource_config`:
     * `plugins`: List of plugins to download and install.
     * `use_existing_resource`: A boolean that indicates if the user want to use pre-existing installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false.
@@ -90,11 +84,6 @@ This refers to a Terraform module.
         * `name`: Name of the backend.
         **required:** false.
         * `options`: Dictionary of key/values.
-<<<<<<< Updated upstream
-          
-            **required:** false.
-        
-=======
         **required:** false.
     * `providers`: If providers are not defined in source, and you want to use specific providers, define that here. The default value is {}.
         * `filename`: **required:** false. Provider files. **provider.tf** by default.
@@ -158,20 +147,13 @@ This refers to a Terraform module.
           }
         }
       ```
->>>>>>> Stashed changes
     * `variables`: A dictionary of variables.
     **required:** false.
     * `environment_variables`: A dictionary of environment variables.
-<<<<<<< Updated upstream
-      
-        **required:** false.
-    
-=======
     **required:** false.
     * `flags_override`: A list of flags override that will be appened to terraform commands The default value is []. example input would be [{'loglevel': 'debug'}] which translate to `--loglevel=debug`
     **required:** false.
     * `log_stdout`: A boolean if you wish to suppress stdout logging for apply and plan commands by setting it to false. The default value is true.
->>>>>>> Stashed changes
     * `tfvars`: The name of the .tfvars file, located in the source_path.
     **required:** false.
     * `store_output_secrets`: A dictionary of outputs that will be create_or_updated inside secert store.
@@ -183,14 +165,6 @@ This refers to a Terraform module.
     **required:** false.
     * `obfuscate_sensitive`: A boolean if you wish to hide senstive outputs logging by setting it to true. The default value is false.
 
-<<<<<<< Updated upstream
-        **required:** false.
-
-  * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
-    * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
-    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
-    * config: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
-=======
   * `max_runtime_property_size`: The maximum terraform source size that you want us to store in the runtime properties. The default value is `1000000`.
   * `max_stored_filesize`: The maximum file size that you want us to store in the rest service. The default value is `1000000`.
   * `store_plugins_dir`: Whether to store terraform binary plugins. The default value is false.
@@ -200,7 +174,6 @@ This refers to a Terraform module.
     * `installation_source`: The URL to download the tflint binary from, The default value is: `https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip`.
     * `executable_path`: Where the tflint binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
     * `config`: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
->>>>>>> Stashed changes
 
         ```yaml
           - type_name: plugin
@@ -220,21 +193,6 @@ This refers to a Terraform module.
           }
         ```
 
-<<<<<<< Updated upstream
-    * flags_override: The plugin has its own internal logic for appending flags to the tflint command.  However, if you wish to add or modify flags, configure here.  For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
-    * env: Additional env vars for duration of tflint executions,
-    * enable: boolean, In order for it to work, must mark True.
-    
-  * tfsec_config:  tfsec is a static analysis security scanner for your Terraform code.
-    * installation_source: The URL to download the tfsec binary from, e.g. 'https://github.com/aquasecurity/tfsec/releases/download/v1.1.3/tfsec-linux-amd64'.
-    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/tfsec.
-    * config: tags, as valid JSON (NOT HCL)
-    * flags_override: 'tfsec can by run with no arguments and will act on the current folder.
-          For a richer experience, there are many additional command line arguments that you can make use of.
-          For example: [ "debug", "run-statistics"] (without --).
-          e.g 'https://aquasecurity.github.io/tfsec/v1.2.1/getting-started/usage/'
-    * enable: boolean, In order for it to work, must mark True.
-=======
     * `flags_override`: The plugin has its own internal logic for appending flags to the tflint command.
       However, if you wish to add or modify flags, configure here.
       For example, "{'loglevel': 'debug'}", becomes "--loglevel=debug".
@@ -267,7 +225,6 @@ This refers to a Terraform module.
           To continue even if issues found 'soft-fail' flag should be used.
           e.g 'https://aquasecurity.github.io/tfsec/v0.63.1/getting-started/usage/'
     * `enable`: boolean, In order for it to work, must mark as True.
->>>>>>> Stashed changes
 
     config.yml
 
@@ -292,20 +249,12 @@ This refers to a Terraform module.
         flags_override: []
         enable: True
     ```
-<<<<<<< Updated upstream
-  * terratag_config: 
-    * installation_source: The URL to download the terratag binary from, e.g. 'https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz'.
-    * executable_path: If the binary is already located on your system (you installed it manually), this is the path on the file system, e.g. /usr/local/bin/terratag.
-    * tags: tags, as valid JSON (NOT HCL)
-    * flags_override: 
-=======
 
   * `terratag_config`:
     * `installation_source`: The URL to download the terratag binary from, The default value is: `https://github.com/env0/terratag/releases/download/v0.1.35/terratag_0.1.35_linux_amd64.tar.gz`.
     * `executable_path`: Where the terratag binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
     * `tags`: tags, as valid JSON (NOT HCL)
     * `flags_override`:
->>>>>>> Stashed changes
       * dir=<path> - defaults to '.'. Sets the terraform folder to tag .tf files in.
       * skipTerratagFiles=false - Dont skip processing *.terratag.tf files (when running terratag a second time for the same directory).
       * verbose=true - Turn on verbose logging.
@@ -322,9 +271,6 @@ This refers to a Terraform module.
         - filter: 'aws_vpc'
       enable: True
     ```
-<<<<<<< Updated upstream
-**Operations**
-=======
 
   * `infracost_config`:
     * `installation_source`: The URL to download the infracost binary from, The default value is: `https://github.com/infracost/infracost/releases/download/v0.10.8/infracost-linux-amd64.tar.gz`
@@ -345,7 +291,6 @@ This refers to a Terraform module.
     allow_kwargs_override: true
     ```
   For more information about the import command , you can refer to this documentation [link](https://developer.hashicorp.com/terraform/cli/commands/import)
->>>>>>> Stashed changes
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
     * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
@@ -368,8 +313,6 @@ This refers to a Terraform module.
        flags_override: ['run-statistics']
     allow_kwargs_override: true
     ```
-<<<<<<< Updated upstream
-=======
   * `terraform.tflint`: TFLint is a linter that checks for possible errors, best practices, etc in your terraform code.
 The following example can be used as a parameter file to the execute operation command.
 
@@ -407,7 +350,6 @@ The following example can be used as a parameter file to the execute operation c
     allow_kwargs_override: true
     ```
 Operation outputs are saved in `plain_text_infracost` and `infracost` runtime properties.
->>>>>>> Stashed changes
 
 
 ### **Runtime Properties**
@@ -419,37 +361,7 @@ Operation outputs are saved in `plain_text_infracost` and `infracost` runtime pr
  * `is_drifted`: True if there are drifts between the template and the actual state, else False.
  * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
 
-<<<<<<< Updated upstream
-**Workflows**
-
-  * `refresh_terraform_resources`: Executes `terraform.refresh` operation on `terraform.Module` node instances.
-  * `reload_terraform_template`: Executes `terraform.reload` on `terraform.Module` node instances.
-  * `terraform_plan`: Executes `terraform.plan` on `terraform.Module` node instances.
-
-**Notes:**
-
-* By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
-It is possible to limit the scope by using the `node_ids` and `node_instance_ids` parameters, specifying lists of
-node ID's and node instance ID's to operate on.
-* Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
-For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
-Pull operation performs exact logic as `terraform.refresh` operation.
-* Cloudify 6.3 introduces the validation interface `cloudify.interfaces.validation.check_status`. 
-For Terraform modules, this operation checks if the resources in the module exist or not. 
-The plugin executes `terraform plan` to gather the list of resources of the current configuration.
-It then calls `terraform refresh` in order to pull the remote state. 
-Finally, it executes `terraform show state` for each resource. 
-An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
-
-**Relationships:**
-
-* `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). . 
-  It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
-
-# Example
-=======
 ### Example
->>>>>>> Stashed changes
 
 In the following example we deploy a Terraform plan:
 
@@ -582,9 +494,6 @@ Executing workflow `reload_terraform_template` on deployment `tf` [timeout=900 s
 2021-10-10 16:30:34.523  CFY <tf> Starting 'reload_terraform_template' workflow execution
 ```
 
-<<<<<<< Updated upstream
-## Terraform Outputs
-=======
 ## update_terraform_binary
 
 * Executes delete and create operations respectively on `terraform` node instances.
@@ -657,7 +566,6 @@ Executing workflow `run_infracost` on deployment `tf` [timeout=900 seconds]
 Workflow outputs are saved in `plain_text_infracost` and `infracost` runtime properties.
 
 # Terraform Outputs
->>>>>>> Stashed changes
 
 You can expose outputs from your Terraform template to the node instance runtime properties.
 
