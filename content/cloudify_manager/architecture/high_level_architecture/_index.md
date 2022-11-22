@@ -14,15 +14,15 @@ alwaysopen = false
 
 ## Cloudify Manager
 
-{{< param cfy_manager_name >}} consists of the {{< param product_name >}} code and a set of open-source applications. For an in-depth explanation of these applications, [click here]({{< relref "cloudify_manager/architecture/high_level_architecture/architecture.md" >}}).
+The {{< param cfy_manager_name >}} consists of the {{< param product_name >}} code and a set of open-source applications. For an in-depth explanation of these applications, [click here]({{< relref "cloudify_manager/architecture/high_level_architecture/architecture.md" >}}).
 
 The {{< param cfy_manager_name >}} architecture is designed to support all potential operational workflows you might require when managing your applications, including:
 
 * Event-stream processing
 * Processing secured requests
 * Metrics queueing, aggregation and analysis
-* Logs/events queueing, aggregation and analysis
-* Manual or automated task execution and queueing, based on live streams of events or aggregated data
+* Logs/ events queueing, aggregation, and analysis
+* Manual or automated task execution and queueing, based on live streams of events, or aggregated data
 * Interaction with {{< param cfy_agent_name >}}, for executing tasks on, and maintaining, application hosts
 
 You can also communicate with {{< param cfy_manager_name >}} using the command-line interface, which uses the {{< param product_name >}} REST client module to interact with the {{< param product_name >}} REST service.
@@ -38,7 +38,7 @@ The agents are designed to execute tasks using [plugins]({{< relref "working_wit
 In the background, the same agents that are used on the hosts are also used in {{< param cfy_manager_name >}}, but in a different context. For instance, every deployment has two agents, one of which talks to IaaS APIs to deploy resources.
 
 {{% note title="Note" %}}
-Note that {{< param product_name >}} can run in "agentless" mode, which means that agents can use specific plugins to manage hosts without the agents being installed on those hosts. You can specify which server nodes will have agents installed on them in the blueprint.
+Note: {{< param product_name >}} can run on "agentless" mode, which means that agents can use specific plugins to manage hosts without the agents being installed on those hosts. You can specify which server nodes will have agents installed on them in the blueprint.
 {{% /note %}}
 
 For more information about agents, [click here]({{< relref "cloudify_manager/agents/_index.md" >}}).
