@@ -535,13 +535,26 @@ outputs:
 
 Notice that nested properties can be either a key name in the case of a map, or an index in case of a list. Also note in `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
 
-### get_attribute to get Node Instance ID
+### get_attribute to get Node Instance ID and index
 
 Use `get_attribute` to retrieve the ID of a node instance:
 
 {{< highlight  yaml  >}}
 { get_attribute: [node, node_instance_id] }
 {{< /highlight >}}
+
+This is equivalent to using `ctx.instance.id` in Python scripts and plugins.
+
+Similarly, use `get_attribute` to retrieve the index of a node instance:
+
+{{< highlight  yaml  >}}
+{ get_attribute: [node, node_instance_index] }
+{{< /highlight >}}
+
+This is equivalent to using `ctx.instance.index` in Python scripts and plugins.
+
+If the relevant node instance has a runtime property named "node_instance_id"
+or "node_instance_index", that runtime property takes precedence, and is returned.
 
 `node` can be SELF, SOURCE, TARGET or node name according to the context in the blueprint.
 
