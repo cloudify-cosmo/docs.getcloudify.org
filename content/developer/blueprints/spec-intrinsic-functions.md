@@ -470,8 +470,7 @@ node_templates:
 
 In the example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input evaluates to the `db_server` runtime property `connection_url`, and the `webserver_version` evaluates to the `web_server` runtime property `requested_version`. `SELF` is used to reference run-time properties of the current node instance in `webserver_version`.
 
-<br>
-### *get_attribute* in Relationship Interface Operation Inputs
+### get_attribute in Relationship Interface Operation Inputs
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
