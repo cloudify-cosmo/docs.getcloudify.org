@@ -41,7 +41,7 @@ To understand all available options AIO cloudify manager chart has, please read 
 # Cloudify manager worker Helm chart  ( Premium Version )
 
 ## Description
- 
+
 It's a Helm chart for cloudify manager which is:
 
 * Highly available, can be deployed with multiple replicas, available only when used with NFS Volume. ( Tested with EFS of AWS | FIlestore of GCP | Azure File Storage)
@@ -68,6 +68,6 @@ You need to deploy DB and Message Broker before deploying Cloudify manager worke
 
 # Deployment Examples
 
-[Deployment to Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}}
+[Deployment to Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}})
 [Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
 [Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks" >}})
