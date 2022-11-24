@@ -1,6 +1,6 @@
 +++
 title = "Agents"
-description = "The section covers how to work with Cloudify Agents. The page covers supported OSs, installation and operation instructions"
+description = "This section covers how to work with Cloudify Agents and the supported OSs, installation, and operation instructions."
 weight = 60
 alwaysopen = false
 +++
@@ -28,7 +28,7 @@ Notes:
   * If your image does not include Python, you can use initialization scripts supported by {{< param product_name >}} (`userdata` on OpenStack, Customization Scripts on AWS etc.) to install Python.
 * For Windows, the agent installer is bundled with a Python interpreter.
 
-## Communication with the manager
+## Communication with the Manager
 
 The agent requires access to the manager with these services:
 

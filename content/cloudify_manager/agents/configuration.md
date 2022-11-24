@@ -34,11 +34,11 @@ node_templates:
 
 
 ### 2. Node Instance Runtime Property
-If the agent to be installed is a host agent (and not a central deployment agent), and the property is provided as part of the `cloudify_agent` node instance runtime property, it is used.
+If the Agent to be installed is a Host Agent (and not a Central Deployment Agent), and the property is provided as part of the `cloudify_agent` node instance runtime property, it is used.
 
 
 ### 3. Node Property
-If the agent to be installed is a host agent (and not a central deployment agent), and the property has been provided as part of the `agent_config` (or the deprecated `cloudify_agent`) node property, it is used. For example:
+If the Agent to be installed is a host agent (and not a central deployment agent), and the property has been provided as part of the `agent_config` (or the deprecated `cloudify_agent`) node property, it is used. For example:
 
 {{< highlight  yaml  >}}
 node_templates:
@@ -72,11 +72,11 @@ You can use this section to specify a global agent configuration that will apply
 
 | NAME                   | TYPE        | DESCRIPTION                                                                                                                                                                                                                                                                                                                                                           |
 |------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `user`                 | string      | For Linux agents, this is the user account for which the agent service will be installed. If the agent installation method is `remote`, then this user will also be used for SSH'ing to the agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the agent host. |
+| `user`                 | string      | For Linux agents, this is the user account for which the Agent service will be installed. If the Agent installation method is `remote`, then this user will also be used for SSH'ing to the Agent host.<br><br>For Windows agents, this parameter is only applicable when the installation method is `remote`, and it is used by WinRM to connect to the Agent host. |
 | `key`                  | string      | For Linux agents installed with the `remote` method, this may be either the path to the private key that will be used to connect to the host, or the actual private key (beginning with "`-----BEGIN RSA PRIVATE KEY-----`").                                                                                                                                        |
-| `password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to agent installation.           |
+| `password`             | string      | For the `remote` installation method, define the password to authenticate with.<br><br>For Linux hosts, this property is optional if the `key` property is provided.<br><br>For Windows hosts, this property is also optional, depending on whether the `password` runtime property has been set by the relevant IaaS plugin, prior to Agent installation.           |
 | `port`                 | integer     | For the `remote` installation method, this is the port used to connect to the host. <br> The default values are `22` for Linux hosts and `5985` for Windows hosts.                                                                                                                                                                                                   |
-| `min_workers`          | integer     | Minimum number of agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.                                                                                                        |
+| `min_workers`          | integer     | Minimum number of Agent workers. By default, the value is  `0`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details. <br> Note: For Windows-based agents, this property is ignored and `min_workers` is set to the value of `max_workers`.                                                                                                        |
 | `max_workers`          | integer     | Maximum number of agent workers. By default, the value is  `5`. See [Auto Scaling]({{< field "autoscale_link" >}}) for further details.                                                                                                                                                                                                                              |
 | `disable_requiretty`   | boolean     | For Linux based agents, disables the `requiretty` setting in the sudoers file. By default, this value is `true`.                                                                                                                                                                                                                                                     |
 | `process_management`   | dictionary  | Process management specific configuration. See [Process Management](#process-management).                                                                                                                                                                                                                                                                            |
@@ -89,17 +89,17 @@ You can use this section to specify a global agent configuration that will apply
 | `log_max_history`      | integer     | Number of historical log files to maintain (default: 7).                                                                                                                                                                                                                                                                                                             |
 | `heartbeat`            | integer     | AMQP heartbeat interval in seconds, 0 means disabled (default: 0)                                                                                                                                                                                                                                                                                                    |
 
-## Extra configuration properties (that go under the `extra` property) {#extra-configuration-properties-that-go-under-the-extra-property}
+## Extra Configuration Properties (that go under the `extra` property) {#extra-configuration-properties-that-go-under-the-extra-property}
 
-| NAME                | TYPE        | DESCRIPTION                                                                                                                                                                         |
-|---------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `distro`            | string      | Linux operation system distribution. See [Agent Package Resolution](#agent-package-resolution).                                                                                      |
-| `distro_codename`   | string      | Linux operation system distribution release. See [Agent Package Resolution](#agent-package-resolution).                                                                              |
-| `package_url`       | string      | Specify an explicit URL from which to download the agent package.                                                                                                                    |
-| `uri`               | string      | For Windows-based agents, WinRM URI. By default, the value is `wsman`.                                                                                                               |
-| `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.                                                                                                           |
-| `transport`         | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}}) |
-| `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.                                                                                                   |
+| NAME                | TYPE        | DESCRIPTION                                                                                                                                                                           |
+|---------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `distro`            | string      | Linux operation system distribution. See [Agent Package Resolution](#agent-package-resolution).                                                                                       |
+| `distro_codename`   | string      | Linux operation system distribution release. See [Agent Package Resolution](#agent-package-resolution).                                                                               |
+| `package_url`       | string      | Specify an explicit URL from which to download the Agent package.                                                                                                                     |
+| `uri`               | string      | For Windows-based agents, WinRM URI. By default, the value is `wsman`.                                                                                                                |
+| `protocol`          | string      | For Windows-based agents, WinRM protocol. By default, the value is `http`.                                                                                                            |
+| `transport`         | string      | For Windows agents installed with the `remote` installation method only: defines the WinRM transport to use (valid values are outlined here: {{< field "pywinrm_transport_link" >}}). |
+| `fabric_env`        | dictionary  | For Linux-based agents, configure fabric that is used to SSH into the remote host.                                                                                                    |
 
 ## Process Management
 
@@ -124,7 +124,7 @@ Additional configuration can be supplied to the service manager that will be use
 
 ## Linux Agent Package Resolution {#agent-package-resolution}
 
-In most cases, the agent package that will be used to install the agent is automatically resolved and does not require manual configuration. However, a mechanism exists that enables the implicit resolution to be overwritten. Following is a short description of the implicit resolution mechanism and details about how to override the implicit resolution with hard-coded values.
+In most cases, the Agent package that will be used to install the agent is automatically resolved and does not require manual configuration. However, a mechanism exists that enables the implicit resolution to be overwritten. Following is a short description of the implicit resolution mechanism and details about how to override the implicit resolution with hard-coded values.
 
 The install process attempts to identify the distribution and its release, and to deploy the correct type of agent for them.
 The identification process is based on Python's `platform.dist()`. We reference the first attribute of the tuple returned by this call as `distro`, and the third attribute as `distro_codename`. For example, making this call on Ubuntu trusty returns a tuple in which the `distro` attribute is `Ubuntu` and the `distro_codename` attribute is `trusty`.

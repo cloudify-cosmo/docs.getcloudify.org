@@ -15,13 +15,13 @@ usually a company that charges customers to issue certificates for them.
 In TLS (an updated replacement for SSL), a server is required to present a certificate as part of the initial connection setup.
 A client connecting to that server will perform the certification path validation algorithm:
 
-1. The subject of the certificate matches the hostname (i.e. domain name) to which the client is trying to connect;
-1. The certificate is signed by a trusted certificate authority (CA).
+1. The subject of the certificate matches the hostname (i.e. domain name) to which the client is trying to connect
+1. The certificate is signed by a trusted certificate authority (CA)
 
 (Taken from [Wikipedia](https://en.wikipedia.org/wiki/Public_key_certificate))
 
 
-## Cluster certificates setup {#cluster-certificates-setup}
+## Cluster Certificates Setup {#cluster-certificates-setup}
 The {{< param cfy_manager_name >}} cluster uses the TLS protocol (as described above) for:
 
 1. Communication between the PostgreSQL cluster nodes.
@@ -30,22 +30,21 @@ The {{< param cfy_manager_name >}} cluster uses the TLS protocol (as described a
 
 A few notes:
 
-* The certificates/keys should be created before proceeding with the installation process and in a PEM format.  
-* The certificates/keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user.
+* The certificates/ keys should be created before proceeding with the installation process and in a PEM format
+* The certificates/ keys are copied to `/etc/cloudify/ssl` during installation from the source given by the user
 Therefore, it is up to the user to delete the leftovers from the source location.  
-* In the case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be
-retrieved from the cloud service hosting the instance.
-* The **same CA** should be used to sign all cluster hosts' certificates.  
+* In the case of using externally hosted PostgreSQL or RabbitMQ instances, the CA needs to be retrieved from the cloud service hosting the instance
+* The **same CA** should be used to sign all cluster hosts' certificates
 
 The following files should exist on each host:
 
-1. CA certificate - The CA certificate that signed the hosts' public key certificates.
-1. Public key certificate - A public key certificate signed by the given CA that specifies the host IP and username.
-1. Private key - The private key associated with the host's public key certificate.
+1. CA Certificate - The CA certificate that signed the hosts' public key certificates.
+1. Public Key Certificate - A public key certificate signed by the given CA that specifies the host IP and username.
+1. Private Key - The private key associated with the host's public key certificate.
 
-The `cfy_manager generate-test-cert` command can be used for creating example certificates:
+The `cfy_manager generate-test-cert` command can be used for creating example certificates.
 
-On a host that has the management service installed, generate certificates for all hosts using:
+On a host that has the management service installed, you can generate certificates for all hosts using:
 
 For a nine nodes cluster:
 ```
@@ -75,6 +74,6 @@ For production purposes, please use a proper CA (e.g. a company CA).
 For an all-in-one {{< param cfy_manager_name >}}, just the host's public key certificate is needed alongside its associated CA certificate and private key.
 
 
-## Replacing certificates
-Replacement of the certificates may be required as a result of regulatory compliance demand, certificate expiration, or revocation due to a security breach.
-Follow the procedure described in the [Replacing Certificates guide]({{< relref "cli/maint_cli/certificates.md#replacing-certificates" >}}) when certificates' replacement is required.
+## Replacing Certificates
+Replacement of the certificates may be required due to regulatory compliance demand, certificate expiration, or revocation due to a security breach.
+Follow the procedure described in the [Replacing Certificates guide]({{< relref "cli/maint_cli/certificates.md#replacing-certificates" >}}) when a certificate replacement is required.

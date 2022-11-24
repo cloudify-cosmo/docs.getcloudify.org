@@ -6,16 +6,16 @@ category: Installation
 draft: false
 weight: 50
 ---
-## Cloudify manager worker helm chart ( Premium Version )
+## Cloudify Manager Worker Helm Chart (Premium Version)
 
 ### Description
  
-It's a helm chart for cloudify manager which:
+A Helm chart for Cloudify Manager is:
 
-* Is highly available, can be deployed with multiple replicas. ( available only when used NFS like Storage file system )
-* Uses persistent volume to survive restarts/failures.
-* Uses external DB (postgress), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
-* Uses external Message Brokes (rabbitMQ), which may be deployed via public helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
+* Is highly available, can be deployed with multiple replicas. (available only when used NFS like Storage file system)
+* Uses persistent volume to survive restarts or failures.
+* Uses external DB (postgress), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+* Uses external Message Brokes (RabbitMQ), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
 
 This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
 
@@ -26,10 +26,10 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 * Docker installed
 * Kubectl installed
 * Helm installed
-* Running Kubernetes cluster (View differences between cloud providers)
-  * [EKS on AWS](./installing-helm-eks.md)
-  * [AKS on Azure](./installing-helm-aks.md)
-  * [GKE on GCP](./installing-helm-gke.md)
+* Running Kubernetes cluster (view differences between cloud providers)
+  * [EKS on AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks.md" >}})
+  * [AKS on Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks.md" >}})
+  * [GKE on GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke.md" >}})
 * Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
 * Cloudify Premium valid license (for Premium version) 
 
@@ -39,9 +39,9 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 2. [Deployment of DB (Postgres).](#install-postgresqlbitnami-to-kubernetes-cluster-with-helm)
 
-3. [Deployment of Message Broker (rabbitMQ).](#install-rabbitmqbitnami-to-kubernetes-cluster-with-helm)
+3. [Deployment of Message Broker (RabbitMQ).](#install-rabbitmqbitnami-to-kubernetes-cluster-with-helm)
 
-4. [Deployment of Cloudify manager worker.](#install-cloudify-manager-worker)
+4. [Deployment of Cloudify Manager worker.](#install-cloudify-manager-worker)
 
 5. [(Optional) Ensure UI access to the manager upon installation](#optional-ensure-ui-access-to-the-manager-upon-installation)
 
@@ -49,14 +49,14 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 7. [Troubleshooting](#troubleshoot)
 
-8. [Uninstallation of helm charts](#uninstallation)
+8. [Uninstallation of Helm charts](#uninstallation)
 
-**You need to deploy DB and Message Broker before deploying Cloudify manager worker**
+**You need to deploy DB and Message Broker before deploying Cloudify manager worker.**
 
 
 ### Generate certificates and add as secret to k8s
 
-**SSL certificate must be provided, to secure communications between cloudify manager and posrgress/rabbitmq**
+**SSL certificate must be provided to secure communications between the Cloudify Manager and Posrgress/RabbitMQ:**
 
 * ca.crt (to sign other certificates)
 
@@ -156,14 +156,14 @@ Create a local copy of the cert-issuer.yaml and apply it to the namespace:
 $ kubectl apply -f ./cert-issuer.yaml -n NAMESPACE
 ```
 
-### Clone cloudify-helm repo
+### Clone cloudify-helm Repository
 This step is necessary because the following steps will require files from this directory
 * In case you don't have Git installed - https://github.com/git-guides/install-git
 ```bash
 $ git clone https://github.com/cloudify-cosmo/cloudify-helm.git && cd cloudify-helm
 ```
-### Install PostgreSQL(bitnami) to Kubernetes cluster with helm
-**First we need to add the Bitnami helm repository - for PostgreSQL and RabbitMQ charts**
+### Install PostgreSQL (Bitnami) to Kubernetes Cluster with Helm
+**First we need to add the Bitnami Helm repository - for PostgreSQL and RabbitMQ charts:**
 ```bash
 $ helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
@@ -182,16 +182,16 @@ tls:
   certKeyFilename: 'tls.key'
 ```
 
-Install postgresql with postgres-values.yaml with pinned version
+Install PostgreSQL with postgres-values.yaml with pinned version:
 
 ```bash
 $ helm install postgres bitnami/postgresql -f ./cloudify-manager-worker/external/postgres-values.yaml --version 10.15.0 -n NAMESPACE
 ```
 
-### Install RabbitMQ(bitnami) to Kubernetes cluster with helm
+### Install RabbitMQ (Bitnami) to Kubernetes Cluster with Helm
 
 
-Use certificate we created as k8s secret: 'cfy-certs'
+Use certificate we created as k8s secret: 'cfy-certs':
 
 ```yaml
 tls:
@@ -206,7 +206,7 @@ tls:
 
 Run management console on 15671 port with SSL (cloudify manager talks to management console via SSL):
 
-add to rabbitmq-values.yaml
+Add to `rabbitmq-values.yaml`:
 
 ```yaml
 configuration: |-
@@ -221,18 +221,18 @@ extraPorts:
     targetPort: 15671
 ```
 
-Install rabbitmq with rabbitmq-values.yaml with pinned version
+Install RabbitMQ with `rabbitmq-values.yaml` with pinned version:
 
 ```bash
 $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml --version 8.29.0 -n NAMESPACE
 ```
 
-### Install cloudify manager worker
+### Install Cloudify Manager Worker
 
 #### Create configMap with premium license - required if using Cloudify premium version
 
-Create license.yaml file and populate it with license data
-* American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps)
+Create `license.yaml` file and populate it with license data
+* American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps):
 
 ```yaml
 apiVersion: v1
@@ -253,7 +253,9 @@ data:
       <LICENSE_KEY>
 ```
 Enable license in values file
-* License name (metadata.name) must match the secretName in the values file
+
+* License name (metadata.name) must match the secretName in the values file:
+
 ```yaml
 license:
   secretName: cfy-license
@@ -262,8 +264,8 @@ Apply created config map:
 ```bash
 $ kubectl apply -f license.yaml
 ```
-#### Add the cloudify-helm repo
-Add the cloudify-helm repo or upgrade it
+#### Add the cloudify-helm Repository
+Add the `cloudify-helm` repository or upgrade it:
 ```bash
 $ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 ```
@@ -273,7 +275,7 @@ $ helm repo update cloudify-helm
 ```
 **If you want to customize the values it's recommended to do so before installing the chart** - [see configuration options below](#configuration-options-of-cloudify-manager-worker-valuesyaml), and either way make sure to review the values file.
 
-#### (optional) Ensure UI access to the manager upon installation
+#### (Optional) Ensure UI access to the manager upon installation:
 #### **[OPTION 1]**
 Use ingress-controller (e.g. NGINX Ingress Controller - https://kubernetes.github.io/ingress-nginx/deploy/)
 
@@ -293,7 +295,9 @@ ingress:
     secretName: cfy-secret-name
 ```
 **HTTPS - Pre-applied SSL Cert**
-* Create SSL secret with tls certificate
+
+* Create SSL secret with tls certificate:
+
 ```yaml
 apiVersion: v1
 kind: Secret
@@ -333,10 +337,10 @@ ingress:
     enabled: true
     secretName: cfy-secret-name
 ```
-**HTTP/HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
+**HTTP/ HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
 
 #### **[OPTION 2]**
-Skip Ingress and expose the Cloudify Manager service using LoadBalancer
+Skip Ingress and expose the Cloudify Manager service using LoadBalancer:
 
 **HTTP**
 
@@ -368,13 +372,13 @@ kubectl describe svc/cloudify-manager-worker -n NAMESPACE | grep Ingress
 ```bash
 $ helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
 ```
-### Configuration options of cloudify-manager-worker values.yaml
+### Configuration Options of cloudify-manager-worker values.yaml
 Edit the values file in `./cloudify-manager-worker/values.yaml` according to your preferences:
-#### Upgrade cloudify manager worker
+#### Upgrade Cloudify Manager Worker:
 
-To upgrade cloudify manager use 'helm upgrade'.
+To upgrade Cloudify Manager use `helm upgrade`.
 
-For example to change to newer version (e.g. from 6.2.0 to 6.3.0 in this example), 
+For example to change to newer version (e.g. from 6.2.0 to 6.3.0 in this example)
 
 Change image version in values.yaml:
 
@@ -392,7 +396,7 @@ image:
   tag: 6.3.0
 ```
 
-Run 'helm upgrade'
+Run `helm upgrade`
 
 ```bash
 $ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f ./cloudify-manager-worker/values.yaml -n NAMESPACE
@@ -408,7 +412,7 @@ image:
   pullPolicy: IfNotPresent
 ```
 
-#### DB - postgreSQL:
+#### DB - PostgreSQL:
 
 ```yaml
 db:
@@ -421,7 +425,7 @@ db:
   server_password: 'cfy_test_pass'
 ```
 
-#### Message Broker - rabbitmq:
+#### Message Broker - RabbitMQ:
 
 ```yaml
 queue:
@@ -446,7 +450,7 @@ service:
     port: 53333
 ```
 
-#### node selector - select on which nodes cloudify manager may run:
+#### Node Selector - Select on which nodes cloudify manager may run:
 
 ```yaml
 nodeSelector: {}
@@ -454,14 +458,14 @@ nodeSelector: {}
 #   nodeType: onDemand 
 ```
 
-#### Secret name of certificate
+#### Secret Name of Certificate
 
 ```yaml
 secret:
   name: cfy-certs
 ```
 
-#### resources requests and limits:
+#### Resources Requests and Limits:
 
 ```yaml
 resources:
@@ -470,7 +474,7 @@ resources:
     cpu: 0.5
 ```
 
-#### Persistent volume size for EBS/EFS:
+#### Persistent Volume Size for EBS/ EFS:
 
 If using multiple replicas (High availability), NFS like Storage like EFS must be used.
 For more details see links to different cloud providers [here](#prerequisites)
@@ -491,7 +495,7 @@ volume:
   size: "3Gi"
 ```
 
-#### readiness probe may be enabled/disabled
+#### Readiness Probe may be Enabled/ Disabled
 
 ```yaml
 readinessProbe:
@@ -503,7 +507,7 @@ readinessProbe:
 
 #### Config
 
-You can delay start of cfy manager / install all plugins / disable security (not recommended)...
+You can delay start of cfy manager/ install all plugins/ disable security (not recommended)
 
 ```yaml
 config:
@@ -522,7 +526,7 @@ config:
 
 #### Ingress
 
-You may enable ingress-nginx and generate automatically cert if you have ingress-nginx / cert-manager installed (e.g. using nginx with existing ssl secret) - [See above for more details](#option-1)
+You may enable ingress-nginx and generate automatically cert if you have ingress-nginx/ cert-manager installed (e.g. using nginx with existing ssl secret) - [See above for more details](#option-1)
 
 ```yaml
 ingress:
@@ -541,7 +545,7 @@ ingress:
 
 Some common use cases:
 
-#### License is not uploaded correctly upon installation
+#### License is not Uploaded Correctly upon Installation
 
 This might happen if the English convention of licence/license is not alligned across the values (name of the value and its value), or across the license/licence configMap.
 
@@ -552,9 +556,9 @@ After ensuring the above, try to reinstall the worker chart
 
 - Workaround for this issue would be to manually upload the license after the manager installation through the UI after logging in or via the [CLI](https://docs.cloudify.co/latest/cli/maint_cli/license/).
 
-#### Cloudify Manager installation succeded but I can't reach the UI
+#### Cloudify Manager Installation Succeded but I can't Reach the UI
 
-Please see [above](#optional-ensure-ui-access-to-the-manager-upon-installation)
+Please see [above](#optional-ensure-ui-access-to-the-manager-upon-installation).
 
 If you already installed the chart, update the values accordingly and run:
 
@@ -562,7 +566,7 @@ If you already installed the chart, update the values accordingly and run:
 $ helm upgrade cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f <path-to-values.yaml-file> -n NAMESPACE
 ```
 
-#### I had to reinstall the worker chart and now it fails on installation
+#### I had to reinstall the worker chart and now it fails on Installation
 
 This might happen due to inter-communications between the components in the different pods, a work around for that would be to delete the postgresql (has a PersistentVolume) and the rabbitmq pods, which will trigger a restart for them.
 ```bash
@@ -571,12 +575,12 @@ $ kubectl delete pod rabbitmq-0 -n NAMESPACE
 ```
 Then try reinstalling the worker chart.
 
-#### Can't find the help you need here?
-Feel free to open an [issue](https://github.com/cloudify-cosmo/cloudify-helm/issues) in the helm chart GitHub page, or [contact us](https://cloudify.co/contact/) through our website.
+#### Can't Find the Help You Need Here?
+Feel free to open an [issue](https://github.com/cloudify-cosmo/cloudify-helm/issues) in the Helm chart GitHub page, or [contact us](https://cloudify.co/contact/) through our website.
 
 ### Uninstallation
 
-As the whole setup is built from mainly 3 helm charts, you simply need to uninstall them.
+As the whole setup is built from mainly 3 Helm charts, you simply need to uninstall them.
 ```bash
 $ helm uninstall cloudify-manager-worker postgres rabbitmq -n NAMESPACE
 ```

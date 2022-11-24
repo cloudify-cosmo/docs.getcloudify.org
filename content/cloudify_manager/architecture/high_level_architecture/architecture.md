@@ -20,10 +20,10 @@ The {{< param cfy_manager_name >}} contains several open-source components. The 
 
 ## Nginx {#nginx}
 
-[Nginx](http://nginx.com/) is a high-performing Web server. In the {{< param cfy_manager_name >}}, it serves two purposes:
+[Nginx](http://nginx.com/) is a high-performing web server. In the {{< param cfy_manager_name >}}, it serves two purposes:
 
-* A proxy for the {{< param product_name >}} REST service and {{< param cfy_console_name >}}
-* A file server to host {{< param product_name >}}-specific resources, agent packages, and blueprint resources.
+1. A proxy for the {{< param product_name >}} REST service and {{< param cfy_console_name >}}
+2. A file server to host {{< param product_name >}}-specific resources, agent packages, and blueprint resources.
 
 ### File Server {#file-server}
 
@@ -52,7 +52,7 @@ The `tenant-resources` and `global-resources` directories are not used by {{< pa
 
 ## Gunicorn and Flask {#gunicorn-and-flask}
 
-[Gunicorn](http://gunicorn.org/) is a Web server gateway interface HTTP server. [Flask](http://flask.pocoo.org/) is a Web framework.
+[Gunicorn](http://gunicorn.org/) is a web server gateway interface HTTP server. [Flask](http://flask.pocoo.org/) is a web framework.
 
 Together, Gunicorn and Flask provide the {{< param product_name >}} REST service. The REST service is written using Flask, and Gunicorn is the server. Nginx is the proxy to that server.
 {{< param product_name >}}'s REST service is the integrator of all parts of the {{< param product_name >}} environment.
@@ -63,8 +63,8 @@ Together, Gunicorn and Flask provide the {{< param product_name >}} REST service
 
 In the {{< param cfy_manager_name >}}, PostgreSQL serves two purposes:
 
-* Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
-* Provides indexing, logs', and events' storage
+1. Provides the main database that stores the application's model (i.e. blueprints, deployments, runtime properties)
+2. Provides indexing, logs', and events' storage
 
 ## RabbitMQ {#rabbitmq}
 
@@ -91,4 +91,6 @@ Both the `Workflow Executor` and the `Task Broker` that appear in the diagram ar
 * The `Workflow Executor` receives workflow execution requests, creates the tasks specified by the workflow, submits the tasks for execution by host agents and the `Task Broker`, and manages the workflow state.
 * The `Task Broker` executes API calls to IaaS providers to create deployment resources and executes other tasks specified in `central_deployment_agent` plugins.
 
-Note that all the agents (the Management Worker, and agents deployed on application hosts) are using the same implementation.
+{{% note %}}
+Note: All the agents (the Management Worker, and Agents deployed on application hosts) are using the same implementation.
+{{% /note %}}

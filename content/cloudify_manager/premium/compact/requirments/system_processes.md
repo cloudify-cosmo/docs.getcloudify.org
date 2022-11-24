@@ -1,13 +1,13 @@
 +++
 title = "System Processes"
-description = "System Processes"
+description = "This section reviews the system processes for the Cloudify Manager environment."
 weight = 60
 alwaysopen = false
 +++
 
 ## {{< param product_name >}} System Processes
 
-In a {{< param cfy_manager_name >}} environment, the following system processes exist
+In a {{< param cfy_manager_name >}} environment, the following system processes exist.
 
 | USER        | COMMAND                                                                       | DESCRIPTION                                                 |
 |-------------|-------------------------------------------------------------------------------|-------------------------------------------------------------|
@@ -44,9 +44,9 @@ This directory can also be used to derived each core service's Systemd init name
 
 ### Service Statuses 
 
-TThe sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
+The sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
 of something like _ps_ or by folder snooping. This is not always practical or desired and there are \
-other, more developer-friendly, ways of enumerating which {{< param product_name >}} services are present and \
+other, more developer-friendly ways of enumerating which {{< param product_name >}} services are present and \
 how to harvest information about them.
 
 The best starting point is to utilize the REST API of the manager to get service information. \
@@ -89,11 +89,11 @@ An example, partial, return is as follows:
 With this information, in standard JSON format, it is easy to match a core {{< param product_name >}} service with a \
 system-level process ID (MainPID) to begin further troubleshooting.
 
-### Cluster status 
+### Cluster Status 
 
 {{< param product_name >}} provides system health information for both single box deployments and clustered deployments. Read more about it:
 
-- [Cluster Status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
+- [Cluster status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
 - [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 
@@ -139,7 +139,7 @@ You can now use the RabbitMQ username and password to log in via the web interfa
 
 To verify if postgres is working correctly a simple select can be executed:
 
-**Code Block 10 bash**
+**Code Block 10 Bash**
 
 ```
 sudo -u postgres psql --port 15432 -c "select 1"

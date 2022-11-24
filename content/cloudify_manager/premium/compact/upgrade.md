@@ -5,24 +5,24 @@ weight = 60
 alwaysopen = false
 +++
 
-## Upgrading a Cloudify Compact Cluster (3 nodes)
+## Upgrading a Cloudify Compact Cluster (3 Nodes)
 
 If the initial cluster installation was done using the Cloudify Cluster Manager, follow this simplified process.
-Updating a Cloudify compact cluster leveraging the Cloudify Cluster Manager
-You can use the Cloudify Cluster Manager tool to upgrade a compact cluster: 
+Updating a Cloudify Compact Cluster leveraging the Cloudify Cluster Manager,
+you can use the Cloudify Cluster Manager tool to upgrade a compact cluster.
 
-Upgrade your Cloudify Cluster Manager by running 
+Upgrade your Cloudify Cluster Manager by running:
 
 ```
 sudo yum install -y <Cloudify Manager Installation RPM>
 ```
 
-On the host that has Cloudify Cluster Manager installed, run 
+On the host that has Cloudify Cluster Manager installed, run:
 ```
 cfy_cluster_manager upgrade
 ```
 
-Optional Arguments: 
+Optional arguments: 
 
 ```
 --config-path The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
@@ -37,9 +37,9 @@ Running this command will automatically run the upgrade procedure on the cluster
 
 If the Cluster was manually deployed, please follow this procedure instead:
 
-### Manually updating a Cloudify compact cluster
+### Manually Updating a Cloudify Compact Cluster
 
-Install the new 6.4 `cloudify-manager-install` RPM on all 3 nodes of the cluster, by using the command: 
+Install the new 6.4 release `cloudify-manager-install` RPM on all 3 nodes of the cluster, by using the command: 
 
 ```
 sudo yum install -y <Cloudify Manager Installation RPM>
@@ -47,7 +47,7 @@ sudo yum install -y <Cloudify Manager Installation RPM>
 
 Repeat this step on all 3 nodes.
 
-On each of the cluster nodes, run
+On each of the cluster nodes, run:
 ```
 cfy_manager upgrade -c <path to DB config>. 
 ```
@@ -61,7 +61,7 @@ Tip: If you used the cloudify-cluster-manager tool to generate the Cloudify clus
 If the cluster was manually installed, please direct the command to the path of the file you generated.
 
 
-On each of the cluster nodes, run  
+On each of the cluster nodes, run:
 ```
 cfy_manager upgrade -c <path to rabbitmq config>. 
 ```
@@ -72,7 +72,11 @@ Do it one after the other, not in parallel.
 Tip: If you used the cloudify-cluster-manager tool to generate the Cloudify cluster, the path to the RabbitMQ config file is  /etc/cloudify/rabbitmq-<node number>_config.yaml. If the cluster was manually installed, please direct the command to the path of the file you generated.
 {{% /note %}}
 
-On each one of the cluster nodes, run  cfy_manager upgrade -c <path to manager config> 
+On each one of the cluster nodes, run:
+```
+cfy_manager upgrade -c <path to manager config>
+```
+
 Do it one after the other, not in parallel.
 
 {{% note %}}
