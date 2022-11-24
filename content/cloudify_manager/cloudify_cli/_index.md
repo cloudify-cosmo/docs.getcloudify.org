@@ -1,13 +1,13 @@
 +++
 title = "Cloudify CLI"
-description = "Cloudify CLI is a command line client to interact with Cloudify Manager. The section provides all the details to install and setup CFY CLI"
+description = "Cloudify CLI is a command line client to interact with Cloudify Manager. The section provides all the details to install and setup CFY CLI."
 weight = 50
 alwaysopen = false
 +++
 
 ## Installing the Cloudify CLI
 
-To remotely connect to {{< param cfy_manager_name >}}, you can install the {{< param product_name >}} Command Line Interface (CLI) on a separate host. The {{< param cfy_cli_name >}} includes all of the commands necessary to run any actions on {{< param cfy_manager_name >}}.
+To remotely connect to the {{< param cfy_manager_name >}}, you can install the {{< param product_name >}} Command Line Interface (CLI) on a separate host. The {{< param cfy_cli_name >}} includes all of the commands necessary to run any actions on {{< param cfy_manager_name >}}.
 
 {{% note title="Manager local CLI" %}}
 The CLI is deployed by default on the {{< param cfy_manager_name >}}. When connected to the manager via SSH, CLI commands can be executed locally without deploying the CLI.
@@ -17,35 +17,35 @@ After you download the {{< param cfy_cli_name >}} installation package, the inst
 
 ### Installing on Linux
 
-To install {{< param cfy_cli_name >}} on Linux, you could use either a single file binary, a RPM
-package and a DEB package.
+To install {{< param cfy_cli_name >}} on Linux, you could use either a single file binary, or a RPM package and a DEB package.
 
-#### Single file binary installation
+#### Single File Binary Installation
 To install a single file binary on your machine, run the following command:
 {{< highlight bash >}}
 $ curl -sfL https://cloudify.co/get-cli | sh -
 {{< /highlight >}}
 
 This will execute a script which will:
-  * determine if your machine meets the requirements:
-    - has a `x86_64` architecture,
-    - has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available,
-  * download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as
-    `/usr/local/bin/cfy`,
-  * create CLI auxiliary directories for the current user.
 
-#### Installation from the packages
+  * Determine if your machine meets the requirements:
+    - Has a `x86_64` architecture
+    - Has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available
+  * Download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as:
+    `/usr/local/bin/cfy`
+  * Create CLI auxiliary directories for the current user
+
+#### Installation from the Packages
 
 1. [Download]({{< relref "/trial_getting_started/set_trial_manager/other-deployments.md" >}}) the installation package for your package management system, either RPM or DEB.
 2. To install from the CLI on the host, run the command for your operating system.
 
-    ##### Centos/RHEL
+    ##### Centos/ RHEL
     {{< highlight bash>}}
     $ sudo rpm -i <pkg.rpm>
     {{< /highlight >}}
     Where `<pkg.rpm>` is the path to the installation file.
 
-    ##### Debian/Ubuntu
+    ##### Debian/ Ubuntu
     {{< highlight bash>}}
     $ sudo dpkg -i <pkg.deb>
     {{< /highlight >}}
@@ -56,19 +56,19 @@ This will execute a script which will:
 To install {{< param cfy_cli_name >}} on Mac OSX, you could use either a single file binary, or
 Python's `pip`.
 
-#### Single file binary installation
+#### Single File Binary Installation
 To install a single file binary on your machine, run the following command.
 {{< highlight bash >}}
 $ curl -sfL https://cloudify.co/get-cli | sh -
 {{< /highlight >}}
 
 This will execute the script which will:
-  * determine if your machine meets the requirements:
-    - has either `x86_64` or `arm64` architecture,
-    - has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available,
-  * download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as
-    `/usr/local/bin/cfy`,
-  * create CLI auxiliary directories for the current user.
+  * Determine if your machine meets the requirements:
+    - Has either `x86_64` or `arm64` architecture
+    - Has `curl`, `sudo` and one of the three: `openssl`, `shasum` or `sha256sum` binaries available
+  * Download the binary {{< param cfy_cli_name >}}, verify its integrity and install it as:
+    `/usr/local/bin/cfy`
+  * Create CLI auxiliary directories for the current user
 
 #### Installation from PyPI (Python Package Index)
 
@@ -113,30 +113,30 @@ The Python, pip or Virtualenv packages are not removed when you remove the {{< p
 
 ### Uninstalling from Linux
 
-#### Single file binary installation
+#### Single File Binary Installation
 
 To uninstall the CLI which was installed as a single file binary, just remove it with
 {{< highlight bash>}}
 $ sudo rm /usr/local/bin/cfy
 {{< /highlight >}}
 
-#### Installation from the packages
+#### Installation from the Packages
 
 To uninstall the CLI from the host, run the command for your operating system.
 
-##### Centos/RHEL
+##### Centos/ RHEL
 {{< highlight bash>}}
 $ sudo rpm -e cloudify
 {{< /highlight >}}
 
-##### Debian/Ubuntu
+##### Debian/ Ubuntu
 {{< highlight bash>}}
 $ sudo dpkg -r cloudify
 {{< /highlight >}}
 
 ### Uninstalling from Mac
 
-#### Single file binary installation
+#### Single File Binary Installation
 
 To uninstall the CLI which was installed as a single file binary, just remove it with
 {{< highlight bash>}}

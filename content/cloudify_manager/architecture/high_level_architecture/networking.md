@@ -12,7 +12,7 @@ Rather than specifying the ports in each component's overview, ports are specifi
 ### External Ports
 
 {{% note title="Ports" %}}
-All ports are TCP ports unless stated otherwise
+All ports are TCP ports unless stated otherwise.
 {{% /note %}}
 
 By default, there are two external networks from which the {{< param cfy_manager_name >}}s are accessed:
@@ -20,9 +20,9 @@ By default, there are two external networks from which the {{< param cfy_manager
 * The network on which the CLI resides is potentially a user's `management network`.
 * The network on which the application resides is potentially a user's application network.
 
-Therefore, {{< param product_name >}} requires only two entry points to its management environment:
+Therefore, {{< param product_name >}} requires only two entry points for its management environment:
 
-* Ports 80 / 443 for user rest-service/UI access via Nginx
+* Ports 80/ 443 for user rest-service/ UI access via Nginx
 * Port 22 is exposed for SSH access, to enable remote access to the {{< param cfy_manager_name >}}.
   This is required for the `cfy ssh` command to work.
 

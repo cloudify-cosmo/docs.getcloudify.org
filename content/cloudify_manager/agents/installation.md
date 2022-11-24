@@ -6,7 +6,7 @@ weight: 10
 aliases: /agents/installation/
 ---
 
-## Installation script
+## Installation Script
 
 The same installation script is used in all of the installation methods.
 This is either a `bash` script on Linux or a PowerShell script on Windows.
@@ -15,7 +15,7 @@ template for each agent during the `install` workflow.
 The script downloads the agent package from the manager (over port 53333),
 extracts it on the agent host, creates a daemon and starts it.
 
-## Installation methods
+## Installation Methods
 
 There are several methods by which the installation script is distributed
 to the agent host and executed.
@@ -24,7 +24,7 @@ to the agent host and executed.
 
 In this method, the installation script is pushed to the agent host, and
 executed remotely using SSH on Linux hosts and WinRM on Windows hosts.
-This is the default and simplest way for systems that allow SSH/WinRM
+This is the default and simplest way for systems that allow SSH/ WinRM
 access. The pre-requisites for remote installation are:
 
 * For Linux, an SSH server must be running on the agent host, and
@@ -60,7 +60,7 @@ once the agent installation is completed.
 
 ### `init_script`
 
-For systems that don't have SSH/WinRM access, `userdata`
+For systems that don't have SSH/ WinRM access, `userdata`
 (e.g. cloud-init) may be used. In this method, an install script is
 rendered, and a temporary link pointing to it is created. This link is
 then embedded in a separate download script, which is injected into
@@ -80,7 +80,7 @@ that runs the initialization script)
 
 ### `plugin`
 
-For systems that have neither SSH/WinRM access, nor
+For systems that have neither SSH/ WinRM access, nor
 the ability to inject a script into userdata, the `plugin` installation
 method allows implementing a custom way to download and execute the
 installation script. In this method, a temporary download link for the
@@ -103,13 +103,13 @@ install the agent package, but only configures and starts the agent
 daemon. This script needs to be downloaded and executed manually for
 every agent.
 
-#### Provided agent step-by-step-guide
+#### Provided Agent Step-by-Step-Guide
 
 For the purposes of this example we will be using a manager IP of _192.0.2.4_
 and deploying an agent for the node with node instance ID _container_nwxqiu_.
 
 1. Prepare a Virtual Machine or Image with a custom agent. Either Prepare
-   a custom agent or just upload an agent archive from
+   a custom agent or just upload an agent archive from:
    `https://192.0.2.4:53333/resources/packages/agents/` <br>
 1. Install the blueprint:
     ```yaml
@@ -154,12 +154,12 @@ and deploying an agent for the node with node instance ID _container_nwxqiu_.
    sudo ./3631bbc3-fc37-4a9f-9db3-81adb2d8e182.sh
    ```
    
-The agent has now joined to the {{< param product_name >}} manager.
-<u>Note:</u> it is recommended to automate the above steps if used often. 
+The Agent has now joined to the {{< param product_name >}} Manager.
+<u>Note:</u> It is recommended to automate the above steps if used often. 
 
 ### `none`
 
-In some cases, the user cannot or prefers not to install an agent
+In some cases, the user cannot or prefers not to install an Agent
 on {{< param product_name >}}-managed VMs. This might be due to a security restriction,
 or because a VM is a pre-configured closed appliance that the user cannot
 access or modify.

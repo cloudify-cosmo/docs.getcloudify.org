@@ -1,25 +1,23 @@
 +++
 title = "Cloudify Cluster Manager CLI"
-description = "Cloudify Cluster Manager CLI is a command line to automate Cloudify Premium installation on 3 nodes or 9 nodes."
+description = "Cloudify Cluster Manager CLI is a command line to automate the Cloudify Premium installation on 3 nodes or 9 nodes."
 weight = 55
 alwaysopen = false
 +++
 
 ## Overview
-The purpose of the Cluster Manager package is to automate the procedure of installing a {{< param product_name >}}
-cluster on existing VMs. The following article will guide you through the different steps of
-easily installing a {{< param product_name >}} cluster on either three or nine VMs.
+The purpose of the Cluster Manager package is to automate the procedure of installing a {{< param product_name >}} cluster on existing VMs. The following article will guide you through the different steps of easily installing a {{< param product_name >}} cluster on either 3 or 9 VMs.
 
 ## Installation
 
-### Choosing a cluster configuration
+### Choosing a Cluster Configuration
 Before using the  Cluster Manager package you must prepare a set of VMs for your cluster.
 The Cluster Manager package supports all cloud providers and the following configurations:
 
-* Fully distributed cluster (9 VMs).
-* Compact cluster (3 VMs).
-* Fully distributed cluster with an external DB (6 VMs).
-* Compact cluster with an external DB (3 VMs).
+* Fully distributed cluster (9 VMs)
+* Compact cluster (3 VMs)
+* Fully distributed cluster with an external DB (6 VMs)
+* Compact cluster with an external DB (3 VMs)
 
 Please follow the [prerequisites and sizing guidelines]({{< relref "cloudify_manager/premium/fully_distributed/requirments/capacity_and_planning.md#cloudify-cluster" >}})
 and generate the required number of VMs according to the mentioned spec. You should also prepare a load balancer to distribute the load over the managers.
@@ -29,35 +27,35 @@ and generate the required number of VMs according to the mentioned spec. You sho
 **NOTE**
 
 1. The Cluster Manager package is currently supported over CentOS or RHEL OS.
-2. A load-balancer is required for load distribution over the managers.
+2. A load balancer is required for load distribution over the managers.
 The setup will expect a load balancer address. The Cluster Manager package does not install the load balancer.
 
 ---
 
-### Installing the Cluster Manager package
+### Installing the Cluster Manager Package
 You can run the Cluster Manager package from one of the cluster's VMs, or from a different host in the
 cluster network. You can install the package either by using an RPM or by using `pip install`:
 
-#### Installing using an RPM
+#### Installing Using an RPM
 Run the following command:
 ```bash
 sudo yum install -y http://repository.cloudifysource.org/cloudify/cloudify-cluster-manager/1.1.1/ga-release/cloudify-cluster-manager-1.1.1-ga.el7.x86_64.rpm
 ```
 
-#### Installing using pip install
+#### Installing Using pip Install
 ```bash
 pip install cloudify-cluster-manager
 ```
 
 &nbsp;
-## Using the Cluster Manager package
+## Using the Cluster Manager Package
 Once the VMs are ready, using the Cluster Manager package to build the cluster consists of three steps:
 
 1. Generating a cluster configuration file template based on the cluster topology you wish to deploy.
 2. Filling in the generated file with the relevant information.
 3. Running the cluster installation based on the completed configuration file.
 
-### Generating a configuration file
+### Generating a Configuration File
 Generating the configuration file is done using the command:
 
 ```bash
@@ -81,13 +79,13 @@ cfy_cluster_manager generate-config [OPTIONS]
 
 **NOTE:** `--three-nodes` or `--nine-nodes` must be specified, and they cannot be specified together.
 
-### Filling in the configuration file
+### Filling in the Configuration File
 
 #### General Note
 Fill in the information according to the comments in the file itself.
 NOTE! Do not delete anything from the file.
 
-#### Load-balancer
+#### Load Balancer
 As mentioned before, a load-balancer is not installed as part of the cluster installation.
 The `load_balancer_ip` value is used in the different config.yaml files for the instances' connection.
 
@@ -99,7 +97,7 @@ The `load_balancer_ip` value is used in the different config.yaml files for the 
 
 * Otherwise: {{< param product_name >}} signed certificates will be generated and used automatically.
 
-#### config.yaml files
+#### config.yaml Files
 * If you wish to use your own config.yaml files for the different instances, you may
 do so by specifying their path as the value of the `config_path` in each one of the instances (all of them).
 
@@ -115,9 +113,9 @@ Moreover, the external_db and credentials sections in the configuration file wil
 are random.
 
 * **WARNING:** At the end of the installation, a file named `secret_credentials_file.yaml` will be created in the current directory.
-This file includes the credentials in clear text. Please, remove it after reviewing it or store it in a safe location.   
+This file includes the credentials in clear text. Please remove it after reviewing it or store it in a safe location.   
 
-### Installing a {{< param product_name >}} cluster
+### Installing a {{< param product_name >}} Cluster
 Now that the configuration file is completed, we can move on to the cluster installation using the
 following command:
 
@@ -139,7 +137,7 @@ cfy_cluster_manager install [OPTIONS]
 * `-h, --help` - Show this help message and exit.
 
 
-### Removing a {{< param product_name >}} cluster
+### Removing a {{< param product_name >}} Cluster
 The created {{< param product_name >}} cluster can be removed using the following command:
 
 ```bash
@@ -155,7 +153,7 @@ cfy_cluster_manager remove [OPTIONS]
 * `-h, --help` - Show this help message and exit.
 
 
-### Upgrading a {{< param product_name >}} cluster
+### Upgrading a {{< param product_name >}} Cluster
 The {{< param product_name >}} cluster can be upgraded from v5.1.0 (or any later release) to a more recent version using the following command:
 
 ```bash
@@ -173,7 +171,7 @@ cfy_cluster_manager upgrade [OPTIONS]
 * `-h, --help` - Show this help message and exit.
 
 &nbsp;
-## Fault tolerance mechanisms
+## Fault Tolerance Mechanisms
 The Cluster Manager package has a few mechanisms to handle errors:
 
 * The configuration file is validated before it is being used.

@@ -5,13 +5,13 @@ weight = 80
 alwaysopen = false
 +++
 
-## Upgrading a Cloudify Fully Distributed Cluster (9+ nodes)
+## Upgrading a Cloudify Fully Distributed Cluster (9 Nodes)
         
 If the initial cluster installation was done using the Cloudify Cluster Manager, follow this simplified process.
 Updating a Cloudify Fully Distributed Cluster leveraging the Cloudify Cluster Manager
-You can use the Cloudify Cluster Manager tool to upgrade a fully distributed cluster: 
+you can use the Cloudify Cluster Manager tool to upgrade a fully distributed cluster.
 
-Upgrade your Cloudify Cluster Manager by running         
+Upgrade your Cloudify Cluster Manager by running:
 ```
 sudo yum install -y <Cluster Manager Installation RPM>
 ```
