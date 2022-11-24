@@ -40,7 +40,7 @@ This is the base node type, which represents a Terraform installation.
 
   * `terraform_config`: Configuration regarding installation of Terraform.
     * `executable_path`: Where the Terraform binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
-        **required:** false
+    **required:** false
   * `resource_config`:
     * `plugins`: List of plugins to download and install.
     * `use_existing_resource`: A boolean that indicates if the user want to use pre-existing installation of terraform , that will skip the installation , but will download the plugins that are specified under `plugins`. The default value is false.
@@ -82,13 +82,11 @@ This refers to a Terraform module.
     * `source_path`: The path within the source property, where the terraform files may be found. The default value is ''.
     * `backend`: If a backend is not defined in source, and you want to use a specific backend, define that here. The default value is {}.
         * `name`: Name of the backend.
-            **required:** false.
-          
+        **required:** false.
         * `options`: Dictionary of key/values.
-          
-            **required:** false.
+        **required:** false.
     * `providers`: If providers are not defined in source, and you want to use specific providers, define that here. The default value is {}.
-        * `filename`: **required:** false. Provider files. **provider.tf** by default.   
+        * `filename`: **required:** false. Provider files. **provider.tf** by default.
         * `providers`: **required:** false. List of providers in a format:
         ```yaml
          providers:
@@ -102,7 +100,7 @@ This refers to a Terraform module.
                 region: us-east-1
         ```
         ...will be translated to:
-    
+
         **providers.tf**
         ```terraform
           provider "azurerm" {
@@ -114,7 +112,7 @@ This refers to a Terraform module.
           }
         ```
     * `required_providers`: If required_providers are not defined in source, and you want to use specific versions, define that here. The default value is {}.
-      * `filename`: **required:** false. Required provider files. **versions.tf.json** by default.   
+      * `filename`: **required:** false. Required provider files. **versions.tf.json** by default.
       * `required_providers`: **required:** false. Dictionary of provider versions in a format given below that is provided in JSON notation:
       ```yaml
         required_providers:
@@ -137,10 +135,10 @@ This refers to a Terraform module.
                 }
             }
         }
-        
+
       ```
-      which is an equivalent of yaml
-      ```yaml
+      which is an equivalent of hcl
+      ```hcl
         terraform {
           required_providers {
             acme:
@@ -243,14 +241,25 @@ This refers to a Terraform module.
     * `executable_path`: Where the tflint binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
     * `config`: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
     * `tfvars`: The name of the .tfvars file, located in the source_path.
+    **required:** false.
+    * `store_output_secrets`: A dictionary of outputs that will be create_or_updated inside secert store.
+    example format of input would be something like this
+    ```yaml
+    store_output_secrets:
+      terraform_output_name: secrets_to_be_created_or_updated
+    ```
+    **required:** false.
+    * `obfuscate_sensitive`: A boolean if you wish to hide senstive outputs logging by setting it to true. The default value is false.
 
-        **required:** false.
-### TFlint
-cloudify.nodes.terraform.Module:properties.resource_config
-  * tflint_config: Configure the usage of TFLint. The configuration is validated during cloudify.interfaces.lifecycle.create. TFlint is actually executed on the module in cloudify.interfaces.lifecycle.configure before apply. Skip TFLint by running cloudify.interfaces.lifecycle.configure with the force parameter.
-    * installation_source: The URL to download the tflint binary from, e.g. 'https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip'.
-    * executable_path:  If the binary is located on the file system, this is the path on the file system, e.g. /usr/local/bin/tflint. Not that the default is empty and will be populated automatically when downloaded.
-    * config: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
+  * `max_runtime_property_size`: The maximum terraform source size that you want us to store in the runtime properties. The default value is `1000000`.
+  * `max_stored_filesize`: The maximum file size that you want us to store in the rest service. The default value is `1000000`.
+  * `store_plugins_dir`: Whether to store terraform binary plugins. The default value is false.
+  * `provider_upgrade`: boolean Whether to add "--upgrade" to init command. The default is false.
+  * `general_executor_process`: A dict of additional keyword args to send the the general executor process argument. the defult value `{'max_sleep_time': 300}`.
+  * `tflint_config`:
+    * `installation_source`: The URL to download the tflint binary from, The default value is: `https://github.com/terraform-linters/tflint/releases/download/v0.34.1/tflint_linux_amd64.zip`.
+    * `executable_path`: Where the tflint binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+    * `config`: Configuration for terragrunt. A list of dicts, with keys, `type_name`, required, `option_name`, not required, and `option_value` required.  For example, this dict:
 
         ```yaml
           - type_name: plugin
@@ -390,7 +399,25 @@ cloudify.nodes.terraform.Module:properties.resource_config
     * api_key: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/)
     * enable: boolean, In order for it to work, must mark True.
 
-**Operations**
+  * `infracost_config`:
+    * `installation_source`: The URL to download the infracost binary from, The default value is: `https://github.com/infracost/infracost/releases/download/v0.10.8/infracost-linux-amd64.tar.gz`
+    * `executable_path`: Where the infracost binary is located in the {{< param cfy_manager_name >}}. If using it, It is your {{< param product_name >}} Administrator's responsibility to ensure this binary is on the system and that it is executable by the `cfyuser`.
+    * `api_key`: api key from Infracost, instructions how to retrieve it give in a [link](https://www.infracost.io/docs/)
+    * `enable`: boolean, In order for it to work, must mark as True.
+    **NOTE** it wouldn't be called unless the interface is specified or by calling the operation `terraform.infracost` or by executing the worklfow `run_infracost`
+
+### **Operations**
+
+  * `terraform.import_resource`: this operation is leveraging terraform import command -which can be used to import remote resources to your local state-. The following example can be used as a parameter file to the execute operation command.
+
+    ```yaml
+    operation: terraform.import_resource
+    operation_kwargs:
+        resource_address: "the address to import the resource to inside terraform module"
+        resource_id: "resource-specific ID to identify that resource being imported"
+    allow_kwargs_override: true
+    ```
+  For more information about the import command , you can refer to this documentation [link](https://developer.hashicorp.com/terraform/cli/commands/import)
 
   * `terraform.reload`: Reloads the Terraform template given the following inputs:
     * `source`: URL or path to a ZIP/tar.gz file, or a Git repository to obtain new module source from. If omitted, then the module is reloaded from its last location.
@@ -468,32 +495,6 @@ Operation outputs are saved in `plain_text_infracost` and `json_infracost` runti
     { "resource_name" : <change-representation> }, <change-representation> format described [here](https://www.terraform.io/docs/internals/json-format.html#change-representation).
  * `is_drifted`: True if there are drifts between the template and the actual state, else False.
  * `terraform_source`: Base64 encoded representation of the zip containing the Terraform modules.
-
-**Workflows**
-
-  * `refresh_terraform_resources`: Executes `terraform.refresh` operation on `terraform.Module` node instances.
-  * `reload_terraform_template`: Executes `terraform.reload` on `terraform.Module` node instances.
-  * `terraform_plan`: Executes `terraform.plan` on `terraform.Module` node instances.
-
-**Notes:**
-
-* By default, the aforementioned workflows operate on all `terraform.Module` node instances in the current deployment.
-It is possible to limit the scope by using the `node_ids` and `node_instance_ids` parameters, specifying lists of
-node ID's and node instance ID's to operate on.
-* Since version 0.16.0, Terraform plugin introduce pull operation for `terraform.Module` node to support pull workflow.
-For  {{< param product_name >}} versions that don't support `pull` workflow (5.2 and older), call `pull` operation with execute operation workflow.
-Pull operation performs exact logic as `terraform.refresh` operation.
-* Cloudify 6.3 introduces the validation interface `cloudify.interfaces.validation.check_status`. 
-For Terraform modules, this operation checks if the resources in the module exist or not. 
-The plugin executes `terraform plan` to gather the list of resources of the current configuration.
-It then calls `terraform refresh` in order to pull the remote state. 
-Finally, it executes `terraform show state` for each resource. 
-An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
-
-**Relationships:**
-
-* `cloudify.terraform.relationships.run_on_host`: Executes `tf.cloudify_tf.tasks.set_directory_config` which connects `cloudify.nodes.terraform.Module` node to `cloudify.nodes.terraform` node(binary installation node). . 
-  It is required to use this relationship on every `cloudify.nodes.terraform.Module` node.
 
 ### Example
 
@@ -683,9 +684,9 @@ Executing workflow `run_infracost` on deployment `tf` [timeout=900 seconds]
 2021-10-10 16:30:34.523  CFY <tf> Starting 'run_infracost' workflow execution
 ```
 
-Workflow outputs are saved in `plain_text_infracost` and `json_infracost` runtime properties.
+Workflow outputs are saved in `plain_text_infracost` and `infracost` runtime properties.
 
-## Terraform Outputs
+# Terraform Outputs
 
 You can expose outputs from your Terraform template to the node instance runtime properties.
 
