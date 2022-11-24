@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 30
 ---
-## Deployment to AWS of Highly Available Cloudify manager worker ( Premium Version )
+## Deployment to AWS of Highly Available Cloudify Manager Worker (Premium Version)
 
-### Provision EKS cluster
+### Provision EKS Cluster
 
 [Installing AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
@@ -23,7 +23,7 @@ $ eksctl create cluster \
   --name eks-cluster
 ```
 
-## Provision of EFS (NFS supported) in AWS:
+## Provision of EFS (NFS Supported) in AWS:
 
 https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html
 
@@ -40,15 +40,15 @@ $  aws efs create-file-system \
 -\-profile adminuser
 ```
 
-### Deploy EFS provisoner
+### Deploy EFS Provisoner
 
 #### Deploy efs-provisioner.yaml
 
-You need to know **efs.system.id** and region first, look at aws console / EFS to get those.
+You need to know **efs.system.id** and region first, look at aws console/ EFS to get those.
 
-Change first **efs.system.id** and region in efs-provisioner.yaml
+Change first **efs.system.id** and region in `efs-provisioner.yaml`.
 
-For Example:
+For example:
 
 ```yaml
 # metadata:
@@ -62,9 +62,9 @@ For Example:
 kubectl apply -f efs/efs-provisoner.yaml
 ```
 
-You can find efs-provisoner.yaml in examples/aws
+You can find `efs-provisoner.yaml` in the `examples/aws` folder
 
-#### Create storage class
+#### Create Storage Class
 
 ```yaml
 kind: StorageClass
@@ -78,7 +78,7 @@ provisioner: example.com/aws-efs
 kubectl apply -f efs/storage.yaml
 ```
 
-### Deploy helm chart
+### Deploy Helm Chart
 
 #### Create Namespace
 ```bash
@@ -143,9 +143,9 @@ ingress:
     secretName: cfy-secret-name
 ```
 
-We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
+We used an external LoadBalancer, not Ingress Nginx/ CertManager to install a cluster in this example.
 
-#### Deployment of helm chart
+#### Deployment of Helm Chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm

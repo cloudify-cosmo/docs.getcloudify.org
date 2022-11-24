@@ -1,6 +1,6 @@
 +++
 title = "System Processes"
-description = "System processes requirments"
+description = "This section reviews the system processes for the Cloudify Manager environment."
 weight = 60
 alwaysopen = false
 +++
@@ -36,15 +36,15 @@ In a {{< param cfy_manager_name >}} environment, the following system processes 
 
 ## Cloudify Service Configuration Defaults 
 
-All {{< param product_name >}}-specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
+All {{< param product_name >}} specific service configurations can be found in /etc/sysconfig. This area is where default configuration data can be found as well as logging locations for service-specific troubleshooting. These are very useful when trying to understand how a service was instantiated and what logging configuration is being used.
 
-This directory can also be used to derived each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-stage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
+This directory can also be used to derive each core service's Systemd init name. For instance, enumerating /etc/sysconfig will show a file called cloudify-stage. This is the name of the service, and thus to query the service status can be done using the command service cloudify-stage status.
 
 ## Discovering {{< param product_name >}} Services
 
 ### Service Statuses 
 
-TThe sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
+The sections above describe how to identify a {{< param product_name >}} service by looking directly at the output \
 of something like _ps_ or by folder snooping. This is not always practical or desired and there are \
 other, more developer-friendly, ways of enumerating which {{< param product_name >}} services are present and \
 how to harvest information about them.
@@ -93,7 +93,7 @@ system-level process ID (MainPID) to begin further troubleshooting.
 
 {{< param product_name >}} provides system health information for both single box deployments and clustered deployments. Read more about it:
 
-- [Cluster Status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
+- [Cluster status widget]({{< relref "working_with/console/widgets/highAvailability.md" >}})
 - [Cluster status]({{< relref "cli/maint_cli/clusters.md" >}})
 - [Manager status]({{< relref "cli/orch_cli/status.md" >}})
 
@@ -105,7 +105,7 @@ system-level process ID (MainPID) to begin further troubleshooting.
 
 To check if the RabbitMQ broker is running (and to see many other details such as which applications are running, memory allocation, and other performance metrics), simply run the following command:
 
-**Code Block 7 bash**
+**Code Block 7 Bash**
 
 ```
 sudo rabbitmqctl -n cloudify-manager@localhost status
@@ -139,7 +139,7 @@ You can now use the RabbitMQ username and password to log in via the web interfa
 
 To verify if postgres is working correctly a simple select can be executed:
 
-**Code Block 10 bash**
+**Code Block 10 Bash**
 
 ```
 sudo -u postgres psql --port 15432 -c "select 1"
@@ -147,7 +147,7 @@ sudo -u postgres psql --port 15432 -c "select 1"
 
 ### Syncthing
 
-Checking if syncthing is working correctly will need a curl command to the REST API.
+Checking if syncing is working correctly will need a curl command to the REST API.
 
 **Code Block 12 REST**
 

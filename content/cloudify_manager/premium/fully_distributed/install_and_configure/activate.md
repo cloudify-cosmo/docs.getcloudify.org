@@ -1,13 +1,16 @@
 ---
 title: Activate
-description: Learn how to activate a Cloudify Premium/Spire license and activate it.
+description: Learn how to activate a Cloudify Premium/ Spire license and activate it.
 weight: 30
 ---
 
 ## Overview
 From {{< param product_name >}} v4.6 on, in order to activate a {{< param mgr_premium_title >}}, a valid license is required.
+
 Before the {{< param cfy_manager_name >}} is activated, most of the {{< param product_name >}} REST APIs are blocked, and neither {{< param cfy_cli_name >}} nor {{< param cfy_console_name >}} is operational.
-{{< param product_name >}} community version does not require a license, hence no activation is needed.
+
+The {{< param product_name >}} community version does not require a license, hence no activation is needed.
+
 If {{< param product_name >}} is deployed as a cluster of managers, the license should only be applied once. This should be done through the active manager in that cluster.
 
 ## Product Activation
@@ -73,10 +76,10 @@ Cloudify License
 
 There are two possible ways to view the license details in the {{< param cfy_console_name >}}:
 
-##### Users menu - License Management option
+##### Users Menu - License Management Option
 
 {{% note title="Access to the License Management option" %}}
-Only users with sys_admin permissions have access to License Management option under the user's menu.
+Only users with sys_admin permission have access to License Management option under the user's menu.
 {{% /note %}}
 
 1. Click the **License Management** option under the user's menu:
@@ -87,7 +90,7 @@ Only users with sys_admin permissions have access to License Management option u
 
     ![valid license]( /images/ui/license/valid-license.png )
 
-##### Help menu - About option
+##### Help Menu - About Pption
 
 1. Click the **About** option under the help menu:
 
@@ -103,11 +106,11 @@ Only users with sys_admin permissions have access to License Management option u
 When the license expires, the {{< param cfy_manager_name >}} will display a notification specifying the new state.
 When using a trial license, upon license expiration, all {{< param cfy_manager_name >}} functionality will cease until it is updated with a valid license. This means that the REST API, {{< param cfy_cli_name >}}, and {{< param cfy_console_name >}} will not be functional.
 
-* Valid trial license example
+* Valid trial license example:
 
     ![trial license tag]( /images/ui/license/trial-license-tag.png )
 
-* Expired license example
+* Expired license example:
 
     ![expired license tag]( /images/ui/license/expired-license-tag.png )
 
@@ -116,7 +119,7 @@ When using a trial license, upon license expiration, all {{< param cfy_manager_n
 When the {{< param product_name >}} subscription is renewed or updated with new capabilities a new license will be provided by {{< param product_name >}} support. Updating the license can be applied through the CLI or the {{< param cfy_console_name >}}.
 
 {{% note title="Update Permissions" %}}
-Only users with sys_admin permissions are allowed to update licenses.
+Only users with sys_admin permission are allowed to update licenses.
 {{% /note %}}
 
 {{% note title="Update Permissions" %}}

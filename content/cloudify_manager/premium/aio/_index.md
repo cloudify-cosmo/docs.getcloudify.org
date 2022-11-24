@@ -1,6 +1,6 @@
 +++
 title = "All-in-One"
-description = "The section covers the requirments and different installation options for All-in-One mode"
+description = "This section covers the requirments and different installation options for the All-in-One mode."
 weight = 10
 alwaysopen = false
 +++
