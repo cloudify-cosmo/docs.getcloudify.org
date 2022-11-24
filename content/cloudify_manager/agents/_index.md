@@ -28,7 +28,7 @@ Notes:
   * If your image does not include Python, you can use initialization scripts supported by {{< param product_name >}} (`userdata` on OpenStack, Customization Scripts on AWS etc.) to install Python.
 * For Windows, the agent installer is bundled with a Python interpreter.
 
-## Communication with the manager
+## Communication with the Manager
 
 The agent requires access to the manager with these services:
 

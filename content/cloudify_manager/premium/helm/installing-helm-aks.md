@@ -6,11 +6,11 @@ category: Installation
 draft: false
 weight: 20
 ---
-## Deployment to Azure of Highly Available Cloudify manager worker  ( Premium Version )
+## Deployment to Azure of Highly Available Cloudify Manager Worker  ( Premium Version )
 
-### Provision AKS cluster
+### Provision AKS Cluster
 
-[How to install azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+[How to Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 ```bash
 az group create --name aks-demo --location eastus
@@ -20,11 +20,11 @@ az aks create --resource-group aks-demo --name aks-cluster --node-count 3 --enab
 az aks get-credentials --resource-group aks-demo --name aks-cluster
 ```
 
-## Provision of Azure File Storage (NFS supported) in Azure:
+## Provision of Azure File Storage (NFS Supported) in Azure:
 
 https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal
 
-### Register the NFS 4.1 protocol
+### Register the NFS 4.1 Protocol
 
 ```bash
 # Connect your Azure CLI to your Azure account, if you have not already done so.
@@ -49,11 +49,11 @@ az feature show \
     --subscription $subscriptionId
 ```
 
-### Creating NFS share
+### Creating NFS Share
 
 To create NFS share must be used **Premium Files Storage**
 
-### Create a FileStorage storage account
+### Create a FileStorage Storage Account
 
 ```bash
 resourceGroup="<resource-group>" ## aks-demo
@@ -69,7 +69,7 @@ az storage account create \
 ```
 You can create it using UI via Azure portal, look [here](https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal) for explanation of how to do it
 
-### Create an NFS share
+### Create an NFS Share
 
 ```bash
 az storage share-rm create \
@@ -83,13 +83,13 @@ az storage share-rm create \
 
 You can create it using UI via Azure portal, look [here](https://docs.microsoft.com/en-us/azure/storage/files/storage-files-how-to-create-nfs-shares?tabs=azure-portal) for explanation of how to do it
 
-After provision is over your nfs server url looks like: https://cfynfsstorage.file.core.windows.net/cfynfsstorage/nfsshare 
+After provision is over your NFS server url looks like: https://cfynfsstorage.file.core.windows.net/cfynfsstorage/nfsshare 
 
 Great explanation of how to provision FileStorage
 https://www.youtube.com/watch?v=MXXS4n-Tk4o&t=0s&ab_channel=WintellectNOW
 
-### Deploy nfs provisioner
-You need dynamic 'nfs client provisoner' to dynamically deploy new PV from nfs storage every time PV needed
+### Deploy NFS Provisioner
+You need dynamic 'nfs client provisoner' to dynamically deploy new PV from nfs storage every time PV needed.
 
 ```bash
 helm install nfs-provisioner stable/nfs-client-provisioner --set nfs.server="cfynfsstorage.file.core.windows.net" --set nfs.path="/cfynfsstorage/nfsshare"
@@ -129,7 +129,7 @@ spec:
     - sec=sys
 ```
 
-### Deploy helm chart
+### Deploy Helm Chart
 
 #### Create Namespace
 ```bash
@@ -194,9 +194,9 @@ ingress:
     secretName: cfy-secret-name
 ```
 
-We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
+We used an external LoadBalancer, no Ingress Nginx/ CertManager to install the cluster in this example.
 
-#### Deployment of helm chart
+#### Deployment of Helm Chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
