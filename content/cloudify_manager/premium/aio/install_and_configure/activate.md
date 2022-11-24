@@ -74,7 +74,7 @@ Cloudify License
 
 There are two possible ways to view the license details in the {{< param cfy_console_name >}}:
 
-##### Users menu - License Management option
+##### Users Menu - License Management Option
 
 {{% note title="Access to License Management option" %}}
 Only users with sys_admin permissions have access to License Management option under the user's menu.
@@ -88,7 +88,7 @@ Only users with sys_admin permissions have access to License Management option u
 
     ![valid license]( /images/ui/license/valid-license.png )
 
-##### Help menu - About option
+##### Help Menu - About Option
 
 1. Click the **About** option under the help menu:
 
@@ -121,7 +121,7 @@ Only users with sys_admin permissions are allowed to update licenses.
 {{% /note %}}
 
 {{% note title="Update Permissions" %}}
-A single license may be active at any given time.
+Only a single license may be active at any given time.
 {{% /note %}}
 
 #### {{< param cfy_cli_name >}}

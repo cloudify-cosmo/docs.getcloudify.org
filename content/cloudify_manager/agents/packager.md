@@ -16,9 +16,9 @@ To use {{< param product_name >}} with distributions other than the [officially 
 
 The purpose of the tool is to:
 
-* Address the issues related to compiling module requirements on different distributions, by bridging the gap between user-compiled images, unfamiliar/minor distributions, and so on.
+* Address the issues related to compiling module requirements on different distributions, by bridging the gap between user-compiled images, unfamiliar/ minor distributions, and so on.
 * Enable you to create your own {{< param cfy_agent_name >}} with your custom plugins.
-* Make the agent creation process seamless in terms of there being a single configuration file and a single-line command.
+* Make the Agent creation process seamless in terms of there being a single configuration file and a single-line command.
 * Enable you to override existing mandatory (and other) modules, by providing your own.
 
 You can use the {{< param cfy_agent_name >}} packager to create an agent on the distribution on which you are running, that uses your distribution and compilers for modules that require compilation.
@@ -34,15 +34,15 @@ You can use the {{< param cfy_agent_name >}} packager to create an agent on the 
 
 During the creation process, the agent-packager performs the following actions:
 
-* Creates a virtualenv using your selected Python binary.
-* Installs mandatory external modules into the virtualenv.
-* Installs modules from a provided requirements.txt file.
-* Installs mandatory and optional {{< param product_name >}} plugins and modules into the virtualenv.
-* Installs the `cloudify-agent` module into the virtualenv.
-* Installs any additional user-selected {{< param product_name >}} plugins and Python modules into the virtualenv.
-* Validates that all specified modules are installed.
-* Generates an `included_plugins.py` file. The file is used by the `cloudify-agent` module to automatically load all plugins specified in the file.
-* Creates a TAR file containing the virtualenv.
+* Creates a virtualenv using your selected Python binary
+* Installs mandatory external modules into the virtualenv
+* Installs modules from a provided requirements.txt file
+* Installs mandatory and optional {{< param product_name >}} plugins and modules into the virtualenv
+* Installs the `cloudify-agent` module into the virtualenv
+* Installs any additional user-selected {{< param product_name >}} plugins and Python modules into the virtualenv
+* Validates that all specified modules are installed
+* Generates an `included_plugins.py` file. The file is used by the `cloudify-agent` module to automatically load all plugins specified in the file
+* Creates a TAR file containing the virtualenv
 
 
 {{% note title="Note" %}}
@@ -93,7 +93,7 @@ Options:
     --version                   Displays current version
 {{< /highlight >}}
 
-example:
+Example:
 
 {{< highlight  bash  >}}
 cfy-ap -f -c my_config.yaml -v
@@ -117,7 +117,7 @@ cfyap.create(config=config,
 {{< /highlight >}}
 
 {{% note title="Note" %}}
-Using the tool from Python enables you to pass the configuration dictionary directly to the creation method, which enables automation of the agent creation process.
+Using the tool from Python enables you to pass the configuration dictionary directly to the creation method, which enables automation of the Agent creation process.
 {{% /note %}}
 
 ## The cloudify-agent Module
@@ -126,16 +126,16 @@ See [here]({{< relref "cloudify_manager/agents/_index.md" >}}).
 
 ## Using the Agent
 
-After creating the agent you can do one of the following:
+After creating the Agent you can do one of the following:
 
 ### Use the Agent on a Per-Node Basis
 
-You can define the paths to the agent TAR file in a blueprint on a per-node basis.
+You can define the paths to the Agent TAR file in a blueprint on a per-node basis.
 See the [{{< param cfy_agent_name >}} documentation]({{< relref "cloudify_manager/agents/_index.md" >}}) for more information.
 
 ### Install Agents in {{< param cfy_manager_name >}} during Bootstrap
 
-You can provide URLs for agents that you want to provide during {{< param cfy_manager_name >}} bootstrap.
+You can provide URLs for Agents that you want to provide during {{< param cfy_manager_name >}} bootstrap.
 
 
 # Configuring the Tool
@@ -182,10 +182,10 @@ python -c "import platform; print platform.dist()"
 
 {{% /note %}}
 
-- `distribution` - The distribution for which the agent is intended. If this is omitted, the tool attempts to retrieve the distribution by itself. The distribution is then used to name the virtualenv (unless explicitly specified in `venv`) and to name the output file (unless explicitly specified in `output_tar`).
-- `release` - The release (e.g. precise, trusty) of the `distribution` for which the agent is intended. If this is omitted, the tool will attempt to retrieve the release by itself. The release is then used to name the virtualenv (unless explicitly specified in `venv`) and to name the output file (if unless specified in `output_tar').
+- `distribution` - The distribution for which the Agent is intended. If this is omitted, the tool attempts to retrieve the distribution by itself. The distribution is then used to name the virtualenv (unless explicitly specified in `venv`) and to name the output file (unless explicitly specified in `output_tar`).
+- `release` - The release (e.g. precise, trusty) of the `distribution` for which the Agent is intended. If this is omitted, the tool will attempt to retrieve the release by itself. The release is then used to name the virtualenv (unless explicitly specified in `venv`) and to name the output file (if unless specified in `output_tar').
 - `python_path` - Enables you to set the Python binary to be used when creating `venv`. (Defaults to `/usr/bin/python`).
-- `requirements_file` - Path to the requirements.txt file that contains the modules you want to be installed in the agent.
+- `requirements_file` - Path to the requirements.txt file that contains the modules you want to be installed in the Agent.
 - `cloudify_agent_version` - Specifies the version of the `cloudify-agent` module to install (Not required if `cloudify_agent_module` is specified). Note that this can be used to create an agent for a specific {{< param product_name >}} version.
 - `cloudify_agent_module` - Specifies the URL from which the `cloudify-agent` module is to be installed. (Ignores `cloudify_agent_version`, if specified).
 - `core_modules` - A `dict` of core modules to install into the virtualenv. (If omitted or with a value of `false`, the module is installed as a part of the `cloudify-agent` dependencies.) See a list of current core modules below.
@@ -203,30 +203,30 @@ All modules and plugins, with the exception of `additional_modules` and modules 
 
 # Agent Modules
 
-Each agent contains a set of Python packages.
+Each Agent contains a set of Python packages.
 These modules can be either simple Python libraries, or plugins.
 
-## Core External Modules:
+## Core External Modules
 
-These are modules, which are not developed by {{< param product_name >}}, that are used by the agent.
+These are modules, which are not developed by {{< param product_name >}}, that are used by the Agent.
 
 - [Pika]({{< field "pika_link" >}}) (Mandatory)
 
 ## Core Modules
 
-These modules are developed by {{< param product_name >}} and provide core functionality for the agent. The default agents provided with {{< param product_name >}} come with these modules pre-installed.
+These modules are developed by {{< param product_name >}} and provide core functionality for the Agent. The default Agents provided with {{< param product_name >}} come with these modules pre-installed.
 
 - [{{< param product_name >}} REST Client]({{< relref "developer/apis/rest-client-python.md" >}}) (Mandatory)
 - [{{< param product_name >}} Plugins Common]({{< field "plugins_common_api_link" >}}) (Mandatory)
 
 ## Core Plugins
 
-These plugins are developed by {{< param product_name >}} and provide core functionality for the agent. The default agents provided with {{< param product_name >}} come with these modules pre-installed.
+These plugins are developed by {{< param product_name >}} and provide core functionality for the Agent. The default Agents provided with {{< param product_name >}} come with these modules pre-installed.
 
 - [{{< param product_name >}} Script Plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) (Optional)
 
-The {{< param cfy_manager_name >}} also runs an instance of an agent, which is called the `cloudify_management_agent`.
-This agent is responsible for starting all other agents, and therefore requires the following plugin.
+The {{< param cfy_manager_name >}} also runs an instance of an Agent, which is called the `cloudify_management_agent`.
+This agent is responsible for starting all other Agents, and therefore requires the following plugin.
 
 - [{{< param cfy_agent_name >}}]({{< relref "cloudify_manager/agents/_index.md" >}})
 

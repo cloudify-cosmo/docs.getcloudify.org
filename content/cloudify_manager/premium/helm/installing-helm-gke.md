@@ -6,9 +6,9 @@ category: Installation
 draft: false
 weight: 40
 ---
-## Deployment to GCP of Highly Available Cloudify manager worker ( Premium Version )
+## Deployment to GCP of Highly Available Cloudify Manager Worker (Premium Version)
 
-### Provision GKE cluster
+### Provision GKE Cluster
 
 [Installing Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
@@ -21,17 +21,17 @@ gcloud container clusters create \
 gcloud container clusters get-credentials gke-cluster
 ```
 
-## Provision of Filestore (NFS supported) in GCP:
+## Provision of Filestore (NFS Supported) in GCP:
 
 https://cloud.google.com/community/tutorials/gke-filestore-dynamic-provisioning
 
-### Enable the required Google APIs
+### Enable the Required Google APIs
 
 ```bash
 gcloud services enable file.googleapis.com
 ```
 
-### Create a Filestore volume
+### Create a Filestore Volume
 
 #### Create a Filestore instance with 1TB of storage capacity
 
@@ -54,7 +54,7 @@ FSADDR=$(gcloud beta filestore instances describe cfy-fs \
      --format="value(networks.ipAddresses[0])")
 ```
 
-### Deploy nfs provisioner
+### Deploy NFS Provisioner
 You need dynamic 'nfs client provisoner' to dynamically deploy new PV from nfs storage every time PV needed
 
 ```bash
@@ -89,7 +89,7 @@ spec:
     - sec=sys
 ```
 
-### Deploy helm chart
+### Deploy Helm Chart
 
 #### Create Namespace
 ```bash
@@ -154,9 +154,9 @@ ingress:
     secretName: cfy-secret-name
 ```
 
-We using external LoadBalancer, no Ingress Nginx / CertManager installed to cluster in this example.
+We used an external LoadBalancer, not Ingress Nginx/ CertManager to install a cluster in this example.
 
-#### Deployment of helm chart
+#### Deployment of Helm Chart
 
 ```bash
 helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
@@ -164,6 +164,6 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f values.yaml
 ```
 
-You can find this values.yaml in /examples/gcp folder. 
+You can find this values.yaml in `/examples/gcp` folder. 
 
 

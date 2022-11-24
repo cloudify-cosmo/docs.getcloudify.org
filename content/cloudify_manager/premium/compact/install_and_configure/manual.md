@@ -1,6 +1,6 @@
 +++
 title = "Manual Install"
-description = "Manual Install"
+description = "This guide describes the process of configuring and installing such a cluster."
 weight = 20
 alwaysopen = false
 +++
@@ -34,8 +34,8 @@ This guide describes the process of configuring and installing such a cluster:
            sudo yum install -y <RPM file path>
            ```
 
-1. All VMs should be on the same network and if there is firewall/security group,
-   make sure used ports are open and not blocking any of our services.
+1. All VMs should be on the same network and if there is firewall/ security group.
+   Make sure the used ports are open and not blocking any of our services.
 
 1. Each VM must have a license file on it.
 

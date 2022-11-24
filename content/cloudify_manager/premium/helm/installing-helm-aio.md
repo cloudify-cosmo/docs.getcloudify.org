@@ -6,17 +6,17 @@ category: Installation
 draft: false
 weight: 10
 ---
-## Cloudify manager AIO helm chart  ( Community Version )
+## Cloudify Manager AIO Helm Chart  (Community Version)
 
 ### Description
 
-It's a helm chart for cloudify manager which is:
+A Helm chart for Cloudify Manager is:
 
 * Not highly available, has one replica only.
 * Has no persistent volume to survive restarts/failures.
 * Has all components on board (as part of docker container): Message Broker and DB part of it.
 
-**This is the best and most simple way to make yourself familiar with cloudify, running a Cloudify manager AIO is a matter of minutes**
+**This is the best and simplest way to make yourself familiar with Cloudify, running a Cloudify Manager AIO in a matter of minutes.**
 
 
 ### Installation
@@ -26,7 +26,7 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
 
-### Configuration options for values.yaml:
+### Configuration Options for values.yaml:
 
 #### Image:
 

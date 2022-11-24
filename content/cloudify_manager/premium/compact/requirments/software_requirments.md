@@ -1,19 +1,19 @@
 +++
-title = "Software Requirments"
-description = "Software Requirments"
+title = "Software Requirements"
+description = "This section reviews the specific software requirements before you install the Cloudify Manager."
 weight = 50
 alwaysopen = false
 +++
 
 ## Overview
 
-These are specific packages that are commonly included in RHEL/CentOS. You must have these packages installed before you install the {{< param cfy_manager_name >}}:
+These are specific packages that are commonly included in RHEL/ CentOS. You must have these packages installed before you install the {{< param cfy_manager_name >}}:
 
-## {{< param cfy_manager_name >}} Manager
+## {{< param cfy_manager_name >}}
 
 | PACKAGE                             | DESCRIPTION                                                                                                                                 |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| sudo                                | Passwordless sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) |
+| sudo                                | Password-less sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) |
 | systemd                             | Create {{< param product_name >}} Services                                                                                                  |
 | yum                                 | Install {{< param product_name >}}'s required packages                                                                                      |
 | openssl-1.0.2k                      | Generate internal/external certificates                                                                                                     |
@@ -30,7 +30,7 @@ These are specific packages that are commonly included in RHEL/CentOS. You must 
 
 | PACKAGE                             | DESCRIPTION                                                                                                                                 |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| sudo                                | Passwordless sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) |
+| sudo                                | Password-less sudo is required to run commands with root privileges (note that this is still a requirement even when running with root user) |
 | systemd                             | Create {{< param product_name >}} Services                                                                                                  |
 | yum                                 | Install {{< param product_name >}}'s required packages                                                                                      |
 | logrotate                           | Rotating {{< param product_name >}} log files                                                                                               |
@@ -60,8 +60,8 @@ You must install the {{< param cfy_manager_name >}} as described in the installa
 
 ## Supported Resolution
 
-Minimal supported resolution of screen width is 1280px
+Minimal supported resolution of screen width is 1,280 px
 
 ## Supported Browsers
 
-The browsers that {{< param cfy_manager_name >}} Manager and {{< param cfy_manager_name >}} Composer support are: Chrome, Edge, Firefox, and Safari
+The browsers that {{< param cfy_manager_name >}} Manager and {{< param cfy_manager_name >}} Composer support are: Chrome, Edge, Firefox, and Safari.
