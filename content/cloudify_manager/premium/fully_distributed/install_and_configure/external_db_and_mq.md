@@ -1,11 +1,11 @@
 +++
 title = "External DB and MQ"
-description = "External Database and Message Queue"
+description = "A guide for installing the Cloudify cluster, the user can use the external PostgreSQL database and RabbitMQ."
 weight = 30
 alwaysopen = false
 +++
 
-## Installing and Configuring External DB And External RabbitMQ Within Distributed Cluster
+## Installing and Configuring External DB and External RabbitMQ within Distributed Cluster
 
 When installing the {{< param product_name >}} cluster, the user can use the external PostgreSQL database and RabbitMQ.
 This page is a guide for installing such services.
@@ -15,7 +15,7 @@ This page is a guide for installing such services.
  - Make sure the PostgreSQL instance is publicly available and reachable from the local {{< param product_name >}} Management service cluster nodes.
  - Retrieve the PostgreSQL instance CA certificate and save it locally for future use in the {{< param product_name >}} Management service cluster nodes configuration.
  - Keep your PostgreSQL database username and password for the later configuration of the {{< param product_name >}} Management service cluster nodes.
- - Make sure the following ports are open in the firewall/security group your database is connected to:
+ - Make sure the following ports are open in the firewall/ security group your database is connected to:
 
  Port      | Description
 -----------|------------
@@ -29,7 +29,7 @@ This page is a guide for installing such services.
 
 Azure Database for PostgreSQL is a fully managed Database-as-a-Service (DBaaS) offering that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability. It is available in two deployment options, as a single server and as a Hyperscale (Citus) cluster (preview).
 
-### Setting up Azure Database for PostgreSQL as the {{< param product_name >}} database
+### Setting up Azure Database for PostgreSQL as the {{< param product_name >}} Database
 The DBaaS of Azure supports a clustered instance and a single instance available for resizing on demand.
 As opposed to other DBaaS vendors, Azure doesn't give access to the `postgres` user with SuperUser privileges, so while working with Azure DBaaS is fully supported, the configuration is a bit different than regular PostgreSQL installations.
 
@@ -60,13 +60,13 @@ postgresql_server:
 
 Note that both `server_username` and `cloudify_username` have the postfix `@azurepg` added to them, as it is required by Azure DBaaS for Postgres
 
-## AWS DBaaS for PostgreSQL(RDS)
+## AWS DBaaS for PostgreSQL (RDS)
 
 {{< param product_name >}} supports [AWS RDS Database for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) as an external database option replacing {{< param product_name >}}'s PostgreSQL deployment.
 
 Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 
-### Setting up AWS database for PostgreSQL as the {{< param product_name >}} database
+### Setting up AWS Database for PostgreSQL as the {{< param product_name >}} Database
 The DBaaS of AWS supports a clustered instance(Multi-AZ) and a single instance available for resizing on demand.
 
 Using RDS (either the single instance or the clustered instance), requires specific setup changes to the {{< param cfy_manager_name >}} configuration.
@@ -96,7 +96,7 @@ postgresql_server:
 The RabbitMQ service is a cluster comprised of any amount of nodes,
 whereas {{< param product_name >}}'s best practice is three nodes.
 
-**Note** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
+**Note:** Please refer to the [RabbitMQ networking guide - Ports](https://www.rabbitmq.com/networking.html#ports)
 to verify the open ports needed for a RabbitMQ cluster installation.
 
 
@@ -109,17 +109,17 @@ to verify the open ports needed for a RabbitMQ cluster installation.
   {{< param product_name >}} Management service cluster nodes.
 - Mark RabbitMQ service as external setting `rabbitmq.is_external: true` flag (see the example
   configuration below).
-- **Note** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
+- **Note:** Reverse DNS lookup must be available in your network for the RabbitMQ nodes,
 please refer to the [RabbitMQ networking guide - DNS](https://www.rabbitmq.com/networking.html#dns-reverse-dns-lookups)
  for further explanation.
 
 
-## {{< param product_name >}} Management Service configuration with external services
+## {{< param product_name >}} Management Service Configuration with External Services
 
 In case of an **externally hosted PostgreSQL database** and **externally hosted RabbitMQ** i.e.
 "bring your own", configure the following settings in `/etc/cloudify/config.yaml`:
 
-**Notice** Some of the keys in the `postgresql_client` section are relevant only for a few cloud
+**Note:** Some of the keys in the `postgresql_client` section are relevant only for a few cloud
 services. Make sure you read the comments provided and follow them.
 
 

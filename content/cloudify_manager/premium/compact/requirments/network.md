@@ -1,6 +1,6 @@
 +++
 title = "Network"
-description = "Network"
+description = "This section reviews the network interface requirements."
 weight = 40
 alwaysopen = false
 +++
@@ -12,10 +12,10 @@ The {{< param cfy_manager_name >}} requires at least 2 network interfaces with c
 * Private - This interface is dedicated to communication with other {{< param product_name >}} components, including agents and cluster members.
 * Public - This interface is dedicated to connections to the {{< param cfy_manager_name >}} via the {{< param cfy_cli_name >}} and {{< param cfy_console_name >}}.
 
-**Connectivity requirements**
-These are the minimal requirements for production systems.
-* Internal communication - between {{< param product_name >}} management cluster entities - at least 1Gbps connection with a latency of 1msec or less.
-* {{< param cfy_agent_name >}} to manager communication - at least 100Mbps connection with a latency of 50ms or less.
+**Connectivity requirements** These are the minimal requirements for production systems.
+
+* Internal communication - between {{< param product_name >}} management cluster entities - at least 1 gbps connection with a latency of 1msec or less.
+* {{< param cfy_agent_name >}} to manager communication - at least 100 mbps connection with a latency of 50ms or less.
 
 **Network Ports**
 The {{< param cfy_manager_name >}} listens on the following ports:
@@ -71,7 +71,7 @@ Additionally, when {{< param product_name >}} is deployed in a cluster topology,
 | 22000 | Syncthing for file replication. |
 | 8009  | Monitoring service port.        |
 
-_All ports are TCP unless noted otherwise._
+_All ports are TCP unless otherwise noted._
 
 **Reverse DNS lookup**
 

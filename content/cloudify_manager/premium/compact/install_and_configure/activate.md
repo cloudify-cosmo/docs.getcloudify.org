@@ -5,16 +5,14 @@ weight: 30
 ---
 
 ## Overview
-From {{< param product_name >}} v4.6 on, in order to activate a {{< param mgr_premium_title >}}, a valid license is required.
+From {{< param product_name >}} v4.6 and on, in order to activate a {{< param mgr_premium_title >}}, a valid license is required.
 Before the {{< param cfy_manager_name >}} is activated, most of the {{< param product_name >}} REST APIs are blocked, and neither {{< param cfy_cli_name >}} nor {{< param cfy_console_name >}} is operational.
 {{< param product_name >}} community version does not require a license, hence no activation is needed.
 If {{< param product_name >}} is deployed as a cluster of managers, the license should only be applied once. This should be done through the active manager in that cluster.
 
 ## Product Activation
 
-A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support.
-{{< param product_name >}} Premium trial customers receive their trial license via email upon trial request.
-Request your free 60-day trial at https://cloudify.co/cloudify-premium-download/.
+A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support. In the {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request. Request your free 60-day trial at https://cloudify.co/cloudify-premium-download/.
 To activate your {{< param cfy_manager_name >}} submit your license through either the {{< param cfy_console_name >}} (UI) or via the {{< param cfy_cli_name >}}.
 
 {{% note title="Activate Permissions" %}}
@@ -46,13 +44,13 @@ To activate the Manager:
 
 ## License Management
 
-You can always check installed license details or upload a new license.
+You can always check the installed license details or upload a new license.
 
 ### License View
 
 #### {{< param cfy_cli_name >}}
 
-You can check installed license details using the following command:
+You can check the installed license details using the following command:
 
 {{< highlight bash >}}
 cfy license list
@@ -60,20 +58,19 @@ cfy license list
 
 The output of the command would be similar to the following:
 
-{{< highlight bash >}}
 Cloudify License
 +-------------+--------------------------+-----------------+-------+------------------+----------------+---------+
 | customer_id |     expiration_date      | license_edition | trial | cloudify_version |  capabilities  | expired |
 +-------------+--------------------------+-----------------+-------+------------------+----------------+---------+
 | customer123 | 2019-11-24 00:00:00.000  |      Spire      | False |       4.6        |                |  False  |
 +-------------+--------------------------+-----------------+-------+------------------+----------------+---------+
-{{< /highlight >}}
+
 
 #### {{< param cfy_console_name >}}
 
 There are two possible ways to view the license details in the {{< param cfy_console_name >}}:
 
-##### Users menu - License Management option
+##### Users Menu - License Management option
 
 {{% note title="Access to the License Management option" %}}
 Only users with sys_admin permissions have access to License Management option under the user's menu.
@@ -87,7 +84,7 @@ Only users with sys_admin permissions have access to License Management option u
 
     ![valid license]( /images/ui/license/valid-license.png )
 
-##### Help menu - About option
+##### Help Menu - About Option
 
 1. Click the **About** option under the help menu:
 

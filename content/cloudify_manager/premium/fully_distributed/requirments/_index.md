@@ -1,6 +1,6 @@
 +++
-title = "Requirments"
-description = "Requirments"
+title = "Requirements"
+description = "Requirements"
 weight = 10
 alwaysopen = false
 +++
