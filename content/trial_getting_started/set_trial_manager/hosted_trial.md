@@ -50,7 +50,7 @@ This example demonstrates how you can use {{< param product_name >}} to easily i
 
 {{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI that you have logged into in Step 2. However in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
-Follow [these]({{< relref "/install_maintain/installation/installing-cli.md" >}}) instructions to deploy your CLI.
+Follow [these]({{< relref "/trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli.md" >}}) instructions to deploy your CLI.
 
 ## Next Steps
 

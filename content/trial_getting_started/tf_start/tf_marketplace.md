@@ -1,60 +1,50 @@
 +++
 
 title = "Get Terraform Blueprints from the Marketplace"
-description = "Get Terraform based blueprints from the marketplace"
+description = "Upload a Terraform module from Cloudify Marketplace and install it"
 weight = 28
 alwaysopen = false
 +++
 
 Getting Started guide to uploading and deploying Terraform based blueprints from the marketplace.
 
-This getting started guide introduces you to uploading and deploying Terraform-based blueprints from the {{< param company_name >}} Marketplace.
-
 ## Prerequisites
-* Cloudify Manager Version 6.4 or later
-* Credentials to a cloud provider, such as AWS
+* Cloudify Manager Version 6.4
+* Terraform module archive available from a URL
+* Credentials to AWS. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
 
 ## Overview
+In this guide we are going through following steps to upload a blueprint based on Terraform from the marketplace and test it.
 
-In this guide we will perform the following steps to upload and test a blueprint based on Terraform from the {{<param company_name>}} Marketplace.
+* Upload the Blueprint to Cloudify Manager
+* Test the uploaded blueprint by creating a deployment and installing it
 
-* Upload the Blueprint to {{< param cfy_manager_name >}}
-* Create a deployment to test the uploaded blueprint
+## Step 1: Upload the Blueprint
+There are several places where to can enter the Marketplace Terraform section.
 
-## Uploading and deploying the blueprint
+* Dashboard -> Run Terraform module button
+* Blueprints Page -> Run Terraform module button
+* Blueprints Page -> Upload button -> upload from the marketplace, select the **Terraform** tab
 
-### Step 1: Upload the blueprint
+Click the upload button, After the upload has finished you will be forwarded to the blueprint's page
 
-There are several locations where you can find Terraform blueprints from the {{<param company_name>}} Marketplace:
-
-* **Dashboard** > **Run Terraform module**
-* **Blueprints** > **Run Terraform module**
-* **Blueprints** > **Upload** > **Upload from Marketplace**
-
-We will use the "Run Terraform module" button from the Blueprints page for this example. Select this option and click the upload button next to the "VM-Ubuntu-AWS-TFM" catalog item:
-
-You will be taken to the deployment dialog once the blueprint has been uploaded to the {{< param cfy_manager_name >}}.
 
 ![Terraform Marketplace]( /images/trial_getting_started/tf/TtMarketplace.jpg )
 
-### Step 2: Create a deployment and test the blueprint
 
-Next, we will create a deployment from the uploaded blueprint and confirm that the end-to-end environment creation process is successful. Perform the following steps to create a new deployment:
+## Step 2: Test the blueprint by creating a Deployment and Installing it
+* Click The Create Deployment Button
+* Review the inputs in the Deployment Creation dialog
+* You would be prompted to define the credentials to the cloud as secrets, those will be propagated to the Terraform Module. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
 
-1. Fill out any necessary Inputs (or leave them at their default values)
-2. Click the "Install" button
+![Terraform Marketplace]( /images/trial_getting_started/tf/TtMarketplace.jpg )
 
-The {{< param cfy_manager_name >}} will begin orchestrating all of the steps necessary to deploy a new environment from your blueprint. You can follow the progress of the installation by viewing the Execution Task Graph and the Deployment Events/Logs. The Execution Task Graph is a powerful feature that visualizes workflows and includes the ability to resume workflows from the point of failure.
 
-![Terraform Install]( /images/trial_getting_started/tf/TfMarketplaceInstall.jpg )
+## Step 3: Verify the installation.
+* Inspect the install workflow execution graph until it will finished, The bars of the execution graph will turn green when operations will finish.
+* Review the logs section of the deployment's page
+* Click the Deployment info tab and review the outputs section, There you will find the outputs of the terraform module defined in the blueprint
 
-### Step 3: Verify the installation
 
-The final step in the deployment process is to verify that the installation was successful. Watch the Install workflow Execution Task Graph until it is finished. The bars of the graph will turn green as operations complete. 
-
-Once the installation has finished, take some time to explore the following features on the deployment page:
-
-* Navigate to the Deployment Info page and review the Outputs that were defined during blueprint creation. These correspond to the Terraform module's Outputs.
-* Navigate to the Deployment Info page and review the Inputs. These represent the values that were provided to the {{< param cfy_manager_name >}} during deployment.
-
-![Terraform Marketplace]( /images/trial_getting_started/tf/TfMarketplaceDeployment.jpg )
+![Terraform Marketplace]( /images/trial_getting_started/tf/TfInstall.jpg )
