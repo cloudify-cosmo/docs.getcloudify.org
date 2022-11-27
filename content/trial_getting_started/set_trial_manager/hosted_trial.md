@@ -5,8 +5,6 @@ weight = 8
 alwaysopen = false
 +++
 
-TODO: is there a way to use params in the page titles?
-
 {{%children style="h2" description="true"%}}
 
 {{< param cfy_caas >}} is the fastest and easiest way to try {{< param product_name >}}.
