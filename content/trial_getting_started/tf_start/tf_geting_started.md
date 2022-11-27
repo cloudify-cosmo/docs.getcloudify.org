@@ -1,6 +1,6 @@
 +++
 
-title = "Create a Blueprint from a Terraform module"
+title = "Upload a Terraform Module"
 description = "Upload a Terraform module and install it."
 weight = 27
 alwaysopen = false
