@@ -1,46 +1,36 @@
 +++
 title = "Cloudify Community"
-description = "Download page and getting started links for the community version"
+description = "Deploy the community version of manager using a Docker container"
 weight = 9
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
-
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 +++
 
 {{%children style="h2" description="true"%}}
 
 
-The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine & most of the manager capabilities (read about the differences between our [{{< param product_name >}} versions]({{< ref "cloudify_manager/architecture/_index.md#comparison-matrix" >}})).
-The community version is available as an rpm, OpenStack Image or as a Docker based container. This page describes the complete setup flow to run {{< param product_name >}} Community manager as a Docker container.
+The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine and supports most of the manager capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here](https://cloudify.co/download/community-vs-enterprise/)).
 
-### Step 1: Install the {{< param cfy_manager_name >}} as a Docker container
+The community version is available as an RPM, OpenStack Image, or Docker container. This page describes the steps necessary to deploy the {{< param product_name >}} trial manager as a Docker container.
 
+You will need a host with [Docker](https://docs.docker.com/install) installed to run the {{< param product_name >}} community container image.
 
-Deploying {{< param product_name >}} Community manager as a Docker container is the easiest way to go.
-This tutorial assumes that you have [Docker](https://docs.docker.com/install) installed on a local or a remote machine.
+## Step 1: Install the {{< param cfy_manager_name >}} as a Docker container
 
-Open your terminal and create/start the Docker container
+Deploying the community version of the {{< param product_name >}} manager is simple. Using a container provides an easy way to get started with {{< param product_name >}}.
 
+To deploy the container image, simply launch a terminal and create the container:
+
+```bash
+{{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
 ```
-docker run -d -p 80:80 cloudifyplatform/community-cloudify-manager-aio:latest
-```
 
-{{% note title="Prerequisites" %}}
-NOTE: Community Docker container is polluted with `rsyslog` log messages. It’s NOT preventing the Community container from operating correctly. Currently, we are working on the 6.4.1 patch that will remove those messages from the container logs.
-{{% /note %}}
-
-it can take up to 1 minute unitl all the services in the docker container will be initiated and the manager will be up and running.
-
-Verify that your manager is running by browsing to [localhost](http://localhost) when running locally,
-or to the hosting machine IP when the Docker server is remote.
-
-The {{< param product_name >}} login page should be displayed.
+This will publish the web interface on port 8080. Verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost:8080](http://localhost:8080). The {{< param product_name >}} login page should be displayed. The default username and password are both _admin_.
 
 ![login-page.png]( /images/ui/pages/login-page.png )
 
-Note: the default login username and password is _admin/admin_
-
-### Step 2: Fill Contacts Details
+## Step 2: Fill Contacts Details
 
 {{% note title="Prerequisites" %}}
 NOTE: Internet access is required to complete this step
@@ -50,21 +40,23 @@ Once you loged in to Community, you'll be asked to fill contact details. You nee
 
 ![community-contact-details.png]( /images/ui/pages/community-contact-details.png )
 
-### Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
+## Step 3: Install your first deployment on your new {{< param cfy_manager_name >}}
 Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
 
 This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
 
-### Step 4: (Optional) - Setup your command line interface (CLI)
+## Step 4: (Optional) - Setup your command line interface (CLI)
 
 {{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you have logged into in Step 2, however in many cases a CLI access from your Mac, Windows, or Linux station is easier.
 
 Follow [these]({{< relref "/trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli.md" >}}) instructions to deploy your CLI.
 ____
 
-#### Congratulations! you now have your {{< param cfy_manager_name >}} ready.
+## Congratulations! you now have your {{< param cfy_manager_name >}} ready.
 
-What's next?
+Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
-* To run your first multi cloud examples on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM and Ansible plugins refer to the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
-* To run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS or AKS refer to the  [Kubernetes reference guide ]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
+* Try out the [local Hello World example]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}}) example using your new manager. No cloud credentials are required for this simple example.
+* Run your first multi-cloud example on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
+* Run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS, or AKS by following the [Kubernetes reference guide]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
+* Manage your installation using the command line utility by reviewing the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}).

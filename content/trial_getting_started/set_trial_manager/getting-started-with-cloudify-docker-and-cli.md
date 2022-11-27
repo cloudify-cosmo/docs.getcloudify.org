@@ -1,20 +1,22 @@
 +++
 title = "Cloudify CLI"
-description = "This guide illustrates how to use {{< param product_name >}} docker image as local CLI client"
+description = "Install the CLI client using a Docker image"
 weight = 300
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"
+docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 +++
 
 {{%children style="h2" description="true"%}}
 
-
 ## Install Cloudify CLI
 
 ### Linux & Mac (Binary)
+
 ```
 curl -sfL https://cloudify.co/get-cli | sh -
 ```
+
 ### Windows
 
 The EXE installation package for Windows can be downloaded from the [link](https://repository.cloudifysource.org/cloudify/6.4.0/ga-release/cloudify-windows-cli_6.4.0-ga.exe)
@@ -46,22 +48,75 @@ cfy profiles use <HOSTNAME|URL|IP> -u admin -p <ADMIN_PASSWORD> --ssl
 cfy profiles set --manager-tenant default_tenant
 ```
 
-For example:
+## Running commands
+
+There are two ways to execute {{< param product_name >}} commands. You can pass commands to the container to execute, or you can launch a shell within the container to execute commands. The sections below cover each approach.
+
+### Passing commands to the container
+
+You can pass {{< param product_name >}} commands to the CLI container by using them as arguments to the `docker exec` command. The general syntax for running any CLI command is shown below:
+
+```bash
+docker exec -it <{{< param product_name >}} docker image name> cfy <command>
+```
+
+For example, to execute a `cfy status` against the locally running {{< param cfy_manager_name >}} using the container:
+
+```bash
+docker exec -it cfy_manager_local cfy status
+```
+
+Please review the [command line reference guide]({{< relref "cli/" >}}) to learn more about the available commands.
+
+### Launching a shell in the container
+
+You can also launch a shell within the running container to execute commands. The shell will provide an interactive terminal within the container to launch commands from. To obtain an interactive shell within the container, simply specify `/bin/sh` as the argument to `docker exec`:
+
+
+```bash
+docker exec -it cfy_manager_local /bin/sh
+```
+
+Once you have obtained a shell within the container, you can execute commands using the CLI using the following syntax:
+
+```bash
+cfy <command>
+```
+
+For example, to execute a `cfy status` against the locally running {{< param cfy_manager_name >}} using the container:
+
+```bash
+cfy status
+```
+
+## Connecting to a remote manager
+
+The examples above execute commands against the locally running {{< param cfy_manager_name >}} within the container. You may also want to connect to a remote {{< param cfy_manager_name >}}. This can be achieved by configuring and using a profile within the container.
+
+First, launch a shell within the container:
+
+```bash
+docker exec -it cfy_manager_local /bin/sh
+```
+
+Next, initialize and configure a profile to use with the CLI using the following syntax:
 
 ```bash
 cfy init
-cfy profiles use http://XXXX.app.cloudify.co -u admin -p my_password --ssl
+cfy profiles use <your manager hostname / URL / IP> -u admin -p <the admin  password> --ssl
 cfy profiles set --manager-tenant default_tenant
 ```
 
+For example, to connect to the remotely running manager at https://manager.yoursite.com, you can use the following command:
 
-## Deploy your first service
+```bash
+cfy init
+cfy profiles use https://manager.yoursite.com -u admin -p admin --ssl
+cfy profiles set --manager-tenant default_tenant
+```
 
-To run your first example on your local docker image run the [local hello world example]({{< relref "trial_getting_started/examples/local/local_hello_world_example#cloudify-cli" >}}).
-This example deploys an http deamon on on your docker instance. (The example doesn't require any cloud credentials)
+## Additional Resources
 
-## CLI Reference Guide
-
-See the [command line reference guide]({{< relref "cli/" >}}) to learn how to deploy a new service, execute workflow, etc..
+For more information about the commands that are available using the CLI, please review the [command line reference guide]({{< relref "cli/" >}}).
 
 For more options on how to install the {{< param cfy_cli_name >}} on Linux, Windows or Mac refer to the [CLI installation guide] ({{< relref "cloudify_manager/cloudify_cli" >}}).
