@@ -71,4 +71,3 @@ You need to deploy DB and Message Broker before deploying Cloudify manager worke
 * [Deployment to Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}})
 * [Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
 * [Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks" >}})
->>>>>>> 94c4ab1d... Update install_with_helm.md
