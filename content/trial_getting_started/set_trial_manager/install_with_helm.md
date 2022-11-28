@@ -67,12 +67,6 @@ Note that the database and message broker must be deployed prior to deploying th
 
 The documentation below covers installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
 
-<<<<<<< HEAD
-* [Deployment to Azure AKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
-* [Deployment to GCP GKE]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
-* [Deployment to AWS EKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
-=======
 * [Deployment to Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}})
 * [Deployment to GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
 * [Deployment to AWS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks" >}})
->>>>>>> 94c4ab1d... Update install_with_helm.md
