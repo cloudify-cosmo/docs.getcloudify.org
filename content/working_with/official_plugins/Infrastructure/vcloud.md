@@ -18,7 +18,6 @@ The vCloud Plugin 2 enables you to use a vCloud-based infrastructure for deployi
 * {{< param cfy_manager_name >}} 5.1 or greater.
 * (Python version 3.6.)
 * vCloud Directory 29.0 or greater.
-
 The plugin is not compatible with blueprints written for tosca-vcloud-plugin.
 
 
@@ -40,6 +39,19 @@ Each node template, has a `client_config` property which stores your account cre
       resource_id: { get_input: vcloud_gateway_id }
 ```
 
+* `username` - The vCloud account username.
+* `password` - The vCloud account password.
+* `url` - The vCloud URL.
+* `org` - The organization name. Required only for the `ondemand` and `subscription` service types.
+* `instance` - The instance UUID. Required only for the `ondemand` service type.
+* `vdc` - The virtual datacenter name.
+* `service` - The vCloud service name.
+* `service_type` - The service type. Can be `subscription`, `ondemand`, `vcd` or `private`. `Private` is an alias for `vcd` and both types can be used with a private vCloud environment without any difference. Defaults to `subscription`.
+* `api_version` - The vCloud Air version. For `Subscription`, defaults to `5.6`. For `OnDemand`, defaults to `5.7`.
+* `region` - The region name. Applies to `OnDemand`.
+* `org_url` - The organization URL. Required only for `private` service type.
+* `edge_gateway` - The Edge gateway name.
+* `ssl_verify` A boolean flag for disabling the SSL certificate check. Only applicable for a `private` cloud service with self-signed certificates. Defaults to `True`
 
 ## Common Properties
 
