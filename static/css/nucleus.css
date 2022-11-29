@@ -534,6 +534,12 @@ h5 {
 h6 {
   font-size: 0.9rem; }
 
+li {
+  margin: .5rem; }
+
+li > p {
+  margin: auto }
+
 p {
   margin: 1.7rem 0; }
 

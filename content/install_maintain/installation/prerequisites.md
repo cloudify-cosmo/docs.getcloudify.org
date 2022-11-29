@@ -1,6 +1,6 @@
 ---
 title: Prerequisites and Sizing Guidelines for Installing a Cloudify Manager
-description: Before you install Cloudify Manager, please review the following Cloudify manager prerequisites.
+description: Before you install a Cloudify Manager, you must review these prerequisites and make sure that your environment is ready to support the Cloudify Manager.
 category: Installation
 draft: false
 weight: 10
