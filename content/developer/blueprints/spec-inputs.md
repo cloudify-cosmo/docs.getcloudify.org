@@ -34,9 +34,9 @@ inputs:
 | Keyname       | Required | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |---------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | description   | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
+| type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance`, `operation_name` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
 | item_type     | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
-| default       | no       | \<any\>       | An optional default value for the input, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` types. |
+| default       | no       | \<any\>       | An optional default value for the input, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance`, `operation_name` types.                                                                                                                                                                                                                                        |
 | constraints   | no       | list of dicts | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.                                                                                                                                                                                                                                                                                                   |
 | required      | no       | boolean       | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.                                                                                                                                                                                                                                                                                                                                |
 | display_label | no       | string        | Used in UI instead of the input's name to describe the input.                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -125,24 +125,24 @@ Each constraint must be in the following format:
 
 ## List of Constraint Operators
 
-| Operator name    | Arguments it accepts             | Value types it can validate                                                                                 |
-|------------------|----------------------------------|-------------------------------------------------------------------------------------------------------------|
-| equal            | scalar                           | any                                                                                                         |
-| greater_than     | scalar                           | comparable                                                                                                  |
-| greater_or_equal | scalar                           | comparable                                                                                                  |
-| less_than        | scalar                           | comparable                                                                                                  |
-| less_or_equal    | scalar                           | comparable                                                                                                  |
-| in_range         | list of two scalars              | comparable                                                                                                  |
-| valid_values     | list of valid values             | any                                                                                                         |
-| length           | scalar                           | string, list, dict                                                                                          |
-| min_length       | scalar                           | string, list, dict                                                                                          |
-| max_length       | scalar                           | string, list, dict                                                                                          |
-| pattern          | string (that represents a regex) | string                                                                                                      |
-| filter_id        | string                           | blueprint_id, deployment_id                                                                                 |
-| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                                                 |
-| tenants          | list of strings                  | blueprint_id, deployment_id                                                                                 |
-| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, scaling_group, secret_key, node_id, node_type, node_instance |
-| deployment_id    | string                           | capability_value, scaling_group, node_id, node_type, node_instance                                          |
+| Operator name    | Arguments it accepts             | Value types it can validate                                                                                                 |
+|------------------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| equal            | scalar                           | any                                                                                                                         |
+| greater_than     | scalar                           | comparable                                                                                                                  |
+| greater_or_equal | scalar                           | comparable                                                                                                                  |
+| less_than        | scalar                           | comparable                                                                                                                  |
+| less_or_equal    | scalar                           | comparable                                                                                                                  |
+| in_range         | list of two scalars              | comparable                                                                                                                  |
+| valid_values     | list of valid values             | any                                                                                                                         |
+| length           | scalar                           | string, list, dict                                                                                                          |
+| min_length       | scalar                           | string, list, dict                                                                                                          |
+| max_length       | scalar                           | string, list, dict                                                                                                          |
+| pattern          | string (that represents a regex) | string                                                                                                                      |
+| filter_id        | string                           | blueprint_id, deployment_id                                                                                                 |
+| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                                                                 |
+| tenants          | list of strings                  | blueprint_id, deployment_id                                                                                                 |
+| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, scaling_group, secret_key, node_id, node_type, node_instance, operation_name |
+| deployment_id    | string                           | capability_value, scaling_group, node_id, node_type, node_instance, operation_name                                          |
 
 ### `name_pattern` details
 
@@ -160,6 +160,7 @@ specifics of these fields.
 | node_id          | `node`          | `id`                                   |
 | node_type        | `node`          | `type`                                 |
 | node_instance    | `node_instance` | `id`                                   |
+| operation_name   | `node`          | keys of `operations` dictionary        |
 
 Following criteria might be used to declare `name_pattern` (all accept strings as their parameters):
 
@@ -172,8 +173,59 @@ equals_to   | attribute must be equal to the parameter provided | `equals_to: de
 
 ### `deployment_id` details
 
-The `deployment_id` is a *required constraint* for `capability_value`, `scaling_group`, `node_id`,
-`node_type` and `node_instance` data types.
+The `deployment_id` constraint for is required most of the time, but sometimes can be omitted, in
+which case we are going to use some defaults:
+
+#### Deployment inputs
+
+For inputs of type `capability_value` and `node_instance`, the `deployment_id` cannot be omitted.
+The other four types (`node_id`, `node_type`, `operation_name` and `scaling_group`) can have that
+constraint not defined in a blueprint, the default would be then to look for the objects defined
+within the blueprint.  For example:
+
+{{< highlight  yaml >}}
+inputs:
+  some_node_id:
+    description: Identifier of some node
+    type: node_id
+  some_operation_name:
+    description: A name of an operation
+    type: operation_name
+
+node_templates:
+  first_node:
+    type: cloudify.nodes.Root
+  second_node:
+    type: cloudify.nodes.Root
+{{< /highlight >}}
+
+The valid values for `some_node_id` (note lack of `deployment_id` constraint) are going to be
+`first_node` and `second_node`.  And `some_operation_name`  accepts any operation defined for
+`cloudify.nodes.Root`.
+
+
+#### Workflow parameters
+
+For all data typed which rely on `deployment_id` constraint, if it is not provided, the default
+value will be the identifier of a deployment the workflow is running on.  For example:
+
+{{< highlight  yaml >}}
+workflows:
+  test_parameters:
+    mapping: test_parameters.py
+    parameters:
+      capa:
+        description: A capability value
+        type: capability_value
+
+capabilities:
+  one:
+    value: "one"
+  two:
+    value: "two"
+{{< /highlight >}}
+
+The `test_parameters` workflow is going to accept either `one` or `two` as `capa` parameter's value.
 
 ## Constraints examples
 
