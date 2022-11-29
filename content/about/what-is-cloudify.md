@@ -15,20 +15,20 @@ aliases: /intro/what-is-cloudify/
 
 ### <span style="color:#0077fc">Everything as a Code</span>
 
-[Service Composition]({{< relref "working_with/service_composition/_index.md" >}}) Domain-Specific Language (DSL) - enabling modeling of a composite service,  containing components from multiple {{< param product_name >}} services and other orchestration domains. It specifically handles the modeling of the relationship between services, handles cascading workflows, shared resources, distributed life-cycle management and more.
+[Service Composition]({{< relref "working_with/service_composition/_index.md" >}}) Domain-Specific Language (DSL) - enabling modeling of a composite service,  containing components from multiple {{< param product_name >}} services and other orchestration domains. It specifically handles the modeling of the relationship between services, handles cascading workflows, shared resources, distributed life-cycle management, and more.
 
 
 ### <span style="color:#0077fc">Orchestrator of orchestrators</span>
 
-Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}), [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
+Built-in integration with **infrastructure orchestration** domains such as [AWS Cloud formation]({{< relref "working_with/official_plugins/Infrastructure/aws.md" >}}), [Azure ARM]({{< relref "working_with/official_plugins/Infrastructure/azure.md" >}}), [Ansible]({{< relref "working_with/official_plugins/Configuration/ansible.md" >}}), and [Terraform]({{< relref "working_with/official_plugins/Orchestration/terraform.md" >}}).
 
 ### <span style="color:#0077fc">Kubernetes Management</span>
 
-Orchestration of cloud native [Kubernetes services]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}) across multiple Kubernetes clusters such as OpenShift, GKE, EKS, and AKS and KubeSpray. {{< param product_name >}} also provides a built-in blueprint to automate cluster setup and configuration.
+Orchestration of cloud-native [Kubernetes services]({{< relref "working_with/official_plugins/Orchestration/kubernetes.md" >}}) across multiple Kubernetes clusters such as OpenShift, GKE, EKS, AKS, and KubeSpray. {{< param product_name >}} also provides a built-in blueprint to automate cluster setup and configuration.
 
 ### <span style="color:#0077fc">Native CI/CD Support</span>
 
-Built-in Integration with [Jenkins]({{< relref "working_with/integration/jenkins-plugin.md" >}}) and other CI/CD platforms provides a single ‘stop-shop’ for integrating all orchestration domains to the CI/CD pipeline.
+Built-in Integration with [Jenkins]({{< relref "working_with/integration/jenkins-plugin.md" >}}) and other CI/CD platforms provides a single ‘stop-shop’ for integrating all orchestration domains into the CI/CD pipeline.
 
 ### <span style="color:#0077fc">Consistent workflow management across all the infrastructure domains</span>
 
@@ -43,13 +43,13 @@ All this functionality is available also through [Command Line Interface] ({{< r
 
 ### <span style="color:#0077fc">Customizable Portal and Catalogue Service</span>
 
-{{< param product_name >}} provides a highly customized [catalog and portal]({{< relref "developer/writing_widgets/" >}}) framework that is suitable for providing a self-service experience and is tenant aware. It can be easily white-labelled, adding preferred custom widgets and pages and customizing views that each user has based on role.
+{{< param product_name >}} provides a highly customized [catalog and portal]({{< relref "developer/writing_widgets/" >}}) framework that is suitable for providing a self-service experience and is tenant aware. It can be easily white-labeled, adding preferred custom widgets and pages and customizing views that each user has based on role.
 
 
 ### <span style="color:#0077fc">Enhanced Security and RBAC support</span>
 
-{{< param product_name >}} provides end [security] ({{< relref "cloudify_manager/architecture/security">}}) of its internal and external resources.
-This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the {{< param product_name >}} managed resources.
+{{< param product_name >}} provides end [security]({{< relref "cloudify_manager/architecture/security">}}) of its internal and external resources.
+This includes support for the secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the {{< param product_name >}} managed resources.
 
 ### <span style="color:#0077fc">Blueprint modeling and design using the {{< param cfy_composer_name >}}</span>
 
@@ -59,9 +59,9 @@ The [{{< param cfy_composer_name >}}]({{< relref "developer/composer" >}}) (blue
 ### <span style="color:#0077fc">Pluggability</span>
 
 Pluggability is one of the core, unique features of {{< param product_name >}}. It provides reusable components abstraction for the system.  <br>
-  You can model anything that you want in a descriptive language, for example IaaS, clouds, configuration management tools, SDN components, NFV components, and so on.  <br>
+  You can model anything that you want in descriptive language, for example, IaaS, clouds, configuration management tools, SDN components, NFV components, and so on.  <br>
   {{< param product_name >}} includes a number of [officially supported out-of-the-box plugins]({{< relref "/working_with/official_plugins/" >}}), but you can also build your own.<br>
 
 ### <span style="color:#0077fc">Spire</span>
 
-{{< param cfy_spire_name >}} was designed to handle large scale deployment such as multi-site and Edge use cases. {{< param cfy_spire_name >}} is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  {{< param cfy_spire_name >}} provides single-point access to manage all managers as well as maintain their daily operations such as upgrading , healing and scaling.
+{{< param cfy_spire_name >}} was designed to handle large-scale deployment such as multi-site and Edge use cases. {{< param cfy_spire_name >}} is built as a ‘manager of the manager’ architecture where each manager acts as an autonomous unit of scale that controls a subset of the overall resources.  {{< param cfy_spire_name >}} provides single-point access to manage all managers as well as maintain their daily operations such as upgrading, healing, and scaling.
