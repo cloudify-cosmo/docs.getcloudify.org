@@ -1,5 +1,5 @@
 +++
-title = "Level 2: Infra Provisioning Basics"
+title = "Level 2: Infrastructure Provisioning Basics"
 description = "Learn how to setup basic infrastructure in AWS, Azure, GCP and OpenStack"
 weight = 20
 alwaysopen = false
