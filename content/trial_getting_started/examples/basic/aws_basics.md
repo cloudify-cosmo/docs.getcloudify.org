@@ -17,7 +17,7 @@ This example demonstrates a simple infrastructure setup in **{{< param cloud_ful
  * Instance
  * Security Group
  * Network
- * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
+ * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc.)
 
 In this example we will deploy only the infrastructure.
 Later, in the more advanced examples (multi cloud examples)
