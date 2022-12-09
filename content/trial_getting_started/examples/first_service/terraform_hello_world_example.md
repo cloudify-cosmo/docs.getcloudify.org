@@ -6,8 +6,8 @@ deployment_name = "hello-world-example.aws-terraform"
 cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
-title = "Terraform hello-world"
-description = "Terraform - Simple hello world"
+title = "Terraform Service Provisioning"
+description = "Deploy a simple web service on AWS using Terraform"
 weight = 40
 alwaysopen = false
 +++

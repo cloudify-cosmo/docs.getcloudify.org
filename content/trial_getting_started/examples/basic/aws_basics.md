@@ -7,7 +7,7 @@ cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_creden
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
 title = "AWS - Infrastructure provisioning basics"
-description = "AWS - Infrastructure provisioning basics"
+description = "Deploy an AWS EC2 instance and supporting infrastructure resources"
 weight = 22
 alwaysopen = false
 +++

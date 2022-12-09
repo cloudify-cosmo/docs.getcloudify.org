@@ -6,8 +6,8 @@ deployment_name = "hello-world-example.aws"
 cloud_auth_ui_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey"
 cloud_auth_cli_link = "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI"
 
-title = "AWS hello-world"
-description = "AWS - Simple hello world"
+title = "AWS - Service Provisioning"
+description = "Deploy a simple web service on AWS"
 weight = 40
 alwaysopen = false
 +++
