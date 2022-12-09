@@ -4,8 +4,8 @@ cloud = "Azure"
 blueprint_name = "azure.yaml"
 deployment_name = "hello-world-example.azure"
 
-title = "Azure hello-world"
-description = "Azure - Simple hello world"
+title = "Azure - Service Provisioning"
+description = "Deploy a simple web service on Azure"
 weight = 40
 alwaysopen = false
 +++

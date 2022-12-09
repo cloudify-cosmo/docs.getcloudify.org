@@ -6,8 +6,8 @@ deployment_name = "hello-world-example.openstack"
 cloud_auth_ui_link = "https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/8/html/command-line_interface_reference_guide/ch_cli#cli_openrc"
 cloud_auth_cli_link = "https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/8/html/command-line_interface_reference_guide/ch_cli#cli_openrc"
 
-title = "OpenStack hello-world"
-description = "OpenStack - Simple hello world"
+title = "OpenStack Service Provisioning"
+description = "Deploy a simple web service on OpenStack"
 weight = 40
 alwaysopen = false
 +++

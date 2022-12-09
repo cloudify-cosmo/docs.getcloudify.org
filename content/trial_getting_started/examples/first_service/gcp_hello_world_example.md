@@ -6,8 +6,8 @@ deployment_name = "hello-world-example.gcp"
 cloud_auth_ui_link = "https://cloud.google.com/iam/docs/service-accounts"
 cloud_auth_cli_link = "https://cloud.google.com/iam/docs/service-accounts"
 
-title = "GCP hello-world"
-description = "GCP - Simple hello world"
+title = "GCP - Service Provisioning"
+description = "Deploy a simple web service on GCP"
 weight = 40
 alwaysopen = false
 +++
