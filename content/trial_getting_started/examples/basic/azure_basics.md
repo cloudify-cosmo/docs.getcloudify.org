@@ -5,7 +5,7 @@ blueprint_name = "azure.yaml"
 deployment_name = "virtual-machine.azure"
 
 title = "Azure - Infrastructure provisioning basics"
-description = "Azure - Infrastructure provisioning basics"
+description = "Deploy an Azure VM and supporting infrastructure resources"
 weight = 25
 alwaysopen = false
 +++

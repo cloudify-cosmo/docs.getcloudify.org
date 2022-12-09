@@ -7,7 +7,7 @@ cloud_auth_ui_link = "https://access.redhat.com/documentation/en-us/red_hat_open
 cloud_auth_cli_link = "https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/8/html/command-line_interface_reference_guide/ch_cli#cli_openrc"
 
 title = "OpenStack - Infrastructure provisioning basics"
-description = "OpenStack - Infrastructure provisioning basics"
+description = "Deploy an OpenStack VM and supporting infrastructure resources"
 weight = 28
 alwaysopen = false
 +++

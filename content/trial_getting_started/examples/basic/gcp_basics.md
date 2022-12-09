@@ -7,7 +7,7 @@ cloud_auth_ui_link = "https://cloud.google.com/iam/docs/service-accounts"
 cloud_auth_cli_link = "https://cloud.google.com/iam/docs/service-accounts"
 
 title = "GCP - Infrastructure provisioning basics"
-description = "GCP - Infrastructure provisioning basics"
+description = "Deploy a GCP VM and supporting infrastructure resources"
 weight = 27
 alwaysopen = false
 +++
