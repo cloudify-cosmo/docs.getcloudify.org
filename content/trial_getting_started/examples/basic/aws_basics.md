@@ -66,10 +66,10 @@ The blueprint for this example handles describes all of the components in the en
 Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload a blueprint using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
 * **Blueprint package**: `https://github.com/cloudify-community/blueprint-examples/releases/download/latest/virtual-machine.zip`
-* **Blueprint name**: virtual-machine
+* **Blueprint name**: virtual-machine (or any name of your choosing)
 * **Blueprint YAML file**: aws.yaml
 
-### Deploy & Install
+### Deploy and Install
 
 Once the blueprint has been uploaded, it will be displayed on the Blueprints page. Create a new deployment, adjusting any inputs as needed.
 

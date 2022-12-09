@@ -12,97 +12,82 @@ weight = 40
 alwaysopen = false
 +++
 
-This example demonstrates a simple infrastructure setup in **{{< param cloud_full >}} ({{< param cloud >}})**, the deployment consists of:
+This example deploys a simple website and all of the supporting infrastructure components, including:
 
- * Instance
- * Web server + simple website
- * Security Group
- * Network
- * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
+* An EC2 instance
+* Security group
+* Network
+* Essential peripherals in AWS (IP address, NIC, etc.)
 
-In this example we will deploy virtual infrastructure and a "hello world" application using the {{< param cloud >}} and Ansible plugins.
+The infrastructure components will be deployed using the Cloudify AWS plugin, while the web application will be deployed with the Ansible plugin.
+
+You should already be familiar with the concepts from the [Fundamentals Example.]({{< relref "/trial_getting_started/examples/fundamentals/" >}})
 
 ## Prerequisites
+
 This example expects the following prerequisites:
 
 * A {{< param cfy_manager_name >}} setup ready. This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
 * Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
 
-#### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
-
-{{< param product_name >}} allows for multiple user interfaces. Some users find the {{< param cfy_console_name >}} (web based UI) more intuitive while others prefer the {{< param cfy_cli_name >}} (Command Line Interface). This tutorial and all following ones will describe both methods.
-
-* [Using the {{< param cfy_console_name >}}](#cloudify-management-console)
-* [Using the {{< param cfy_cli_name >}}](#cloudify-cli)
-
-{{% note %}}
-Community version - Some of the options described in the guide are not available in the community version management console (web UI). An example would be setting up secrets. You can still perform all of the functionality using the {{< param cfy_cli_name >}}.
-{{% /note %}}
-
-## {{< param cfy_console_name >}}
-
-This section explains how to run the above described steps using the {{< param cfy_console_name >}}.
-The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used interchangeably for all {{< param product_name >}} activities.
-
+## Deployment Steps
 
 ### Create Secrets
 
-To connect to {{< param cloud >}}, credentials are required.
-{{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
-Secrets are kept encrypted in a secure way and used in run-time by the system.
-Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).
+Credentials are required to connect to {{< param cloud >}}. {{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
+
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to create secrets using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#create-secrets" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#create-secrets-1" >}})
+
+Create the following secrets in the {{< param cfy_manager_name >}}:
+
+|                           Secret Name                            |             Description              |
+| ---------------------------------------------------------------- | ------------------------------------ |
+| `aws_access_key_id`                                              | The access key ID used to access AWS |
+| `aws_secret_access_key` The secret access key used to access AWS |                                      |
 
 {{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
-To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
-
-* aws_access_key_id
-* aws_secret_access_key
-
-![Required plugins for this example]( /images/trial_getting_started/aws_basic/Screenshot249.png )
-
 ### Upload Plugins
 
-Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
-I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
+Connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin. This example also requires the Utilities plugin and the Ansible plugin to deploy the website.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload plugins using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-plugins" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-plugins-1" >}})
 
-For this example, upload the following plugins:
+Upload the following plugins to the {{< param cfy_manager_name >}}:
 
 * Utilities
-* Ansible (`cloudify-ansible-plugin`)
 * {{< param cloud >}}
-
-
-
+* Ansible
 
 ### Upload Blueprint
 
-A blueprint is a general purpose model for describing systems, services or any orchestrated object topology.
-Blueprints are represented as descriptive code (yaml based files) and typically stored and managed as part of the source repository.
-The blueprint is available [here]({{< param first_service_blueprint_master >}}/{{< param blueprint_name >}}).
+The blueprint for this example handles describes all of the components in the environment's topology. Upload a new blueprint to the {{< param cfy_manager_name >}} with the values below.
 
-The flow required to setup a service consists of:
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to upload a blueprint using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
-1. Upload the blueprint describing the service to the {{< param cfy_manager_name >}}.
-1. Create a deployment from the uploaded blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
-1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
+* **Blueprint package**: `https://github.com/cloudify-community/blueprint-examples/releases/download/latest/hello-world-example.zip`
+* **Blueprint name**: hello-world-example (or any name of your choosing)
+* **Blueprint YAML file**: aws.yaml
 
-Let's run these one by one.
+### Deploy and Install
 
-To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-Simple-Service-Setup blueprint.
+Once the blueprint has been uploaded, it will be displayed on the Blueprints page. Create a new deployment, adjusting any inputs as needed.
 
+Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of how to create a deployment using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#deploy-and-install" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#upload-blueprint-and-deploy" >}})
 
-### Deploy & Install
-
-Once the blueprint is uploaded, it will be displayed in the Blueprints widget. to deploy the blueprint click the **Create deployment** button next to the blueprint you wish to deploy. Specify a deployment name, update any inputs, and click **Deploy & Install**. Changing inputs is completely optional and the defaults are safe to use.
-
-You will be directed to the **Deployment** page and will be able to track the progress of the execution.
-
-The deployment you have created should be displayed in the deployments list in the **Deployments** page.
+You will be directed to the **Deployment** page and will be able to track the progress of the execution:
 
 ![Track the progress of a Workflow]( /images/trial_getting_started/aws_basic/Screenshot261.png )
+
+### Validate
+
+
+
+
+
+
+
+
 
 ### Validate
 
