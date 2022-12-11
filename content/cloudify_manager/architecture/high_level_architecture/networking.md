@@ -43,7 +43,9 @@ Agents connect to RabbitMQ to receive tasks.
 
 The following additional ports are exposed on localhost, and used by the manager internally:
 
-* RabbitMQ uses port 15671 for the management API access
-* The {{< param cfy_console_name >}} backend uses port 8088
-* The {{< param cfy_composer_name >}} backend uses port 3000
-* PostgreSQL uses port 5432 for database access
+| Port  | Description                                      |
+|-------|--------------------------------------------------|
+| 15671 | RabbitMQ port                                    |
+| 8088  | The {{< param cfy_console_name >}} backend port  |
+| 3000  | The {{< param cfy_composer_name >}} backend port |
+| 5432  | PostgreSQL port                                  |
