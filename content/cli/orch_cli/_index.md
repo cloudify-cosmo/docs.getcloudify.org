@@ -5,7 +5,7 @@ weight: 20
 alwaysopen: false
 ---
 
-The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "install_maintain/installation/installing-manager.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
+The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
 
 Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
 
@@ -17,7 +17,7 @@ If you attempt to run a command that is not supported in local mode, an error me
 
 {{% /note %}}
 
-If you haven't already [installed Cloudify]({{< relref "install_maintain/installation/installing-cli.md" >}}), now would be a good time to do so.
+If you haven't already [installed Cloudify]({{< relref "cloudify_manager/cloudify_cli" >}}), now would be a good time to do so.
 
 # Usage
 

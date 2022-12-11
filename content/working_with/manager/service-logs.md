@@ -86,7 +86,7 @@ Remote hosts that have a {{< param product_name >}} Agent running on them will h
 
 You can find all log files for {{< param product_name >}} related services located at `/var/log/cloudify`.
 
-## Log Rotation
+## Log Rotation {#log-rotation}
 
 All {{< param product_name >}} related log files on the manager host are managed by logrotate. Log files are configured to rotate when they reach the size of `100MB`.
 At most, 7 rotated files are kept for each rotated log file.

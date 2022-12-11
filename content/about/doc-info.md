@@ -7,7 +7,7 @@ aliases: /intro/doc-info/
 ---
 The documentation center has been designed to assist you in easily navigating to the information that you require.
 
-**Documentation for {{< param product_name >}} Core Products:**		Guides related to the [**{{< param cfy_manager_name >}}**]({{< relref "install_maintain/installation/installing-manager.md" >}})  and  [**{{< param cfy_cli_name >}}**]({{< relref "cli/_index.md" >}}) products<br><br>
+**Documentation for {{< param product_name >}} Core Products:**		Guides related to the [**{{< param cfy_manager_name >}}**]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}})  and  [**{{< param cfy_cli_name >}}**]({{< relref "cli/_index.md" >}}) products<br><br>
 
 **[{{< param cfy_composer_name >}} Documentation]({{< relref "developer/composer/_index.md" >}}):**				Guides related to the {{< param cfy_composer_name >}} product<br><br>
 **[{{< param cfy_api_name >}} References]({{< relref "developer/apis/_index.md" >}}):**						Guides related to the REST APIs and REST client<br><br>

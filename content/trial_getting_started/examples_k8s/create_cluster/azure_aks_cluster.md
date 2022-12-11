@@ -8,7 +8,7 @@ cloud_auth_cli_link = "https://docs.microsoft.com/en-us/cli/azure/create-an-azur
 kubectl_cli_link = "https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html"
 cloud_cli_link = "https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
 
-title = "Azure AKS - Cluster provisioning"
+title = "Azure AKS"
 description = "Azure AKS - Cluster provisioning"
 weight = 27
 alwaysopen = false
@@ -30,7 +30,8 @@ This example expects the following prerequisites:
 
 * A {{< param cfy_manager_name >}} installed and accessible.
   * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* Access to {{< param cloud >}} infrastructure is required to demonstrate this example. 
+* Credentials to Azure. You'll need **Subscription ID**, ** Tenant ID**, **Client ID**, and **Client Secret**
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
@@ -61,11 +62,11 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 {{< param product_name >}} version 6+ offers a fast-track process to import both credentials and all necessary plugins. As soon as the {{< param cfy_console_name >}} loads, it will present several "getting started" options. Choose the {{< param cloud >}} option and enter the requested credentials to automatically import the required secrets and plugins.
 
-![{{< param cloud >}} getting started]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth.jpg )
+![{{< param cloud >}} getting started]( /images/trial_getting_started/k8s/create_cluster/azure_setup_cloud.png )
 
-![{{< param cloud >}} import access]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth-azure.jpg )
+![{{< param cloud >}} import access]( /images/trial_getting_started/k8s/create_cluster/azure_secrets.png )
 
-![{{< param cloud >}} import summary]( /images/trial_getting_started/k8s/create_cluster/getting-started-auth-azure-summary.jpg )
+![{{< param cloud >}} import summary]( /images/trial_getting_started/k8s/create_cluster/azure_summary.png )
 
 #### Validate Secrets
 
@@ -83,7 +84,7 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 * `azure_client_id` - the Service Principal `appId`.
 * `azure_client_secret` - the Service Principal `password`.
 
-![Validate secrets for this example]( /images/trial_getting_started/k8s/create_cluster/secrets-azure.jpg )
+![Validate secrets for this example]( /images/trial_getting_started/k8s/create_cluster/azure_secret_store.png )
 
 #### Validate Plugins
 
@@ -93,19 +94,7 @@ To view the imported plugins in the {{< param cfy_manager_name >}}, login to the
 * Kubernetes
 * Utilities
 
-![Required plugins for this example]( /images/trial_getting_started/k8s/create_cluster/plugins-azure.jpg )
-
-### Import Kubernetes Blueprint
-
-The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
-
-![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples.jpg )
-
-![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-azure.jpg )
-
-Once imported, you can find the resulting **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint by clicking on the **Blueprints** page. 
-
-![{{< param cloud >}} list blueprints]( /images/trial_getting_started/k8s/create_cluster/blueprints-azure.jpg )
+![Required plugins for this example]( /images/trial_getting_started/k8s/create_cluster/azure_plugins.png )
 
 ### Deploy an {{< param cloud >}} {{< param engine >}} Cluster
 
@@ -116,17 +105,14 @@ On the **Blueprints** page, click the **Create deployment** button for the **Kub
 
 Click the **Deploy & Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
 
-![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-azure-deploy.jpg )
+![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/azure_aks_create_deployment.png )
 
 You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
 
-![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-azure-complete.jpg )
+![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/azure_aks_deployment.png )
 
 ____
 
-
-## {{< param cfy_cli_name >}}
-.. todo
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 

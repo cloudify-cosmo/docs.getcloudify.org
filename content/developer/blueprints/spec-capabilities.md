@@ -33,10 +33,10 @@ value       | yes      | \<any\>     | The capability value. May be anything fro
 # Example
 
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_3
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
+  - cloudify/types/types.yaml
 
 node_templates:
   webserver_vm:

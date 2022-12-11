@@ -9,7 +9,7 @@ Users page displays a manageable list of users.
 
 ![Users Page]( /images/ui/pages/users-page.png )
 
-Additional information about security related to users is available on the [Security page]({{< relref "install_maintain/manager_architecture/security.md" >}}).
+Additional information about security related to users is available on the [Security page]({{< relref "cloudify_manager/architecture/security/" >}}).
 
 {{% note %}}
 Users page is only visible and available to `admin` users.

@@ -1,5 +1,6 @@
 ---
 title: users
+description: The `cfy users` command is used to manage users and passwords on the Cloudify Manager.
 category: Docs
 draft: false
 aliases: /cli/users/

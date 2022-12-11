@@ -1,5 +1,6 @@
 ---
 title: cluster
+description: The command is used to manage the Cloudify Manager cluster.
 category: Docs
 draft: false
 abstract: Command-Line Interface

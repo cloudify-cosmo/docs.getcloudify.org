@@ -1,5 +1,6 @@
 ---
 title: snapshots
+description: The `cfy snapshots` command is used to manage data snapshots of the Cloudify Manager. You must have `admin` credentials to create and restore snapshots.
 category: Docs
 draft: false
 abstract: Command-Line Interface
@@ -36,7 +37,7 @@ previous state or upgrade it to a newer version.
 * `--exclude-credentials` - Exclude {{< param product_name >}} agent key files (specified in the blueprint agent_config) from the snapshot
 * `--exclude-logs` - Exclude logs from the snapshot
 * `--exclude-events` - Exclude events from the snapshot
-* `--queue` - If set, snapshot-creation-workflows that can`t currently
+* `--queue` - If set, snapshot-creation-workflows that can't currently
             run will be queued and run automatically when possible
 
 
@@ -163,7 +164,7 @@ Restore the {{< param cfy_manager_name >}} to its previous state, or upgrade it 
 `SNAPSHOT_ID` is the ID of the snapshot to use for restoration<br>
 
 More detailed description of a snapshot-restore procedure for scheduled executions is available at
-[Backup and Restore Guide]({{< relref "ops_guides/backup_restore_guide.md#special-case-restoring-scheduled-executions" >}}).
+[Backup and Restore Guide]({{< relref "cloudify_manager/premium/fully_distributed/backup_and_restore.md#special-case-restoring-scheduled-executions" >}}).
 
 
 #### Optional flags

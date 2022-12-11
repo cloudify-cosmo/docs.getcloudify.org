@@ -1,7 +1,7 @@
 +++
-title = "Cloudify as a Kubernetes Service"
+title = "Cloudify Helm Chart"
 description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
-weight = 8
+weight = 200
 alwaysopen = false
 +++
 
@@ -35,7 +35,7 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
 
-To understand all available options for the AIO {{< param cfy_manager_name >}} chart, please see the [Cloudify AIO Helm chart documentation.]({{< relref "install_maintain/installation/helm-chart/installing-helm-aio" >}})
+To understand all available options for the AIO {{< param cfy_manager_name >}} chart, please see the [Cloudify AIO Helm chart documentation.]({{< relref "cloudify_manager/premium/helm/installing-helm-aio" >}})
 
 
 ## {{< param company_name >}} Manager Worker Helm chart (Premium Version)
@@ -55,7 +55,7 @@ The diagram below shows an example architecture deployed to the `cfy-example` na
 
 ### Installation
 
-Installation of the {{< param company_name >}} Manager Worker Helm chart involves several steps. Please consult the [{{< param company_name >}} Manager Worker Helm chart documentation]({{< relref "install_maintain/installation/helm-chart/installing-helm-worker" >}}) for the complete process. At a high level, this involves the following steps:
+Installation of the {{< param company_name >}} Manager Worker Helm chart involves several steps. Please consult the [{{< param company_name >}} Manager Worker Helm chart documentation]({{< relref "cloudify_manager/premium/helm/installing-helm-worker" >}}) for the complete process. At a high level, this involves the following steps:
 
 1. Deployment of DB (Postgres).
 2. Deployment of Message Broker (rabbitMQ).
@@ -67,6 +67,6 @@ Note that the database and message broker must be deployed prior to deploying th
 
 The documentation below covers installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
 
-* [Deployment to Azure AKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-aks" >}})
-* [Deployment to GCP GKE]({{< relref "install_maintain/installation/helm-chart/installing-helm-gke" >}})
-* [Deployment to AWS EKS]({{< relref "install_maintain/installation/helm-chart/installing-helm-eks" >}})
+* [Deployment to Azure AKS]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}})
+* [Deployment to GCP GKE]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
+* [Deployment to AWS EKS]({{< relref "cloudify_manager/premium/helm/installing-helm-eks" >}})
