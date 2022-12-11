@@ -20,7 +20,7 @@ All-in-One (AIO) deployment is based on a single {{< param product_name >}} box 
 An AIO deployment is recommended for non-mission critical use when high-availability is not required and the scale is not extreme.
 {{< param product_name >}} AIO is typically used for development and testing systems but is also common in production for smaller-scale areas.
 
-To learn more about installing an AIO {{< param product_name >}} platform, as an rpm or leveraging OpenStack/ Docker container images, please continue to:
+To learn more about installing an AIO {{< param product_name >}} platform, as an rpm or leveraging OpenStack, Docker container images, please continue to:
 
 ### Community 
 - [Docker]({{< relref "cloudify_manager/community/install_and_configure/docker.md" >}})
@@ -37,15 +37,15 @@ To learn more about installing an AIO {{< param product_name >}} platform, as an
 
 ## {{< param product_name >}} Compact Cluster (3 Nodes)
 
-The {{< param product_name >}} Compact Cluster deployment is based on 3 servers, each running all of the {{< param product_name >}} services. The services are deployed in an active-active approach with a high-availability setup.
-A Compact Cluster provides an enterprise-grade {{< param product_name >}} deployment suitable to almost any organization with a performance and scale equivalent to a fully distributed cluster containing 3 managers and with the option of further scaling using higher form factor hardware. The Compact Cluster is designed for mission-critical use.
+The {{< param product_name >}} Compact Cluster deployment is based on 3 servers, each running all of the {{< param product_name >}} services. Where the services are deployed in an active-active approach with a high-availability setup.
+A Compact Cluster provides an enterprise-grade {{< param product_name >}} deployment suitable to almost any organization with a performance and scale equivalent to a fully distributed cluster containing 3 managers and with the option of further scaling using higher form factor hardware. The Compact Cluster is designed for mission-critical use and is availabel for Premium only.
 
 To learn more about installing the Compact Cluster please continue to:
 
 * [Compact Cluster Installation Guide]({{< relref "cloudify_manager/premium/compact/" >}})
 
 {{% note %}}
-Note: The above-mentioned section will guide you on how to deploy a Compact Cluster manually. {{< param product_name >}} provides an automated flow that simplifies the deployment over 3 existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager Package]({{< relref "cloudify_manager/premium/compact/install_and_configure/cluster_manager.md" >}})
+Note: The above-mentioned section will guide you on how to deploy a Compact Cluster manually. {{< param product_name >}} provides an automated flow that simplifies the deployment over 3 existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager Package]({{< relref "cloudify_manager/premium/compact/install_and_configure/cluster_manager.md" >}}).
 {{% /note %}}
 
 ## {{< param product_name >}} Fully Distributed Cluster
@@ -57,10 +57,11 @@ Running the {{< param product_name >}} platform as a fully distributed cluster p
 To learn more about installing the {{< param product_name >}} fully distributed cluster please continue to:
 
 * [Fully Distributed Cluster Installation Guide]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/manual.md" >}})
-* [Distributed Cluster with External Database and Messaging Queue]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md" >}})
+* [Distributed cluster with external database and messaging queue]({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/external_db_and_mq.md" >}})
+* [Helm chart]({{< relref "cloudify_manager/premium/helm/" >}})
 
 {{% note %}}  
-Note: The above-mentioned section will guide you on how to deploy a distributed cluster manually. {{< param product_name >}} provides an automated flow that simplifies the deployment over 9 existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager Package] ({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/cluster_manager.md" >}})
+Note: The above-mentioned section will guide you on how to deploy a distributed cluster manually. {{< param product_name >}} provides an automated flow that simplifies the deployment over 9 existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager Package] ({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/cluster_manager.md" >}}).
 {{% /note %}}
 
 ## Cloudify on Kubernetes
