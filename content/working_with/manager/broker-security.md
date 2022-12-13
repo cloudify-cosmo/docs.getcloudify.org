@@ -30,7 +30,7 @@ The password can be changed using the `rabbitmq.password` setting in the configu
 
 Communications with the broker is secured using SSL/TLS. The {{< param cfy_manager_name >}} uses a CA certificate, which is deployed to the agents on managed compute nodes, and a server certificate (the "internal" certificate) that is used by RabbitMQ.
 
-Those certificates can also be provided by the user using the `ssl_inputs` setting in the configuration file. For more information about configuring the certificates, [see the description in the article about Manager Architecture - Security]({{< relref "install_maintain/manager_architecture/security.md#customizing-ssl-for-internal-communication" >}})
+Those certificates can also be provided by the user using the `ssl_inputs` setting in the configuration file. For more information about configuring the certificates, [see the description in the article about Manager Architecture - Security]({{< relref "cloudify_manager/architecture/security/communication.md#customizing-ssl-for-internal-communication" >}})
 
 
 {{% note title="Note" %}}

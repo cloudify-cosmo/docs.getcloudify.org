@@ -11,7 +11,7 @@ aliases: /blueprints/spec-inputs/
 Inputs are useful when there is a need to inject parameters in the blueprint that were unknown when the blueprint was created, and they can be used for distinction between different deployments of the same blueprint.
 
 {{% note title="Note" %}}
-Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs` multiple times.
+Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_4`, you can also import `inputs` multiple times.
 {{% /note %}}
 
 {{% note title="Note" %}}
@@ -34,9 +34,9 @@ inputs:
 | Keyname       | Required | Type          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |---------------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | description   | no       | string        | An optional description for the input.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
+| type          | no       | string        | The required data type of the input. Not specifying a data type means the type can be anything, including a list, an array or a dictionary. Valid types: `string`, `integer`, `float`, `boolean`, `list`, `dict`, `regex`, `textarea`, `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance`, `operation_name` or a [custom data type]({{< relref "developer/blueprints/spec-data-types.md" >}}). |
 | item_type     | no       | string        | Definition of items' type, only valid for `list` type, if none is provided the items' type can be anything.                                                                                                                                                                                                                                                                                                                                           |
-| default       | no       | \<any\>       | An optional default value for the input, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance` types. |
+| default       | no       | \<any\>       | An optional default value for the input, not available for `blueprint_id`, `deployment_id`, `secret_key`, `capability_value`, `scaling_group`, `node_id`, `node_type`, `node_instance`, `operation_name` types.                                                                                                                                                                                                                                        |
 | constraints   | no       | list of dicts | The constraints the input value must comply with. Read more details about the format and usage of the constraints in the Constraints section below.                                                                                                                                                                                                                                                                                                   |
 | required      | no       | boolean       | a boolean value to indicate whether the input is required `must be passed` or not, by default all inputs are required.                                                                                                                                                                                                                                                                                                                                |
 | display_label | no       | string        | Used in UI instead of the input's name to describe the input.                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -46,6 +46,14 @@ inputs:
 _Note: `display` key is valid only for inputs of type `textarea`, it can contain only a number of rows to be used to display the field.  See the example below._
 
 _Note: if you specify a custom `data_type` in the `type` field, a property validation will occur. See the example below._
+
+# Best Pracice
+
+As inputs provides an option to parametrize a blueprint. As a blueprint developer you have to provide as much information as possible to ensure that the blueprint consumer understands what are the scope of each input.
+`type` - Provide a type as it will ensure both input value and based on the type inputs will rendered differently in `create deployment` modal. That will provide a better experience for the blueprint cinsumer.
+`display_label` - Ensure that the input name in `create deployment` modal is human readable.
+`description` - Describe what the input is about
+
 # Example
 
 {{< highlight  yaml >}}
@@ -55,10 +63,13 @@ inputs:
   image_name:
     description: The image name of the server
     type: string
+    display_label: Image Name
     default: "Ubuntu 12.04"
 
   extra_vm_details:
     description: Extra server details
+    display_label: Extra VM Details
+    type: dict
     default:
       key_name: 'my-openstack-key-name'
       all_my_flavors: [ 1, 2, 3, 4 ]
@@ -85,6 +96,7 @@ node_templates:
 
   vm:
     type: cloudify.openstack.nodes.Server
+    display_label: Virtual Machine Details
     properties:
       server:
         image_name: { get_input: image_name }
@@ -101,6 +113,7 @@ node_templates:
 inputs:
   ports_conf:
     type: port_conf
+    display_label: Ports Configuration
 data_types:
   port_conf:
     properties:
@@ -125,24 +138,24 @@ Each constraint must be in the following format:
 
 ## List of Constraint Operators
 
-| Operator name    | Arguments it accepts             | Value types it can validate                                                                                 |
-|------------------|----------------------------------|-------------------------------------------------------------------------------------------------------------|
-| equal            | scalar                           | any                                                                                                         |
-| greater_than     | scalar                           | comparable                                                                                                  |
-| greater_or_equal | scalar                           | comparable                                                                                                  |
-| less_than        | scalar                           | comparable                                                                                                  |
-| less_or_equal    | scalar                           | comparable                                                                                                  |
-| in_range         | list of two scalars              | comparable                                                                                                  |
-| valid_values     | list of valid values             | any                                                                                                         |
-| length           | scalar                           | string, list, dict                                                                                          |
-| min_length       | scalar                           | string, list, dict                                                                                          |
-| max_length       | scalar                           | string, list, dict                                                                                          |
-| pattern          | string (that represents a regex) | string                                                                                                      |
-| filter_id        | string                           | blueprint_id, deployment_id                                                                                 |
-| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                                                 |
-| tenants          | list of strings                  | blueprint_id, deployment_id                                                                                 |
-| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, scaling_group, secret_key, node_id, node_type, node_instance |
-| deployment_id    | string                           | capability_value, scaling_group, node_id, node_type, node_instance                                          |
+| Operator name    | Arguments it accepts             | Value types it can validate                                                                                                 |
+|------------------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| equal            | scalar                           | any                                                                                                                         |
+| greater_than     | scalar                           | comparable                                                                                                                  |
+| greater_or_equal | scalar                           | comparable                                                                                                                  |
+| less_than        | scalar                           | comparable                                                                                                                  |
+| less_or_equal    | scalar                           | comparable                                                                                                                  |
+| in_range         | list of two scalars              | comparable                                                                                                                  |
+| valid_values     | list of valid values             | any                                                                                                                         |
+| length           | scalar                           | string, list, dict                                                                                                          |
+| min_length       | scalar                           | string, list, dict                                                                                                          |
+| max_length       | scalar                           | string, list, dict                                                                                                          |
+| pattern          | string (that represents a regex) | string                                                                                                                      |
+| filter_id        | string                           | blueprint_id, deployment_id                                                                                                 |
+| labels           | list of dicts of size one        | blueprint_id, deployment_id                                                                                                 |
+| tenants          | list of strings                  | blueprint_id, deployment_id                                                                                                 |
+| name_pattern     | dict                             | blueprint_id, deployment_id, capability_value, scaling_group, secret_key, node_id, node_type, node_instance, operation_name |
+| deployment_id    | string                           | capability_value, scaling_group, node_id, node_type, node_instance, operation_name                                          |
 
 ### `name_pattern` details
 
@@ -160,6 +173,7 @@ specifics of these fields.
 | node_id          | `node`          | `id`                                   |
 | node_type        | `node`          | `type`                                 |
 | node_instance    | `node_instance` | `id`                                   |
+| operation_name   | `node`          | keys of `operations` dictionary        |
 
 Following criteria might be used to declare `name_pattern` (all accept strings as their parameters):
 
@@ -172,10 +186,101 @@ equals_to   | attribute must be equal to the parameter provided | `equals_to: de
 
 ### `deployment_id` details
 
-The `deployment_id` is a *required constraint* for `capability_value`, `scaling_group`, `node_id`,
-`node_type` and `node_instance` data types.
+The `deployment_id` constraint for is required most of the time, but sometimes can be omitted, in
+which case we are going to use some defaults:
 
-## Constraints examples
+#### Deployment inputs
+
+For inputs of type `capability_value` and `node_instance`, the `deployment_id` cannot be omitted.
+The other four types (`node_id`, `node_type`, `operation_name` and `scaling_group`) can have that
+constraint not defined in a blueprint, the default would be then to look for the objects defined
+within the blueprint.  For example:
+
+{{< highlight  yaml >}}
+inputs:
+  some_node_id:
+    description: Identifier of some node
+    type: node_id
+  some_operation_name:
+    description: A name of an operation
+    type: operation_name
+
+node_templates:
+  first_node:
+    type: cloudify.nodes.Root
+  second_node:
+    type: cloudify.nodes.Root
+{{< /highlight >}}
+
+The valid values for `some_node_id` (note lack of `deployment_id` constraint) are going to be
+`first_node` and `second_node`.  And `some_operation_name`  accepts any operation defined for
+`cloudify.nodes.Root`.
+
+
+#### Workflow parameters
+
+For all data typed which rely on `deployment_id` constraint, if it is not provided, the default
+value will be the identifier of a deployment the workflow is running on.  For example:
+
+{{< highlight  yaml >}}
+workflows:
+  test_parameters:
+    mapping: test_parameters.py
+    parameters:
+      capa:
+        description: A capability value
+        type: capability_value
+
+capabilities:
+  one:
+    value: "one"
+  two:
+    value: "two"
+{{< /highlight >}}
+
+The `test_parameters` workflow is going to accept either `one` or `two` as `capa` parameter's value.
+
+## Constraints by input type
+
+Operator name      | Arguments it accepts             | Value types it can validate
+------------------ | -------------------------------- | --------------------------
+equal              | scalar                           | any
+greater_than.      | scalar                           | comparable
+greater_or_equal   | scalar                           | comparable
+less_than          | scalar                           | comparable
+less_or_equal      | scalar                           | comparable
+in_range           | list of two scalars              | comparable
+valid_values       | list of valid values             | any
+length             | scalar                           | string, list, dict
+min_length         | scalar                           | string, list, dict
+max_length         | scalar                           | string, list, dict
+pattern            | string (that represents a regex) | string
+
+Although there is not restriction between the input type and constraints, It's recommended to use the following constraints per each input type
+
+### String Constraints
+
+Operator name      | Arguments it accepts             | Value types it can validate
+------------------ | -------------------------------- | --------------------------
+valid_values       | list of valid values             | any
+length             | scalar                           | string, list, dict
+min_length         | scalar                           | string, list, dict
+max_length         | scalar                           | string, list, dict
+pattern            | string (that represents a regex) | string
+
+### Integer and Float Constraints
+
+Operator name      | Arguments it accepts             | Value types it can validate
+------------------ | -------------------------------- | --------------------------
+equal              | scalar                           | any
+greater_than.      | scalar                           | comparable
+greater_or_equal   | scalar                           | comparable
+less_than          | scalar                           | comparable
+less_or_equal      | scalar                           | comparable
+in_range           | list of two scalars              | comparable
+
+
+## Example
 
 In the following example, the `image_name` input must comply with the given regex, otherwise an error is displayed.
 
@@ -281,3 +386,75 @@ inputs:
           contains: Compute
       - deployment_id: app
 {{< /highlight >}}
+
+## Common used inputs
+
+### Port
+
+Port numbers range from 0 to 65536
+
+```
+inputs:
+  port:
+    type: integer
+    display_label: Port
+    constraints:
+      - greater_or_equal: 0
+      - less_or_equal: 65536
+```
+### URL
+
+URL starts with HTTP/HTTPS:
+
+```
+inputs:
+  url:
+    type: string
+    display_label: URL
+    constraints:
+      - pattern: '^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$'
+```
+
+Not require HTTP protocol:
+
+```
+inputs:
+  url:
+    type: string
+    display_label: URL
+    constraints:
+      - pattern: '^[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$'
+```
+
+### CIDR
+
+```
+inputs:
+  cidr:
+    type: string
+    display_label: CIDR
+    constraints:
+      - pattern: '^([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
+```
+
+### IPv4
+
+```
+inputs:
+  ipv4:
+    type: string
+    display_label: IPv4
+    constraints:
+      - pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$'
+```
+
+### IPv6
+```
+inputs:
+  ipv6:
+    type: string
+    display_label: IPv6
+    constraints:
+      - pattern: '^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$'
+```
+

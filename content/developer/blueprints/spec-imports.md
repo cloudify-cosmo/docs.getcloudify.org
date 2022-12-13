@@ -8,10 +8,10 @@ aliases: /blueprints/spec-imports/
 types_yaml_link: http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
 ---
 
-`imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml ) file).
+`imports` enable the author of a blueprint to reuse blueprint files, or parts of them, and to use predefined types (e.g. from the [types.yaml]( http://www.getcloudify.org/spec/cloudify/6.4.0/types.yaml ) file).
 
 {{% note title="Note" %}}
-Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can also import `inputs`, `node_templates` and `outputs` multiple times.
+Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_4`, you can also import `inputs`, `node_templates` and `outputs` multiple times.
 {{% /note %}}
 
 # Declaration
@@ -23,12 +23,27 @@ imports:
 {{< /highlight >}}
 
 
-# Example
+# Example 1
 
 {{< highlight  yaml >}}
 
 imports:
   - {{< field "types_yaml_link" >}}
+  - plugin:cloudify-openstack-plugin
+
+node_templates:
+  vm:
+    type: cloudify.openstack.nodes.Server
+  webserver:
+    type: cloudify.nodes.WebServer
+{{< /highlight >}}
+
+# Example 2
+
+{{< highlight  yaml >}}
+
+imports:
+  - cloudify/types/types.yaml
   - plugin:cloudify-openstack-plugin
 
 node_templates:

@@ -56,7 +56,7 @@ When a user is added to a tenant, a Role must be assigned to it by passing a val
 
 You can configure the account lock in the {{< param cfy_manager_name >}} either:
 
-* Before you start to use the {{< param cfy_manager_name >}} - [Before you install]({{< relref "/install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}}) the {{< param cfy_manager_name >}} or [after you install]({{< relref "/install_maintain/installation/installing-manager.md#configuring-the-manager-settings" >}}) the {{< param cfy_manager_name >}}, you can set the account lock settings in the config.yaml file. After you install or configure the {{< param cfy_manager_name >}}, the account lock is enforced.
+* Before you start to use the {{< param cfy_manager_name >}} - [Before you install]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.mdd#installing-cloudify-manager" >}}) the {{< param cfy_manager_name >}} or [after you install]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md#configuring-the-manager-settings" >}}) the {{< param cfy_manager_name >}}, you can set the account lock settings in the config.yaml file. After you install or configure the {{< param cfy_manager_name >}}, the account lock is enforced.
 
 * After you start to use the {{< param cfy_manager_name >}} - Edit the account lock settings in the rest service configuration file at `/opt/manager/rest-security.conf`. To enforce the account lock, restart the {{< param product_name >}} rest service: `supervisorctl restart cloudify-restservice`
 

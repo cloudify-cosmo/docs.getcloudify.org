@@ -156,7 +156,7 @@ Note that this procedure essentially creates a new cluster, with the data from t
 In this process you teardown the active {{< param cfy_manager_name >}} and install a new one on the same VM. You create new VMs for the {{< param cfy_manager_name >}}s that will become the hot standbys in the cluster.
 
 1. Create a snapshot of the active {{< param cfy_manager_name >}}.
-2. [Uninstall]({{< relref "install_maintain/installation/installing-manager.md" >}}) {{< param cfy_manager_name >}} from the active machine.
+2. [Uninstall]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) {{< param cfy_manager_name >}} from the active machine.
 3. Install an updated Manager on the existing machine.
 4. Restore the snapshot to the {{< param cfy_manager_name >}} instance.
 5. Run `cluster start` to designate this {{< param cfy_manager_name >}} instance as the active Manager.

@@ -1,5 +1,6 @@
 ---
 title: sites
+description: The `cfy sites` command is used to manage sites and their location.
 category: Docs
 draft: false
 abstract: Command-Line Interface

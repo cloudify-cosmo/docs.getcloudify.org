@@ -9,7 +9,7 @@ Tenants page displays a manageable list of tenants.
 
 ![Tenants Page]( /images/ui/pages/tenants-page.png )
 
-Additional information about security related to tenants is available on the [Security page]({{< relref "install_maintain/manager_architecture/security.md" >}}).
+Additional information about security related to tenants is available on the [Security page]({{< relref "cloudify_manager/architecture/security/" >}}).
 
 {{% note %}}
 Tenants page is only visible and available to `admin` users.
