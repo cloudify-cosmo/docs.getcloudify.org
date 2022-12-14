@@ -5,7 +5,6 @@ weight = 30
 alwaysopen = false
 +++
 
-## Overview
 {{< param cfy_manager_name >}} comprises the following main parts:
 
 * {{< param cfy_manager_name >}}
@@ -31,7 +30,7 @@ All requests are served via a proxy.
 
 ## {{< param cfy_agent_name >}}
 
-{{< param cfy_agent_name >}}s are entities for executing tasks on application hosts. They listen to task queues and execute tasks when required.
+These are entities for executing tasks on application hosts. They listen to task queues and execute tasks when required.
 
 The agents are designed to execute tasks using [plugins]({{< relref "working_with/official_plugins/_index.md" >}}).
 
@@ -45,4 +44,4 @@ For more information about agents, [click here]({{< relref "cloudify_manager/age
 
 ## {{< param cfy_console_name >}}
 
-{{< param product_name >}} includes a {{< param cfy_console_name >}} that provides the same features as the CLI, as well as others. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
+This is a UI interface that easily interacts with Cloudify Manager. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
