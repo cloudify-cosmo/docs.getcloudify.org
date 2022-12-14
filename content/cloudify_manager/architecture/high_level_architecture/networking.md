@@ -22,25 +22,30 @@ By default, there are two external networks from which the {{< param cfy_manager
 
 Therefore, {{< param product_name >}} requires only two entry points for its management environment:
 
-* Ports 80/ 443 for user rest-service/ UI access via Nginx
-* Port 22 is exposed for SSH access, to enable remote access to the {{< param cfy_manager_name >}}.
-  This is required for the `cfy ssh` command to work.
+| Port    | Description                                                                                                                    |
+|---------|--------------------------------------------------------------------------------------------------------------------------------|
+| 80/ 443 | Rest-service/ UI access via Nginx                                                                                              |
+| 22      | SSH access, to enable remote access to the {{< param cfy_manager_name >}}. This is required for the `cfy ssh` command to work. |
 
 ### Application Ports
 
 The following ports are exposed for agent-manager communication:
 
-* The REST service and the file server are accessed via port 53333
-* RabbitMQ is accessed via port 5671
+| Port  | Description                          |
+|-------|--------------------------------------|
+| 53333 | The REST service and the file server |
+| 5671  | RabbitMQ                             |
 
 The agents use the REST service to update the application's model (for example, setting runtime properties).
 Agents connect to RabbitMQ to receive tasks.
 
-### Local ports
+### Local Ports
 
 The following additional ports are exposed on localhost, and used by the manager internally:
 
-* RabbitMQ uses port 15671 for the management API access
-* The {{< param cfy_console_name >}} backend uses port 8088
-* The {{< param cfy_composer_name >}} backend uses port 3000
-* PostgreSQL uses port 5432 for database access
+| Port  | Description                                      |
+|-------|--------------------------------------------------|
+| 15671 | RabbitMQ port                                    |
+| 8088  | The {{< param cfy_console_name >}} backend port  |
+| 3000  | The {{< param cfy_composer_name >}} backend port |
+| 5432  | PostgreSQL port                                  |
