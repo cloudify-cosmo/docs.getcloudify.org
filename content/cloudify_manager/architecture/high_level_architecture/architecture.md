@@ -20,7 +20,7 @@ The {{< param cfy_manager_name >}} contains several open-source components. The 
 
 ## Nginx {#nginx}
 
-[Nginx](http://nginx.com/) is a high-performing web server. In the {{< param cfy_manager_name >}}, it serves two purposes:
+[Nginx](http://nginx.com/) is a high-performing web server. In the {{< param cfy_manager_name >}} it serves two purposes:
 
 1. A proxy for the {{< param product_name >}} REST service and {{< param cfy_console_name >}}
 2. A file server to host {{< param product_name >}}-specific resources, agent packages, and blueprint resources.
