@@ -602,6 +602,7 @@ node_templates:
 
 {{< /highlight >}}
 
+# Workflows
 
 ## update_repositories workflow
 
