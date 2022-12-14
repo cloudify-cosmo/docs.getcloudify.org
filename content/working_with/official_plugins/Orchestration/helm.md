@@ -409,6 +409,15 @@ node_templates:
 
 {{< /highlight >}}
 
+
+## Operations 
+### **check drift workflow**
+Check drift will check if there was a change in repo list.
+
+The returned value is a dictionary with the changes.
+
+If nothing has changed, an empty dictionary will be returned.
+
 ## cloudify.nodes.helm.Release
 This node type responsible for create release on Kubernetes cluster.
 
@@ -547,6 +556,21 @@ node_templates:
 
 {{< /highlight >}}
 
+## Operations 
+### **check drift workflow**
+When a specific version for chert is provided in the blueprint
+The check drift will confirm that this is the current version.
+If no version was provided, the check drift will check if there is an update of the chart version in the repo, 
+or from another source by checking helm_list.
+
+To provide a version you can add this flag in the blueprint under resource_config.
+```yaml
+   flags:
+      - name: version
+        value: { get_input: version }
+```
+
+return 'diff' or 'None'
 
 
 # Relationships
