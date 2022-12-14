@@ -582,6 +582,7 @@ node_templates:
 # Workflows
 
 ## check status workflow
+
 ### Example of using check_drift workflow
 
 Assuming the release node type is:
@@ -619,7 +620,7 @@ return 'diff' or 'None'
 
 Assuming the repo node type is :
 
-check drift will check that the 'repo url' is the same as the original given in the installation.
+check drift will check that the repo_list is drifted.
 
 `cfy exec start execute_operation -p operation=cloudify.interfaces.lifecycle.check_drift -p node_instance_ids=‘[“repo_wi688d”]’ -d 2440d9b2-10b2-4517-ac77-67e98d0fde7b`
 
