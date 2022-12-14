@@ -581,6 +581,49 @@ node_templates:
 
 # Workflows
 
+## check status workflow
+### Example of using check_drift workflow
+
+Assuming the release node type is:
+
+Updates the data in runtime_properties for status_output and helm_list.
+
+`cfy exec start execute_operation -p operation=cloudify.interfaces.lifecycle.check_status -p node_instance_ids=‘[“release_s52cey”]’ -d 2440d9b2-10b2-4517-ac77-67e98d0fde7b`
+
+Assuming the repo node type is:
+
+Updates the data in runtime_properties for repo_list.
+
+`cfy exec start execute_operation -p operation=cloudify.interfaces.lifecycle.check_status -p node_instance_ids=‘[“repo_wi688d”]’ -d 2440d9b2-10b2-4517-ac77-67e98d0fde7b`
+
+
+## check drift workflow
+
+### Example of using check_drift workflow
+
+Assuming the release node type is:
+
+Drift check will look for updated chart version in the repository and will verify if a chart version is set in the blueprint the drift check will verify that the current version of the chart matches to the .version specified in the blueprint.
+In the situation where a version is not specified in the blueprint, it will check if there is an updated version in the repository in relation to the release in the installation.
+
+`cfy exec start execute_operation -p operation=cloudify.interfaces.lifecycle.check_drift -p node_instance_ids=‘[“release_s52cey”]’ -d 2440d9b2-10b2-4517-ac77-67e98d0fde7b`
+
+When it is necessary to require a specific version of the chart, write the version here as follows-
+```yaml
+   flags:
+      - name: version
+        value: { get_input: version }
+```
+
+return 'diff' or 'None'
+
+Assuming the repo node type is :
+
+check drift will check that the 'repo url' is the same as the original given in the installation.
+
+`cfy exec start execute_operation -p operation=cloudify.interfaces.lifecycle.check_drift -p node_instance_ids=‘[“repo_wi688d”]’ -d 2440d9b2-10b2-4517-ac77-67e98d0fde7b`
+
+
 ## update_repositories workflow
 
 This workflow provides the ability to update all the repositories for a Helm client.
