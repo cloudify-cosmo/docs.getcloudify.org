@@ -86,7 +86,7 @@ This example deployed a simple web application on a virtual machine with support
 * Navigating to the {{< param cloud >}} console and verifying that the new instance and other resources were created.
 * Examining the Deployment page in the {{< param cfy_console_name >}} for more information about your deployed nodes, topology, installation logs.
 
-You can navigate to the IP address provided by the `application_endpoint` capability.
+To access the new service, you can locate the `application_endpoint` containing a URL to the service on the **Deployment Outputs/Capabilities** section on the Deployment Info page. Simply navigate to the URL in a web browser to view the deployed service.
 
 Please refer to the [Fundamentals Example]({{< relref "/trial_getting_started/examples/fundamentals/" >}}) for an explanation of verification steps, including how to obtain outputs and capabilities using the [UI]({{< relref "/trial_getting_started/examples/fundamentals/#validate" >}}) or [CLI]({{< relref "/trial_getting_started/examples/fundamentals/#validate-1" >}})
 
