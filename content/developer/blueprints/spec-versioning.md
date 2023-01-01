@@ -11,13 +11,15 @@ aliases: /blueprints/spec-versioning/
 
 The currently defined versions are 
 
-* `cloudify_dsl_1_0`
-* `cloudify_dsl_1_1`
-* `cloudify_dsl_1_2` 
 * `cloudify_dsl_1_3`
 * `cloudify_dsl_1_4`
 
 <br>
+
+| Cloudify Manager Version | DSL 1.3 | DSL 1.4 |
+|--------------------------|---------|---------|
+| 5.1 and higher           | V       | V       |
+| 6.4 and higher           |         | V       |
 
 # Example
 {{< highlight  yaml >}}
