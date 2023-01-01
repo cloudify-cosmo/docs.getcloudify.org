@@ -10,15 +10,15 @@ docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 {{%children style="h2" description="true"%}}
 
 
-The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine and supports most of the manager capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here](https://cloudify.co/download/community-vs-enterprise/)).
+The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine that supports most of the Manager's capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here](https://cloudify.co/download/community-vs-enterprise/)).
 
-The community version is available as an RPM, OpenStack Image, or Docker container. This page describes the steps necessary to deploy the {{< param product_name >}} trial manager as a Docker container.
+The community version is available as an RPM, OpenStack Image, or Docker container. This page describes the steps necessary to deploy the {{< param product_name >}} Trial Manager as a Docker container.
 
 You will need a host with [Docker](https://docs.docker.com/install) installed to run the {{< param product_name >}} community container image.
 
-## Step 1: Install the {{< param cfy_manager_name >}} as a Docker container
+## Step 1: Install the {{< param cfy_manager_name >}} as a Docker Container
 
-Deploying the community version of the {{< param product_name >}} manager is simple. Using a container provides an easy way to get started with {{< param product_name >}}.
+Deploying the community version of the {{< param product_name >}} Manager is simple. Using a container provides an easy way to get started with {{< param product_name >}}.
 
 To deploy the container image, simply launch a terminal and create the container:
 
@@ -30,13 +30,13 @@ This will publish the web interface on port 8080. Verify that the {{< param cfy_
 
 ![login-page.png]( /images/ui/pages/login-page.png )
 
-## Step 2: Fill Contacts Details
+## Step 2: Fill in Contact Details
 
 {{% note title="Prerequisites" %}}
-NOTE: Internet access is required to complete this step
+NOTE: Internet access is required to complete this step.
 {{% /note %}}
 
-Once you loged in to Community, you'll be asked to fill contact details. You need to fill the form to access Cloudify Manager. It's required only once on the first loging. 
+Once you log into the Community, you'll be asked to fill in your contact details. You need to fill in the form to access the Cloudify Manager. It's required only once on the first log in.
 
 ![community-contact-details.png]( /images/ui/pages/community-contact-details.png )
 
