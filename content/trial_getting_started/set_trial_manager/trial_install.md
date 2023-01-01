@@ -9,11 +9,11 @@ docker_image_name = "cloudifyplatform/premium-cloudify-manager-aio:latest"
 
 {{%children style="h2" description="true"%}}
 
-The {{< param product_name >}} Premium Trial provides a fully functional Premium Manager as a Docker container image. This page describes the complete setup flow to install and activate a {{< param product_name >}} trial Manager.
+The {{< param product_name >}} Premium Trial provides a fully functional Premium Manager as a Docker container image. This page describes the complete setup flow to install and activate a {{< param product_name >}} Trial Manager.
 
 You will need a host with [Docker](https://docs.docker.com/install) installed to run the {{< param product_name >}} Premium Trial container image.
 
-## Step 1: Install the {{< param cfy_manager_name >}} as a Docker container
+## Step 1: Install the {{< param cfy_manager_name >}} as a Docker Container
 
 Deploying the  trial as a Docker container is simple. Using a container provides an easy way to get started with the Premium {{< param cfy_manager_name >}}.
 
@@ -23,13 +23,11 @@ To deploy the container image, simply launch a terminal and create the container
 docker run -d -p 80:80 cloudifyplatform/premium-cloudify-manager-aio:latest
 ```
 
-It can take up to 1 minute unitl all the services in the docker container will be initiated and the manager will be up and running.
+It can take up to 1 minute until all the services in the Docker container will be initiated and the manager will be up and running.
 
 This will publish the web interface on port 8080. Verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost](http://localhost). The {{< param product_name >}} login page should be displayed. The default username and password are both _admin_.
 
 ![login-page.png](/images/ui/pages/login-page.png)
-
-Note: the default login username and password are _admin/admin_
 
 ## Step 2: Activate your Trial
 
@@ -44,11 +42,13 @@ To activate your trial using the UI:
 2. You will be prompted for your subscription key. Provide the subscription key using the dialog.
    * Additional information about the licensing process can be found [here]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}).
 
-## Next Steps
+____
+
+## Congratulations! Your {{< param cfy_manager_name >}} is Ready.
 
 Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
-* Try out the [local Hello World example]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}}) example using your new manager. No cloud credentials are required for this simple example.
-* Run your first multi-cloud example on AWS, Azure, GCP and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the  **[example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}})**.
+* Try out the [local Hello World]({{< relref "trial_getting_started/examples/local/local_hello_world_example" >}}) example using your new manager. No cloud credentials are required for this simple example.
+* Run your first multi-cloud example on AWS, Azure, GCP, and OpenStack using the native {{< param product_name >}} plugins as well as Cloud Formation, Azure ARM, and Ansible plugins by following the [example based tutorials]({{< relref "trial_getting_started/examples/_index.md" >}}).
 * Run your first Kubernetes service on OpenShift, KubeSpray, GKE, EKS, or AKS by following the [Kubernetes reference guide]({{< relref "working_with/official_plugins/orchestration/kubernetes" >}}).
 * Manage your installation using the command line utility by reviewing the [local CLI guide]({{< relref "trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli" >}}).
