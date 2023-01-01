@@ -39,6 +39,8 @@ There are two authentication methods which are:
 
  * kube config authentication.
  * Cluster CA, cluster endpoint(host) and token.
+ * The token may have expired, in which case it will access the file "/etc/cloudify/.kube/config" if the file exists it will return an error.
+
 
 ### Kube Config Authentication
 
