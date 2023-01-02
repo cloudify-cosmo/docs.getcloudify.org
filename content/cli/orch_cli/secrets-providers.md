@@ -116,7 +116,7 @@ private_resource:          False
 ### list
 
 #### Usage
-`fy secrets providers list [OPTIONS]`
+`cfy secrets providers list [OPTIONS]`
 
 List all Secrets Providers.
 
