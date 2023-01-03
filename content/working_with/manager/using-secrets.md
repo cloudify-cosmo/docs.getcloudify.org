@@ -20,9 +20,9 @@ Users can use the secret according to the user roles and the visibility of the s
 
 ### Secrets from remote provider
 
-Secret value can be provided by remote "Secrets Provider", like Vault or another Cloudify Manager.
+Secret value can be provided by remote "Secrets Provider", like Vault or another {{< param cfy_manager_name >}}.
 If a provider is set up for a secret resource, and provider connection is available, then a secret value will be passed in decrypted form.
-More about Secrets Providers [here](https://github.com/cloudify-cosmo/docs.getcloudify.org/blob/master/content/cli/orch_cli/secrets-providers.md).
+More about Secrets Providers [here]({{< relref "cli/orch_cli/secrets-providers.md" >}}).
 
 ### Updating a secret
 

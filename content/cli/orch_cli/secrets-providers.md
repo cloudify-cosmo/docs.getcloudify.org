@@ -6,7 +6,7 @@ abstract: Cloudify's Command-Line Interface
 aliases: /cli/secrets-providers/
 ---
 
-The `cfy secrets providers` command is used to manage Cloudify Secrets Providers.
+The `cfy secrets providers` command is used to manage {{< param product_name >}} Secrets Providers.
 
 #### Optional flags
 These commands support the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}).
