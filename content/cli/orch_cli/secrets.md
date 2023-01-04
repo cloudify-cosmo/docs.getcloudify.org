@@ -36,6 +36,8 @@ One of these flags:
 * `--hidden-value` - The secret value is only shown to the user that created the secret, to the tenant managers, and to sys-admins.
                      Use of the secret is allowed according to user roles and the visibility of the secret.
 * `-t, --tenant-name` - The name of the tenant of the secret. If not specified, the current tenant will be used.
+* `-p, --provider` - Secrets Provider's name.
+* `-o, --provider-options` - Secrets Provider's options in stringify JSON
 
 &nbsp;
 #### Example
@@ -240,6 +242,8 @@ One of these flags:
                                           Use of the secret is allowed according to user roles and the visibility of the secret.
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'].
 * `-t, --tenant-name TEXT` - The name of the tenant of the secret. If not specified, the current tenant will be used.
+* `-p, --provider` - Secrets Provider's name.
+* `-o, --provider-options` - Secrets Provider's options in stringify JSON
 
 &nbsp;
 #### Example
