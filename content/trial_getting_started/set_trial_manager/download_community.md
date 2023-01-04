@@ -10,7 +10,7 @@ docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 {{%children style="h2" description="true"%}}
 
 
-The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine that supports most of the Manager's capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here](https://cloudify.co/download/community-vs-enterprise/)).
+The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine that supports most of the Manager's capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here]({{< ref "cloudify_manager/architecture/_index.md#comparison-matrix" >}})).
 
 The community version is available as an RPM, OpenStack Image, or Docker container. This page describes the steps necessary to deploy the {{< param product_name >}} Trial Manager as a Docker container.
 
@@ -40,19 +40,13 @@ Once you log into the Community, you'll be asked to fill in your contact details
 
 ![community-contact-details.png]( /images/ui/pages/community-contact-details.png )
 
-## Step 3: Install your First Deployment on Your New {{< param cfy_manager_name >}}
-Check out your new {{< param cfy_manager_name >}} by installing the [Local Hello-World Example Deployment]({{< relref "trial_getting_started/examples/local/local_hello_world_example.md" >}}).  
-
-This example demonstrates how you can use {{< param product_name >}} to easily install a local HTTP server with a hello-world page on it.
-
-## Step 4: (Optional) - Setup your Command Line Interface (CLI)
+## Step 3: (Optional) - Setup your Command Line Interface (CLI)
 
 {{< param product_name >}} offers multiple user interfaces. All orchestration actions can be performed from the Management Console UI you logged into in Step 2, however, in many cases, a CLI access from your Mac, Windows, or Linux station is easier.
 
 Follow [these]({{< relref "/trial_getting_started/set_trial_manager/getting-started-with-cloudify-docker-and-cli.md" >}}) instructions to deploy your CLI.
-____
 
-## Congratulations! Your {{< param cfy_manager_name >}} is Ready.
+## Next Steps
 
 Now that you have access to a {{< param cfy_manager_name >}} environment, we recommend performing some additional activities to become comfortable with {{< param company_name >}}. The ideas below are just suggestions to get you started on your journey!
 
