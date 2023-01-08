@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Netconf Plugin
 category: Official Plugins
+description: "Plugin for serializing TOSCA node templates to netconf configuration."
 draft: false
 weight: 110
 aliases:
