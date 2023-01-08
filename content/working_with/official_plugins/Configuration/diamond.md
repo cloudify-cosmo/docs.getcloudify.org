@@ -3,6 +3,7 @@ title: Diamond Plugin
 category: Official Plugins
 draft: false
 abstract: "Cloudify diamond plugin description and configuration"
+description: "DEPRECATED: The Diamond plugin is used to install & configure a Diamond monitoring agent (version 3.5) on hosts."
 weight: 120
 aliases:
   - /plugins/diamond/
