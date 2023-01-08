@@ -11,7 +11,7 @@ aliases:
 
 # Overview
 
-{{< param product_name >}} Plugins are Python packages that do the work of communicating with external systems. Primarily:
+{{< param product_name >}} plugins are Python packages that function as the communication with external systems. Primarily:
 
 <p>
   <div class="image">
@@ -32,7 +32,8 @@ For example:
 
 # Background
 
-[Blueprints]({{< relref "developer/blueprints" >}}) use the {{< param product_name >}} DSL to model an application. The model, or node_templates section, describes a topology which includes:
+[Blueprints]({{< relref "developer/blueprints" >}}) use the {{< param product_name >}} DSL to model an application. The model, or node_templates section, describes a topology that includes:
+
   * [Node Templates]({{< relref "developer/blueprints/spec-node-templates" >}})
   * [Relationships]({{< relref "developer/blueprints/spec-relationships" >}}) between node templates.
 
@@ -53,13 +54,13 @@ You can then map node template and relationship operations to plugin code, or if
 
 ## Example Blueprint with REST Call
 
-The following example illustrates configuration step. In it, we create a user via some REST API.
+The following example illustrates the configuration step. In it, we create a user via some REST API.
 
 In the blueprint, we define the lifecycle steps, along with the inputs for the plugin operation:
 
-  * endpoint information
-  * reference to a template file containing the REST request itself.
-  * parameters
+  * Endpoint information
+  * Reference to a template file containing the REST request itself
+  * Parameters
 
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
@@ -150,9 +151,9 @@ All this script does right now is log a "Hello World" message message to {{< par
 
 To run the following, you will need the following for a real VM:
 
-  * `ip`: A routeable IP to the VM with a responsive SSH server.
-  * `username`: The SSH user for that VM.
-  * `private_key`: The content of the private key for that SSH user.
+  * `ip`: a routeable IP to the VM with a responsive SSH server
+  * `username`: the SSH user for that VM
+  * `private_key`: the content of the private key for that SSH user
 
 ```yaml
 tosca_definitions_version: cloudify_dsl_1_3
@@ -181,6 +182,7 @@ node_templates:
 ```
 
 Let's review:
+
   * In the `properties`, we define the method for installing and configuring a {{< param product_name >}} Agent on the VM. We provide the IP and authentication information.
   * We define the `start` operation as the execution of our `hello.sh` script from above.
 
@@ -292,14 +294,14 @@ For more information, see the [AWS Plugin]({{< relref "working_with/official_plu
 
 # Distribution
 
-{{< param product_name >}} plugins are distributed as [Wagons]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}) format. Wagons are archives of [Python Wheels](https://pythonwheels.com/). The latest official {{< param product_name >}} Plugins are available for download at [Plugins Download](http://cloudify.co/plugins).
+{{< param product_name >}} plugins are distributed in a [Wagon]({{< relref "developer/writing_plugins/packaging-your-plugin.md" >}}) format. Wagons are archives of [Python Wheels](https://pythonwheels.com/). The latest official [{{< param product_name >}} plugins](https://cloudify.co/plugins/) are available for download.
 
 # Installation
 
 You may upload a plugin to your {{< param cfy_manager_name >}} via either the UI or the CLI:
 
-  * For UI usage, see [managing plugins]({{< relref "working_with/console/pages/plugins-page.md" >}}).
-  * For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}}).
+  * For UI usage, see [managing plugins]({{< relref "working_with/console/pages/plugins-page.md" >}})
+  * For CLI usage, see [cfy plugins upload]({{< relref "cli/orch_cli/plugins.md#upload" >}})
 
 # Contributing
 
