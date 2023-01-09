@@ -303,6 +303,81 @@ Deployments:
 
 ...
 {{< /highlight >}}
+### status-list
+
+#### Usage
+`cfy deployments status-list [OPTIONS]`
+
+Show deployment statuses
+
+Show a grid of various deployment statuses, allowing an at-a-glance insight
+of the state of the system.
+
+This command allows the same filtering that `cfy deployments list` does.
+
+### Options
+
+* `-s, --pagination-size INTEGER` - The max number of results to retrieve per
+                                    page [default: 1000]
+* `-o, --pagination-offset INTEGER` - The number of resources to skip;
+                                      --pagination-offset=1 skips the first
+                                  resource [default: 0]
+* `--dependencies-of TEXT` - List only deployments on which the given
+                             deployment ID depends.
+* `--search-name TEXT` - Search deployments by their display name.
+                         The returned list will include only
+                         deployments that contain the given search pattern
+* `--search TEXT` - Search resources by id. The returned list
+                    will include only resources that contain the
+                    given search pattern
+* `-a, --all-tenants` - Include resources from all tenants
+                        associated with the user. You cannot use
+                        this argument with arguments: [tenant_name].
+* `-t, --tenant-name TEXT` - The name of the tenant to list deployments
+                             from. If not specified, the current tenant
+                             will be used. You cannot use this argument
+                             with arguments: [all_tenants]
+* `--descending` - Sort list in descending order [default: False]
+* `--sort-by TEXT` - Key for sorting the list
+* `-lr, --labels-rule TEXT` - A labels' filter rule. Labels' filter rules
+                              must be one of: <key>=<value>,
+                              <key>!=<value>, <key> is-not <value>, <key>
+                              is null, <key> is not null. <value> can be a
+                              single string or a list of strings of the
+                              form [<value1>,<value2>,...]. Any comma and
+                              colon in <value> must be escaped with `\`.
+                              The labels' keys specified in the filter
+                              rules will be saved in lower case.
+* `-ar, --attrs-rule TEXT` - An attributes' filter rule. Attributes'
+                             filter rules must be one of: <key>=<value>,
+                             <key>!=<value>, <key> contains <value>,
+                             <key> does-not-contain <value>, <key>
+                             starts-with <value>, <key> ends-with
+                             <value>, <key> is not empty. <value> can be
+                             a single string or a list of strings of the
+                             form [<value1>,<value2>,...]. Allowed
+                             attributes to filter by are: [blueprint_id,
+                             created_by, site_name, schedules]. This
+                             argument can be used multiple times
+* `--filter-id TEXT` - Filter results according to the specified filter
+* `-g, --group-id TEXT` - Show deployments belonging to this group
+* `-b, --blueprint-id TEXT` - Show deployments created from this blueprint
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy dep status-list
+Listing all deployments...
+
+Deployments:
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+|                   id                  |              display_name             | deployment_status | installation_status | unavailable_instances | drifted_instances |
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+| d973d4e3e-702b-45d4-a0a2-2f3917b338b8 | d973d4e3e-702b-45d4-a0a2-2f3917b338b8 |    in_progress    |       inactive      |           2           |         0         |
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+
+Showing 1 of 1 deployments
+{{< /highlight >}}
 
 ### summary
 
