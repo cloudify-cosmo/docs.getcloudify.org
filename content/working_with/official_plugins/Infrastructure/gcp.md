@@ -1,6 +1,7 @@
 ---
 title: Google Cloud Plugin
 category: Official Plugins
+description: The GCP plugin enables you to manage cloud resources on GCP
 draft: false
 weight: 120
 aliases:

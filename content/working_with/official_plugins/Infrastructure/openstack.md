@@ -1,6 +1,7 @@
 ---
 title: OpenStack Plugin
 category: Official Plugins
+description: The OpenStack plugin enables you to use an OpenStack-based cloud infrastructure for deploying services and applications
 draft: false
 abstract:
 weight: 170
