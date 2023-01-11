@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Docker Plugin
 category: Official Plugins
+description: The plugin enables you to work with Docker images and containers
 draft: false
 weight: 100
 aliases:
