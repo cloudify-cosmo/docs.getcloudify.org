@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Plugin
 category: Official Plugins
+description: With the Kubernetes Plugin you can define Kubernetes resources in your blueprints.
 draft: false
 weight: 100
 aliases: ["/plugins/kubernetes/", "/developer/official_plugins/kubernetes/", "/working_with/official_plugins/configuration/kubernetes/"]
