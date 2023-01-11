@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: vCloud Plugin
 category: Official Plugins
+description: The vCloud Plugin 2 enables you to use a vCloud-based infrastructure for deploying services and applications
 draft: false
 abstract: Cloudify vCloud plugin description and configuration
 weight: 140
