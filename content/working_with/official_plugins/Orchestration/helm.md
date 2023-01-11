@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Helm 3 Plugin
 category: Official Plugins
+description: The plugin allows you to manage Helm on Kubernetes cluster
 draft: false
 weight: 100
 aliases: ["/plugins/helm/", "/developer/official_plugins/helm/"]
