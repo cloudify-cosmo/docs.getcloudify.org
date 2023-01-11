@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: StarlingX Plugin
 category: Official Plugins
+description: The StarlingX plugin enables you to discover StarlingX systems and manage resources on StarlingX systems
 draft: false
 weight: 100
 aliases:

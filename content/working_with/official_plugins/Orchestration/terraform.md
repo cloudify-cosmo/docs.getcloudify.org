@@ -2,6 +2,7 @@
 layout: bt_wiki
 title: Terraform Plugin
 category: Official Plugins
+description: The Terraform plugin enables you to manage Terraform mogules and sources lifecycle [ init, plan, apply, refresh, state, import, outputs, destroy ]
 draft: false
 weight: 100
 aliases:

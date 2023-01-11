@@ -1,6 +1,6 @@
 ---
 layout: bt_wiki
-title: Custom workflow Plugin
+title: Custom Workflow Plugin
 category: Official Plugins
 draft: false
 weight: 100
