@@ -284,7 +284,7 @@ OPA is configured by setting the desired parameters in `cloudify.nodes.terraform
 * `installation_source` - Location to download the OPA binary from. Defaults to `https://github.com/open-policy-agent/opa/releases/download/v0.47.4/opa_linux_amd64_static`
 * `executable_path` - Location of an existing OPA binary on the system. If used, the binary will not be downloaded from the `installation_source` and the existing binary will be used for policy evaluations.
 * `config` - OPA configuration file to override any default OPA behavior.
-* `policy_bundles` - A list of one or more zipped policy [bundles](https://www.openpolicyagent.org/docs/latest/management-bundles/) for use in the policy evaluation. Policy budnles can be local to the blueprint archive, or they can be downloaded from remote sources. The format for policy bundles is described below.
+* `policy_bundles` - A list of one or more zipped policy [bundles](https://www.openpolicyagent.org/docs/latest/management-bundles/) for use in the policy evaluation. Policy bundles can be local to the blueprint archive, or they can be downloaded from remote sources. The format for policy bundles is described below.
 * `flags_override` - A list of flags to additionally pass to the OPA binary. The `opa exec` command runs with the `--bundle` and `--decision` flags by default, and overriding flags is not recommended.
 * `enable` - A boolean to indicate whether or not OPA policy evaluation is enabled during normal Terraform operations, such as `terraform apply`. This is currently unused, as the OPA tasks are implemented outside of the normal Terraform workflows. This is reserved for future use when OPA is integrated as part of normal Terraform workflows.
 
