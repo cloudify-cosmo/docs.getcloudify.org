@@ -275,6 +275,8 @@ cloudify.nodes.terraform.Module:properties.resource_config
 
 ### OPA
 
+OPA support was introduced in version 0.19.14 of the Terraform plugin.
+
 The `terraform.opa` interface operation evaluates an [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) decision against a Terraform plan. Calling this interface operation will initialize Terraform (if it has not already been initialized), generate a Terraform plan, and then evaluate the decision against the provided OPA policies.
 
 The operation provides a thing wrapper around running `opa exec` against the Terraform plan in JSON format.
