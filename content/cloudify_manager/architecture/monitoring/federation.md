@@ -17,9 +17,12 @@ alwaysopen = false
 > within a single server
 > [[Prometheus's documentation](https://prometheus.io/docs/prometheus/latest/federation/#cross-service-federation)]
 
-Below is a diagram of federation used in {{< param product_name >}}'s use case:
+Below is a diagram of federation used in {{< param product_name >}}'s use case.  Notice that
+Prometheus is talking to _Status Reporters_ (not other Promethus instances directly), which is to
+note the additional nginx component to all _Status Reporters_.  Black arrows mark the “federation
+connections”.
 
-![Status Reporter architecture]( /images/monitoring/status_reporter_architecture.svg )
+![Status Reporter federation]( /images/monitoring/status_reporter_federation.svg )
 
 # Configuration
 
@@ -34,7 +37,7 @@ the hosts, which will be used in `federate_*` jobs.  For example database nodes 
   labels: {}
 {{< /highlight >}}
 
-For more details on defining targets look for the
+For more information about defining targets look for the
 [file-based service discovery](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config)
 in Prometheus's documentation.
 
@@ -65,4 +68,13 @@ It reads: query all targets listed in `/etc/prometheus/targets/other_postgres.ym
 endpoint `/monitoring/federate` with given credentials and a TLS CA certificate for any metrics
 matching labels: ```job="postgresql"``` (postgres_exporter's) and ```host!="172.22.0.3"``` (skip
 metrics of the node _this_ Prometheus is running on).
+
+This configuration requires fully-blown _Status Reporter_ to be available on federated nodes.  It
+means, that not only should there be a
+[service-specific exporter]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#additional-components)
+installed (e.g. postgres_exporter for database nodes), but all other
+[common components]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#common-components):
+node_exporter, Prometheus and nginx, all configured similarly to what {{< param product_name >}}
+provides (proper TLS certificates, authentication credentials same as on all other nodes, same
+opened ports, etc.)
 

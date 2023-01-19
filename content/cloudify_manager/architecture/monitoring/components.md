@@ -5,6 +5,9 @@ weight = 10
 alwaysopen = false
 +++
 
+![Status Reporter components]( /images/monitoring/status_reporter_components.svg )
+
+
 # Common components
 At its core, _Status Reporter_ contains these three components:
 
@@ -31,6 +34,10 @@ Prometheus's [node_exporter](https://github.com/prometheus/node_exporter#node-ex
 
 
 # Additional components
+
+Each of the nodes gets additional exporters to monitor and report on status of specific services:
+Managers, Databases, Message Queues.  In case of different services running on the same node
+(e.g. All-in-One environment) more than just one service-specific exporter is deployed.
 
 ## Manager nodes
 
