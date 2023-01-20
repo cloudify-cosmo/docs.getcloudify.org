@@ -79,17 +79,18 @@ SSH into the {{< param cfy_manager_name >}} VM and follow these steps:
     ```
     * Open the file `/opt/cloudify-stage/dist/userData/config.json` for editing
 
-        * Under `saml` section change the values as follows:
-            * `enabled`: true (enabling SAML mode)
+        * Under `auth` section change the values as follows:
+            * `type`: "saml" (enabling SAML mode)
             * `certPath`: "/etc/cloudify/ssl/okta_certificate.pem" (SAML certificate path which is used by the
               {{< param cfy_manager_name >}} and {{< param cfy_console_name >}})
-            * `ssoUrl`: \<okta_sso_url\> (redirect url to the application, **Identity Provider Single Sign-On URL**
+            * `loginPageUrl`: \<okta_sso_url\> (redirect url to the application, 
+              **Identity Provider Single Sign-On URL**
               which can be found under **Setup Instructions** section of the newly created
               {{< param product_name >}} app in Okta)
-            * `portalUrl`: \<organization_okta_portal_url\> (redirect url to the organization portal:
+            * `afterLogoutUrl`: \<organization_okta_portal_url\> (redirect url to the organization portal:
               https://my-org.okta.com)
 
-        * Remove all other configuration objects (except `saml`) from the file if you don't plan to modify it
+        * Remove all other configuration objects (except `auth`) from the file if you don't plan to modify it
 
     * Restart the {{< param cfy_console_name >}} service using the following command:
     ```
@@ -175,5 +176,5 @@ After you create a service provider you need to configure Single sign-on with th
 
 Then you need to follow Configuring {{< param product_name >}} above - with these values override:
 
-  * ssoUrl: https://wso2-server-ip/samlsso?spEntityID=console
-  * portalUrl: https://wso2-server-ip/samlsso?spEntityID=console&slo=true
+  * loginPageUrl: https://wso2-server-ip/samlsso?spEntityID=console
+  * afterLogoutUrl: https://wso2-server-ip/samlsso?spEntityID=console&slo=true
