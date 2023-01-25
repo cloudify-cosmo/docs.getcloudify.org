@@ -17,8 +17,6 @@ The widget provides the following information:
 
 The right column of the table allows permitted users to edit the secret provider’s details or delete it.
 
-To better understand how secret providers work in {{< param product_name >}}, go to [Secret Store page]({{< relref "developer/blueprints/spec-secretstore.md" >}}) or [Using the Secret Store page]({{< relref "working_with/manager/using-secrets.md" >}}).
-
 ## Settings
 
 * `Refresh time interval` - The time interval in which the widget’s data will be refreshed, in seconds. Default: 30 seconds.
