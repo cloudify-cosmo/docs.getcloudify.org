@@ -15,7 +15,7 @@ The widget provides the following information:
 * **Creation time**
 * **Last update time**
 
-The right column of the table allows permitted users to edit the secret provider’s values or delete it.
+The right column of the table allows permitted users to edit the secret provider’s details or delete it.
 
 To better understand how secret providers work in {{< param product_name >}}, go to [Secret Store page]({{< relref "developer/blueprints/spec-secretstore.md" >}}) or [Using the Secret Store page]({{< relref "working_with/manager/using-secrets.md" >}}).
 
