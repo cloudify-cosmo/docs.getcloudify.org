@@ -10,12 +10,12 @@ Displays all the secret providers visible to the logged-in user in the current t
 
 The widget provides the following information:
 
-* **Provider name** - The name of the secret provider.
-* **Provider type** - The type of the secret provider.
+* **Provider name**
+* **Provider type**
 * **Creation time**
 * **Last update time**
 
-The right column of the table allows permitted users to edit the secret provider’s values or delete it.
+The right column of the table allows permitted users to edit the secret provider’s details or delete it.
 
 To better understand how secret providers work in {{< param product_name >}}, go to [Secret Store page]({{< relref "developer/blueprints/spec-secretstore.md" >}}) or [Using the Secret Store page]({{< relref "working_with/manager/using-secrets.md" >}}).
 
