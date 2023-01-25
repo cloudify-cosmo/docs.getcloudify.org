@@ -10,8 +10,8 @@ Displays all the secret providers visible to the logged-in user in the current t
 
 The widget provides the following information:
 
-* **Provider name** - The name of the secret provider.
-* **Provider type** - The type of the secret provider.
+* **Provider name**
+* **Provider type**
 * **Creation time**
 * **Last update time**
 
