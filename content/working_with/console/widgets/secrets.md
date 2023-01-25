@@ -3,7 +3,7 @@ title: Secrets Store Management
 category: Widgets
 draft: false
 ---
-Displays all the secrets visible to the logged-in user in the current tenant (including global secrets). The widget provides the following information:
+Displays all the secrets visible to the logged-in user in the current tenant. The widget provides the following information:
 
 * **Secret key**
 * **Secret visibility level** represented by the icon next to the key. Permitted users (the secret’s creator, sys admins or tenant managers of the current tenant) can set the secret’s visibility by clicking on this icon.
