@@ -4,7 +4,7 @@ category: Widgets
 draft: false
 ---
 
-Displays all the secret providers visible to the logged-in user in the current tenant (including global secrets). 
+Displays all the secret providers visible to the logged-in user in the current tenant. 
 
 ![secret-providers]( /images/ui/widgets/secret-providers.png )
 
