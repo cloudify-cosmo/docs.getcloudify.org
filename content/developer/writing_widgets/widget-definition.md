@@ -181,7 +181,6 @@ is equivalent to
 Useful resources: 
 
   * [Widgets Components]({{< relref "developer/writing_widgets/widgets-components.md" >}})
-  * [Writing Widgets FAQ]({{< relref "developer/writing_widgets/faq.md" >}})
 
 #### Inclusive Params
 
