@@ -431,7 +431,7 @@ This built-in workflow is usually not executed directly, but using the Deploymen
           - `cloudify.interfaces.lifecycle.update`
           - `cloudify.interfaces.lifecycle.update_config`
           - `cloudify.interfaces.lifecycle.update_apply`
-      1. Instances for which any of the update operations failed will be reinstalled.
+      1. Instances for which the drift check, or any of the update operations failed will be reinstalled.
       1. If `skip_reinstall` is not set, reinstall the instances to be reinstalled, by running [the uninstall workflow]({{<relref "working_with/workflows/built-in-workflows#the-uninstall-workflow">}}) followed by [the uninstall workflow]({{<relref "working_with/workflows/built-in-workflows#the-install-workflow">}}) on them.
   1. Delete removed relationships, instances, and nodes, from storage.
   1. Update deployment execution schedules. New schedules are updated and changed schedules are updated, but deleted schedules are *not* removed from storage.
