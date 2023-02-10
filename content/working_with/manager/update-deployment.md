@@ -245,7 +245,8 @@ The instance will be considered drifted if this operation returns a non-empty va
 The {{< param cfy_manager_name >}} doesn't inspect the returned value, so it can be any object. Plugin authors are advised to return a description of all the differences, so that the `update` operation can act upon them.
 
 {{% note title="Warning" %}}
-If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (e.g. if the node properties have changed), the instances will not be updated or reinstalled. Take care to always return a non-empty value if there are _any_ changes to the instances.
+If `check_drift` returns an empty or false value, `update` operations will not run, and even in case of blueprint changes (e.g. if the node properties have changed), the instances will not be updated or reinstalled. Take care to always return a non-empty or true value if there are _any_ changes to the instances.
+Values are evaluated using Python `bool()` semantics; for example, the empty dict, the number 0, the empty string, the boolean False, or None, are all considered false.
 {{% /note %}}
 
 If the `check_drift` operation is not implemented, the instances are only considered drifted if there are relevant blueprint changes (e.g. the node properties have changed).
