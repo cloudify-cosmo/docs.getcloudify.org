@@ -18,13 +18,15 @@ The Application provides:
     * Manage Environment
     * Update Environment
     * Delete Environment
+    * Resume Execution (>= Version 3)
+    * Stop Execution (>= Version 3)
 * Setup Cloud Account -AWS/Azure-.
 * Certified environments.
 * Various Resources.
 
 ## Application Prerequisites
 
-ServiceNow version: Quebec Release
+ServiceNow version: >= Quebec Release
 
 ## Application Installation
 
@@ -61,11 +63,15 @@ One more video that demonstrates our application installation :
 
 ## Application Tables
 
-The application consists of 3 main tables :
+The application consists of 7 main tables :
 
-* x_clop2_cloudify_configs : this table is used to hold Cloudify Manager tenants endpoints.
+* x_clop2_cloudify_configs : this table is used to hold {{< param cfy_manager_name >}} tenants endpoints.
 * x_clop2_cloudify_deployments : this table is used to keep track of the deployments created by which users.
 * x_clop2_cloudify_executions : this table is used to keep track of deployments executions statuses.
+* x_clop2_cloudify_remediation_setups : this table is used to supply dynamic values to remediation subflow and which config record to use. (>= Version 2.5)
+* x_clop2_cloudify_custom_catalog_setup : this table is used to supply a dynamic way of linking custom catalog items with their respective blueprints. (>= Version 3)
+* x_clop2_cloudify_temp_list_collector : this table is used to hold temporary values for {{< param cfy_manager_name >}} [ >= Version 6.4 ] new list type . (>= Version 3)
+* x_clop2_cloudify_rest_requests : this table is used to hold inbound REST requests for {{< param cfy_manager_name >}}. (>= Version 3)
 
 
 ## Application Roles
@@ -74,6 +80,8 @@ The application contains 2 main roles that can be assigned to ServiceNow users :
 
 * x_clop2_cloudify.admin : Application admin role where the user will have access to application menu and all of the modules, the ability to select all of the config records despite being customized to be for a specific group , can also see all records in the deployments and executions tables.
 * x_clop2_cloudify.user : Application user role where the user will have access to the catalog resources from the service portal and the ability to select the config records that are either assigned to the user group or with no group specified to it.
+
+> **Note** : In the versions >= 3 the user role have been extended to see the application menu where the users will have access to define configs and see their executions progress.
 
 You can watch this video that explains the roles :
 
