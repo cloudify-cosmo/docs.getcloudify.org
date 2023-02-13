@@ -120,7 +120,7 @@ node_templates:
 
 ## Non-Installed Plugin
 
-The following is an example of a plugin definition so that the plugin is not installed. This might be used when a custom agent package, created using the [agent-packager]({{< relref "install_maintain/agents/packager.md" >}}), already includes this plugin, meaning that no installation is necessary.
+The following is an example of a plugin definition so that the plugin is not installed. This might be used when a custom agent package, created using the [agent-packager]({{< relref "cloudify_manager/agents/packager.md" >}}), already includes this plugin, meaning that no installation is necessary.
 
 
 {{< highlight  yaml >}}

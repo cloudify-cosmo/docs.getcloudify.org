@@ -1,6 +1,7 @@
 ---
 title: vSphere Plugin
 category: Official Plugins
+description: The vSphere plugin enables you to use a vSphere-based infrastructure for deploying services and applications
 draft: false
 weight: 130
 aliases:

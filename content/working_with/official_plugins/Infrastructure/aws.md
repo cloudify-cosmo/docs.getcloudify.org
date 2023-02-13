@@ -1,6 +1,7 @@
 ---
 title: AWS Plugin
 category: Official Plugins
+description: The AWS plugin enables you to manage AWS resources
 draft: false
 weight: 100
 aliases:

@@ -470,8 +470,7 @@ node_templates:
 
 In the example, each time the `configure` operation of `web_server` instances is invoked, the inputs `db_connection_url` and `webserver_version` are evaluated. The `db_connection_url` input evaluates to the `db_server` runtime property `connection_url`, and the `webserver_version` evaluates to the `web_server` runtime property `requested_version`. `SELF` is used to reference run-time properties of the current node instance in `webserver_version`.
 
-<br>
-### *get_attribute* in Relationship Interface Operation Inputs
+### get_attribute in Relationship Interface Operation Inputs
 
 For this example, assume a `connection_url` runtime property has been set on the `db_server` instance and a `requested_version` runtime property has been set on the `web_server` instance.
 
@@ -535,13 +534,26 @@ outputs:
 
 Notice that nested properties can be either a key name in the case of a map, or an index in case of a list. Also note in `partial_spec` that `get_attribute` can be used in complex data structures and not only in a flat key/value manner.
 
-### get_attribute to get Node Instance ID
+### get_attribute to get Node Instance ID and index
 
 Use `get_attribute` to retrieve the ID of a node instance:
 
 {{< highlight  yaml  >}}
 { get_attribute: [node, node_instance_id] }
 {{< /highlight >}}
+
+This is equivalent to using `ctx.instance.id` in Python scripts and plugins.
+
+Similarly, use `get_attribute` to retrieve the index of a node instance:
+
+{{< highlight  yaml  >}}
+{ get_attribute: [node, node_instance_index] }
+{{< /highlight >}}
+
+This is equivalent to using `ctx.instance.index` in Python scripts and plugins.
+
+If the relevant node instance has a runtime property named "node_instance_id"
+or "node_instance_index", that runtime property takes precedence, and is returned.
 
 `node` can be SELF, SOURCE, TARGET or node name according to the context in the blueprint.
 

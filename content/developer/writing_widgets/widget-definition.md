@@ -40,9 +40,9 @@ As seen in the example above, there are some configuration fields that you can p
 The `Stage.defineWidget` function receives a settings object with the options described in this table.
 
 Option                 | Type    | Required | Default      | Description
-----------             | -----   | -------- | ------------ | -----------
+----------             | -----   | -------- |--------------| -----------
 `categories`           | array   | No       | `['Others']` | This property specifies in which categories this widget is shown. It can take an array containing one or more of the values defined in `Stage.GenericConfig.CATEGORY` object: `BLUEPRINTS` ('Blueprints' category), `DEPLOYMENTS` ('Deployments'), `BUTTONS_AND_FILTERS` ('Buttons and Filters'), `CHARTS_AND_STATISTICS` ('Charts and Statistics'), `EXECUTIONS_NODES` ('Executions/Nodes'), `SYSTEM_RESOURCES` ('System Resources'), `OTHERS` ('Others'), `ALL` ('All').
-`color`                | string  | No       | `blue`       | The color of the widget. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey` or `black`.
+`color`                | string  | No       | no color     | Widget's top border color. One of the following: `red`, `orange`, `yellow`, `olive`, `green`, `teal`, `blue`, `violet`, `purple`, `pink`, `brown`, `grey`, `black` or undefined.
 `description`          | string  | No       | -            | Description of the widget that is displayed in the [Add Widget modal]({{< relref "working_with/console/customization/edit-mode.md#adding-widgets" >}}).
 `fetchUrl`             | string/object | No | -            | If `fetchUrl` exists, the data from the URL is fetched by the application and passed to the render and postRender methods. To fetch multiple URLs, you must pass an object where the key is a name you select for this data, and the value is the URL. It is important to note that the render is called once before the data is fetched (to enable information about loading or partial data can be displayed) and once after the data is fetched.
 `hasReadme`            | boolean | No       | `false`      | Whether to use `README.md` file. File must be present in widget's main directory. If `helpUrl` is defined and `hasReadme` is set to `true`, then `helpUrl` is used.
@@ -57,7 +57,7 @@ Option                 | Type    | Required | Default      | Description
 `name`                 | string  | Yes      | -            | The display name of the widget that is displayed in the [Add Widget modal]({{< relref "working_with/console/customization/edit-mode.md#adding-widgets" >}}). It is also used as the default widget name.
 `showBorder`           | boolean | No       | `true`       | Whether to display border of the widget.
 `showHeader`           | boolean | No       | `true`       | Whether to display a header. If a header is not displayed, a user cannot change the widget name.
-`supportedEditions`    | array   | No       | `[]`        | A list of {{< param product_name >}} license editions (strings) that widget is supported by. Widget is available only on {{< param product_name >}} with one of the listed license editions installed. If not set (default), then widget availability will not be restricted to any specific license edition.
+`supportedEditions`    | array   | No       | `[]`         | A list of {{< param product_name >}} license editions (strings) that widget is supported by. Widget is available only on {{< param product_name >}} with one of the listed license editions installed. If not set (default), then widget availability will not be restricted to any specific license edition.
 `permission`           | string  | No       | `CUSTOM_ALL` | This property specifies which user can later access and view this widget. It can take one of the following three values defined in `Stage.GenericConfig.CUSTOM_WIDGET_PERMISSIONS` object: `CUSTOM_ADMIN_ONLY` (applies for 'sys_admin' and 'manager' roles), `CUSTOM_SYS_ADMIN_ONLY` (applies for 'sys_admin' only, `CUSTOM_ALL` (applies to all user-roles).
 
 
@@ -181,7 +181,6 @@ is equivalent to
 Useful resources: 
 
   * [Widgets Components]({{< relref "developer/writing_widgets/widgets-components.md" >}})
-  * [Writing Widgets FAQ]({{< relref "developer/writing_widgets/faq.md" >}})
 
 #### Inclusive Params
 

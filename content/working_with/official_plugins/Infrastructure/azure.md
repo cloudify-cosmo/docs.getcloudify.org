@@ -1,6 +1,7 @@
 ---
 title: Azure Plugin
 category: Official Plugins
+description: The Azure plugin enables you to manage cloud resources on Azure
 draft: false
 weight: 110
 aliases:

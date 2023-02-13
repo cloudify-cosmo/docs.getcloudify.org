@@ -71,7 +71,7 @@ node_types_required | no | list of strings | Toggle the workflow depending on th
 
 ## `deployment_id` Constraint Details
 
-For workflow parameters of [types which require `deployment_id` constraint]({{< relref "developer/blueprints/spec-inputs.md" >}}#deployment-id-details),
+For workflow parameters of [types which require `deployment_id` constraint]({{< relref "developer/blueprints/spec-inputs.md" >}}#deployment_id-details),
 the value of the `deployment_id` constraint might be omitted in the blueprint.  In that case
 deployment's ID which the workflow is running on will be used.
 

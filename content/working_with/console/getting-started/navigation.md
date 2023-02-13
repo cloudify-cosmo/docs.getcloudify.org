@@ -21,7 +21,7 @@ The topmost section of the sidebar is a header presenting main information about
 * **Logo**
 * **Product name**
 * **Product version** - only major an minor digits are presented
-* **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}) page for more details.
+* **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}) page for more details.
 
 {{% note %}}
 You can customize top header bar using white-labelling feature described in [User Configuration]({{< relref "working_with/console/customization/user-configuration.md" >}}).
@@ -48,7 +48,7 @@ System menu occupies bottom part of the sidebar. It consists of the following el
 * **Tenants menu** - click the current tenant name to open dropdown selection menu and change the current tenant
 * **Help menu** - click the ![Help icon]( /images/ui/icons/help-icon.png ) to open menu with links to support pages
 * **System health** - click this option to see more detailed information about system services
-* **User menu** - click the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "install_maintain/installation/manager-license.md" >}}), change password or log out
+* **User menu** - click the username to enter [Edit Mode]({{< relref "working_with/console/customization/edit-mode.md" >}}), open [Template Management]({{< relref "working_with/console/customization/templates-mgmt.md" >}}) or [License Management]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}), change password or log out
 
 {{% note %}}
 Set of the available options can differ between admin and non-admin users. The list above presents all the options available for admins.

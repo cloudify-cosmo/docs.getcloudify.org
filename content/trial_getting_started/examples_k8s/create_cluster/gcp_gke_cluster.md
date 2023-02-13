@@ -8,7 +8,7 @@ cloud_auth_cli_link = "https://cloud.google.com/iam/docs/service-accounts"
 kubectl_cli_link = "https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html"
 cloud_cli_link = "https://cloud.google.com/sdk/docs/install"
 
-title = "GCP GKE - Cluster provisioning"
+title = "GCP GKE"
 description = "GCP GKE - Cluster provisioning"
 weight = 27
 alwaysopen = false
@@ -71,50 +71,27 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 
 * gcp_credentials
 
-![Validate secrets for this example]( /images/trial_getting_started/k8s/create_cluster/secrets-gcp.jpg )
-
-#### Validate Plugins
-
-To view the imported plugins in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
-
-* GCP
-* Kubernetes
-* Utilities
-
-![Required plugins for this example]( /images/trial_getting_started/k8s/create_cluster/plugins-gcp.jpg )
+![Validate secrets for this example]( /images/trial_getting_started/k8s/create_cluster/gcp_secret_store.png )
 
 ### Import Kubernetes Blueprint
 
-The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
+The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. Once the blueprint will be uploaded you'll be redirected to create a deployment dialog.
 
-![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples.jpg )
-
-![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-gcp.jpg )
-
-Once imported, you can find the resulting **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint by clicking on the **Blueprints** page. 
-
-![{{< param cloud >}} list blueprints]( /images/trial_getting_started/k8s/create_cluster/blueprints-gcp.jpg )
+![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/gke_select_from_marketplace.png )
 
 ### Deploy an {{< param cloud >}} {{< param engine >}} Cluster
-
-On the **Blueprints** page, click the **Create deployment** button for the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
 
 * Create a *Deployment name*.
 * Adjust the *Zone* input to match your preferences.
 
-Click the **Deploy & Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
+Click the **Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
 
-![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-gcp-deploy.jpg )
+![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/gcp_gke_create_deployment.png )
 
 You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
 
-![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-gcp-complete.jpg )
-
+![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/gcp_gke_deployment.png )
 ____
-
-
-## {{< param cfy_cli_name >}}
-.. todo
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 

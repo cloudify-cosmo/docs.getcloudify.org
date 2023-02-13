@@ -31,10 +31,10 @@ values      | yes      | list | A list of values for the specified key. Each val
 
 {{< highlight  yaml >}}
 
-tosca_definitions_version: cloudify_dsl_1_3
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/5.3.0/types.yaml
+  - cloudify/types/types.yaml
 
 inputs:
   environment: 

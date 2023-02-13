@@ -24,7 +24,7 @@ The `task_retries` and `max_retries` parameters can be set in one of the followi
 
 * If the operation [`max_retries` parameter]({{< relref "developer/blueprints/spec-interfaces.md#definition" >}}) has been set for a certain operation, it will be used.
 
-* When [installing the manager]({{< relref "install_maintain/installation/installing-manager.md" >}}), the `task_retries` parameter is a configuration parameter in the `mgmtworker.workflows` section of the config.yaml file.
+* When [installing the manager]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}), the `task_retries` parameter is a configuration parameter in the `mgmtworker.workflows` section of the config.yaml file.
 
 * `task_retries`, `task_retry_interval` and `subgraph_retries` can also all be set using the CLI (`cfy config`).
 

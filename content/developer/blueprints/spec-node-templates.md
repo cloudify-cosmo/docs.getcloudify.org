@@ -11,7 +11,7 @@ aliases: /blueprints/spec-node-templates/
 `node_templates` are more commonly referred to as `nodes`. Nodes can comprise more than one instance. For example, you might define a node that contains two VMs. Each VM is a `node_instance`.
 
 {{% note title="Note" %}}
-Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can import `node_templates` multiple times.
+Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_4`, you can import `node_templates` multiple times.
 {{% /note %}}
 
 # Declaration

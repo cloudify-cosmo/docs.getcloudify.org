@@ -243,6 +243,8 @@ Execution Parameters:
 
 
 ### resume
+
+#### Usage
 `cfy executions resume [OPTIONS] EXECUTION_ID`
 
 Resume the execution of a workflow in a failed or cancelled state.
@@ -267,3 +269,123 @@ Resuming execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e
 A resume request for execution 19280e9a-7163-4066-b4f4-a09aaed6dd0e has been sent. To track the execution's status, use:
 cfy executions get 19280e9a-7163-4066-b4f4-a09aaed6dd0e
 {{< /highlight >}}
+
+
+### Execution groups
+
+#### List execution groups
+
+##### Usage
+`cfy executions groups list`
+
+List all execution groups
+
+#### Start execution group
+
+##### Usage
+`cfy executions groups start [OPTIONS] WORKFLOW_ID`
+
+Start an execution group
+
+This starts an execution on every deployment in the given deployment group.
+
+##### Optional flags
+
+* `-g, --deployment-group TEXT` - The deployment group ID to run the workflow on
+* `--concurrency INTEGER` - Run this many executions at a time
+* `-p, --parameters TEXT` - Parameters for the workflow
+* `-w, --with-worker-names / --without-worker-names` - Show the worker name for each event
+* `-f, --force` - Execute the workflow even if there is an ongoing execution for the given deployment
+* `--timeout INTEGER` - Operation timeout in seconds (The execution
+                        itself will keep going, but the CLI will
+                        stop waiting for it to terminate) [default: 900]
+
+
+#### Get execution group
+
+##### Usage
+`cfy executions groups get`
+
+Display execution group information
+This includes the source deployment group, and the workflow name.
+
+#### Get execution group details
+
+##### Usage
+`cfy executions groups details`
+
+Show execution group details
+
+##### Example
+
+{{< highlight  bash >}}
+$ cfy executions groups details 99aef5ff-9eee-440e-9adc-3e9d6b66c9ce
+
+Execution group 99aef5ff-9eee-440e-9adc-3e9d6b66c9ce:
++--------------+---------------------+-------------+--------------------------+------------+
+| workflow_id  | deployment_group_id | #executions |        created_at        |   status   |
++--------------+---------------------+-------------+--------------------------+------------+
+| check_status |          g1         |      1      | 2023-01-09 13:31:22.232  | terminated |
++--------------+---------------------+-------------+--------------------------+------------+
+
+Last 2 logs:
+2023-01-09 13:31:23.013  CFY execution '82501cc7-8eb9-4e19-b6ab-e7160cae1b77' changed state to 'started'
+2023-01-09 13:31:23.300  CFY execution '82501cc7-8eb9-4e19-b6ab-e7160cae1b77' changed state to 'terminated'
+
+Executions' status summary:
+    terminated:     1
+
+{{< /highlight >}}
+
+
+#### Cancel execution group
+
+##### Usage
+`cfy executions groups cancel [OPTIONS] GROUP_ID`
+
+Cancel an execution group
+
+This cancels all running executions in the group. Executions that already
+finished are unaffected.
+
+##### Optional flags
+* `-f, --force` - Terminate the execution abruptly, rather than request an orderly termination
+* `-k, --kill` - Terminate the execution abruptly, and also stop currently
+                 running tasks. This will stop all processes running operations
+                 and workflows for the given execution.
+
+#### Resume execution group
+
+##### Usage
+`cfy executions groups resume [OPTIONS] GROUP_ID`
+
+Resume an execution group
+
+This resumes all failed executions in the group. Executions that already
+finished are unaffected.
+
+##### Optional flags
+* `--reset-operations` - Reset operations in started state, so that they are
+                         run again unconditionally
+
+
+#### Set a success group for the execution group
+
+##### Usage
+`cfy executions groups set-success-group [OPTIONS] GROUP_ID SUCCESS_GROUP_ID`
+
+Set success target group for this execution-group.
+
+Deployments for which the execution succeeds, will be added to the success
+target deployments group.
+
+
+#### Set a failure group for the execution group
+
+##### Usage
+`cfy executions groups set-failure-group [OPTIONS] GROUP_ID SUCCESS_GROUP_ID`
+
+Set success target group for this execution-group.
+
+Deployments for which the execution succeeds, will be added to the success
+target deployments group.

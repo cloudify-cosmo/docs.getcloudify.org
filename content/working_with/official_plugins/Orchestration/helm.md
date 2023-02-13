@@ -1,6 +1,7 @@
 ---
 title: Helm 3 Plugin
 category: Official Plugins
+description: The plugin allows you to manage Helm on Kubernetes cluster
 draft: false
 weight: 100
 aliases: ["/plugins/helm/", "/developer/official_plugins/helm/"]
@@ -39,6 +40,7 @@ There are two authentication methods which are:
 
  * kube config authentication.
  * Cluster CA, cluster endpoint(host) and token.
+ * The token may have expired, in which case it will access the file "/etc/cloudify/.kube/config" if the file exists it will return an error.
 
 ### Kube Config Authentication
 
@@ -402,6 +404,15 @@ node_templates:
 
 {{< /highlight >}}
 
+
+## Operations 
+### **check drift workflow**
+Check drift will check if there was a change in repo list.
+
+The returned value is a dictionary with the changes.
+
+If nothing has changed, an empty dictionary will be returned.
+
 ## cloudify.nodes.helm.Release
 This node type responsible for create release on Kubernetes cluster.
 
@@ -540,6 +551,21 @@ node_templates:
 
 {{< /highlight >}}
 
+## Operations 
+### **check drift workflow**
+When a specific version for chert is provided in the blueprint
+The check drift will confirm that this is the current version.
+If no version was provided, the check drift will check if there is an update of the chart version in the repo, 
+or from another source by checking helm_list.
+
+To provide a version you can add this flag in the blueprint under resource_config.
+```yaml
+   flags:
+      - name: version
+        value: { get_input: version }
+```
+
+return 'diff' or 'None'
 
 
 # Relationships

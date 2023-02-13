@@ -19,4 +19,4 @@ When you open it for the first time you will see the login page:
 
 When you log in for the first time, you'll need to activate your product.
 
-More about licensing and activation can be found at [Activating {{< param cfy_manager_name >}} and License Management]({{< relref "install_maintain/installation/manager-license.md" >}}).
+More about licensing and activation can be found at [Activating {{< param cfy_manager_name >}} and License Management]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}).

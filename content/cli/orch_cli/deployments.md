@@ -282,7 +282,7 @@ If `--blueprint-id` is provided, list deployments for that blueprint.
 
 *  `-s, --pagination-size INTEGER` -    The max number of results to retrieve per page [default: 1000]
 
-
+* `-g, --group-id TEXT` - Show deployments belonging to this group
 
 
 &nbsp;
@@ -302,6 +302,81 @@ Deployments:
 +-----------------------------+-----------------------------+--------------------------+--------------------------+------------+----------------+------------+
 
 ...
+{{< /highlight >}}
+### status-list
+
+#### Usage
+`cfy deployments status-list [OPTIONS]`
+
+Show deployment statuses
+
+Show a grid of various deployment statuses, allowing an at-a-glance insight
+of the state of the system.
+
+This command allows the same filtering that `cfy deployments list` does.
+
+### Options
+
+* `-s, --pagination-size INTEGER` - The max number of results to retrieve per
+                                    page [default: 1000]
+* `-o, --pagination-offset INTEGER` - The number of resources to skip;
+                                      --pagination-offset=1 skips the first
+                                  resource [default: 0]
+* `--dependencies-of TEXT` - List only deployments on which the given
+                             deployment ID depends.
+* `--search-name TEXT` - Search deployments by their display name.
+                         The returned list will include only
+                         deployments that contain the given search pattern
+* `--search TEXT` - Search resources by id. The returned list
+                    will include only resources that contain the
+                    given search pattern
+* `-a, --all-tenants` - Include resources from all tenants
+                        associated with the user. You cannot use
+                        this argument with arguments: [tenant_name].
+* `-t, --tenant-name TEXT` - The name of the tenant to list deployments
+                             from. If not specified, the current tenant
+                             will be used. You cannot use this argument
+                             with arguments: [all_tenants]
+* `--descending` - Sort list in descending order [default: False]
+* `--sort-by TEXT` - Key for sorting the list
+* `-lr, --labels-rule TEXT` - A labels' filter rule. Labels' filter rules
+                              must be one of: <key>=<value>,
+                              <key>!=<value>, <key> is-not <value>, <key>
+                              is null, <key> is not null. <value> can be a
+                              single string or a list of strings of the
+                              form [<value1>,<value2>,...]. Any comma and
+                              colon in <value> must be escaped with `\`.
+                              The labels' keys specified in the filter
+                              rules will be saved in lower case.
+* `-ar, --attrs-rule TEXT` - An attributes' filter rule. Attributes'
+                             filter rules must be one of: <key>=<value>,
+                             <key>!=<value>, <key> contains <value>,
+                             <key> does-not-contain <value>, <key>
+                             starts-with <value>, <key> ends-with
+                             <value>, <key> is not empty. <value> can be
+                             a single string or a list of strings of the
+                             form [<value1>,<value2>,...]. Allowed
+                             attributes to filter by are: [blueprint_id,
+                             created_by, site_name, schedules]. This
+                             argument can be used multiple times
+* `--filter-id TEXT` - Filter results according to the specified filter
+* `-g, --group-id TEXT` - Show deployments belonging to this group
+* `-b, --blueprint-id TEXT` - Show deployments created from this blueprint
+
+#### Example
+
+{{< highlight  bash  >}}
+$ cfy dep status-list
+Listing all deployments...
+
+Deployments:
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+|                   id                  |              display_name             | deployment_status | installation_status | unavailable_instances | drifted_instances |
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+| d973d4e3e-702b-45d4-a0a2-2f3917b338b8 | d973d4e3e-702b-45d4-a0a2-2f3917b338b8 |    in_progress    |       inactive      |           2           |         0         |
++---------------------------------------+---------------------------------------+-------------------+---------------------+-----------------------+-------------------+
+
+Showing 1 of 1 deployments
 {{< /highlight >}}
 
 ### summary
@@ -1074,3 +1149,199 @@ will stay the same.
   
 * `-t, --tenant-name TEXT`  The name of the tenant of the filter. If not
                             specified, the current tenant will be used
+
+
+### Deployment groups
+
+A deployment group allows organizing multiple deployments together, in order to run executions in batch on all of them.
+
+
+#### Deployment groups list
+
+##### Usage
+`cfy deployments groups list`
+
+List all deployment groups.
+
+##### Example
+
+{{< highlight  bash  >}}
+$ cfy dep gro list
+
+Deployment groups:
++----+-------------+-------------+----------------------+
+| id | deployments | description | default_blueprint_id |
++----+-------------+-------------+----------------------+
+| g1 |      0      |   group 1   |                      |
++----+-------------+-------------+----------------------+
+{{< /highlight >}}
+
+
+#### Deployment groups create
+
+##### Usage
+`cfy deployments groups create [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Create a deployment group.
+
+The provided inputs will be used as default inputs for new deployments
+created using `cfy deployments groups extend --count`.
+
+##### Optional flags
+
+* `-i, --inputs TEXT` - Inputs for the deployment
+* `-b, --default-blueprint TEXT` - Default blueprint for this deployment group
+* `--description TEXT` - Description of this deployment group
+
+#### Deployment groups delete
+
+##### Usage
+`cfy deployments groups delete [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Delete a deployment group
+
+This deletes a deployment group, which by default only removes the
+grouping, the deployments in the group are still left intact.
+To delete all deployments, pass `--delete-deployments`.
+
+##### Optional flags
+
+* `--delete-deployments` - Delete all deployments belonging to this group
+* `-l, --with-logs` - If set, then the deployment's management workers logs
+                      are deleted as well [default: False]
+* `-f, --force` - Delete the deployment even if there are existing live
+                  nodes for it, or existing installations which depend on it
+
+
+#### Deployment groups extend
+
+##### Usage
+`cfy deployments groups extend [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Add deployments to an existing group
+
+This adds deployments from a filter, or from another group, or creates new
+deployments, using this group's default blueprint and inputs.
+
+##### Optional flags
+* `-d, --deployment-id TEXT` - Deployment ID to add or remove from the group
+* `--count INTEGER` - Create this many deployments in the group
+* `--filter-id TEXT` - Use deployments selected by this filter
+* `-lr, --labels-rule TEXT` - A labels' filter rule. Labels' filter rules must
+                              be one of: <key>=<value>, <key>!=<value>, <key>
+                              is-not <value>, <key> is null, <key> is not null.
+                              <value> can be a single string or a list of
+                              strings of the form [<value1>,<value2>,...]. Any
+                              comma and colon in <value> must be escaped with
+                              `\`. The labels' keys specified in the filter
+                              rules will be saved in lower case.
+* `-ar, --attrs-rule TEXT` - An attributes' filter rule. Attributes' filter
+                             rules must be one of: <key>=<value>,
+                             <key>!=<value>, <key> contains <value>, <key>
+                             does-not-contain <value>, <key> starts-with
+                             <value>, <key> ends-with <value>, <key> is not
+                             empty. <value> can be a single string or a list of
+                             strings of the form [<value1>,<value2>,...].
+                             Allowed attributes to filter by are:
+                             [blueprint_id, created_by, site_name, schedules].
+                             This argument can be used multiple times
+* `--from-group TEXT` - Use deployments belonging to this group
+* `--into-environments TEXT` - Add created deployments to the environments
+                               already existing in this group.. You cannot use
+                               this argument with arguments: [count]
+
+
+#### Deployment groups shrink
+
+##### Usage
+`cfy deployments groups shrink [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Shrink a group, removing deployments from it
+
+##### Optional flags
+* `-d, --deployment-id TEXT` - Deployment ID to add or remove from the group
+* `--filter-id TEXT` - Use deployments selected by this filter
+* `-lr, --labels-rule TEXT` - A labels' filter rule. Labels' filter rules must
+                              be one of: <key>=<value>, <key>!=<value>, <key>
+                              is-not <value>, <key> is null, <key> is not null.
+                              <value> can be a single string or a list of
+                              strings of the form [<value1>,<value2>,...]. Any
+                              comma and colon in <value> must be escaped with
+                              `\`. The labels' keys specified in the filter
+                              rules will be saved in lower case.
+* `-ar, --attrs-rule TEXT` - An attributes' filter rule. Attributes' filter
+                             rules must be one of: <key>=<value>,
+                             <key>!=<value>, <key> contains <value>, <key>
+                             does-not-contain <value>, <key> starts-with
+                             <value>, <key> ends-with <value>, <key> is not
+                             empty. <value> can be a single string or a list of
+                             strings of the form [<value1>,<value2>,...].
+                             Allowed attributes to filter by are:
+                             [blueprint_id, created_by, site_name, schedules].
+                             This argument can be used multiple times
+* `--from-group TEXT` - Use deployments belonging to this group
+
+
+
+#### Deployment groups update
+
+##### Usage
+`cfy deployments groups update [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Update a deployment group
+
+This changes the group's attributes; for updating deployments belonging
+to this group, see `update-deployments`.
+
+##### Optional flags
+* `-i, --inputs TEXT` - Inputs for the deployment
+* `-b, --default-blueprint TEXT` - Default blueprint for this deployment group
+* `--description TEXT` - Description of this deployment group
+
+
+#### Deployment groups update deployments
+
+##### Usage
+`cfy deployments groups update [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+Update all deployments in the given group.
+
+If updating with a new blueprint, the blueprint must already be uploaded.
+Arguments have the same meaning as in single-deployment update, except that
+preview is not supported. This creates an execution-group with an update
+workflow for each deployment in the group.
+
+For available options, see deployment update.
+
+
+#### Deployment groups list labels
+
+##### Usage
+`cfy deployments groups labels list [OPTIONS] DEPLOYMENT_GROUP_NAME`
+
+List labels of a group
+
+
+#### Deployment groups add label
+
+##### Usage
+`cfy deployments groups labels add [OPTIONS] LABELS_LIST DEPLOYMENT_GROUP_NAME`
+
+Add labels to the deployment group.
+
+Dpeloyments added to this group will have the group labels added to them.
+LABELS_LIST: <key>:<value>,<key>:<value>
+
+
+#### Deployment groups remove label
+
+##### Usage
+`cfy deployments groups labels delete [OPTIONS] LABEL DEPLOYMENT_GROUP_NAME`
+
+Remove a label from the deployment group.
+
+Deployments added to this group will no longer have the label
+added to them.
+
+LABEL: Can be either <key>:<value> or <key>. If <key> is provided,
+all labels associated with this key will be deleted from the group.

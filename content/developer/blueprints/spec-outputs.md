@@ -9,7 +9,7 @@ aliases: /blueprints/spec-outputs/
 `outputs` enable you to expose global aspects of a deployment. When deployed, a blueprint can expose specific outputs of that deployment - for example, an endpoint of a server or any other runtime or static information of a specific resource.
 
 {{% note title="Note" %}}
-Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_3`, you can import `outputs` multiple times.
+Beginning with [definitions version]({{< relref "developer/blueprints/spec-versioning.md" >}}) `cloudify_dsl_1_4`, you can import `outputs` multiple times.
 {{% /note %}}
 
 # Declaration
@@ -34,10 +34,10 @@ value       | yes      | \<any\>     | The output value. May be anything from a 
 # Example
 
 {{< highlight  yaml >}}
-tosca_definitions_version: cloudify_dsl_1_3
+tosca_definitions_version: cloudify_dsl_1_4
 
 imports:
-  - http://www.getcloudify.org/spec/cloudify/5.0.0/types.yaml
+  - cloudify/types/types.yaml
 
 node_templates:
   webserver_vm:

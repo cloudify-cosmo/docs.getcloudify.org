@@ -82,6 +82,14 @@ The intrinsic functions list is available at [Intrinsic functions specification 
 Note that, for the `get_attribute` function you must be familiar with and use the run-time attributes' names, not the auto-filled properties names.
 For example, to obtain a virtual IP address using the `get_attribute` function, use the run-time attribute `VirtualIp_address`, not the `VirtualIP` property.
 
+Service composition related node types provide dedicated features that make defining their properties easier in the context of blueprints and deployments available on the manager.
+For `cloudify.nodes.Component` and `cloudify.nodes.ServiceComponent` node types when "External resource" flag in "Blueprints" section is turned on it is possible to select one of the blueprints already existing on the manager.
+Alternatively, it is possible to manually enter an in-existing blueprint ID.
+Once existing blueprint ID is selected and "External resource" flag in "Deployments" section is turned off it is possible to load blueprint inputs and set them as a template for "Inputs" property - inputs' values are initially set to their defaults and can be further aligned.
+Individual inputs can be also removed from the loaded list. 
+When "External resource" in "Deployments" section is turned on it is possible to select one of the deployments already existing on the manager.
+This feature is also available for `cloudify.nodes.SharedResource` node type when specifying "Deployment ID" property.
+
 ### Setting interfaces
 
 To select the operations that you require, click the ![Select Operation]( /images/composer/select-implementation-icon.png ) icon next to the implementation fields in the node's Interfaces section on the right of the screen. The following dialog box is displayed:

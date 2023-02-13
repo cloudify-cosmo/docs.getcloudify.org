@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Plugin
 category: Official Plugins
+description: With the Kubernetes Plugin you can define Kubernetes resources in your blueprints.
 draft: false
 weight: 100
 aliases: ["/plugins/kubernetes/", "/developer/official_plugins/kubernetes/", "/working_with/official_plugins/configuration/kubernetes/"]
@@ -207,6 +208,7 @@ One of four methods options can be used to provide the configuration:
 
 * With GKE it is best to use legacy cluster certificate authentication. See [here](https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration#using_legacy_cluster_certificate_or_user_credentials).
 
+The token may have expired, in which case it will access the file "/etc/cloudify/.kube/config" if the file exists it will return an error.
 **Example1:**
 
 {{< highlight  yaml  >}}
@@ -769,11 +771,120 @@ and now, using the kubernetes plugin it creates resource in the cluster(pod):
 
 {{< /highlight >}}
 
+## CustomResourceDefinition and Custom Objects
+
+The Cloudify Kubernetes Plugin supports creating and using [CustomResourceDefinition](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)s.
+
+To create a **CustomResourceDefinition**, create a new Kubernetes Resource Node, like you would with any other supported resource type, by providing the path to a Kubernetes resource template in your node template:
+
+```yaml
+  resource:
+    type: cloudify.kubernetes.resources.FileDefinedResource
+    properties:
+      client_config: { get_input: **client_config }
+      file:
+        resource_path: resources/crd.yaml
+```
+
+In your `crd.yaml` file, provide the definition for your **CustomDefinedResource**.
+
+You can also use **CustomDefinedResource**s with the Kubernetes plugin. Usages of **CustomDefinedResource**s are referred to as [Custom Objects](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#create-custom-objects).
+
+### When using **Custom Objects**, you must add specific `annotations` to the `metadata` section of the resource.
+
+Specify the following keys in your `metadata:annotations` section:
+
+ - cloudify-crd-group
+ - cloudify-crd-plural
+ - cloudify-crd-version
+
+Cloudify needs these keys in order to identify the resource as a usage of a **CustomDefinedResource**.
+_An alternative method of providing these keys is available when using the **cloudify.kubernetes.resources.CustomObject** node type. See the **cloudify.kubernetes.resources.CustomObject** example below._
+
+Define a **CustomDefinedResource** and use it in the same Kubernetes template:
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  # This value is used in the cloudify-crd-group annotation in the usage of the CRD.
+  group: stable.example.com
+  versions:
+  # This value is used in the cloudify-crd-version annotation in the usage of the CRD.
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cronSpec:
+                  type: string
+                image:
+                  type: string
+                replicas:
+                  type: integer
+  scope: Namespaced
+  names:
+  # This value is used in the cloudify-crd-plural annotation in the usage of the CRD.
+    plural: crontabs
+    singular: crontab
+    kind: CronTab
+    shortNames:
+    - ct
+---
+apiVersion: "stable.example.com/v1"
+kind: CronTab
+metadata:
+  name: my-new-cron-object
+  annotations:
+    # See comments in the CRD defintion above for where to find these values.
+    cloudify-crd-group: stable.example.com
+    cloudify-crd-plural: crontabs
+    cloudify-crd-version: v1
+spec:
+  cronSpec: "* * * * */5"
+  image: my-awesome-cron-image
+```
+
+Using the **cloudify.kubernetes.resources.CustomObject** node type:
+
+```yaml
+  resource:
+    type: cloudify.kubernetes.resources.CustomObject
+    properties:
+      client_config: { get_input: **client_config }
+      options:
+        group: stable.example.com
+        plural: crontabs
+        version: v1
+      definition:
+        apiVersion: "stable.example.com/v1"
+        kind: CronTab
+        metadata:
+          name: my-new-cron-object
+          annotations:
+            # See comments in the CRD defintion above for where to find these values.
+            cloudify-crd-group: stable.example.com
+            cloudify-crd-plural: crontabs
+            cloudify-crd-version: v1
+        spec:
+          cronSpec: "* * * * */5"
+          image: my-awesome-cron-image
+
+```
+
 
 # Relationship
 
 ## cloudify.relationships.kubernetes.connected_to_shared_cluster
 
 Connect Kubernetes resource node templates to an existing Kubernetes cluster. Target node type must be **cloudify.kubernetes.resources.SharedCluster**.
+
 
 

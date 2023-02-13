@@ -47,8 +47,8 @@ All this functionality is available also through [Command Line Interface]({{< re
 
 ### <span style="color:#0077fc">Enhanced Security and RBAC support</span>
 
-{{< param product_name >}} provides end [security]({{< relref "install_maintain/manager_architecture/security">}}) of its internal and external resources.
-This includes support for the secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the {{< param product_name >}} managed resources.
+{{< param product_name >}} provides end [security] ({{< relref "cloudify_manager/architecture/security">}}) of its internal and external resources.
+This includes support for secret store, encryption of all internal communication channels, as well as multi-tenancy and RBAC support to control who gets access to each of the {{< param product_name >}} managed resources.
 
 ### <span style="color:#0077fc">Blueprint modeling and design using the {{< param cfy_composer_name >}}</span>
 

@@ -16,7 +16,7 @@ all of its requirements) and up to entire micro-services that are found across i
 The namespace context is added to all the DSL elements that may be referenced, allowing the blueprint to safely be
 imported and used in other blueprints, without fear of name collisions.
 This contributes a great deal for common blueprint patterns that now can be imported several times under different
-namespaces and be used with no unwanted duplications across deployments. ** Notice: ** {{< param product_name >}} basic types definition can not receive namespace.
+namespaces and be used with no unwanted duplications across deployments. **Notice:** {{< param product_name >}} basic types definition can not receive namespace.
 
 # Catalog Blueprint   
 With the ability to import a catalog blueprint, blueprints are now truly shareable building blocks that can be used across

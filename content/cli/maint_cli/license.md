@@ -1,5 +1,6 @@
 ---
 title: license
+description: The `cfy license` command is used to manage the Cloudify Manager license.
 category: Docs
 draft: false
 abstract: Command-Line Interface

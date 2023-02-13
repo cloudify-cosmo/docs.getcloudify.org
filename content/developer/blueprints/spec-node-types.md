@@ -14,7 +14,7 @@ aliases: /blueprints/spec-node-types/
 node_types:
 
   type1:
-    derived_from: cloudify.types.Root
+    derived_from: cloudify.nodes.Root
     interfaces:
       ...
     properties:
@@ -45,7 +45,7 @@ Using this mechanism, you can build various type hierarchies that can be reused 
 When a type derives from another type, its `interfaces` and `properties` keys are merged with the parent type's `interfaces` and `properties` keys. The merge is on the property/operation level. A property defined on the parent type is overridden by a property with the same name that is defined on the deriving type. The same is true for an interface operation mapping. However, it is important to note that it is possible to add additional operation mappings to an interface defined in the parent type in the deriving type. See the [examples section](#examples) for more information.
 
 {{% note title="Note" %}}
-When not deriving from any other type, it is good practice to derive from the `cloudify.types.Root` type that is defined in the [built-in types]({{< relref "developer/blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.types.Root` type.
+When not deriving from any other type, it is good practice to derive from the `cloudify.nodes.Root` type that is defined in the [built-in types]({{< relref "developer/blueprints/built-in-types.md" >}}). If you do not do this, you must either [write a custom workflow]({{< relref "working_with/workflows/creating-your-own-workflow.md" >}}) or declare the `cloudify.interfaces.lifecycle` interface in this new type. This is required because the [built-in *install* and *uninstall* workflows]({{< relref "working_with/workflows/built-in-workflows.md" >}}) are based on interfaces that are declared for the `cloudify.nodes.Root` type.
 {{% /note %}}
 
 

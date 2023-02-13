@@ -11,7 +11,7 @@ Displays the following information about a specific agent:
 * **Node** - Node ID associated with agent
 * **System** - agent host operation system
 * **Version** - agent version
-* **Install method** - agent installation method (described [here]({{< relref "install_maintain/agents/installation.md" >}}))
+* **Install method** - agent installation method (described [here]({{< relref "cloudify_manager/agents/installation.md" >}}))
 
 ![agents-management]( /images/ui/widgets/agents-management.png )
 

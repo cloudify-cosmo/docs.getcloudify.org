@@ -35,23 +35,23 @@ HTML: *I love {{< field "favorite_food" >}}!*
 
 * To link to another page in the content directory:
 
-    `[The manager installation page]({{</* relref  "install_maintain/installation/installing-manager.md" */>}})`
+    `[The manager installation page]({{</* relref  "cloudify_manager/premium/fully_distributed/install_and_configure/manual.md" */>}})`
 
-    For example: [The manager installation page]({{< relref  "install_maintain/installation/installing-manager.md" >}})
+    For example: [The manager installation page]({{< relref  "cloudify_manager/premium/fully_distributed/install_and_configure/manual.md" >}})
 
 * To link to an anchor on another page in the content directory:
 
-    `[The manager installation instructions]({{</* relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" */>}})`
+    `[The manager installation instructions]({{</* ref "cloudify_manager/premium/fully_distributed/install_and_configure/manual.md#installing-cloudify-manager" */>}})`
 
-    For example: [The manager installation instructions]({{< relref "install_maintain/installation/installing-manager.md#installing-cloudify-manager" >}})
+    For example: [The manager installation instructions]({{< ref "cloudify_manager/premium/fully_distributed/install_and_configure/manual.md#installing-services" >}})
 
 # Text Formatting
 
-| **Description** | **Syntax** | **Output** |
-|-------------|----------------|-------------
-| Emphasized text | \*emphasized\* | *emphasized* |
-| Bold text | \*\*bold\*\* | **bold** |
-| Inline code | \`print "hello world!"\` | `print "hello world!"` |
+| **Description** | **Syntax**               | **Output**             |
+|-----------------|--------------------------|------------------------|
+| Emphasized text | \*emphasized\*           | *emphasized*           |
+| Bold text       | \*\*bold\*\*             | **bold**               |
+| Inline code     | \`print "hello world!"\` | `print "hello world!"` |
 
 # Code Blocks
 

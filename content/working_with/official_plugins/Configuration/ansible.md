@@ -1,6 +1,7 @@
 ---
 title: Ansible Plugin
 category: Official Plugins
+description: The Ansible plugin enables you to configure resources with Ansible and provides an agentless method for executing operations on hosts.
 draft: false
 weight: 100
 aliases: ["/plugins/ansible/", "/developer/official_plugins/ansible/", "/working_with/official_plugins/configuration/ansible/"]
