@@ -26,7 +26,7 @@ configuration for _Status Reporter_ will be added.
 [fully distributed cluster]({{< relref "/cloudify_manager/premium/fully_distributed/_index.md" >}})
 or a [compact cluster]({{< relref "/cloudify_manager/premium/compact/_index.md" >}}) installations,
 Prometheus instances create a
-[federated network]({{< relref "/cloudify_manager/architecture/monitoring/federation.md">}}) in order
+[federated network]({{< relref "/install_maintain/monitoring/federation.md">}}) in order
 to exchange information without the involvement of {{< param cfy_manager_name >}}.
 
 Prometheus's [node_exporter](https://github.com/prometheus/node_exporter#node-exporter)

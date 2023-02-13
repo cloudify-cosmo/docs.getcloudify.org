@@ -9,7 +9,7 @@ The easiest method to monitor an external service with the {{< param product_nam
 _Status Reporter_ is to add additional scraping targets to existing Prometheus installation (e.g.
 the one running with {{< param cfy_manager_name >}}).  It is not the only way.  An alternative is
 to configure an additional external Prometheus instance (along with the appropriate exporter), which
-handles the service, and have it [federated]({{< relref "/cloudify_manager/architecture/monitoring/federation.md">}})
+handles the service, and have it [federated]({{< relref "/install_maintain/monitoring/federation.md">}})
 with existing Prometheus.  The latter is more complicated, but has its advantages (residency,
 load-distribution etc.).  This guide will focus on the former approach, which is probably the
 simplest, and, in most cases, the best one.
@@ -55,7 +55,7 @@ These are configured as Prometheus's
   expr: pg_up{job="postgresql"} == 1 and up{job="postgresql"} == 1
 {{< /highlight >}}
 : combines two metrics from the
-[postgres_exporter]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#additional-components):
+[postgres_exporter]({{< relref "/install_maintain/monitoring/components.md" >}}#additional-components):
 `up` monitors status of postgres_exporter and `pg_up` – that of PostgreSQL server.  Both metrics
 should have values of `1`.
 
@@ -68,7 +68,7 @@ should have values of `1`.
     process_manager: supervisord
 {{< /highlight >}}
 : returns a list of running services (as reported by the
-[node_exporter]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#common-components)),
+[node_exporter]({{< relref "/install_maintain/monitoring/components.md" >}}#common-components)),
 which could be relevant for determining database node's status.  The above rules are meant for
 a system which is operated with [supervisord](http://supervisord.org/).  In case
 [systemd](https://systemd.io/) is the process supervisor of choice, update the rules accordingly,
@@ -85,7 +85,7 @@ e.g.:
 ## Expected results
 
 The following method might be used to test PostgreSQL metrics (for other methods look
-[here]({{< relref "/cloudify_manager/architecture/monitoring/access.md" >}})):
+[here]({{< relref "/install_maintain/monitoring/access.md" >}})):
 
 {{< highlight bash >}}
 curl "http://localhost:9090/monitoring/api/v1/query?query=postgres_healthy%20or%20postgres_service"
@@ -214,7 +214,7 @@ monitors status of RabbitMQ service.  Should be of value `1`.
     process_manager: supervisord
 {{< /highlight >}}
 : returns a list of running services (as reported by the
-[node_exporter]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#common-components)),
+[node_exporter]({{< relref "/install_maintain/monitoring/components.md" >}}#common-components)),
 which could be relevant for determining message queue node's status.  The above rules are meant for
 a system which is operated with [supervisord](http://supervisord.org/).  In case
 [systemd](https://systemd.io/) is the process supervisor of choice, update the rules accordingly,
@@ -231,7 +231,7 @@ e.g.:
 ## Expected results
 
 The following method might be used to test RabbitMQ metrics (for other methods look
-[here]({{< relref "/cloudify_manager/architecture/monitoring/access.md" >}})):
+[here]({{< relref "/install_maintain/monitoring/access.md" >}})):
 
 {{< highlight bash >}}
 curl "http://localhost:9090/monitoring/api/v1/query?query=rabbitmq_healthy%20or%20rabbitmq_service"
