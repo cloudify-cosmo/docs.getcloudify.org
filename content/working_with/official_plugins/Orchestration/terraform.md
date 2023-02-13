@@ -279,6 +279,52 @@ This refers to a Terraform module.
     * `enable`: boolean, In order for it to work, must mark as True.
     **NOTE** it wouldn't be called unless the interface is specified or by calling the operation `terraform.infracost` or by executing the worklfow `run_infracost`
 
+### OPA
+
+OPA support was introduced in version 0.19.14 of the Terraform plugin.
+
+The `terraform.opa` interface operation evaluates an [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) decision against a Terraform plan. Calling this interface operation will initialize Terraform (if it has not already been initialized), generate a Terraform plan, and then evaluate the decision against the provided OPA policies.
+
+The operation provides a thing wrapper around running `opa exec` against the Terraform plan in JSON format.
+
+OPA is configured by setting the desired parameters in `cloudify.nodes.terraform.Module:properties.opa_config`:
+
+* `installation_source` - Location to download the OPA binary from. Defaults to `https://github.com/open-policy-agent/opa/releases/download/v0.47.4/opa_linux_amd64_static`
+* `executable_path` - Location of an existing OPA binary on the system. If used, the binary will not be downloaded from the `installation_source` and the existing binary will be used for policy evaluations.
+* `config` - OPA configuration file to override any default OPA behavior.
+* `policy_bundles` - A list of one or more zipped policy [bundles](https://www.openpolicyagent.org/docs/latest/management-bundles/) for use in the policy evaluation. Policy bundles can be local to the blueprint archive, or they can be downloaded from remote sources. The format for policy bundles is described below.
+* `flags_override` - A list of flags to additionally pass to the OPA binary. The `opa exec` command runs with the `--bundle` and `--decision` flags by default, and overriding flags is not recommended.
+* `enable` - A boolean to indicate whether or not OPA policy evaluation is enabled during normal Terraform operations, such as `terraform apply`. This is currently unused, as the OPA tasks are implemented outside of the normal Terraform workflows. This is reserved for future use when OPA is integrated as part of normal Terraform workflows.
+
+A policy bundle is a ZIP archive that can be passed to the `--bundle` flag for `opa exec`. To create a policy bundle in the format required by Cloudify, simply zip up the contents of an OPA directory containing one or more Rego files. For example:
+
+```bash
+$ ls
+main.rego  security_groups.rego
+
+$ zip -r policy.zip *
+  adding: main.rego (deflated 21%)
+  adding: security_groups.rego (deflated 47%)
+```
+
+The `policy_bundles` parameter accepts a list of bundles in the same format used by the `source` parameter for the [Terraform module]({{< relref "working_with/official_plugins/Orchestration/terraform#cloudifynodesterraformmodule" >}}). Each policy bundle must have a `name`, which is used to name the directory on the Cloudify Manager when the bundle is extracted.
+
+The example below shows a single policy bundle named `my-policy`. This bundle is located in `resources/policy.zip`, which is within the blueprint archive:
+```yaml
+  module:
+    type: cloudify.nodes.terraform.Module
+    properties:
+      opa_config:
+        policy_bundles:
+          - name: my-policy
+            location: resources/policy.zip
+    relationships:
+      - target: terraform
+        type: cloudify.terraform.relationships.run_on_host
+```
+
+The `terraform.opa` operation also requires that the `decision` parameter be se. See the "Operations" section below for more information.
+
 ### **Operations**
 
   * `terraform.import_resource`: this operation is leveraging terraform import command -which can be used to import remote resources to your local state-. The following example can be used as a parameter file to the execute operation command.
@@ -350,7 +396,16 @@ The following example can be used as a parameter file to the execute operation c
     allow_kwargs_override: true
     ```
 Operation outputs are saved in `plain_text_infracost` and `infracost` runtime properties.
+  * `terraform.opa`: Runs OPA policy evaluation. This operation will initialize Terraform (if it is not already initialized), generate a Terraform plan, and run OPA policy evaluation against it. You must specify the desired `decision` to evaluate. If no decision is specified, it will default to `terraform/deny`. The decision is passed to the `--decision` flag of the `opa exec` command.
 
+    ```yaml
+    opa:
+      implementation: tf.cloudify_tf.tasks.evaluate_opa_policy
+      inputs:
+        # Note that opa_config can be omitted and it will default to the node property.
+        opa_config: { get_property: [SELF, opa_config ] }
+        decision: "terraform/deny"
+    ```
 
 ### **Runtime Properties**
 
