@@ -20,7 +20,7 @@ prefix to all paths**.  For example a query endpoint is not located at `/api/v1/
 
 Prometheus is configured to listen on lo (localhost, 127.0.0.1) interface, on port 9090.  To access
 it, it is necessary to obtain a SSH access to the machine it is running on (look
-[here]({{< relref "/cloudify_manager/architecture/high_level_architecture/networking.md" >}}#external-ports)
+[here]({{< relref "/install_maintain/installation/installing-external-db-and-queue-cluster.md" >}})
 for details).
 
 Below is the example of using `curl` to query all `up` metrics:

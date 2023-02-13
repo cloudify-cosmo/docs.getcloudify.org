@@ -1,7 +1,7 @@
 +++
 title = "Monitoring"
 description = "Describes tools and configuration used for monitoring (a.k.a. Status Reporter)"
-weight = 60
+weight = 600
 alwaysopen = false
 +++
 
@@ -10,7 +10,7 @@ alwaysopen = false
 {{< param product_name >}} ships with a monitoring and alerting software build around
 [Prometheus](https://prometheus.io/) behind a [Nginx](https://www.nginx.org) HTTP reverse proxy
 and a few [exporters](https://prometheus.io/docs/instrumenting/exporters/).
-[This bundle]({{< relref "components.md" >}}) is called _Status Reporter_ and is used to check
+[This bundle]({{< relref "/install_maintain/monitoring/components.md" >}}) is called _Status Reporter_ and is used to check
 and report on the status of a {{< param cfy_manager_name >}}, a database and a queuing service,
 combining them into single information about the services' health.
 

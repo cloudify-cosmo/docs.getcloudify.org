@@ -71,9 +71,9 @@ metrics of the node _this_ Prometheus is running on).
 
 This configuration requires fully-blown _Status Reporter_ to be available on federated nodes.  It
 means, that not only should there be a
-[service-specific exporter]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#additional-components)
+[service-specific exporter]({{< relref "/install_maintain/monitoring/components.md" >}}#additional-components)
 installed (e.g. postgres_exporter for database nodes), but all other
-[common components]({{< relref "/cloudify_manager/architecture/monitoring/components.md" >}}#common-components):
+[common components]({{< relref "/install_maintain/monitoring/components.md" >}}#common-components):
 node_exporter, Prometheus and nginx, all configured similarly to what {{< param product_name >}}
 provides (proper TLS certificates, authentication credentials same as on all other nodes, same
 opened ports, etc.)
