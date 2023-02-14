@@ -6,4 +6,4 @@ alwaysopen = false
 +++
 
 ## Overview
-Cloudify Manager is supported for installation on a 64-bit host with RHEL/ CentOS 7.6  and RHEL 8.
+Cloudify Manager is supported for installation on a 64-bit host with RHEL 8.6 and CentOS 7.6.
