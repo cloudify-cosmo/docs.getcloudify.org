@@ -1,6 +1,6 @@
 +++
 title = "Cloudify Community"
-description = "Deploy the community version of manager using a Docker container"
+description = "Deploy the community version of the manager using a Docker container"
 weight = 9
 alwaysopen = false
 docker_image_name = "cloudifyplatform/community-cloudify-manager-aio:latest"

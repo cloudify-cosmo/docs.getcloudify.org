@@ -1,6 +1,6 @@
 +++
 title = "Cloudify Premium"
-description = "Deploy a Premium manager using a Docker container"
+description = "Deploy a premium manager using a Docker container"
 weight = 10
 alwaysopen = false
 docker_image_name = "cloudifyplatform/premium-cloudify-manager-aio:latest"
