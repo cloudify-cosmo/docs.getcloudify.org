@@ -1,6 +1,6 @@
 +++
 title = "Cloudify Manager Setup"
-description = "Get started with setting up your hosted service trial or deploying your own trial server"
+description = "Get started by setting up your hosted service trial or deploying your own trial server"
 weight = 95
 alwaysopen = false
 +++
