@@ -1,13 +1,18 @@
 +++
 title = "Cloudify Helm Chart"
-description = "Deploy Cloudify to Kubernetes cluster with our Helm chart"
+description = "Deploy Cloudify to a Kubernetes cluster with our Helm chart"
 weight = 200
 alwaysopen = false
 +++
 
 {{%children style="h2" description="true"%}}
 
-The {{< param cfy_manager_name >}} may be installed on Kubernetes cluster using the official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm). There are two options for installation: the All In One (AIO) chart and the Cloudify Manager Worker chart. Each option is described in more detail below.
+The {{< param cfy_manager_name >}} may be installed on a Kubernetes cluster using the official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm). There are two options for installation: 
+
+* All In One (AIO) chart
+* Cloudify Manager Worker chart
+
+Each option is described in more detail below.
 
 ## Prerequisites
 To use the official Helm charts, you will need:
@@ -15,11 +20,11 @@ To use the official Helm charts, you will need:
 * An existing Kubernetes cluster to deploy the charts into
 * The [Helm package manager](https://helm.sh/) installed and configured to talk with your cluster
 
-## {{< param company_name >}} AIO Helm chart (Community Version)
+## {{< param company_name >}} AIO Helm Chart (Community Version)
 
 The {{< param cfy_manager_name >}} AIO Helm chart is the preferred way to become familiar with {{< param company_name >}}. It is a very simple installation that can be deployed in minutes.
 
-The chart has several limitations that you should be aware of, as this option is only suitable for a basic trial of the {{< param company_name >}} product:
+The chart has several limitations that you should be aware of, as this option is only suitable Cloudify basic trial:
 
 * No high availability: only a single replica is deployed.
 * No persistent volume is configured for data to persist across pod restarts or failures.
@@ -35,11 +40,11 @@ helm repo add cloudify-helm https://cloudify-cosmo.github.io/cloudify-helm
 helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 ```
 
-To understand all available options AIO cloudify manager chart has, please read [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})
+To understand all available options AIO Cloudify Manager chart has, please read [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}}).
 
 To understand all available options for the AIO {{< param cfy_manager_name >}} chart, please see the [Cloudify AIO Helm chart documentation.]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}})
 
-## {{< param company_name >}} Manager Worker Helm chart (Premium Version)
+## {{< param company_name >}} Manager Worker Helm Chart (Premium Version)
 
 The {{< param company_name >}} Manager Worker Helm chart deploys a highly available installation of the Premium version of the {{< param cfy_manager_name >}}. This includes several features that are appropriate for a production installation:
 
@@ -48,9 +53,9 @@ The {{< param company_name >}} Manager Worker Helm chart deploys a highly availa
 * External PostgreSQL database support. This can also be deployed into Kubernetes by using the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
 * External RabbitMQ Message Broker support. This can also be deployed into Kubernetes using the [Bitnami RabbitMQ Helm chart](https://github.com/bitnami/charts/tree/master/bitnami)
 
-This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
+This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of the Cloudify Manager):
 
-The diagram below shows an example architecture deployed to the `cfy-example` namespace. Note that it is possible to have multiple pod replicas of the {{< param cfy_manager_name >}}.
+The diagram below shows an example architecture deployed to the `cfy-example` namespace. **Note**: It is possible to have multiple pod replicas of the {{< param cfy_manager_name >}}.
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
@@ -58,15 +63,15 @@ The diagram below shows an example architecture deployed to the `cfy-example` na
 
 Installation of the {{< param company_name >}} Manager Worker Helm chart involves several steps. Please consult the [{{< param company_name >}} Manager Worker Helm chart documentation]({{< relref "cloudify_manager/premium/helm/installing-helm-worker" >}}) for the complete process. At a high level, this involves the following steps:
 
-1. Deployment of DB (Postgres).
-2. Deployment of Message Broker (rabbitMQ).
+1. Deployment of DB (Postgres)
+2. Deployment of Message Broker (RabbitMQ)
 3. {{< param company_name >}} Manager Worker deployment
 
-Note that the database and message broker must be deployed prior to deploying the Manager Worker.
+**Note**: The database and message broker must be deployed prior to deploying the Manager Worker.
 
 ### Hosted Kubernetes Deployment Examples
 
-The documentation below covers installation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
+The documentation below covers the stallation of the {{< param company_name >}} Manager Worker Helm chart across different hosted Kubernetes services:
 
 * [Deployment to Azure AKS]({{< relref "cloudify_manager/premium/helm/installing-helm-aks" >}})
 * [Deployment to GCP GKE]({{< relref "cloudify_manager/premium/helm/installing-helm-gke" >}})
