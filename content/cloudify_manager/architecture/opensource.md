@@ -1,7 +1,7 @@
 +++
 title = "Opensource"
 description = "Open-Source Compliance"
-weight = 60
+weight = 100
 alwaysopen = false
 +++
 
