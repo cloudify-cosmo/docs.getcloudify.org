@@ -23,7 +23,7 @@ Deploying the community version of the {{< param product_name >}} Manager is sim
 To deploy the container image, simply launch a terminal and create the container:
 
 ```bash
-{{< param docker_install_command_prefix >}} {{< param docker_image_name >}}
+docker run -d -p 80:80 cloudifyplatform/community-cloudify-manager-aio:latest
 ```
 
 This will publish the web interface on port 8080. Then verify that the {{< param cfy_manager_name >}} is running by navigating to [http://localhost:8080](http://localhost:8080). The {{< param product_name >}} login page should appear. The default username and password are both _admin_.
