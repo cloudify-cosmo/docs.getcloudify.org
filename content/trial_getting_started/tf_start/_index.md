@@ -1,6 +1,6 @@
 +++
 title = "Terraform Guides"
-description = "Learn how to Orchestrate Terraform module based deployments"
+description = "Learn how to orchestrate Terraform module based deployments"
 weight = 96
 alwaysopen = false
 +++
