@@ -10,7 +10,7 @@ docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 {{%children style="h2" description="true"%}}
 
 
-The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine that supports most of the Manager's capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here](https://cloudify.co/download/community-vs-enterprise/).
+The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine that supports most of the Manager's capabilities. This makes it ideal for trying out Cloudify without a premium license. You can read more about the differences between {{< param product_name >}} versions [here]({{< ref "cloudify_manager/architecture/_index.md#comparison-matrix" >}}).
 
 The community version is available as an RPM, OpenStack Image, or Docker container. This page describes the steps necessary to deploy the {{< param product_name >}} Trial Manager as a Docker container.
 
