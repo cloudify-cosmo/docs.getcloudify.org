@@ -389,3 +389,14 @@ Set success target group for this execution-group.
 
 Deployments for which the execution succeeds, will be added to the success
 target deployments group.
+
+
+#### Change the concurrency setting of an execution group
+
+##### Usage
+`cfy executions groups set-concurrency [OPTIONS] GROUP_ID CONCURRENCY`
+
+Change the concurrency setting of an execution group.
+
+When starting executions belonging to this group, the new concurrency
+setting will be used. Already-running executions are unaffected.
