@@ -20,7 +20,6 @@ The topmost section of the sidebar is a header presenting main information about
 
 * **Logo**
 * **Product name**
-* **Product version** - only major an minor digits are presented
 * **License status** - on click you are redirected to License Management page. See [License Management]({{< relref "cloudify_manager/premium/aio/install_and_configure/activate.md" >}}) page for more details.
 
 {{% note %}}
