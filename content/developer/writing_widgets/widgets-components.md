@@ -23,12 +23,16 @@ Components from {{< param product_name >}} UI Components library can be accessed
 
 ## React Leaflet
 
-The following components from React-Leaflet library can be accessed using `Stage.Basic.Leaflet` global object:
+The following components from React-Leaflet library v2 can be accessed using `Stage.Basic.Leaflet` global object:
 
-* [Map](https://react-leaflet.js.org/docs/en/components#map)
-* [Marker](https://react-leaflet.js.org/docs/en/components#marker)
-* [Popup](https://react-leaflet.js.org/docs/en/components#popup)
-* [TileLayer](https://react-leaflet.js.org/docs/en/components#tilelayer)
+* [CircleMarker](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#circlemarker)
+* [FeatureGroup](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#featuregroup)
+* [Map](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#map)
+* [Marker](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#marker)
+* [MarkerClusterGroup](https://github.com/YUzhva/react-leaflet-markercluster#readme)
+* [Popup](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#popup)
+* [TileLayer](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#tilelayer)
+* [Tooltip](https://github.com/PaulLeCam/react-leaflet/blob/v2/docs/components.md#tooltip)
 
 For example if you want to use Map component, access it with `Stage.Basic.Leaflet.Map`.
 
