@@ -16,12 +16,13 @@ Creating a deployment does not actually create any resources, it simply generate
 
 1. On the [Blueprints widget]({{< relref "working_with/console/widgets/blueprints.md" >}}), select the required blueprint and click **Deploy**.
 
-2. Enter the name of the deployment and either:
+1. Enter the name of the deployment
 
-   * Specify the input parameters
-   * Enter the location of a file that contains the input parameters
+1. Specify parent on which the blueprint should be deployed on - this option is presented only when the blueprint is using [get_environment_capability]({{< relref "developer/blueprints/spec-intrinsic-functions#get_environment_capability" >}}) intrinsic function
 
-3. Click **Install** to create and install deployment or select **Deploy** in the dropdown to just create deployment.
+1. Specify the input parameters or enter the location of a file that contains the input parameters
+
+1. Click **Install** to create and install deployment or select **Deploy** in the dropdown to just create deployment.
 
 After creating the deployment, you will be automatically redirected to a page with details about deployment status.
 For information about deployment states, see the [Services Page]({{< relref "working_with/console/pages/services-page.md" >}}) documentation.
