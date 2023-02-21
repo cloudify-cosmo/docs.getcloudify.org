@@ -18,7 +18,7 @@ Creating a deployment does not actually create any resources, it simply generate
 
 1. Enter the name of the deployment
 
-1. Specify parent on which the blueprint should be deployed on - this option is presented only when the blueprint is using [get_environment_capability]({{< relref "developer/blueprints/spec-intrinsic-functions#get_environment_capability" >}}) intrinsic function
+1. Specify environment on which the blueprint should be deployed on - this option is presented only when the blueprint is using [get_environment_capability]({{< relref "developer/blueprints/spec-intrinsic-functions#get_environment_capability" >}}) intrinsic function
 
 1. Specify the input parameters or enter the location of a file that contains the input parameters
 
