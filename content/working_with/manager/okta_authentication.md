@@ -139,7 +139,7 @@ To get the user access URL , from application properties: `User access URL`
 
 Then you need to follow Configuring {{< param product_name >}} above - with these values override:
 
-  * ssoUrl : the user access URL that you got above
+  * loginPageUrl : the user access URL that you got above
 
 
 ## Configuring WSO2 SSO
