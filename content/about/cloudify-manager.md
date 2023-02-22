@@ -28,6 +28,6 @@ In addition, the {{< param cfy_manager_name >}}:
 * Retains a history of metrics and events
 * Manages agents running on an application's host machines
 
-Although you can use Cloudify to provision resources directly from the CLI, use Cloudify Manager to manage production-level applications.
+Although you can use {{< param product_name >}} to provision resources directly from the CLI, use {{< cfy_manager_name >}} to manage production-level applications.
 
-For more information about Cloudify Manager, see the Cloudify Manager section later in this user's guide.
+For more information about {{< cfy_manager_name >}}, see the {{< cfy_manager_name >}} section later in this user's guide.
