@@ -1,9 +1,9 @@
 ---
-title: What Is Cloudify?
+title: Introduction
 category: Introduction
 draft: false
 weight: 100
-aliases: /intro/what-is-cloudify/
+aliases: /intro/introduction/
 ---
 
 {{< param product_name >}} is an open-source multi-cloud and edge orchestration platform.
