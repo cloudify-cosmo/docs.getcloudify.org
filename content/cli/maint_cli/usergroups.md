@@ -1,6 +1,6 @@
 ---
 title: user-groups
-description: The `cfy user-groups` command is used to define and manage user groups on the Cloudify Manager.
+description: The `cfy user-groups` command is used to define and manage user groups on the Manager.
 category: Docs
 draft: false
 aliases: /cli/user-groups/

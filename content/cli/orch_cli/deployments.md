@@ -2,11 +2,11 @@
 title: deployments
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/deployments/
 ---
 
-The `cfy deployments` command is used to manage running deployments on a Cloudify manager.
+The `cfy deployments` command is used to manage running deployments on a {{< param cfy_manager_name >}}.
 
 You can use the command to create, delete, update and list deployments and to show the outputs for a specific deployment.
 
@@ -194,7 +194,7 @@ List deployment update details.
 #### Usage
 `cfy deployments delete [OPTIONS] DEPLOYMENT_ID`
 
-Delete a deployment from Cloudify Manager.
+Delete a deployment from {{< param cfy_manager_name >}}.
 
 {{% note title="Note" %}}
 Deleting a deployment does not delete the resources of an application. To delete the resources, run the `uninstall` workflow (unless a custom uninstall workflow is provided).

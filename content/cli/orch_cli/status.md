@@ -2,11 +2,11 @@
 title: status
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/status/
 ---
 
-The `cfy status` command is used to display the status of a running Cloudify Manager.
+The `cfy status` command is used to display the status of a running {{< param cfy_manager_name >}}.
 
 To use the command you must `cfy profiles use -t MANAGEMENT_IP` first.
 
@@ -35,13 +35,13 @@ Services:
 +--------------------------------+--------+
 |            service             | status |
 +--------------------------------+--------+
-| Cloudify Console               | Active |
+| {{< param product_name >}} Console               | Active |
 | PostgreSQL                     | Active |
 | AMQP-Postgres                  | Active |
 | Manager Rest-Service           | Active |
 | RabbitMQ                       | Active |
 | Webserver                      | Active |
-| Cloudify Composer              | Active |
+| {{< param product_name >}} Composer              | Active |
 | Management Worker              | Active |
 +--------------------------------+--------+
 
@@ -55,14 +55,14 @@ Services:
 +--------------------------------+--------+
 |            service             | status |
 +--------------------------------+--------+
-| Cloudify Console               | Active |
+| {{< param product_name >}} Console               | Active |
 | Manager Rest-Service           | Active |
 | PostgreSQL                     | Active |
 | AMQP-Postgres                  | Active |
 | File Sync Service              | Active |
 | RabbitMQ                       | Active |
 | Webserver                      | Active |
-| Cloudify Composer              | Active |
+| {{< param product_name >}} Composer              | Active |
 | Management Worker              | Active |
 +--------------------------------+--------+
 ...

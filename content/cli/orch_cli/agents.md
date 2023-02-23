@@ -2,11 +2,11 @@
 title: agents
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/agents/
 ---
 
-The `cfy agents` command is used to manage Cloudify agents on existing deployments.
+The `cfy agents` command is used to manage {{< param product_name >}} agents on existing deployments.
 
 See [agents]({{< relref "install_maintain/agents/_index.md" >}}) for more information.
 
@@ -84,8 +84,8 @@ and the and the [common CLI flags]({{< relref "cli/_index.md#common-options" >}}
 
 
 ### validate
-Validates the connection between the Cloudify Manager and the live
-Cloudify Agents (installed on remote hosts).
+Validates the connection between the {{< param cfy_manager_name >}} and the live
+{{< param cfy_agent_name >}} (installed on remote hosts).
 #### Usage
 `cfy agents validate [OPTIONS] [DEPLOYMENT_ID]`
 

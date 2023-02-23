@@ -1,6 +1,6 @@
 ---
 title: cluster
-description: The command is used to manage the Cloudify Manager cluster.
+description: The command is used to manage the Manager cluster.
 category: Docs
 draft: false
 abstract: Command-Line Interface
@@ -28,7 +28,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 {{< highlight  bash  >}}
 
 $ cfy cluster status
-Retrieving Cloudify cluster status... [ip=10.239.1.160]
+Retrieving cluster status... [ip=10.239.1.160]
 Current cluster status is OK:
 
 Cluster status services:

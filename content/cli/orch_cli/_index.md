@@ -1,23 +1,23 @@
 ---
 title: Orchestration Commands
-description: Cloudify CLI Commands for Orchestration
+description: CLI Commands for Orchestration
 weight: 20
 alwaysopen: false
 ---
 
-The Cloudify command-line interface (CLI) is the default method for interacting with the Cloudify management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [Cloudify Manager]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
+The {{< param product_name >}} command-line interface (CLI) is the default method for interacting with the {{< param product_name >}} management environment, to manage your applications. It enables you to execute workflows on your local machine, and to interact with a running [{{< param cfy_manager_name >}}]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}}) via SSH to upload and delete blueprints, create deployments, execute workflows, retrieve events, and more.
 
-Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of Cloudify Manager refers to executing workflows directly from that Cloudify Manager instance.
+Working _locally_ refers to running workflows directly from the machine on which the CLI is installed. Working with an instance of {{< param cfy_manager_name >}} refers to executing workflows directly from that {{< param cfy_manager_name >}} instance.
 
-When you use the CLI to control a Cloudify Manager instance, additional commands appear in the CLI that are not available for use in local mode, for example communicating with a running Cloudify Manager using SSH, downloading its logs, creating snapshots, uploading plugins and so on.
+When you use the CLI to control a {{< param cfy_manager_name >}} instance, additional commands appear in the CLI that are not available for use in local mode, for example communicating with a running {{< param cfy_manager_name >}} using SSH, downloading its logs, creating snapshots, uploading plugins and so on.
 
 {{% note title="Note" %}}
 
-If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using Cloudify Manager. To use a Cloudify Manager, you can run [`cfy profiles use`]({{< relref "cli/maint_cli/profiles.md" >}}).
+If you attempt to run a command that is not supported in local mode, an error message is returned advising you that the command is only supported when using {{< param cfy_manager_name >}}. To use a {{< param cfy_manager_name >}}, you can run [`cfy profiles use`]({{< relref "cli/maint_cli/profiles.md" >}}).
 
 {{% /note %}}
 
-If you haven't already [installed Cloudify]({{< relref "cloudify_manager/cloudify_cli" >}}), now would be a good time to do so.
+If you haven't already [{{< param product_name >}}]({{< relref "cloudify_manager/cloudify_cli" >}}), now would be a good time to do so.
 
 # Usage
 
@@ -27,15 +27,15 @@ You can access the CLI by running the `cfy` command in your terminal. Use `cfy -
 $ cfy -h
 Usage: cfy [OPTIONS] COMMAND [ARGS]...
 
-  Cloudify's Command Line Interface
+  {{< param product_name >}}'s Command Line Interface
 
   Note that some commands are only available if you are using a Manager. You
-  can use Cloudify Manager by running the `cfy profiles use` command and providing
+  can use {{< param cfy_manager_name >}} by running the `cfy profiles use` command and providing
   it with the IP of the your manager (and SSH credentials if applicable).
 
   To activate bash-completion, run `eval "$(_CFY_COMPLETE=source cfy)"`
 
-  Cloudify's working directory resides in ~/.cloudify. To change it, set the
+  {{< param product_name >}}'s working directory resides in ~/.cloudify. To change it, set the
   variable `CFY_WORKDIR` to the appropriate directory (e.g. /tmp/).
 
 Options:
@@ -49,7 +49,7 @@ Commands:
   agents            Handle a deployment's agents
   apply             Install a blueprint or update existing deployment with blueprint [manager only]
   blueprints        Handle blueprints on the manager
-  cluster           Handle the Cloudify Manager cluster
+  cluster           Handle the {{< param cfy_manager_name >}} cluster
   deployments       Handle deployments on the Manager
   dev               Run fabric tasks [manager only]
   events            Show events from workflow executions
@@ -63,23 +63,23 @@ Commands:
   node-instances    Handle a deployment's node-instances
   nodes             Handle a deployment's nodes
   plugins           Handle plugins on the manager
-  profiles          Handle Cloudify CLI profiles Each profile can...
-  secrets           Handle Cloudify secrets (key-value pairs)
+  profiles          Handle {{< param cfy_api_name >}} profiles Each profile can...
+  secrets           Handle {{< param product_name >}} secrets (key-value pairs)
   snapshots         Handle manager snapshots
   ssh               Connect using SSH [manager only]
   ssl               Handle the manager's external ssl
   status            Show manager status [manager only]
-  tenants           Handle Cloudify tenants [Premium feature]
+  tenants           Handle {{< param product_name >}} tenants [Premium feature]
   uninstall         Uninstall an application blueprint [manager only]
-  user-groups       Handle Cloudify user groups [Premium feature]
-  users             Handle Cloudify users
+  user-groups       Handle {{< param product_name >}} user groups [Premium feature]
+  users             Handle {{< param product_name >}} users
   workflows         Handle deployment workflows
 
 
 ...
 {{< /highlight >}}
 
-Note that some features. such as viewing metric graphs and application topologies, are only available via the {{< param cfy_console_name >}} if you are running Cloudify Manager.
+Note that some features. such as viewing metric graphs and application topologies, are only available via the {{< param cfy_console_name >}} if you are running {{< param cfy_manager_name >}}.
 
 # Inputs and Parameters
 
@@ -98,7 +98,7 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
+By default, a `.{{< param product_name >}}` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences.
 
@@ -140,6 +140,6 @@ The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers
 
 {{% note title="Note" %}}
 
-The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
+The `.{{< param product_name >}}` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
 
 {{% /note %}}

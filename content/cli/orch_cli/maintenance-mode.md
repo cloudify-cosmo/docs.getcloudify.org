@@ -2,7 +2,7 @@
 title: maintenance-mode
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/maintenance-mode/
 ---
 
@@ -26,7 +26,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage 
 `cfy maintenance-mode activate [OPTIONS]`
 
-Enter maintenance-mode on Cloudify Manager, rejecting further REST requests.
+Enter maintenance-mode on {{< param cfy_manager_name >}}, rejecting further REST requests.
 
 #### Optional flags
 
@@ -55,7 +55,7 @@ Run 'cfy maintenance-mode status' to check the maintenance mode's status.
 #### Usage 
 `cfy maintenance-mode deactivate` 
 
-Deactivate maintenance-mode on the Cloudify Manager, to accept REST requests.
+Deactivate maintenance-mode on the {{< param cfy_manager_name >}}, to accept REST requests.
 
 &nbsp;
 #### Example
@@ -91,7 +91,7 @@ Maintenance Mode Status:
 	Activated At:	2017-04-04T05:16:21.407Z
 	Activation Requested At:	2017-04-04T05:16:21.407Z
 
-INFO - Cloudify Manager is currently in maintenance mode. Most requests will be blocked.
+INFO - {{< param cfy_manager_name >}} is currently in maintenance mode. Most requests will be blocked.
 
 ...
 {{< /highlight >}}
