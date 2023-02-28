@@ -14,24 +14,24 @@ weight = 22
 alwaysopen = false
 +++
 
-This example demonstrates provisioning a **{{< param engine_full >}} ({{< param engine >}})** cluster on the **{{< param cloud >}}** cloud. The deployment consists of:
+This example demonstrates the provisioning of an **{{< param engine_full >}} ({{< param engine >}})** cluster on the **{{< param cloud >}}** cloud. The deployment consists of:
 
  * {{< param cloud >}} {{< param engine >}} cluster
- * Security Group
+ * Security group
  * Network
- * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
+ * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc.)
 
-In this example we will deploy only the cluster.
-Later, in the more advanced examples (multi cloud examples)
+In this example, we will deploy only the cluster.
+Later, in the more advanced examples (multi-cloud examples)
 we will leverage this setup as the basis for deploying a containerized service.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} installed and accessible.
-  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} UI console is required to demonstrate this example.
-* Credentials to AWS. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+* A {{< param cfy_manager_name >}} installed and accessible
+  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}})
+* Access to the {{< param cloud >}} UI console is required to demonstrate this example
+* Credentials to AWS. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
 
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
@@ -52,7 +52,7 @@ The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used in
 
 
 
-### Import Plugins, Blueprints and Secrets
+### Import Plugins, Blueprints, and Secrets
 
 To connect to {{< param cloud >}}, credentials and Cloudify plugins are required. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 {{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
@@ -69,7 +69,7 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 #### Validate Secrets
 
-To view the imported secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
+To view the imported secrets in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
 
 * aws_access_key_id
 * aws_secret_access_key
@@ -78,7 +78,7 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 
 #### Validate Plugins
 
-To view the imported plugins in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
+To view the imported plugins in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
 
 * AWS
 * Kubernetes
@@ -91,14 +91,14 @@ To view the imported plugins in the {{< param cfy_manager_name >}}, login to the
 
 On the **Blueprints** page, click the **Deploy** button for the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
 
-* Create a *Deployment name*.
-* Adjust any of the *Region* and *Availability zone* inputs to match your preferences.
+* Create a *Deployment name*
+* Adjust any of the *Region* and *Availability zone* inputs to match your preferences
 
 Click the **Deploy & Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
 
 ![AWS blueprints]( /images/trial_getting_started/k8s/create_cluster/k8s-bp-examples-aws-deploy.jpg )
 
-You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
+You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel on the *Deployments* page. 
 
 ![AWS Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/aws_eks_deployment.png )
 
@@ -106,7 +106,7 @@ ____
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 
-### Install CLI tools
+### Install CLI Tools
 
 #### Kubectl
 
@@ -138,7 +138,7 @@ aws sts get-caller-identity
 aws eks --region your_region update-kubeconfig --name your_cluster_name
 ```
 
-### Verify access
+### Verify Access
 
 ```bash
 # List version
