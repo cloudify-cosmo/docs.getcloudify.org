@@ -50,7 +50,7 @@ Secret `test` created
 
 For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.md" >}}).
 
-### Creating a secret with value from the {{< param cfy_console_name >}}
+### Creating local secret from the {{< param cfy_console_name >}}
 
 1. Go to the [Secrets page]({{< relref "working_with/console/pages/secrets-page.md" >}}).
 2. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
