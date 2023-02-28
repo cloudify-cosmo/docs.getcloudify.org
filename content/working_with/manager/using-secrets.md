@@ -63,7 +63,7 @@ For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.m
 
 ![Create Secret]( /images/manager/create_secret_dialog.png )
 
-### Creating a secret with Secret Provider from the {{< param cfy_console_name >}}
+### Creating remotely provided secret from the {{< param cfy_console_name >}}
 1. Go to the [Secrets page]({{< relref "working_with/console/pages/secrets-page.md" >}}).
 2. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
 3. Insert the secret key
