@@ -14,23 +14,23 @@ weight = 27
 alwaysopen = false
 +++
 
-This example demonstrates provisioning a **{{< param engine_full >}} ({{< param engine >}})** cluster on the **{{< param cloud >}}** cloud. The deployment consists of:
+This example demonstrates provisioning an **{{< param engine_full >}} ({{< param engine >}})** cluster on the **{{< param cloud >}}** cloud. The deployment consists of:
 
  * {{< param cloud >}} {{< param engine >}} cluster
- * Security Group
+ * Security group
  * Network
- * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
+ * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc.)
 
-In this example we will deploy only the cluster.
-Later, in the more advanced examples (multi cloud examples)
+In this example, we will deploy only the cluster.
+Later, in the more advanced examples (multi-cloud examples)
 we will leverage this setup as the basis for deploying a containerized service.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} installed and accessible.
-  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} infrastructure is required to demonstrate this example. 
+* A {{< param cfy_manager_name >}} installed and accessible
+  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}})
+* Access to {{< param cloud >}} infrastructure is required to demonstrate this example
 * Credentials to Azure. You'll need **Subscription ID**, ** Tenant ID**, **Client ID**, and **Client Secret**
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
@@ -70,7 +70,7 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 #### Validate Secrets
 
-To view the imported secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
+To view the imported secrets in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
 
 * azure_subscription_id
 * azure_tenant_id
@@ -79,16 +79,16 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 
 **Notes**
 
-* `azure_subscription_id` - the account subscription ID.
-* `azure_tenant_id` - the Service Principal `tenant`.
-* `azure_client_id` - the Service Principal `appId`.
-* `azure_client_secret` - the Service Principal `password`.
+* `azure_subscription_id` - the account subscription ID
+* `azure_tenant_id` - the Service Principal `tenant`
+* `azure_client_id` - the Service Principal `appId`
+* `azure_client_secret` - the Service Principal `password`
 
 ![Validate secrets for this example]( /images/trial_getting_started/k8s/create_cluster/azure_secret_store.png )
 
 #### Validate Plugins
 
-To view the imported plugins in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
+To view the imported plugins in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
 
 * Azure
 * Kubernetes
@@ -100,14 +100,14 @@ To view the imported plugins in the {{< param cfy_manager_name >}}, login to the
 
 On the **Blueprints** page, click the **Create deployment** button for the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. 
 
-* Create a *Deployment name*.
-* Adjust the *Zone* input to match your preferences.
+* Create a *Deployment name*
+* Adjust the *Zone* input to match your preferences
 
 Click the **Deploy & Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
 
 ![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/azure_aks_create_deployment.png )
 
-You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
+You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy an {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel on the *Deployments* page. 
 
 ![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/azure_aks_deployment.png )
 
@@ -116,7 +116,7 @@ ____
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 
-### Install CLI tools
+### Install CLI Tools
 
 #### Kubectl
 
@@ -126,7 +126,7 @@ ____
 
 {{< param cloud >}} documentation: [{{< param cloud_cli_link >}}]({{< param cloud_cli_link >}})
 
-To initialize Kubectl, go to the {{< param cloud >}} Console, navigate to the **Kubernetes Service** page, select your cluster, and click **Connect**. This will display a CLI command to use to setup the Kubectl config. 
+To initialize Kubectl, go to the {{< param cloud >}} Console, navigate to the **Kubernetes Service** page, select your cluster, and click **Connect**. This will display a CLI command to use to set up the Kubectl config. 
 
 ![kubectl access]( /images/trial_getting_started/k8s/create_cluster/azure-kubectl.jpg )
 
