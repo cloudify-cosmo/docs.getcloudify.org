@@ -67,7 +67,7 @@ For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.m
 1. Go to the [Secrets page]({{< relref "working_with/console/pages/secrets-page.md" >}}).
 2. Click **Create** in the [Secret Store Management widget]({{< relref "working_with/console/widgets/secrets.md" >}}).
 3. Insert the secret key
-4. Click on the checkbox "Retrieve the secret value from a secret provider" (you must have at least one secret provider defined in {{< param product_name >}} to be able to use this option, see [Secret Providers widget](link to Secrets Provider widget) for details)
+4. Click on the checkbox "Retrieve the secret value from a secret provider" (you must have at least one secret provider defined in {{< param product_name >}} to be able to use this option, see [Secret Providers widget]({{< relref "working_with/console/widgets/secretProviders.md" >}}) for details)
 5. Select the secret provider from the dropdown list
 6. Insert the secret's path in selected secret provider
 7. Click **Create**.

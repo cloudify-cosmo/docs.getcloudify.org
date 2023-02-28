@@ -9,4 +9,4 @@ Secret storage provides a tenant-wide variable store for data that you do not wa
 
 ![Secrets Page]( /images/ui/pages/secrets-page.png )
 
-See [Secrets widget]({{< relref "working_with/console/widgets/secrets.md" >}}) and [Secret Provider widget]({{< relref "working_with/console/widgets/secretProviders.md" >}}) for more information.
+See [Secrets widget]({{< relref "working_with/console/widgets/secrets.md" >}}) and [Secret Providers widget]({{< relref "working_with/console/widgets/secretProviders.md" >}}) for more information.
