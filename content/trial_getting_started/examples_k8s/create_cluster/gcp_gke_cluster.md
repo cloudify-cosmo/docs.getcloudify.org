@@ -17,20 +17,20 @@ alwaysopen = false
 This example demonstrates provisioning a **{{< param engine_full >}} ({{< param engine >}})** cluster on the **{{< param cloud >}}** cloud. The deployment consists of:
 
  * {{< param cloud >}} {{< param engine >}} cluster
- * Security Group
+ * Security group
  * Network
- * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc...).
+ * All of the essential peripherals in {{< param cloud >}} (IP address, NIC, etc.)
 
-In this example we will deploy only the cluster.
-Later, in the more advanced examples (multi cloud examples)
+In this example, we will deploy only the cluster.
+Later, in the more advanced examples (multi-cloud examples)
 we will leverage this setup as the basis for deploying a containerized service.
 
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} installed and accessible.
-  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
-* Access to {{< param cloud >}} infrastructure is required to demonstrate this example.
+* A {{< param cfy_manager_name >}} installed and accessible
+  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}})
+* Access to {{< param cloud >}} infrastructure is required to demonstrate this example
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
@@ -59,7 +59,7 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 {{< param cloud >}} credentials can be created by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
-To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page. In the **Secrets** panel, scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secret:
+To store the access keys as secrets in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page. In the **Secrets** panel, scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secret:
 
 * gcp_credentials
 
@@ -67,7 +67,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 
 #### Validate Secrets
 
-To view the imported secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
+To view the imported secrets in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Secrets** tab. The following secrets should exist after following the above steps:
 
 * gcp_credentials
 
@@ -75,27 +75,27 @@ To view the imported secrets in the {{< param cfy_manager_name >}}, login to the
 
 ### Import Kubernetes Blueprint
 
-The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kuberenetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. Once the blueprint will be uploaded you'll be redirected to create a deployment dialog.
+The {{< param cfy_manager_name >}} provides an easy method of provisioning a Kubernetes cluster on {{< param cloud >}} {{< param engine >}}. On the **Marketplace** page, navigate to the **Kubernetes Blueprint Examples** tab and upload the **Kubernetes-{{< param cloud >}}-{{< param engine >}}** blueprint. Once the blueprint will be uploaded you'll be redirected to create a deployment dialog.
 
 ![{{< param cloud >}} import blueprint]( /images/trial_getting_started/k8s/create_cluster/gke_select_from_marketplace.png )
 
-### Deploy an {{< param cloud >}} {{< param engine >}} Cluster
+### Deploy a {{< param cloud >}} {{< param engine >}} Cluster
 
-* Create a *Deployment name*.
-* Adjust the *Zone* input to match your preferences.
+* Create a *Deployment name*
+* Adjust the *Zone* input to match your preferences
 
 Click the **Install** button at the bottom of the form to start the deployment. On the following page, click the **Execute** button. 
 
 ![{{< param cloud >}} blueprints]( /images/trial_getting_started/k8s/create_cluster/gcp_gke_create_deployment.png )
 
-You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
+You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with {{< param cloud >}} to deploy a {{< param cloud >}} {{< param engine >}} Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel on the *Deployments* page. 
 
 ![{{< param cloud >}} Kubernetes cluster complete]( /images/trial_getting_started/k8s/create_cluster/gcp_gke_deployment.png )
 ____
 
 ## Using the {{< param cloud >}} {{< param engine >}} Cluster
 
-### Install CLI tools
+### Install CLI Tools
 
 #### Kubectl
 
@@ -105,7 +105,7 @@ ____
 
 {{< param cloud >}} documentation: [{{< param cloud_cli_link >}}]({{< param cloud_cli_link >}})
 
-To initialize Kubectl, go to the {{< param cloud >}} Console, navigate to the **Kubernetes Engine** page and in the dropdown for your cluster, click **Connect**. This will display a CLI command to use to setup the Kubectl config. 
+To initialize Kubectl, go to the {{< param cloud >}} Console, navigate to the **Kubernetes Engine** page and in the dropdown for your cluster, click **Connect**. This will display a CLI command to use to set up the Kubectl config. 
 
 ![kubectl access]( /images/trial_getting_started/k8s/create_cluster/gcp-kubectl.jpg )
 
@@ -114,7 +114,7 @@ To initialize Kubectl, go to the {{< param cloud >}} Console, navigate to the **
 gcloud container clusters get-credentials ex2-cluster --zone europe-central2-a --project eaas-266314
 ```
 
-### Verify access
+### Verify Access
 
 ```bash
 # List version
