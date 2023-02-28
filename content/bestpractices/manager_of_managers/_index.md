@@ -7,22 +7,22 @@ abstract: Spire Manager
 weight: 102
 ---
 
-# Using Cloudify as a Manager of Managers  (a.k.a  MoM or Spire)
-![Using Cloudify as a Manager of Managers](/images/mom/spire.png "Using Cloudify as a Manager of Managers")  
-*Using Cloudify as a Manager of Managers*
+# Using {{< param product_name >}} as a Manager of Managers  (a.k.a  MoM or Spire)
+![Using {{< param product_name >}} as a Manager of Managers](/images/mom/spire.png "Using {{< param product_name >}} as a Manager of Managers")  
+*Using {{< param product_name >}} as a Manager of Managers*
 
 
-The Cloudify managers of managers (Spire) feature allows control of several managers (*local managers*) from one manager (*Spire*) via the deploy-on feature.
+The {{< param product_name >}} managers of managers (Spire) feature allows control of several managers (*local managers*) from one manager (*Spire*) via the deploy-on feature.
 The deploy-on feature allows users to deploy services on the discovered environments.
 The deploy-on feature also provides a means to deploy the same service on multiple environments using a single command. Users can group the environments based on location, tagging and filters.
 The following guide provides a step by step guide on how to install sub managers, add them to a central manager using a discovery mechanism, and deploy an application on multiple managers through a single command.
 
 
-## 1. Installation of Cloudify Spire Manager
+## 1. Installation of {{< param cfy_spire_name >}} Manager
 
-To install the ***MAIN Manager (Spire)***, please refer to the [Cloudify official documentation.](https://docs.cloudify.co/latest/install_maintain/installation/installing-manager/)
+To install the ***MAIN Manager (Spire)***, please refer to the [{{< param product_name >}} official documentation.](https://docs.cloudify.co/latest/install_maintain/installation/installing-manager/)
 
-You can also check [Cloudify EC2 Provisioning](https://github.com/cloudify-community/cloudify-catalog/tree/6.4.0-build/cloudify_manager/ec2). It is the package for installing the *Cloudify Manager* on an ec2 AWS instance.
+You can also check [{{< param product_name >}} EC2 Provisioning](https://github.com/cloudify-community/cloudify-catalog/tree/6.4.0-build/cloudify_manager/ec2). It is the package for installing the *{{< param cfy_manager_name >}}* on an ec2 AWS instance.
 
 ## 2. Installation of sub-managers
 
@@ -40,17 +40,17 @@ First step is to deploy [manager_discovery.yaml](https://github.com/cloudify-com
 - ***protocol*** - protocol used by sub manager
 - ***port*** - number of port which sub manager is exposed
 
-[Installation using the Cloudify Management Console]({{< relref "exposing_submanager/exposing_submanager_ui.md" >}})
+[Installation using the {{< param cfy_console_name >}}]({{< relref "exposing_submanager/exposing_submanager_ui.md" >}})
 
-[Installation using the Cloudify API]({{< relref "exposing_submanager/exposing_submanager_api.md" >}})
+[Installation using the {{< param cfy_api_name >}}]({{< relref "exposing_submanager/exposing_submanager_api.md" >}})
 
-[Installation using the Cloudify CLI]({{< relref "exposing_submanager/exposing_submanager_cli.md" >}})
+[Installation using the {{< param cfy_api_name >}}]({{< relref "exposing_submanager/exposing_submanager_cli.md" >}})
 
 
 ### Required secrets
 
 To perform correct management, you need to create also a proper [secret](https://docs.cloudify.co/latest/cli/orch_cli/secrets/) about your **all** sub managers in Spire central manager. There are two ways to connect Spire with sub managers:
-- _Token_ - contains the proper value of [Cloudify token](https://docs.cloudify.co/latest/cli/orch_cli/tokens/). The token can be created with command ***cfy token create***
+- _Token_ - contains the proper value of [{{< param product_name >}} token](https://docs.cloudify.co/latest/cli/orch_cli/tokens/). The token can be created with command ***cfy token create***
 - _User password_ and _username_- contains the value of password and name of the user
 ![Secrets]( /images/mom/secrets.png )
 

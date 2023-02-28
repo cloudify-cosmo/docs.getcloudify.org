@@ -27,7 +27,7 @@ Inputs description:
     - *trust_all* - the value of ***CLOUDIFY_SSL_TRUST_ALL*** (true if the certificate is not valid or for testing purpose)
 - optional (depends on authentication type):
     - *cloudify_secret_token* - the name of the secret which contains token value
-    - *cloudify_password_secret_name* and *cloudify_user_secret_name*- the name of the secret which contains value of the password and the user name of Cloudify user. 
+    - *cloudify_password_secret_name* and *cloudify_user_secret_name*- the name of the secret which contains value of the password and the user name of {{< param product_name >}} user. 
 
 ## Verification “Deploy on” mechanism
 To check if deployments are deployed on local managers, follow the example below/
