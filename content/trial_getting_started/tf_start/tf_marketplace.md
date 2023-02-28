@@ -1,7 +1,7 @@
 +++
 
 title = "Upload Terraform Blueprints from the Marketplace"
-description = "Upload a Terraform module from Cloudify Marketplace and install it"
+description = "Upload a Terraform module from Cloudify Marketplace and install it."
 weight = 28
 alwaysopen = false
 +++

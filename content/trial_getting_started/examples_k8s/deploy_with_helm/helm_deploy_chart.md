@@ -6,7 +6,7 @@ example_bp_package = "https://github.com/cloudify-community/blueprint-examples/r
 example_bp_direct = "https://github.com/cloudify-community/blueprint-examples/blob/master/kubernetes/helm-eks/blueprint.yaml"
 
 title = "Deploying Charts"
-description = "Deploying Charts"
+description = "Learn how to deploy a Helm chart on a discovered Kubernetes environment"
 weight = 22
 alwaysopen = false
 +++
