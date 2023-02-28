@@ -69,7 +69,7 @@ For more commands, see [secrets command line]({{< relref "cli/orch_cli/secrets.m
 3. Insert the secret key
 4. Click on the checkbox "Retrieve the secret value from a secret provider" (you must have at least one secret provider defined in {{< param product_name >}} to be able to use this option, see [Secret Providers widget](link to Secrets Provider widget) for details)
 5. Select the secret provider from the dropdown list
-6. Insert the secret path
+6. Insert the secret's path in selected secret provider
 7. Click **Create**.
 
 ![Create Secret]( /images/manager/create_secret_dialog_2.png )
