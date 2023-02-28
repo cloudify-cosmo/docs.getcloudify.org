@@ -21,8 +21,8 @@ This example demonstrates deploying a Helm chart (including the binary installat
 ## Prerequisites
 This example expects the following prerequisites:
 
-* A {{< param cfy_manager_name >}} installed and accessible.
-  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}}).
+* A {{< param cfy_manager_name >}} installed and accessible
+  * This can be either a [{{< param mgr_hosted_title >}}]({{< param mgr_hosted_link >}}), a [{{< param mgr_premium_title >}}]({{< param mgr_premium_link >}}), or a [{{< param mgr_community_title >}}]({{< param mgr_community_link >}})
 
 #### {{< param cfy_cli_name >}} or {{< param cfy_console_name >}}?
 
@@ -53,11 +53,11 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 #### Validate Secrets
 
-This example doesn't require any secrets, but it does depend on an existing *SharedCluster* node being available in an existing Deployment - which would be using secrets. Refer to the [Kubernetes Cluster Discovery](/trial_getting_started/examples_k8s/discover_cluster/) tutorial to learn more about this and the prerequisites. 
+This example doesn't require any secrets, but it does depend on an existing *Shared Cluster* node being available in an existing Deployment, which would be using secrets. Refer to the [Kubernetes Cluster Discovery](/trial_getting_started/examples_k8s/discover_cluster/) tutorial to learn more about this and the prerequisites. 
 
 #### Validate Plugins
 
-To view the imported plugins in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
+To view the imported plugins in the {{< param cfy_manager_name >}}, log in to the {{< param cfy_console_name >}} and select the **Resources** page and navigate to the **Plugins** tab. The following plugins should exist after following the above steps:
 
 * Helm
 * Kubernetes
@@ -84,6 +84,6 @@ Click the **Deploy & Install** button at the bottom of the form to start the dep
 
 ![Helm deployment inputs]( /images/trial_getting_started/k8s/helm/helm_deploy_inputs.jpg )
 
-You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with the Helm binary (including installing it!) to deploy a Helm Chart on an existing Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel in the *Deployments* page. 
+You now have a {{< param product_name >}} Deployment running the default *install* workflow. {{< param product_name >}} will begin actively interfacing with the Helm binary (including installing it!) to deploy a Helm Chart on an existing Kubernetes cluster. You can track the status of the Deployment in the *Execution Task Graph* panel on the *Deployments* page. 
 
 ![Helm deployment installation]( /images/trial_getting_started/k8s/helm/helm_install_complete.jpg )
