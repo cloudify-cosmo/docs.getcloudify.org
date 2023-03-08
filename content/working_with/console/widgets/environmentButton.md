@@ -36,7 +36,7 @@ Note that blueprint selection option will not be present - the blueprint to be u
 
 ## Settings
 
-* `label` - The label displayed in the button. Default: 'Create Environment'
+* `Label` - The label displayed in the button. Default: 'Create Environment'
 * `Color` - The color of the button. Available colors list can be found
   at: [Theming - Semantic UI React](https://react.semantic-ui.com/layouts/theming). Default: 'blue'
 * `Icon` - Name of the icon displayed in the button. Available icons list can be found
