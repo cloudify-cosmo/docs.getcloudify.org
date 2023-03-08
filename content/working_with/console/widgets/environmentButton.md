@@ -28,7 +28,7 @@ Rest of the fields are optional:
 
 * `Blueprint Description` - description of the blueprint that will be generated
 * `Capabilities` - capabilities of the blueprint that will be generated
-* `Labels` - labels of the environment blueprint/deployment to be created (depending on the `Blueprint Default` checbox value) 
+* `Labels` - labels of the environment blueprint/deployment to be created (depending on the `Blueprint Default` checkbox value) 
 * `Location` - site name to be set for the environment deployment to be created
 
 Once the `Create` button is clicked the environment blueprint will be generated and environment deployment creation modal will show up, as described in [From Blueprint]({{< relref "#from-blueprint" >}}).
