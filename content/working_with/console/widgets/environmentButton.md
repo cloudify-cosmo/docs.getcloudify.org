@@ -8,12 +8,12 @@ Allows creating a new environment.
 ![create_deployment_button]( /images/ui/widgets/create_environment_button.png )
 
 Two options are available:
-* **From Blueprint** 
+##### From Blueprint 
 
-  Allows for creating an environment deployment from a selected environment blueprint. Refer to [Deploying a Blueprint]({{< relref "working_with/console/widgets/blueprints.md#deploying-a-blueprint" >}}) and [Create Deployment Button]({{< relref "working_with/console/widgets/deploymentButton.md" >}}) for details on deployment creation.
+  Allows for creating an environment deployment from a selected environment blueprint. Refer to [Deploying a Blueprint]({{< relref "working_with/console/widgets/blueprints#deploying-a-blueprint" >}}) and [Create Deployment Button]({{< relref "working_with/console/widgets/deploymentButton.md" >}}) for details on deployment creation.
 
 
-* **New**
+##### New
 
   Allows for creating an environment deployment from an on-the-fly created blueprint.
  
