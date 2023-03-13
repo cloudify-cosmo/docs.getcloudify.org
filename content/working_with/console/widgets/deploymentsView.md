@@ -291,8 +291,8 @@ filter.
   be refreshed, in seconds. Default: 10 seconds
 - `Map height` - the height of the map section in pixels
 - `List of fields to show in the table`
+- `List of labels' keys to show in the table as columns`
 - `Number of items to show at once in the table`
-- `List of labels to show in the table as columns`
 - `Show map by default`
 - `Name of the saved filter to apply` - the name of a filter to use by default
   when there is no local filter applied.
