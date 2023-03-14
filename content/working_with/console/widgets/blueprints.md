@@ -89,6 +89,14 @@ The default visibility is "Tenant", and according to the logged-in user's permis
       - `Terraform output` - value of the output, which will be added to the generated blueprint.
 9. Click **Upload**.
 
+##### Using HELM chart
+1. Click the **Upload** button.
+2. In the menu, click **Upload from HELM chart** option.
+3. **Create Blueprint from HELM Chart** modal will appear.
+4. Provide URL to the `HELM repository` and `HELM chart` to be used.
+5. Provide `Cluster credentials` by selecting input names or secret keys that are to be used for getting the values.
+6. Click **Create**.
+
 ##### Using {{< param cfy_composer_name >}}
 
 1. Click the **Upload** button.
