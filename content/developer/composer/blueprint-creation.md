@@ -73,6 +73,17 @@ Depending on the property type this can be changed to one of other options:
 
 - **Input** - allows using input value as property value (uses `get_input` intrinsic function)
 - **Secret** - allows using secret value as property value (uses `get_secret` intrinsic function)
+- **Property** - allows using another's node template property as value (uses `get_property` intrinsic function)
+- **System** - allows using tenant name or certain deployment attributes as property value
+- **Environment capability** - allows using existing environment blueprint capability as property value (uses `get_environment_capability` intrinsic function).
+  When this option is active the value is specified with two dropdowns.
+  The first one selects existing environment blueprint existing on the {{< param cfy_manager_name >}}.
+  The second one selects capability of the environment blueprint.
+- **Capability** - allows using component blueprint capability as property value (uses `get_capability` intrinsic function).
+  When this option is active the value is specified with two dropdowns.
+  The first one selects component node template that is associated with a blueprint existing on the {{< param cfy_manager_name >}}.
+  The second one selects capability of the blueprint.
+- **Attribute** - allows using node instance attribute as property value (uses `get_attribute` intrinsic function).
 - **Advanced** - allows specifying any valid YAML as property value
 
 For **Dictionary** and **List** types, as well as for **Advanced** mode it is possible to use intrinsic functions manually.
