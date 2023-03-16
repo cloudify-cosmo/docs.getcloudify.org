@@ -77,7 +77,7 @@ Depending on the property type this can be changed to one of other options:
 - **System** - allows using tenant name or certain deployment attributes as property value
 - **Environment capability** - allows using existing environment blueprint capability as property value (uses `get_environment_capability` intrinsic function).
   When this option is active the value is specified with two dropdowns.
-  The first one selects existing environment blueprint existing on the {{< param cfy_manager_name >}}.
+  The first one selects environment blueprint existing on the {{< param cfy_manager_name >}}.
   The second one selects capability of the environment blueprint.
 - **Capability** - allows using component blueprint capability as property value (uses `get_capability` intrinsic function).
   When this option is active the value is specified with two dropdowns.
