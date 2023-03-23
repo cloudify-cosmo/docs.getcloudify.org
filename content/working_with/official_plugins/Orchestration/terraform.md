@@ -407,6 +407,29 @@ The following example can be used as a parameter file to the execute operation c
         decision: "terraform/deny"
     ```
 
+
+  * `terraform.migrate_state`: Migrate Terraform state storage from a local statefile to a Cloud storage option, such as S3 or Azure Storage Account. The operation accepts two parameters: `backend` and `backend_config`. The `backend` parameter is a dict with two static keys, `name` and `options`. The `name` value is the name of the supported backend provider, such as `s3` or `azurerm`. The `options` value is a dict that contains the backend configuration. The `backend_config` is a dict of key:value's that will be used in the `terraform init -migrate-state` command as appended `-backend-confg` flags. This is useful for injecting credentials into the runtime, for example, the below example will result in the command: `terraform init -no-color -backend-config="bucket=tfstates" -backend-config="key=test" -backend-config="region=us-east-2" -backend-config="access_key=......" -backend-config="secret_key=....." -migrate-state`. Both the `backend` parameter and the `backend_config` parameters are necessary.
+ 
+    ```yaml
+    operation: terraform.migrate_state
+    operation_kwargs:
+      backend:
+        name: s3
+        options:
+          bucket: tfstates
+          key: test
+          region: var.aws_region
+          access_key: var.access_key
+          secret_key: var.secret_key
+      backend_config:
+        bucket: tfstates
+        key: test
+        region: us-east-2
+        access_key: { get_secret: aws_access_key_id }
+        secret_key: { get_secret: aws_secret_access_key }
+    allow_kwargs_override: true
+    ```
+
 ### **Runtime Properties**
 
  * `state`: Saves the state of the resources created in the format { "resource_name" : <resource state> },
@@ -620,6 +643,46 @@ Executing workflow `run_infracost` on deployment `tf` [timeout=900 seconds]
 
 Workflow outputs are saved in `plain_text_infracost` and `infracost` runtime properties.
 
+
+## migrate_state
+
+You can migrate from local Terraform state file to a hosted storage state, such as S3 or Azure storage account, with the `migrate_state` workflow. This command exposes the functionality of `terraform init -migrate-state`. This workflow wraps the `terraform.migrate` interface for the `cloudify.nodes.terraform.Module` node type.
+
+That operation accepts two parameters:
+  - `backend`: A dict that contains `name` and `options` keys. More information follows the `backend_config` definition.
+  - `backend_config`: a dict of key:value's that will be used in the `terraform init -migrate-state` command as appended `-backend-confg` flags. This is useful for injecting credentials into the runtime, for example, the below example will result in the command: `terraform init -no-color -backend-config="bucket=foo" -backend-config="key=bar" -backend-config="region=us-east-2" -backend-config="access_key=......" -backend-config="secret_key=....." -migrate-state`. Both the `backend` parameter and the `backend_config` parameters are necessary.
+
+The `backend` parameter is a dict with two static keys:
+  - `name`: the name of the supported backend provider, such as `s3` or `azurerm`.
+  - `options`: a dict that contains the backend configuration.
+ 
+You can invoke the `migrate_state` workflow from the CLI like this, using a YAML file describing the required parameters:
+
+```bash
+cfy executions start migrate_state -d [DEPLOYMENT_ID] -p migrate-state-params.yaml 
+```
+
+Example `migrate-state-params.yaml` file:
+
+```yaml
+node_ids:
+  - cloud_resources
+backend:
+  name: s3
+  options:
+    bucket: foo
+    key: bar
+    region: var.aws_region
+    access_key: var.access_key
+    secret_key: var.secret_key
+backend_config:
+  bucket: foo
+  key: bar
+  region: us-east-2
+  access_key: { get_secret: aws_access_key_id }
+  secret_key: { get_secret: aws_secret_access_key }
+```
+
 # Terraform Outputs
 
 You can expose outputs from your Terraform template to the node instance runtime properties.
@@ -677,3 +740,4 @@ The plugin executes `terraform plan` to gather the list of resources of the curr
 It then calls `terraform refresh` in order to pull the remote state.
 Finally, it executes `terraform show state` for each resource.
 An "OK" return value indicates that all resources exist. A "not OK" value indicates that the resource does not exist.
+
