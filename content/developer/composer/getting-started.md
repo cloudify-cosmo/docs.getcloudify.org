@@ -43,14 +43,20 @@ Under each blueprint you have the following navigation options:
 * **Inputs**, **Outputs** and **Capabilities** - see [Managing Inputs, Outputs and Capabilities]({{< relref "developer/composer/managing-inputs-outputs.md" >}}) for details
 * **Plugins** - see [Managing Plugins]({{< relref "developer/composer/managing-plugins.md" >}}) for details
 
-#### Global actions
+#### New blueprint dropdown
 
-At the top of the list there are buttons to enable you to create or import a blueprint.
+At the top of the list there is a dropdown button that allows for adding a new blueprint - creating an empty blueprint, importing an existing blueprint or createing blueprint from an existing HELM chart.  
 
 ![Global Actions]( /images/composer/global-actions.png )
 
+##### Importing blueprint
+
 To import a blueprint, you must specify the archive that contains the blueprint package (either local or a URL), and the name of the main .yaml file in the package that represents the topology of your environment (in cases in which the archive package contains more than one .yaml file). If the field is left empty, the default is “blueprint.yaml”.
 
+##### Creating blueprint from HELM chart
+
+To create a new blueprint from a HELM chart it is required to specify URL to the `HELM repository` and `HELM chart` to be used.
+In addition, `Cluster credentials` need to be specified by selecting input names or secret keys to be used for getting the values.
 
 #### Blueprint actions
 
