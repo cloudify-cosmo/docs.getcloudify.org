@@ -283,6 +283,9 @@ The _Run Workflow_ bulk action will show a modal that allows selecting a
 workflow that will be executed on each deployment that matches the current
 filter.
 
+After selecting workflow, fields allowing to modify values of the workflow parameters will appear.   
+Fields will be initialized with default values of the workflow parameters.
+
 ![Run Workflow modal](/images/ui/widgets/deployments-view-run-workflow-modal.png)
 
 ## Settings
