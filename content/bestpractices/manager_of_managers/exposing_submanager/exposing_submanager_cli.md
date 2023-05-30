@@ -5,7 +5,7 @@ weight: 105
 alwaysopen: false
 ---
 
-#### Installation via Cloudify CLI.
+#### Installation via {{< param cfy_cli_name >}}.
 
 To proceed with CLI installation, refer to [official documentation](https://docs.cloudify.co/latest/cli/orch_cli/).
 
