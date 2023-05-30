@@ -2,11 +2,11 @@
 title: executions
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/executions/
 ---
 
-The `cfy executions` command is used to manage workflow executions on Cloudify Manager.
+The `cfy executions` command is used to manage workflow executions on {{< param cfy_manager_name >}}.
 
 You can use the command to start, cancel and and list executions and to retrieve information about a single execution.
 

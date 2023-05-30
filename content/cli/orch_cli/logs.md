@@ -2,13 +2,13 @@
 title: logs
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/logs/
 ---
 
-The `cfy logs` command is used to manage log files on Cloudify Manager.
+The `cfy logs` command is used to manage log files on {{< param cfy_manager_name >}}.
 
-You can use the command to download, backup and purge Cloudify Manager service logs.
+You can use the command to download, backup and purge {{< param cfy_manager_name >}} service logs.
 
 To use the command you must have the credentials (user and key) set in the local context and must run `cfy use -t MANAGEMENT_IP` prior to running the command.
 
@@ -23,7 +23,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage 
 `cfy logs backup [OPTIONS]`
 
-Create a backup of all logs under a single archive and save it on Cloudify Manager under /var/log.
+Create a backup of all logs under a single archive and save it on {{< param cfy_manager_name >}} under /var/log.
 
 &nbsp;
 #### Example
@@ -43,7 +43,7 @@ Backing up manager logs to /var/log/cloudify-manager-logs_20170330T122201_10.239
 #### Usage 
 `cfy logs download [OPTIONS]`
 
-Download an archive containing all of the Cloudify Manager service logs.
+Download an archive containing all of the {{< param cfy_manager_name >}} service logs.
 
 #### Optional flags
 
@@ -70,11 +70,11 @@ Removing archive from manager...
 #### Usage 
 `cfy logs purge [OPTIONS]`
 
-Purge all log files on Cloudify Manager.
+Purge all log files on {{< param cfy_manager_name >}}.
 
 Truncate all logs files under /var/log/cloudify.
 
-This enables you to take extreme measures to clean up data from Cloudify Manager. For example, you might choose to run this command when the disk is full due to a bug that has caused the logs to bloat.
+This enables you to take extreme measures to clean up data from {{< param cfy_manager_name >}}. For example, you might choose to run this command when the disk is full due to a bug that has caused the logs to bloat.
 
 The `-f, --force` flag is mandatory as a safety measure.
 
@@ -84,7 +84,7 @@ The `-f, --force` flag is mandatory as a safety measure.
 
 {{% warning title="Forced Prerequisites Installation" %}}
 USE WITH CARE!<br>
-Log files in Cloudify Manager are rotated. `cfy purge` is a safety measure in case disk space on Cloudify Manager runs out, and  should only be used in extreme situations.
+Log files in {{< param cfy_manager_name >}} are rotated. `cfy purge` is a safety measure in case disk space on {{< param cfy_manager_name >}} runs out, and  should only be used in extreme situations.
 {{% /warning %}}
 
 

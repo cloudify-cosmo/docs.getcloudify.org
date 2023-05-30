@@ -2,11 +2,11 @@
 title: blueprints
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/blueprints/
 ---
 
-The `cfy blueprints` command is used to manage blueprints on a Cloudify Manager instance.
+The `cfy blueprints` command is used to manage blueprints on a {{< param cfy_manager_name >}} instance.
 
 You can use the command to upload, delete, download, validate and list blueprints and to retrieve information for a specific blueprint.
 
@@ -25,7 +25,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage
 `cfy blueprints upload [options] BLUEPRINT_PATH`
 
-Upload a blueprint to a Cloudify Manager.
+Upload a blueprint to a {{< param cfy_manager_name >}}.
 
 `BLUEPRINT_PATH` can be either a local blueprint yaml file or blueprint
 archive; a url to a blueprint archive or an
@@ -69,7 +69,7 @@ Supported archive types are: zip, tar, tar.gz and tar.bz2
 * `-l, --visibility TEXT` - Defines who can see the resource, can be set to one of ['private', 'tenant', 'global'] [default: tenant].
 
 {{% note title="Note" %}}
-When you upload a local blueprint yaml, the CLI compresses the directory that contains the blueprint file and uploads the entire directory to the Cloudify Manager.
+When you upload a local blueprint yaml, the CLI compresses the directory that contains the blueprint file and uploads the entire directory to the {{< param cfy_manager_name >}}.
 
 Make sure that:
 
@@ -166,7 +166,7 @@ Packaging complete!
 #### Usage
 `cfy blueprints download [OPTIONS] BLUEPRINT_ID`
 
-Download a blueprint from Cloudify Manager.
+Download a blueprint from {{< param cfy_manager_name >}}.
 
 `BLUEPRINT_ID` -        The ID of the blueprint to download.
 

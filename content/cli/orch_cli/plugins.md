@@ -2,15 +2,15 @@
 title: plugins
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/plugins/
 ---
 
-The `cfy plugins` command is used to manage plugins stored on a Cloudify manager.
+The `cfy plugins` command is used to manage plugins stored on a {{< param cfy_manager_name >}}.
 
 You can use the command to upload, download, delete and list plugins and also to get information on a specific plugin.
 
-A Cloudify plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
+A {{< param product_name >}} plugin is an archive created by [wagon](http://github.com/cloudify-cosmo/wagon).
 
 Each plugin has a plugin.yaml file that map node lifecycle operations to appropriate plugin functions.
 
@@ -27,12 +27,12 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage
 `cfy plugins upload [OPTIONS] PLUGIN_PATH`
 
-Upload a plugin to Cloudify Manager.
+Upload a plugin to {{< param cfy_manager_name >}}.
 
 `PLUGIN_PATH` is the path to the wagon archive to upload.
 
 {{% note title="Important" %}}
-Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` and `zip` formats. Cloudify only supports wagon in the `tar.gz` format.
+Wagon (via the `--format` flag) enables you to create archives in both `tar.gz` and `zip` formats. {{< param product_name >}} only supports wagon in the `tar.gz` format.
 {{% /note %}}
 
 #### Required flags
@@ -73,7 +73,7 @@ Plugin uploaded. The plugin's id is e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74
 #### Usage
 `cfy plugins download [OPTIONS] PLUGIN_ID`
 
-Download a plugin from Cloudify Manager.
+Download a plugin from {{< param cfy_manager_name >}}.
 
 `PLUGIN_ID` is the ID of the plugin to download.
 
@@ -103,7 +103,7 @@ Plugin downloaded as e90b1a09-6b56-4a92-b9cd-5fc4ef32ab74.tar.gz
 #### Usage
 `cfy plugins delete [OPTIONS] PLUGIN_ID`
 
-Delete a plugin from Cloudify Manager.
+Delete a plugin from {{< param cfy_manager_name >}}.
 
 `PLUGIN_ID` is the ID of the plugin to be deleted.
 
@@ -131,7 +131,7 @@ Plugin deleted
 #### Usage
 `cfy plugins list [OPTIONS]`
 
-List all available plugins on Cloudify Manager.
+List all available plugins on {{< param cfy_manager_name >}}.
 You can use this command to retrieve the IDs of the plugins you want to download or delete.
 
 #### Optional flags
@@ -377,7 +377,7 @@ Delete resource tags from specific plugin.
 #### Usage
 `cfy plugins bundle-upload [OPTIONS]`
 
-Upload a bundle of plugins to Cloudify Manager.
+Upload a bundle of plugins to {{< param cfy_manager_name >}}.
 
 
 #### Optional flags

@@ -1,6 +1,6 @@
 ---
 title: tenants
-description: The `cfy tenants` command is used to create and manage tenants on the Cloudify Manager.
+description: The `cfy tenants` command is used to create and manage tenants on the Manager.
 category: Docs
 draft: false
 aliases: /cli/tenants/

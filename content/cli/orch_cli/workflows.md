@@ -2,7 +2,7 @@
 title: workflows
 category: Docs
 draft: false
-abstract: Cloudify Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/workflows/
 ---
 
@@ -20,7 +20,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 #### Usage
 `cfy workflows list [OPTIONS]`
 
-Lists all workflows on the Cloudify Manager for a specific deployment.
+Lists all workflows on the {{< param cfy_manager_name >}} for a specific deployment.
 
 `DEPLOYMENT_ID` The ID of the deployment for which you want to list the workflows.
 

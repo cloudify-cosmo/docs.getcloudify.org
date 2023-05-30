@@ -2,7 +2,7 @@
 title: events
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/events/
 ---
 

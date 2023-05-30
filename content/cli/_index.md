@@ -1,6 +1,6 @@
 +++
-title = "Cloudify CLI Commands"
-description = "CLI Commands for the Cloudify Manager"
+title = "CLI Commands"
+description = "CLI Commands for the Manager"
 weight = 90
 alwaysopen = false
 +++

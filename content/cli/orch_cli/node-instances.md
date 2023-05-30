@@ -2,7 +2,7 @@
 title: node-instances
 category: Docs
 draft: false
-abstract: Cloudify's Command-Line Interface
+abstract: Command-Line Interface
 aliases: /cli/node-instances/
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: license
-description: The `cfy license` command is used to manage the Cloudify Manager license.
+description: The `cfy license` command is used to manage the Manager license.
 category: Docs
 draft: false
 abstract: Command-Line Interface
@@ -28,7 +28,7 @@ Upload a license to a Manager.
 $ cfy license upload license.yaml
 ...
 
-Uploading Cloudify License `license.yaml` to the Manager...
+Uploading Cloudify license `license.yaml` to the Manager...
 Cloudify license successfully uploaded.
 
 ...
@@ -48,7 +48,7 @@ List the details of the {{< param product_name >}} license.
 $ cfy license list
 ...
 
-Retrieving Cloudify License
+Retrieving License
 ...
 Cloudify License
 
@@ -76,7 +76,7 @@ $ cfy license remove
 ...
 
 Removing Cloudify License from the Manager...
-Cloudify license successfully removed.
+Cloudify License successfully removed.
 
 ...
 {{< /highlight >}}

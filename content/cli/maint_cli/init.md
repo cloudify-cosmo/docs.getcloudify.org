@@ -1,6 +1,6 @@
 ---
 title: init
-description: The `cfy init` command is used to initialize a Cloudify working directory.
+description: The `cfy init` command is used to initialize a working directory.
 category: Docs
 draft: false
 abstract: Command-Line Interface

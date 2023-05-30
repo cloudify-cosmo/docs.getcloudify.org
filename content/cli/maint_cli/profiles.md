@@ -1,6 +1,6 @@
 ---
 title: profiles
-description: The `cfy profiles` command is used to manage the Cloudify profiles.
+description: The `cfy profiles` command is used to manage the product profiles.
 category: Docs
 draft: false
 abstract: Command-Line Interface
