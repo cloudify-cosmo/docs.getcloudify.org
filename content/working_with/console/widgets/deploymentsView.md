@@ -76,7 +76,7 @@ The columns can show:
     The counts and statuses in those columns are based on **all** child
     deployments (it does not matter whether they are directly or indirectly
     attached to the main deployment).
-
+8.  Deployment labels' values for selected label key (you can select labels' keys in widget configuration - "List of labels' keys to show in the table as columns" parameter)
 ### Sorting deployments
 
 Deployments in the table can be sorted by clicking a column's header.
@@ -280,8 +280,9 @@ The newly created child deployments will be automatically installed.
 #### Run Workflow
 
 The _Run Workflow_ bulk action will show a modal that allows selecting a
-workflow that will be executed on each deployment that matches the current
-filter.
+workflow, that will be executed on each deployment that matches the current filter. Note that only workflows which are common for filtered deployments can be selected within the modal.
+
+After selecting a workflow, user will be able to adjust workflow parameters. Only simple type parameters (`string`, `integer`, `float`, `boolean`, `list`, `textarea`) which are common for deployments matching the current filter are presented. Parameters with default values will have the initial value set.
 
 ![Run Workflow modal](/images/ui/widgets/deployments-view-run-workflow-modal.png)
 
@@ -291,6 +292,7 @@ filter.
   be refreshed, in seconds. Default: 10 seconds
 - `Map height` - the height of the map section in pixels
 - `List of fields to show in the table`
+- `List of labels' keys to show in the table as columns`
 - `Number of items to show at once in the table`
 - `Show map by default`
 - `Name of the saved filter to apply` - the name of a filter to use by default

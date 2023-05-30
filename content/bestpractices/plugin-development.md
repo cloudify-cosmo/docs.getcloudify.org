@@ -1,5 +1,5 @@
 ---
-title: "Cloudify Plugin Development: Best Practices"
+title: "Plugin Development: Best Practices"
 description: "Tips and best practices for plugin development"
 weight: 98
 alwaysopen: false
@@ -159,7 +159,7 @@ finally:
 
 ### Using `causes` with `RecoverableError` / `NonRecoverableError`
 
-When raising one of Cloudify’s exceptions (`RecoverableError` or `NonRecoverableError`), as a result of an underlying exception, you should use the “causes” feature when creating the exception class. This ensures that important troubleshooting data is not lost.
+When raising one of {{< param product_name >}}’s exceptions (`RecoverableError` or `NonRecoverableError`), as a result of an underlying exception, you should use the “causes” feature when creating the exception class. This ensures that important troubleshooting data is not lost.
 
 For example:
 
