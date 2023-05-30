@@ -11,7 +11,7 @@ alwaysopen = false
 * Agents _optional_
 * {{< param cfy_console_name >}}
 
-## Cloudify Manager
+## {{< param cfy_manager_name >}}
 
 The {{< param cfy_manager_name >}} consists of the {{< param product_name >}} code and a set of open-source applications. For an in-depth explanation of these applications, [click here]({{< relref "cloudify_manager/architecture/high_level_architecture/architecture.md" >}}).
 
@@ -44,4 +44,4 @@ For more information about agents, [click here]({{< relref "cloudify_manager/age
 
 ## {{< param cfy_console_name >}}
 
-This is a UI interface that easily interacts with Cloudify Manager. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).
+This is a UI interface that easily interacts with {{< param cfy_manager_name >}}. For more information, [click here]({{< relref "working_with/console/_index.md" >}}).

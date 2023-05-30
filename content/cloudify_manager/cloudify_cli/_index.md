@@ -1,11 +1,11 @@
 +++
-title = "Cloudify CLI"
-description = "Cloudify CLI is a command line client to interact with Cloudify Manager. The section provides all the details to install and setup CFY CLI."
+title = "Platform CLI"
+description = "Platform CLI is a command line client to interact with platform Manager. The section provides all the details to install and setup CFY CLI."
 weight = 50
 alwaysopen = false
 +++
 
-## Installing the Cloudify CLI
+## Installing the {{< param product_name >}} CLI
 
 To remotely connect to the {{< param cfy_manager_name >}}, you can install the {{< param product_name >}} Command Line Interface (CLI) on a separate host. The {{< param cfy_cli_name >}} includes all of the commands necessary to run any actions on {{< param cfy_manager_name >}}.
 

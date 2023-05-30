@@ -1,6 +1,6 @@
 +++
 title = "Automated Install"
-description = "The following article will guide you through the different steps of easily installing a Cloudify cluster on either three or nine VMs."
+description = "The following article will guide you through the different steps of easily installing a cluster on either three or nine VMs."
 weight = 10
 alwaysopen = false
 +++

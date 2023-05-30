@@ -6,24 +6,24 @@ weight = 10
 
 ## Overview
 
-This section is a collection of information about the architecture and operational characteristics of Cloudify Manager.
+This section is a collection of information about the architecture and operational characteristics of {{< param cfy_manager_name >}}.
 
 For the most part, documents in this section are not intended as task-oriented instructions. Instead, they are offered as background information to help inform your own proactive administration, maintenance, and architecture practices.
 
-There are 3 options to consume Cloudify Manager, Community, Premium, and SaaS. 
+There are 3 options to consume {{< param cfy_manager_name >}}, Community, Premium, and SaaS. 
 
 ## Community
 
-Cloudify Community is an open-source version. Cloudify Manager Community can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart.
+{{< param product_name >}} Community is an open-source version. {{< param cfy_manager_name >}} Community can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart.
 
 ## Premium
 
-Cloudify Premium is a commercial version. Cloudify Manager Premium can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart. 
+{{< param product_name >}} Premium is a commercial version. {{< param cfy_manager_name >}} Premium can be installed either as a docker container, on VM (RHEL/CentOS), or on Kubernetes using our Helm Chart. 
 
 
 ## SaaS
 
-Cloudify SaaS provides all of the Premium features. It is a hosted Cloudify Manager, so you don’t need to worry about installation, maintenance, and availability. The SaaS is always up to date with the most recent features.
+{{< param product_name >}} SaaS provides all of the Premium features. It is a hosted {{< param cfy_manager_name >}}, so you don’t need to worry about installation, maintenance, and availability. The SaaS is always up to date with the most recent features.
 
 ## Comparison Matrix {#comparison-matrix}
 

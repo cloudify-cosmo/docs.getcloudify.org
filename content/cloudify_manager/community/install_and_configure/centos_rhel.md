@@ -1,6 +1,6 @@
 +++
 title = "CentOS/ RHEL"
-description = "Install a single All-In-One Cloudify Manager."
+description = "Install a single All-In-One Manager."
 weight = 40
 +++
 

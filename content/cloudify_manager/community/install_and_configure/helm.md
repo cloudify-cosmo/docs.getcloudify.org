@@ -8,7 +8,7 @@ alwaysopen: false
 
 ## Overview
 
-The Cloudify Manager may be installed to the Kubernetes cluster using our official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
+The {{< param cfy_manager_name >}} may be installed to the Kubernetes cluster using our official [Helm chart](https://github.com/cloudify-cosmo/cloudify-helm).
 
 ## Prerequisites 
 
@@ -19,7 +19,7 @@ The Cloudify Manager may be installed to the Kubernetes cluster using our offici
 
 ## Description
 
-It's a Helm chart for Cloudify manager which is:
+It's a Helm chart for {{< param cfy_manager_name >}} which is:
 
 * Not highly available, has one replica only
 * Has no persistent volume to survive restarts/ failures
@@ -35,4 +35,4 @@ helm install cloudify-manager-aio cloudify-helm/cloudify-manager-aio
 
 ## Configure
 
-To understand all available options the AIO Cloudify Manager Helm chart has, please read the [Cloudify AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}}).
+To understand all available options the AIO {{< param cfy_manager_name >}} Helm chart has, please read the [{{< param product_name >}} AIO Helm chart]({{< relref "cloudify_manager/premium/helm/installing-helm-aio.md" >}}).

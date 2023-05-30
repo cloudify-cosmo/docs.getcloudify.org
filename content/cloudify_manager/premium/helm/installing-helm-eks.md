@@ -1,12 +1,12 @@
 ---
 layout: bt_wiki
 title: AWS EKS
-description: Deployment to AWS (EKS) of Highly Available Cloudify manager worker using the helm chart.
+description: Deployment to AWS (EKS) of Highly Available manager worker using the helm chart.
 category: Installation
 draft: false
 weight: 30
 ---
-## Deployment to AWS of Highly Available Cloudify Manager Worker (Premium Version)
+## Deployment to AWS of Highly Available {{< param cfy_manager_name >}} Worker (Premium Version)
 
 ### Provision EKS Cluster
 

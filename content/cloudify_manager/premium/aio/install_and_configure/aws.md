@@ -6,7 +6,7 @@ alwaysopen = false
 +++
 
 ## Overview
-This page describes the complete setup flow to install Cloudify Manager Premium as an AWS AMI - A fully functional All-In-One Cloudify Manager.
+This page describes the complete setup flow to install {{< param cfy_manager_name >}} Manager Premium as an AWS AMI - A fully functional All-In-One {{< param cfy_manager_name >}}.
 
 
 ## Install
@@ -26,11 +26,11 @@ Using the standard ec2 instance creation process, the non-default, and important
 4. Network Settings
    - Make sure to select a vpc that matches your requirements, if you want public access to the manager instance, expose it using public VPC & Subnet
    - Make sure to set **Auto-assign public IP** to `Enable`
-   - Security Group should be suggested by the AMI; but in general, for Cloudify you need the following ports:
+   - Security Group should be suggested by the AMI; but in general, for {{< param product_name >}} you need the following ports:
      - 22 - ssh access
      - 80 - http access (not a must if the manager is going to accessed by SSL only)
      - 443 - https access
-     - 53333 - Internal rest service (required by Cloudify)
+     - 53333 - Internal rest service (required by {{< param product_name >}})
 
 Click - **`Launch instance`**
 
@@ -42,7 +42,7 @@ A few minutes after the instance is created, the Manager UI should be available 
 
 For CLI access there are two options:
 
-1. ssh to the running instance using the the following command: (Also good for administrating Cloudify Manager instance)
+1. ssh to the running instance using the the following command: (Also good for administrating {{< param cfy_manager_name >}} instance)
 ```
 ssh -i <keyPair> centos@<instance-public-ip>
 ``` 
@@ -51,6 +51,6 @@ ssh -i <keyPair> centos@<instance-public-ip>
 
 ### Advanced configuration and options ###
 - To connect by ssl to the manager (CLI & UI), configure a DNS record to the instance, or to an LB in front of it, and set an SSL certificate to that record, there are many ways to do so via AWS (e.g. [aws-docs](https://docs.aws.amazon.com/cloudhsm/latest/userguide/ssl-offload-linux.html))
-- To control the ssl option of the Cloudify Manager itself, connect using ssh and follow [this section](https://docs.cloudify.co/latest/cloudify_manager/architecture/security/communication/#ssl-mode-for-external-communication)
-- To adjust more options of the Cloudify Manager, run `sudo vi /etc/cloudify/config.yaml`, edit the file according to your needs, and run `cfy_manager configure` to apply the changes. See all the available options [here]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}})
+- To control the ssl option of the {{< param cfy_manager_name >}} itself, connect using ssh and follow [this section](https://docs.cloudify.co/latest/cloudify_manager/architecture/security/communication/#ssl-mode-for-external-communication)
+- To adjust more options of the {{< param cfy_manager_name >}}, run `sudo vi /etc/cloudify/config.yaml`, edit the file according to your needs, and run `cfy_manager configure` to apply the changes. See all the available options [here]({{< relref "cloudify_manager/premium/aio/install_and_configure/centos_rhel.md" >}})
   - e.g. changing the admin password, setting a hostname, adjusting postgresql/rabbitmq configurations

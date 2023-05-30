@@ -1,23 +1,23 @@
 ---
 layout: bt_wiki
-title: Cloudify Manager Worker
-description: Deploy a Cloudify Manager Worker to Kubernetes with a helm chart.
+title: Manager Worker
+description: Deploy a Manager Worker to Kubernetes with a helm chart.
 category: Installation
 draft: false
 weight: 50
 ---
-## Cloudify Manager Worker Helm Chart (Premium Version)
+## {{< param cfy_manager_name >}} Worker Helm Chart (Premium Version)
 
 ### Description
  
-A Helm chart for Cloudify Manager is:
+A Helm chart for {{< param cfy_manager_name >}} is:
 
 * Is highly available, can be deployed with multiple replicas. (available only when used NFS like Storage file system)
 * Uses persistent volume to survive restarts or failures.
 * Uses external DB (postgress), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
 * Uses external Message Brokes (RabbitMQ), which may be deployed via public Helm chart of Bitnami: https://github.com/bitnami/charts/tree/master/bitnami
 
-This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of cloudify manager):
+This is how the setup looks after it's deployed to 'cfy-example' namespace (it's possible to have multiple replicas (pods) of {{< param cfy_manager_name >}}):
 
 ![cfy-manager](/images/helm/cfy-example.png)
 
@@ -31,7 +31,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
   * [AKS on Azure]({{< relref "cloudify_manager/premium/helm/installing-helm-aks.md" >}})
   * [GKE on GCP]({{< relref "cloudify_manager/premium/helm/installing-helm-gke.md" >}})
 * Sufficient Kubernetes node [Minimum Requirements](https://docs.cloudify.co/latest/install_maintain/installation/prerequisites/)
-* Cloudify Premium valid license (for Premium version) 
+* {{< param product_name >}} Premium valid license (for Premium version) 
 
 ### How to create and deploy such a setup?
 
@@ -41,7 +41,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 3. [Deployment of Message Broker (RabbitMQ).](#install-rabbitmqbitnami-to-kubernetes-cluster-with-helm)
 
-4. [Deployment of Cloudify Manager worker.](#install-cloudify-manager-worker)
+4. [Deployment of {{< param cfy_manager_name >}} worker.](#install-cloudify-manager-worker)
 
 5. [(Optional) Ensure UI access to the manager upon installation](#optional-ensure-ui-access-to-the-manager-upon-installation)
 
@@ -51,12 +51,12 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 8. [Uninstallation of Helm charts](#uninstallation)
 
-**You need to deploy DB and Message Broker before deploying Cloudify manager worker.**
+**You need to deploy DB and Message Broker before deploying {{< param product_name >}} manager worker.**
 
 
 ### Generate certificates and add as secret to k8s
 
-**SSL certificate must be provided to secure communications between the Cloudify Manager and Posrgress/RabbitMQ:**
+**SSL certificate must be provided to secure communications between the {{< param cfy_manager_name >}} and Posrgress/RabbitMQ:**
 
 * ca.crt (to sign other certificates)
 
@@ -64,7 +64,7 @@ This is how the setup looks after it's deployed to 'cfy-example' namespace (it's
 
 * tls.crt
 
-#### Option 1: Create certificates using the community cloudify manager docker container
+#### Option 1: Create certificates using the Community {{< param cfy_manager_name >}} docker container
 
 ```bash
 $ docker pull cloudifyplatform/community-cloudify-manager-aio:latest
@@ -227,9 +227,9 @@ Install RabbitMQ with `rabbitmq-values.yaml` with pinned version:
 $ helm install rabbitmq bitnami/rabbitmq -f ./cloudify-manager-worker/external/rabbitmq-values.yaml --version 8.29.0 -n NAMESPACE
 ```
 
-### Install Cloudify Manager Worker
+### Install {{< param cfy_manager_name >}} Worker
 
-#### Create configMap with premium license - required if using Cloudify premium version
+#### Create configMap with premium license - required if using {{< param product_name >}} premium version
 
 Create `license.yaml` file and populate it with license data
 * American/British English accepted, but must be alligned across all 'license/licence' strings (values/configMaps):
@@ -337,10 +337,10 @@ ingress:
     enabled: true
     secretName: cfy-secret-name
 ```
-**HTTP/ HTTPS options will expose Cloudify Manager UI on a URL matching the `host` value**
+**HTTP/ HTTPS options will expose {{< param cfy_manager_name >}} UI on a URL matching the `host` value**
 
 #### **[OPTION 2]**
-Skip Ingress and expose the Cloudify Manager service using LoadBalancer:
+Skip Ingress and expose the {{< param cfy_manager_name >}} service using LoadBalancer:
 
 **HTTP**
 
@@ -362,7 +362,7 @@ That will create a load balancer depending on your K8S infrastructure (e.g. EKS 
 ```bash
 kubectl describe svc/cloudify-manager-worker -n NAMESPACE | grep Ingress
 ```
-**The value of the ingress will be the UI URL of the Cloudify Manager.**
+**The value of the ingress will be the UI URL of the {{< param cfy_manager_name >}}.**
 
 **HTTPS**
 * To secure the site with SSL you can update the load balancer configuration to utilize an SSL Certificate
@@ -374,9 +374,9 @@ $ helm install cloudify-manager-worker cloudify-helm/cloudify-manager-worker -f 
 ```
 ### Configuration Options of cloudify-manager-worker values.yaml
 Edit the values file in `./cloudify-manager-worker/values.yaml` according to your preferences:
-#### Upgrade Cloudify Manager Worker:
+#### Upgrade {{< param cfy_manager_name >}} Worker:
 
-To upgrade Cloudify Manager use `helm upgrade`.
+To upgrade {{< param cfy_manager_name >}} use `helm upgrade`.
 
 For example to change to newer version (e.g. from 6.2.0 to 6.3.0 in this example)
 

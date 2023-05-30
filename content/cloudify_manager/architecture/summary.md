@@ -1,6 +1,6 @@
 +++
 title = "Summary"
-description = "Cloudify Manager"
+description = "Platform Manager"
 weight = 10
 alwaysopen = false
 +++
@@ -64,9 +64,9 @@ To learn more about installing the {{< param product_name >}} fully distributed 
 Note: The above-mentioned section will guide you on how to deploy a distributed cluster manually. {{< param product_name >}} provides an automated flow that simplifies the deployment over 9 existing VMs. To use the Cluster Manager package and automate the cluster deployment flow read: [Cluster Manager Package] ({{< relref "cloudify_manager/premium/fully_distributed/install_and_configure/cluster_manager.md" >}}).
 {{% /note %}}
 
-## Cloudify on Kubernetes
+## {{< param product_name >}} on Kubernetes
 
-The Cloudify platform can be deployed on K8s using the Helm chart. Cloudify creates a stateful pod that will require persistence volume. It can be provisioned as an All-in-One, that contains all three layers (Cloudify Manager, Database, and Message Queue) or deployed as a cluster where the Manager is deployed on a separate pod and PostgreSQL DB or RabbitMQ Message Queue are either deployed on Kubernetes or used as external resources. 
+The {{< param product_name >}} platform can be deployed on K8s using the Helm chart. {{< param product_name >}} creates a stateful pod that will require persistence volume. It can be provisioned as an All-in-One, that contains all three layers ({{< param cfy_manager_name >}}, Database, and Message Queue) or deployed as a cluster where the Manager is deployed on a separate pod and PostgreSQL DB or RabbitMQ Message Queue are either deployed on Kubernetes or used as external resources. 
 
 - [Community - AIO]({{< relref "cloudify_manager/premium/helm/" >}})
 - [Premium - AIO]({{< relref "cloudify_manager/premium/helm/" >}})

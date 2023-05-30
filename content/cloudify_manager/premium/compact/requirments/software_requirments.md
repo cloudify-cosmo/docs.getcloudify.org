@@ -1,6 +1,6 @@
 +++
 title = "Software Requirements"
-description = "This section reviews the specific software requirements before you install the Cloudify Manager."
+description = "This section reviews the specific software requirements before you install the Manager."
 weight = 50
 alwaysopen = false
 +++

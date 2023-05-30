@@ -1,6 +1,6 @@
 +++
-title = "Cloudify Manager"
-description = "Cloudify manager installation and maintanance"
+title = "Manager"
+description = "Manager installation and maintanance"
 weight = 25
 alwaysopen = false
 +++

@@ -1,12 +1,12 @@
 ---
 layout: bt_wiki
 title: All-in-One
-description: Deploy a Cloudify Manager AIO to Kubernetes with a helm chart.
+description: Deploy a Manager AIO to Kubernetes with a helm chart.
 category: Installation
 draft: false
 weight: 10
 ---
-## Cloudify Manager AIO Helm Chart  (Community Version)
+##  {{< param cfy_manager_name >}} AIO Helm Chart  (Community Version)
 
 ### Description
 
@@ -16,7 +16,7 @@ A Helm chart for Cloudify Manager is:
 * Has no persistent volume to survive restarts/failures.
 * Has all components on board (as part of docker container): Message Broker and DB part of it.
 
-**This is the best and simplest way to make yourself familiar with Cloudify, running a Cloudify Manager AIO in a matter of minutes.**
+**This is the best and simplest way to make yourself familiar with {{< param product_name >}}, running a  {{< param cfy_manager_name >}} AIO in a matter of minutes.**
 
 
 ### Installation

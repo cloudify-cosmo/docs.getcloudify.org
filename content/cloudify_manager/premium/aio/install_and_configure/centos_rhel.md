@@ -1,6 +1,6 @@
 +++
 title = "CentOS/ RHEL"
-description = "Install a single All-In-One Cloudify Manager."
+description = "Install a single All-In-One Manager."
 weight = 30
 +++
 
@@ -75,7 +75,7 @@ restservice:
 
 ### Multi-Network Management {#multi-network-management}
 
-The {{< param cfy_manager_name >}} uses [Cloudify Agents]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the {{< param cfy_manager_name >}} IP addresses or DNS names that your agents will use to communicate with it.
+The {{< param cfy_manager_name >}} uses [{{< param cfy_agent_name >}}]({{< relref "about/manager_architecture/_index.md#cloudify-agents" >}}) to execute tasks and collect information about the resources that it manages. You must specify the {{< param cfy_manager_name >}} IP addresses or DNS names that your agents will use to communicate with it.
 
 {{% note %}}
 * You cannot configure multi-network management on [{{< param cfy_manager_name >}} images]({{< relref "cloudify_manager/premium/aio/install_and_configure/image.md" >}}).

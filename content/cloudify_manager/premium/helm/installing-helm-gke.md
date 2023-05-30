@@ -1,12 +1,12 @@
 ---
 layout: bt_wiki
 title: GCP GKE
-description: Deployment to Google (GKE) of Highly Available Cloudify manager worker using the helm chart.
+description: Deployment to Google (GKE) of Highly Available manager worker using the helm chart.
 category: Installation
 draft: false
 weight: 40
 ---
-## Deployment to GCP of Highly Available Cloudify Manager Worker (Premium Version)
+## Deployment to GCP of Highly Available {{< param cfy_manager_name >}} Worker (Premium Version)
 
 ### Provision GKE Cluster
 

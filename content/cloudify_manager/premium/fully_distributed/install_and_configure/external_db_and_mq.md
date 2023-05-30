@@ -1,6 +1,6 @@
 +++
 title = "External DB and MQ"
-description = "A guide for installing the Cloudify cluster, the user can use the external PostgreSQL database and RabbitMQ."
+description = "A guide for installing the luster, the user can use the external PostgreSQL database and RabbitMQ."
 weight = 30
 alwaysopen = false
 +++
@@ -127,8 +127,8 @@ services. Make sure you read the comments provided and follow them.
 manager:
   security:
     ssl_enabled: true
-    admin_password: '<strong admin password for Cloudify>'
-  cloudify_license_path: '<path to Cloudify license file>'
+    admin_password: '<strong admin password for {{< param product_name >}}>'
+  cloudify_license_path: '<path to {{< param product_name >}} license file>'
 
 rabbitmq:
   username: '<username configured for queue management on rabbit>'
@@ -138,7 +138,7 @@ rabbitmq:
   ca_path: '<path to ca certificate>'
 
   # Set this to true if the RabbitMQ is an external service.  This will result in the RabbitMQ
-  # service not being internally-monitored by the Cloudify cluster status reporter.
+  # service not being internally-monitored by the {{< param product_name >}} cluster status reporter.
   is_external: true
 
   # In case the connection to the RabbitMQ instance uses one IP address,
@@ -173,7 +173,7 @@ postgresql_client:
   host: localhost
 
   # Server user name (server_username), password (server_password),
-  # and DB (server_db_name) to use when connecting to the database for Cloudify
+  # and DB (server_db_name) to use when connecting to the database for {{< param product_name >}}
   # DB initialization and population.
   #
   # If your database is an Azure DBaaS instance, you must set 'server_username'
@@ -186,7 +186,7 @@ postgresql_client:
   server_username: postgres
   server_password: '<the postgresql database user password>'
 
-  # Cloudify DB name, user name and password to be created.
+  # {{< param product_name >}} DB name, user name and password to be created.
   #
   # The following apply if your database is an Azure DBaaS instance:
   #

@@ -6,12 +6,12 @@ alwaysopen = false
 +++
 
 ## Overview
-Cloudify Premium provides a fully functional Premium manager as a Docker container image. This page describes the complete setup flow to install Cloudify Manager Premium as a docker container.
+{{< param product_name >}} Premium provides a fully functional Premium manager as a Docker container image. This page describes the complete setup flow to install {{< param cfy_manager_name >}} Premium as a docker container.
 
 
 ## Install
 
-Deploying Cloudify trial manager as a Docker container is the easiest way to go. This tutorial assumes that you have Docker installed on a local or remote machine.
+Deploying {{< param product_name >}} trial manager as a Docker container is the easiest way to go. This tutorial assumes that you have Docker installed on a local or remote machine.
 
 Open your terminal and create/ start the Docker container.
 
@@ -21,16 +21,16 @@ docker run -d cloudifyplatform/premium-cloudify-manager-aio:latest -p 80:80
 
 Verify that your manager is running by browsing to localhost when running locally, or to the hosting machine IP when the Docker server is remote.
 
-The Cloudify login page should be displayed.
+The {{< param product_name >}} login page should be displayed.
 
 ## Activate
 
-A Cloudify license is provided to all Cloudify Premium subscribed customers by Cloudify support. Cloudify Premium trial customers receive their trial license via email upon trial request. Request your free 60 days trial at https://cloudify.co/cloudify-premium-download/.
+A {{< param product_name >}} license is provided to all {{< param product_name >}} Premium subscribed customers by {{< param product_name >}} support. {{< param product_name >}} Premium trial customers receive their trial license via email upon trial request. Request your free 60 days trial at https://cloudify.co/cloudify-premium-download/.
 
-Once you receive your license activation key, use it to activate your Cloudify Manager. Manager activation (and most other Cloudify actions) can be performed through either Cloudify Management Console (UI) or via Cloudify CLI. In this tutorial, we will demonstrate the usage of the Management Console.
+Once you receive your license activation key, use it to activate your {{< param cfy_manager_name >}}. Manager activation (and most other {{< param product_name >}} actions) can be performed through either {{< param product_name >}} Management Console (UI) or via {{< param product_name >}} CLI. In this tutorial, we will demonstrate the usage of the Management Console.
 
-1. Log in to the Cloudify Management Console (as done in step 1 above). username and password are _admin/ admin_.
-2. Submit your Cloudify subscription/ trial key. Learn more here.
+1. Log in to the {{< param product_name >}} Management Console (as done in step 1 above). username and password are _admin/ admin_.
+2. Submit your {{< param product_name >}} subscription/ trial key. Learn more here.
 
 ## Configure
 
