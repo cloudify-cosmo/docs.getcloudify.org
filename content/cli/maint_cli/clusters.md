@@ -28,7 +28,7 @@ These commands support the [common CLI flags]({{< relref "cli/_index.md#common-o
 {{< highlight  bash  >}}
 
 $ cfy cluster status
-Retrieving cluster status... [ip=10.239.1.160]
+Retrieving Cloudify cluster status... [ip=10.239.1.160]
 Current cluster status is OK:
 
 Cluster status services:

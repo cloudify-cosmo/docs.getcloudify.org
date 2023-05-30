@@ -17,7 +17,7 @@ If you attempt to run a command that is not supported in local mode, an error me
 
 {{% /note %}}
 
-If you haven't already [{{< param product_name >}}]({{< relref "cloudify_manager/cloudify_cli" >}}), now would be a good time to do so.
+If you haven't already [installed {{< param product_name >}}]({{< relref "cloudify_manager/cloudify_cli" >}}), now would be a good time to do so.
 
 # Usage
 
@@ -98,7 +98,7 @@ You cannot pass non-string values when using the `key=value` method.
 
 # Configuration
 
-By default, a `.{{< param product_name >}}` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
+By default, a `.cloudify` directory is created under ~(Home directory). You can change the location using an `_env_` variable (for example, `cfy init` or `cfy profiles use`).
 
 The directory contains a file named `config.yaml` that you can customize according to your preferences.
 
@@ -140,6 +140,6 @@ The default sets the `cloudify.cli.main` and `cloudify.rest_client.http` loggers
 
 {{% note title="Note" %}}
 
-The `.{{< param product_name >}}` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
+The `.cloudify` directory might also contain other files and directories, which are used internally by `cfy`, that are not described in this section.
 
 {{% /note %}}

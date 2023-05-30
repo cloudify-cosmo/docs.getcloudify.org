@@ -28,8 +28,8 @@ Upload a license to a Manager.
 $ cfy license upload license.yaml
 ...
 
-Uploading license `license.yaml` to the Manager...
-License successfully uploaded.
+Uploading Cloudify license `license.yaml` to the Manager...
+Cloudify license successfully uploaded.
 
 ...
 {{< /highlight >}}
@@ -50,7 +50,7 @@ $ cfy license list
 
 Retrieving License
 ...
-License
+Cloudify License
 
 +--------------+--------------------------+-----------------+-------+------------------+--------------+---------+
 | customer_id  |     expiration_date      | license_edition | trial | cloudify_version | capabilities | expired |
@@ -75,8 +75,8 @@ Remove a {{< param product_name >}} license from the Manager.
 $ cfy license remove
 ...
 
-Removing License from the Manager...
-License successfully removed.
+Removing Cloudify License from the Manager...
+Cloudify License successfully removed.
 
 ...
 {{< /highlight >}}
