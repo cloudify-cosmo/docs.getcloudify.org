@@ -26,7 +26,7 @@ The {{< param cfy_manager_name >}} listens on the following ports:
 |-------|----------------------------------------------------------------------------|
 | 80    | REST API and UI. This port must be accessible when SSL is not enabled.     |
 | 443   | REST API and UI. This port must be accessible when SSL is enabled.         |
-| 22    | For remote access to the manager from the Cloudify CLI. (Optional)         |
+| 22    | For remote access to the manager from the {{< param cfy_api_name >}}. (Optional)         |
 | 5671  | RabbitMQ. This port must be accessible from agent VMs.                     |
 | 8009  | Monitoring service port.                                                   |
 | 53333 | Internal REST communications. This port must be accessible from agent VMs. |

@@ -7,13 +7,13 @@ weight = 20
 ## Overview
 The {{< param product_name >}} free community version contains a fully functional {{< param product_name >}} engine & most of the manager capabilities (read about the differences between our [{{< param product_name >}} versions]({{< ref "cloudify_manager/architecture/_index.md#comparison-matrix" >}})). 
 
-This section describes how to install and run Cloudify Manager as a Docker container.
+This section describes how to install and run {{< param cfy_manager_name >}} as a Docker container.
 
 Verify that the target computer meets the [prerequisites]({{< relref "cloudify_manager/community/capacity_and_planning.md" >}}).
 
 ## Install
 
-Deploying the Cloudify trial manager as a Docker container is the easiest way to go. This tutorial assumes that you have Docker installed on a local or remote machine.
+Deploying the {{< param product_name >}} trial manager as a Docker container is the easiest way to go. This tutorial assumes that you have Docker installed on a local or remote machine.
 Open your terminal and create/ start the Docker container (requires password).
 
 ```

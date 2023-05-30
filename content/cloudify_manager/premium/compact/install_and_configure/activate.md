@@ -1,6 +1,6 @@
 ---
 title: Activate
-description: Learn how to activate a Cloudify Premium license and activate it.
+description: Learn how to activate a Premium license and activate it.
 weight: 30
 ---
 

@@ -1,6 +1,6 @@
 +++
-title = "Cloudify Cluster Manager CLI"
-description = "Cloudify Cluster Manager CLI is a command line to automate the Cloudify Premium installation on 3 nodes or 9 nodes."
+title = "Cluster Manager CLI"
+description = "Cluster Manager CLI is a command line to automate the Premium installation on 3 nodes or 9 nodes."
 weight = 55
 alwaysopen = false
 +++

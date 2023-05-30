@@ -1,6 +1,6 @@
 +++
 title = "Compact"
-description = "This section covers the requirments, installation, and operation steps for a Compact cluster (3-node cluster). In a Compact cluster each node has 3 layers, Cloudify Manager, PostgreSQL, and RabbitMQ."
+description = "This section covers the requirments, installation, and operation steps for a Compact cluster (3-node cluster). In a Compact cluster each node has 3 layers, Manager, PostgreSQL, and RabbitMQ."
 weight = 20
 alwaysopen = false
 +++

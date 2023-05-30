@@ -1,15 +1,15 @@
 +++
 title = "Fully Distributed"
-description = "This section covers the requirments, installation and operation step for Fully Distributed cluster (9 nodes cluster). In Fully Distributed cluster Cloudify Manager is installed on 3 node, PostgreSQL deployed on 3 nodes, and RabbitMQ deployed on 3 nodes."
+description = "This section covers the requirments, installation and operation step for Fully Distributed cluster (9 nodes cluster). In Fully Distributed cluster Manager is installed on 3 node, PostgreSQL deployed on 3 nodes, and RabbitMQ deployed on 3 nodes."
 weight = 30
 alwaysopen = false
 +++
 
-## Cloudify Cluster Architecture
+## {{< param product_name >}} Cluster Architecture
 
 ![{{< param product_name >}}_Cluster]( /images/cluster/cluster-architecture.png )
 
-Cloudify Manager 6.4 clusters are composed of three separate services that construct the entire {{< param product_name >}} solution:  
+ {{< param cfy_manager_name >}} 6.4 clusters are composed of three separate services that construct the entire {{< param product_name >}} solution:  
 
 1. {{< param product_name >}} Management Service – The Management service embeds the {{< param product_name >}} workers framework, the REST API,
 the user interface infrastructure and other backend services.

@@ -1,6 +1,6 @@
 ---
 title: Certificates Overview
-description: Go over the Cloudify certificates setup.
+description: Go over the certificates setup.
 weight: 40
 ---
 

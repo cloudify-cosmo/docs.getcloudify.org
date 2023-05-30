@@ -1,6 +1,6 @@
 +++
 title = "System Processes"
-description = "This section reviews the system processes for the Cloudify Manager environment."
+description = "This section reviews the system processes for the Manager environment."
 weight = 60
 alwaysopen = false
 +++

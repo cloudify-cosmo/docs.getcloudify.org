@@ -1,6 +1,6 @@
 +++
 title = "Sizing Guidelines"
-description = "Defining the exact sizing of a Cloudify Manager is based on many variants in the equation. These are the guidelines and insights into how such sizing can be determined."
+description = "Defining the exact sizing of a Manager is based on many variants in the equation. These are the guidelines and insights into how such sizing can be determined."
 weight = 20
 alwaysopen = false
 +++

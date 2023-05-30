@@ -1,12 +1,12 @@
 ---
 layout: bt_wiki
 title: Azure AKS
-description: Deployment to Azure (AKS) of Highly Available Cloudify manager worker using the helm chart.
+description: Deployment to Azure (AKS) of Highly Available manager worker using the helm chart.
 category: Installation
 draft: false
 weight: 20
 ---
-## Deployment to Azure of Highly Available Cloudify Manager Worker  ( Premium Version )
+## Deployment to Azure of Highly Available {{< param cfy_manager_name >}} Worker  ( Premium Version )
 
 ### Provision AKS Cluster
 

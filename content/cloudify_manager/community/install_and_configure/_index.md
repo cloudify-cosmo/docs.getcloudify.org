@@ -7,9 +7,9 @@ alwaysopen = false
 
 ## Overview
 
-This section covers the Cloudify Manager Community installation. The Cloudify Manager Community is available in All-in-One mode only.
+This section covers the {{< param cfy_manager_name >}} Community installation. The {{< param cfy_manager_name >}} Community is available in All-in-One mode only.
 
-The Cloudify Manager Community can be installed:
+The {{< param cfy_manager_name >}} Community can be installed:
 
 * Docker Container - Docker container can be installed on any virtual machine that run Docker Server.
 * CentOS/ RHEL - Provides instructions on how to install RPM on CentOS/ RHEL.

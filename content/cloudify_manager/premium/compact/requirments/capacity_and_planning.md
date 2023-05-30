@@ -1,6 +1,6 @@
 +++
 title = "Capacity and Planning"
-description = "The Cloudify Compact Cluster deployment capacity and planning are based on the server and the following recommendations."
+description = "The Compact Cluster deployment capacity and planning are based on the server and the following recommendations."
 weight = 10
 alwaysopen = false
 +++

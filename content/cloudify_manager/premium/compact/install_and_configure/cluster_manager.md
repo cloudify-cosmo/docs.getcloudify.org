@@ -1,6 +1,6 @@
 +++
 title = "Automated Install"
-description = "The following article will guide you through the different steps of easily installing a Cloudify cluster on either 3 or 9 VMs."
+description = "The following article will guide you through the different steps of easily installing a cluster on either 3 or 9 VMs."
 weight = 10
 alwaysopen = false
 +++
@@ -145,7 +145,7 @@ cfy_cluster_manager upgrade [OPTIONS]
 
 #### Options
 * `--config-path` - The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
-* `--upgrade-rpm` - Path to a Cloudify Manager install RPM. This can be either a local or remote path.  
+* `--upgrade-rpm` - Path to a {{< param cfy_manager_name >}} install RPM. This can be either a local or remote path.  
 * `-v, --verbose` - Show verbose output.
 * `-h, --help` - Show this help message and exit.
 
