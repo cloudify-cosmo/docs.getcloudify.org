@@ -80,7 +80,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
 I.e., connecting to AWS requires the AWS plugin.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+To upload the required plugins to your manager, select the **{{< param product_name >}} Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
 For this example, upload the following plugins:
 

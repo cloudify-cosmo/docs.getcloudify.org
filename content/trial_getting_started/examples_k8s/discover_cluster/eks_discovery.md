@@ -61,7 +61,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
 I.e., connecting to AWS requires the AWS plugin.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+To upload the required plugins to your manager, select the **{{< param product_name >}} Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
 For this example, upload the following plugins:
 
@@ -91,7 +91,7 @@ For the Discovery and Batch Workload Management feature, the flow is:
 1. Upload the blueprint that runs a Kubernetes workload on a Kubernetes Cluster managed in another Deployment {{< param cfy_manager_name >}}.
 1. Create a deployment from the uploaded AWS Account blueprint. This generates a model of the service topology in the {{< param product_name >}} database and provides the "context" needed for running workflows.
 1. Run the **install** workflow for the created deployment to apply the model to the infrastructure.
-1. Run the **discover_and_deploy** workflow from the "account" deployment to discover Kubernetes Clusters and install existing cluster deployments for them on the Cloudify manager.
+1. Run the **discover_and_deploy** workflow from the "account" deployment to discover Kubernetes Clusters and install existing cluster deployments for them on the {{< param cfy_manager_name >}}.
 1. Run the **batch_deploy_and_install** workflow from the "account" deployment to install a Kubernetes workload on the discovered clusters.
 
 Let's run these one by one.

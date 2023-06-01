@@ -1,5 +1,5 @@
 +++
-title = "Cloudify Community"
+title = "Community"
 description = "Deploy the community version of the manager using a Docker container"
 weight = 9
 alwaysopen = false
@@ -36,7 +36,7 @@ This will publish the web interface on port 8080. Then verify that the {{< param
 NOTE: Internet access is required to complete this step.
 {{% /note %}}
 
-Once you log into the Community, you'll be asked to fill in your contact details. You need to fill in the form to access the Cloudify Manager. It's required only once on the first log in.
+Once you log into the Community, you'll be asked to fill in your contact details. You need to fill in the form to access the {{< param cfy_manager_name >}}. It's required only once on the first log in.
 
 ![community-contact-details.png]( /images/ui/pages/community-contact-details.png )
 

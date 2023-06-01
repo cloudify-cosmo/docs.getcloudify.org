@@ -11,7 +11,7 @@ Getting Started guide to uploading and deploying Terraform based blueprints from
 This getting started guide introduces you to uploading and deploying Terraform-based blueprints from the {{< param company_name >}} Marketplace.
 
 ## Prerequisites
-* Cloudify Manager Version 6.4 or later
+* {{< param cfy_manager_name >}} Version 6.4 or later
 * Credentials to a cloud provider, such as AWS
 
 ## Overview

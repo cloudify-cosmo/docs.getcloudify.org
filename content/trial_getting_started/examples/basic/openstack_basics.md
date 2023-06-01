@@ -57,7 +57,7 @@ Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_
 
 {{< param cloud >}} credentials can be downloaded by following the guide [here]({{< param cloud_auth_ui_link>}}).
 
-To store the access keys as secrets in the Cloudify manager, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
+To store the access keys as secrets in the {{< param cfy_manager_name >}}, login to the {{< param cfy_console_name >}} and select the **System Resources** page. Scroll to the **Secret Store Management** widget and use the **Create** button to add the following new secrets:
 
 ```bash   
 * openstack_username
@@ -89,7 +89,7 @@ To store the access keys as secrets in the Cloudify manager, login to the {{< pa
 Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
 I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+To upload the required plugins to your manager, select the **{{< param product_name >}} Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
 For this example, upload the following plugins:
 
@@ -112,7 +112,7 @@ The flow required to setup a service consists of:
 
 Let's run these one by one.
 
-To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
+To upload a blueprint to the {{< param cfy_manager_name >}}, select the **{{< param product_name >}} Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-Basics-VM-Setup blueprint.
 
 
 ### Deploy & Install
