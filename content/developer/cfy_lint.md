@@ -1,16 +1,16 @@
 +++
 title = "CFY-Lint CLI"
-description = "A Cloudify blueprint linter for identifying and fixing stylistic and syntactical DSL issues."
+description = "A blueprint linter for identifying and fixing stylistic and syntactical DSL issues."
 weight = 80
 alwaysopen = false
 +++
 
 ## About CFY-Lint
 
-CFY-Lint is a command line tool that can identify and fix stylistic and syntactical issues in Cloudify blueprints, for example:
+CFY-Lint is a command line tool that can identify and fix stylistic and syntactical issues in {{< param product_name >}} blueprints, for example:
 
  - YAML stylistic conventions
- - Cloudify DSL conventions
+ - {{< param product_name >}} DSL conventions
  - Deprecated node types and relationship types
  - Unimported node types and relationship types
  - Node and relationship dependencies
@@ -50,7 +50,7 @@ Options:
 -b, --blueprint-path
 ```
 
-Provide the relative or absolute path to a Cloudify DSL file, such as a blueprint or a plugin YAML.
+Provide the relative or absolute path to a {{< param product_name >}} DSL file, such as a blueprint or a plugin YAML.
 
 __NOTE:__ The `CWD` must be the same directory as the file, if you want to use relative imports to other YAML files.
 

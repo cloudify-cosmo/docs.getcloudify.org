@@ -1,5 +1,5 @@
 ---
-title: Integrating Cloudify with Configuration Management Tools
+title: Integrating Configuration Management Tools
 category: Writing Plugins
 draft: false
 weight: 3000

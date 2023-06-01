@@ -68,7 +68,7 @@ default     | no       | \<any\>     | An optional default value for the propert
 required    | no       | boolean     | Specifies whether the property is required. (Default: `true`, Supported since: [cloudify_dsl_1_2]({{< relref "developer/blueprints/spec-versioning.md" >}}))
 
 {{% note title="Built-in Node Types" %}}
-Cloudify provides some built-in node types, which you can find out about [here]({{< relref "developer/blueprints/built-in-types.md" >}}).
+{{< param product_name >}} provides some built-in node types, which you can find out about [here]({{< relref "developer/blueprints/built-in-types.md" >}}).
 {{% /note %}}
 # Examples
 

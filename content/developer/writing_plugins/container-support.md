@@ -1,5 +1,5 @@
 ---
-title: A Guide To Cloudify Container Support For Kubernetes And Docker
+title: A Guide To Container Support For Kubernetes And Docker
 category: Writing Plugins
 draft: false
 weight: 1450

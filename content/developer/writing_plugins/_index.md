@@ -1,6 +1,6 @@
 ---
 title: Writing Plugins
-description: How to write and package plugins for Cloudify
+description: How to write and package plugins
 weight: 30
 alwaysopen: false
 ---
@@ -31,7 +31,7 @@ for more information, see:
 
 {{< param product_name >}} distributes plugins in [Wagon](https://github.com/cloudify-cosmo/wagon/blob/master/README.md) format. Wagon packages are a sets of Python [Wheels](https://packaging.python.org/tutorials/distributing-packages/#wheels) for dependency management. {{< param product_name >}} publishes official wagons, which are found on [plugins download page](http://cloudify.co/plugins).
 
-_Note: The [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) is distributed with Cloudify._
+_Note: The [Script plugin]({{< relref "working_with/official_plugins/Configuration/script.md" >}}) is distributed with {{< param product_name >}}._
 
 
 # Plugin Installation

@@ -1,7 +1,7 @@
 ---
 title: Widget Backend
 description: Description of Widget Backend feature.
-category: Cloudify Console
+category: Console
 draft: false
 weight: 500
 ---

@@ -84,8 +84,8 @@ you're in luck. You can perform a _plugins update_.
 You can find more information on the CLI command [here](/cli/orch_cli/plugins/#update).
 
 # Namespace
-You can import any resource and add a namespace context to all included Cloudify DSL elements, with
-the exception of adding namespace to Cloudify basic types.
+You can import any resource and add a namespace context to all included {{< param product_name >}} DSL elements, with
+the exception of adding namespace to {{< param product_name >}} basic types.
 
 Import command with a namespace format is `namespace--RESOURCE`.
 

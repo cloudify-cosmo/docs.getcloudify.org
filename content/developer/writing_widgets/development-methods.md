@@ -1,7 +1,7 @@
 ---
 title: Widget Development Methods
 description: Different development methods available for widget creation.
-category: Cloudify Console
+category: Console
 draft: false
 weight: 100
 ---
