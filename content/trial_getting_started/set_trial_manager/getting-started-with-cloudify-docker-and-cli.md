@@ -1,5 +1,5 @@
 +++
-title = "Cloudify CLI"
+title = "CLI"
 description = "Install the CLI client using a Docker image"
 weight = 300
 alwaysopen = false
@@ -9,7 +9,7 @@ docker_install_command_prefix = "docker run --name cfy_manager_local -p 8080:80"
 
 {{%children style="h2" description="true"%}}
 
-## Install Cloudify CLI
+## Install {{< param product_name >}} CLI
 
 ### Linux & Mac (Binary)
 
@@ -40,7 +40,7 @@ eval "$(_CFY_COMPLETE=source cfy)"
 
 ## Connect to a Remote Manager
 
-By default CLI points to `localhost`. In case you've installed Cloudify CLI on a different machine or you are using Cloudify SaaS, you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
+By default CLI points to `localhost`. In case you've installed {{< param product_name >}} CLI on a different machine or you are using {{< param product_name >}} SaaS, you'll need to set up a new profile to redirect to a remote {{< param cfy_manager_name >}}
 
 ```bash
 cfy init

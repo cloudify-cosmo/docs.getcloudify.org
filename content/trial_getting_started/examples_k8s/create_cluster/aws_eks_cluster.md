@@ -54,7 +54,7 @@ The {{< param cfy_console_name >}} and {{< param cfy_cli_name >}} can be used in
 
 ### Import Plugins, Blueprints and Secrets
 
-To connect to {{< param cloud >}}, credentials and Cloudify plugins are required. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+To connect to {{< param cloud >}}, credentials and {{< param product_name >}} plugins are required. AWS credentials can be created by following the guide [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 {{< param product_name >}} recommends storing such sensitive information in a {{< param product_name >}} secret.
 Secrets are kept encrypted in a secure way and used in run-time by the system.
 Learn more about {{< param product_name >}} secrets [here]({{< relref "/working_with/manager/using-secrets.md" >}}).

@@ -69,7 +69,7 @@ To store the access keys as secrets in the {{< param cfy_manager_name >}}, login
 Plugins are {{< param product_name >}}'s extendable interfaces to services, cloud providers and automation tools.
 I.e., connecting to {{< param cloud >}} requires the {{< param cloud >}} plugin.
 
-To upload the required plugins to your manager, select the **Cloudify Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
+To upload the required plugins to your manager, select the **{{< param product_name >}} Catalog** page, scroll to the **Plugins Catalog** widget and select the plugins you wish to upload.
 
 For this example, upload the following plugins:
 
@@ -93,7 +93,7 @@ The flow required to setup a service consists of:
 
 Let's run these one by one.
 
-To upload a blueprint to the {{< param cfy_manager_name >}}, select the **Cloudify Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-VM-Setup-using-CloudFormation blueprint.
+To upload a blueprint to the {{< param cfy_manager_name >}}, select the **{{< param product_name >}} Catalog** page, and use the **Upload blueprint** button next to the {{< param cloud >}}-VM-Setup-using-CloudFormation blueprint.
 
 
 

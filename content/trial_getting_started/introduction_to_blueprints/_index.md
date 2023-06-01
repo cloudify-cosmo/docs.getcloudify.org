@@ -1,6 +1,6 @@
 +++
 title = "Introduction To Blueprints"
-description = "Learn how to write your first Cloudify blueprint"
+description = "Learn how to write your first blueprint"
 weight = 96
 alwaysopen = false
 +++

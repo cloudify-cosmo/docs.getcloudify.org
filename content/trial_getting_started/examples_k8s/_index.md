@@ -1,6 +1,6 @@
 +++
 title = "Kubernetes Guides"
-description = "Deploy the Cloudify trial manager and walkthrough usage examples for Kubernetes"
+description = "Deploy the trial manager and walkthrough usage examples for Kubernetes"
 weight = 97
 alwaysopen = false
 +++
