@@ -6,7 +6,7 @@ weight: 700
 aliases: /blueprints/spec-relationships/
 ---
 
-`relationships` in Cloudify are DSL elements that establish dependencies between [node templates](../spec-node-templates), but also can be used to perform operations (i.e. execute code).  Relationships are declared in a relationships section in a node template declaration at the same level as properties and interfaces, and are often defined in [plugins](../spec-plugins).  A node template can contain any number of relationship declarations, within certain constraints noted below.  Each relationship declaration refers to two node templates in a blueprint: the source and the target.  The source node is implicit; it is the node template that the relationship is declared in.  The target is explicit, and refered to by node id.  Example:
+`relationships` in {{< param product_name >}} are DSL elements that establish dependencies between [node templates](../spec-node-templates), but also can be used to perform operations (i.e. execute code).  Relationships are declared in a relationships section in a node template declaration at the same level as properties and interfaces, and are often defined in [plugins](../spec-plugins).  A node template can contain any number of relationship declarations, within certain constraints noted below.  Each relationship declaration refers to two node templates in a blueprint: the source and the target.  The source node is implicit; it is the node template that the relationship is declared in.  The target is explicit, and refered to by node id.  Example:
 
 ```yaml
   node1: 
@@ -21,7 +21,7 @@ aliases: /blueprints/spec-relationships/
     ....
 ```
 
-Relationships in Cloudify are explicit; a blueprint that contains no relationships will operate on all contained nodes simultaneously, regardless whether the node templates refer to each other via [intrinsic functions](../spec-intrinsic-functions).  The fundamental relationship type in Cloudify is called `cloudify.relationships.depends_on`.  It (and other relationships derived from it) is used by built-in workflows such as [install](/working_with/workflows/built-in-workflows#the-install-workflow) for ordering of node instance evaluation, and in some cases executing code.
+Relationships in {{< param product_name >}} are explicit; a blueprint that contains no relationships will operate on all contained nodes simultaneously, regardless whether the node templates refer to each other via [intrinsic functions](../spec-intrinsic-functions).  The fundamental relationship type in {{< param product_name >}} is called `cloudify.relationships.depends_on`.  It (and other relationships derived from it) is used by built-in workflows such as [install](/working_with/workflows/built-in-workflows#the-install-workflow) for ordering of node instance evaluation, and in some cases executing code.
 
 Relationships are declared in individual node templates, and have a type and a target. If node `A` declares a `depends_on` relationship to node `B`, this conveys a sense of order to the built-in workflows.  In the case of the `install` workflow, it means ‘process node B before node A’.  In the case of the `uninstall` workflow it means ‘process node A before node B’.  
 
@@ -59,7 +59,7 @@ By default, nodes can be related using the relationship types described below. Y
 
 ## Fundamental Built-in Relationships
 
-There are three fundamental relationships defined by Cloudify, which underlie all other relationship types, including those defined in plugins or blueprint authors.  The base/root relationship type is `cloudify.relationships.depends_on`, which indicates processing order to the built-in workflows.    All relationships, even custom relationships, must ultimately derive from the depends_on relationship. Derived from this relationship are `cloudify.relationships.connected_to`, and `cloudify.relationships.contained_in`.
+There are three fundamental relationships defined by {{< param product_name >}}, which underlie all other relationship types, including those defined in plugins or blueprint authors.  The base/root relationship type is `cloudify.relationships.depends_on`, which indicates processing order to the built-in workflows.    All relationships, even custom relationships, must ultimately derive from the depends_on relationship. Derived from this relationship are `cloudify.relationships.connected_to`, and `cloudify.relationships.contained_in`.
 
 ![Basic Relationships](/images/blueprint/basic_rels.png)
 
@@ -237,8 +237,8 @@ please visit [SharedResource]({{< relref "working_with/service_composition/share
 As an extension of `cloudify.relationships.depends_on` relationship type, this can only target a node of
 SharedResource type. This relationship will allow running any workflow (custom or not) ,which is defined
 in the target node's deployment, as a part from establish and unlink relationship lifecycle operations.
-Also if the SharedResource node has been created with different Cloudify client connection, those settings
-will be taken from the node properties if exists else it will use default Cloudify client.
+Also if the SharedResource node has been created with different {{< param product_name >}} client connection, those settings
+will be taken from the node properties if exists else it will use default {{< param product_name >}} client.
 
 #### Relationship settings:
 
@@ -281,8 +281,8 @@ As an extension of `cloudify.relationships.connected_to` relationship type, this
 type of SharedResource. This relationship will allow running any workflow (custom or not) ,which is defined
 in the target node's deployment, as a part from establish and unlink relationship lifecycle.
 With support for scaling the relationship according to `cloudify.relationships.connected_to` features.
-Also if the SharedResource node has been created with different Cloudify client connection, those settings
-will be taken from the node properties if exists else it will use default Cloudify client.
+Also if the SharedResource node has been created with different {{< param product_name >}} client connection, those settings
+will be taken from the node properties if exists else it will use default {{< param product_name >}} client.
 
 #### Relationship settings:
 

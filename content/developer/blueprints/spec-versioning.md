@@ -15,7 +15,7 @@ The currently defined versions are
 
 <br>
 
-| Cloudify Manager Version | DSL 1.3 | DSL 1.4 |
+| {{< param cfy_manager_name >}} Version | DSL 1.3 | DSL 1.4 |
 |--------------------------|---------|---------|
 | 5.1 and higher           | V       | V       |
 | 6.4 and higher           |         | V       |

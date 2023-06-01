@@ -1,6 +1,6 @@
 ---
-title: Cloudify APIs
-description: Working with Cloudify APIs
+title: APIs
+description: Working with APIs
 weight: 80
 alwaysopen: false
 ---

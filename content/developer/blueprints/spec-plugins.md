@@ -189,7 +189,7 @@ plugins:
     properties_description: |
       Description regarding the credentials and
       the link to AWS documentation how to generate
-      or the link to cloudify documentation on
+      or the link to {{< param product_name >}} documentation on
       different types of authentication methods
     properties:
       aws_access_key_id:

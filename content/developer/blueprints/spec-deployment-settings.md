@@ -7,7 +7,7 @@ aliases: /blueprints/spec-deployment-settings/
 ---
 
 Deployment Settings are additional settings and instructions provided to
-Cloudify manager on how to handle a deployment created out of this blueprint.
+{{< param product_name >}} manager on how to handle a deployment created out of this blueprint.
 
 # Declaration
 

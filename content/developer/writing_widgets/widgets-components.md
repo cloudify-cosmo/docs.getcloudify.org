@@ -1,7 +1,7 @@
 ---
 title: Widget Components Reference
-description: Documentation for all ReactJS components developed by Cloudify team.
-category: Cloudify Console
+description: Documentation for all ReactJS components.
+category: Console
 draft: false
 weight: 700
 aliases: ["/apis/widgets-components/", "/developer/custom_console/widgets-components/"]

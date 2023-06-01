@@ -1,7 +1,7 @@
 ---
 title: Widget Definition
 description: Description of widget definition including all available configuration parameters.
-category: Cloudify Console
+category: Console
 draft: false
 weight: 300
 api_link: "https://docs.cloudify.co/api/v3.1"

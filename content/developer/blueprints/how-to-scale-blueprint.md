@@ -9,7 +9,7 @@ aliases: /blueprints/how-to-scale-blueprint/
 We will now build, from scratch, a simple system which is capable of scaling on AWS. 
 Our system will consist of a number of instances under a single load balancer.
 
-We start out by importing the tosca definitions file and corresponding cloudify types definitions file.
+We start out by importing the tosca definitions file and corresponding {{< param product_name >}} types definitions file.
 
 {{< highlight  yaml >}}
 tosca_definitions_version: cloudify_dsl_1_3

@@ -1,7 +1,7 @@
 ---
 title: Widget APIs
 description: Description of APIs exposed for widget development.
-category: Cloudify Console
+category: Console
 draft: false
 weight: 400
 ---

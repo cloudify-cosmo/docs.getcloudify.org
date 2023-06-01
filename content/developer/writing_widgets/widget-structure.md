@@ -1,7 +1,7 @@
 ---
 title: Widget Structure
 description: Description of widget definition and directory structure.
-category: Cloudify Console
+category: Console
 draft: false
 weight: 200
 ---
