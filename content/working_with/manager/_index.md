@@ -1,5 +1,5 @@
 ---
-title: Using the Cloudify Manager
+title: Using the Manager
 description: 
 weight: 20
 alwaysopen: false

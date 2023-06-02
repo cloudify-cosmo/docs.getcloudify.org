@@ -1060,7 +1060,7 @@ For more information, and possible keyword arguments, see: [EC2:create_key_pair]
 
   * `log_create_response`: Boolean. Opt-in to storing the create API request. Not recommended, will log private key material.
   * `store_in_runtime_properties`: Boolean. Opt-in to save the KeyPair KeyMaterial in the node-instance runtime-properties. Not recommended.
-  * `create_secret`: Boolean. Opt-in to save the KeyPair KeyMaterial in the secret store. Only available in Cloudify Manager.
+  * `create_secret`: Boolean. Opt-in to save the KeyPair KeyMaterial in the secret store. Only available in {{< param cfy_manager_name >}}.
   * `secret_name`: String. The name of the secret if `create_secret` is `true`.
   * `update_existing_secret`: String. If `secret_name` already exists, overwrite the value.
 
@@ -2913,11 +2913,11 @@ For more information, and possible keyword arguments, see: [CloudFormation:creat
   * `cloudify.interfaces.lifecycle.create`: Store `resource_config` in runtime properties.
   * `cloudify.interfaces.lifecycle.configure`: Executes the [CreateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html) action.
     * `inputs`:
-        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to create the stack.
+        * `minimum_wait_time`: Sets the minimum time in seconds that {{< param product_name >}} will wait for AWS to create the stack.
   * `cloudify.interfaces.lifecycle.start`: Executes the same operations as `cloudify.interfaces.lifecycle.pull`.
   * `cloudify.interfaces.lifecycle.delete`: Executes the [DeleteStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeleteStack.html) action.
     * `inputs`:
-        * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait for AWS to delete the stack.
+        * `minimum_wait_time`: Sets the minimum time in seconds that {{< param product_name >}} will wait for AWS to delete the stack.
   * `cloudify.interfaces.lifecycle.pull`: Executes:
     * [DetectStackDrift](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DetectStackDrift.html) action.
     * [ListStackResources](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackResources.html) action, and store the result under `state` runtime property .
@@ -2974,7 +2974,7 @@ Outputs:
 ```
 
 Also, the order of the outputs is not guaranteed. That makes it impossible to refer to output values
-through Cloudify's intrinsic functions (such as `get_attribute`).
+through {{< param product_name >}}'s intrinsic functions (such as `get_attribute`).
 
 In order to address this, the plugin sets a runtime property by the name `outputs_items`, which is a
 dictionary containing the output values. This runtime property is only set if the `Outputs` key exists

@@ -5,7 +5,7 @@ weight = 101
 alwaysopen = false
 +++
 
-Cloudify Application is a scoped application that provides ServiceNow users an integration interface to Cloudify environments, using Catalog items that will be added to your default service portal under Cloudify Resources.
+{{< param product_name >}} Application is a scoped application that provides ServiceNow users an integration interface to {{< param product_name >}} environments, using Catalog items that will be added to your default service portal under {{< param product_name >}} Resources.
 
 ## Application Contents
 
@@ -33,14 +33,14 @@ ServiceNow version: >= Quebec Release
 The Application can be installed like any other Application - through the official ServiceNow Store :
 
 1.  Log into ServiceNow Store with ServiceNow HI credentials.
-2.	Search for Cloudify in the search box. Application information appears in the search results.
-3.	From the search results, click Cloudify.
+2.	Search for {{< param product_name >}} in the search box. Application information appears in the search results.
+3.	From the search results, click {{< param product_name >}}.
 Information about the application is displayed.
 4.	In the right pane of the application window, view the Compatibility section to ensure that the integration application is compatible with the version of ServiceNow that you require.
 5.	In the right pane of the application window, click the Get button.
 A notice appears.
 6.	At the bottom of the notice, click Continue.
-7.	On the Purchase of Cloudify page, choose the Make available on specific instances radio button and click the Select button.
+7.	On the Purchase of {{< param product_name >}} page, choose the Make available on specific instances radio button and click the Select button.
 A Select Instances dialog appears.
 8.	In the Available Instances pane, double-click the instance that you want the application to be available on and click OK.
 9.	Select the "I accept" check box (to accept terms of use and subscription terms and conditions) and click Get.
@@ -49,8 +49,8 @@ A Select Instances dialog appears.
 The Applications list appears.
 12.	Click the Downloads tab.
 The Downloads list appears.
-13.	Scroll to the Cloudify application, and click the Install button.
-The application now appears in the ServiceNow menu, displayed in the left-hand navigation panel as Cloudify.
+13.	Scroll to the {{< param product_name >}} application, and click the Install button.
+The application now appears in the ServiceNow menu, displayed in the left-hand navigation panel as {{< param product_name >}}.
 
 You can refer to the ServiceNow official support video :
 

@@ -11,11 +11,11 @@ As a ServiceNow developer you can use the application exposed actions and sub-fl
 
 ![Flow Designer actions]( /images/service_now/actions.png )
 
-*NOTE* it will require the user to have Cloudify app roles to be able to select and provide config names from the configured configs, as it will be required in all of the actions and sub-flows as an input.
+*NOTE* it will require the user to have {{< param product_name >}} app roles to be able to select and provide config names from the configured configs, as it will be required in all of the actions and sub-flows as an input.
 
 ## Create Environment Catalog Item explained
 
-In the application we use catalog client scripts to handle most of the logic that is needed to communicate with Cloudify. Starting with config selection (which will be listed to the user) and if there is one it will be selected automatically based on the selected config. We fetch the blueprints and onChange values and fetch the blueprint inputs that don’t have default values.
+In the application we use catalog client scripts to handle most of the logic that is needed to communicate with {{< param product_name >}}. Starting with config selection (which will be listed to the user) and if there is one it will be selected automatically based on the selected config. We fetch the blueprints and onChange values and fetch the blueprint inputs that don’t have default values.
 
 You can watch this video that explain the catalog item:
 

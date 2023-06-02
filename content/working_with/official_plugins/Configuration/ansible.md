@@ -193,15 +193,15 @@ Similar to the Script Plugin and the Fabric Plugin, you do not have to use any s
 
 In addition, you can provide additional key-word args parameters to the AnsiblePlaybookFromFile class, such as `options_config`.
 
-## Ansible Module for Cloudify
+## Ansible Module for {{< param product_name >}}
 
-You may use the ansible Cloudify module to store runtime properties inside of your Ansible playbooks.
+You may use the ansible {{< param product_name >}} module to store runtime properties inside of your Ansible playbooks.
 
 **requirements**
 
-  * Cloudify Ansible Plugin 3.0.0, or higher.
-  * Cloudify Manager 6.4, or higher.
-  * A Cloudify Manager that supports SSL, or your Cloudify manager rest credentials. You must collect your {{< param product_name >}} manager credentials. The module will try to use environment variables to connect to {{< param product_name >}} Manager, however, if your manager is not configured for SSL or if your security does not permit, you must provide credentials directly in the playbook.  The module will try to load the {{< param product_name >}} rest client from the management worker virtual env, i.e. `/opt/mgmtworker/env/lib/python3.6/site-packages/` in Cloudify 6.4. If this path does not contain `cloudify_rest_client` or if it doesn't exist at all, or if it's not valid anymore, then the module will not work.
+  * {{< param product_name >}} Ansible Plugin 3.0.0, or higher.
+  * {{< param product_name >}} Manager 6.4, or higher.
+  * A {{< param cfy_manager_name >}} that supports SSL, or your {{< param cfy_manager_name >}} rest credentials. You must collect your {{< param product_name >}} manager credentials. The module will try to use environment variables to connect to {{< param product_name >}} Manager, however, if your manager is not configured for SSL or if your security does not permit, you must provide credentials directly in the playbook.  The module will try to load the {{< param product_name >}} rest client from the management worker virtual env, i.e. `/opt/mgmtworker/env/lib/python3.6/site-packages/` in Cloudify 6.4. If this path does not contain `cloudify_rest_client` or if it doesn't exist at all, or if it's not valid anymore, then the module will not work.
   * You must install the Ansible module in one of the appropriate paths for ansible modules, for example `/etc/cloudify/.ansible/plugins/modules.`.
 
 ## Using the module:

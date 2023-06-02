@@ -1,5 +1,5 @@
 ---
-title: Using the Cloudify Console
+title: Using the Console
 description:
 weight: 60
 alwaysopen: false

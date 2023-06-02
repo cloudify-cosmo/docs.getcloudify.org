@@ -1285,7 +1285,7 @@ my_volume:
 1. Creates a server, with name `my_server`, and with name on OpenStack *the node's ID* (since no `name` parameter was supplied under the `server` property). The server is set with an image and flavor IDs.
 2. Creates a volume. It is set with a relationship to the `my_server` node: This designated relationship type will take care of attaching the volume to OpenStack server node.
 
-## Example IV: Using Windows server with a Cloudify agent
+## Example IV: Using Windows server with a {{< param product_name >}} agent
 
 This example demonstrates how to use a Windows server on which a {{< param product_name >}} agent is deployed.
 

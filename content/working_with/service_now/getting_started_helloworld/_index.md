@@ -5,7 +5,7 @@ weight = 103
 alwaysopen = false
 +++
 
-Given that you have your Cloudify Environment configured, you can start with Hello World Journey
+Given that you have your {{< param product_name >}} Environment configured, you can start with Hello World Journey
 
 If you have x_clop2_cloudify.admin role you should be able to see the application menu - from the menu modules you can select Getting Started Setup
 

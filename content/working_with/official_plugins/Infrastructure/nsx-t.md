@@ -1,7 +1,7 @@
 ---
 title: NSX-T Plugin
 category: Official Plugins
-description: Cloudify NSX-T Plugin enables users create NSX-T Resources in NSX-T manager
+description: The NSX-T Plugin enables users create NSX-T Resources in NSX-T manager
 draft: false
 weight: 150
 aliases:

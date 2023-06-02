@@ -2,7 +2,7 @@
 title: Creating Custom Workflows
 category: Workflows
 draft: false
-abstract: A guide to authoring Cloudify Workflows
+abstract: A guide to authoring Workflows
 weight: 700
 aliases: /workflows/creating-your-own-workflow/
 ---

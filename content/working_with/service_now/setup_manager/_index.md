@@ -1,25 +1,25 @@
 +++
-title = "Cloudify Manager Setup"
+title = "Manager Setup"
 description = "Get started with setting up your hosted service trial or deploying your own trial server"
 weight = 102
 alwaysopen = false
 +++
 
-The first step in this journey is to setup your Cloudify Environment.
+The first step in this journey is to setup your {{< param product_name >}} Environment.
 
-If you have x_clop2_cloudify.admin role you should be able to see the application menu - from the menu modules you can select Getting Started Setup then you can get started with Cloudify Environment
+If you have x_clop2_cloudify.admin role you should be able to see the application menu - from the menu modules you can select Getting Started Setup then you can get started with {{< param product_name >}} Environment
 
-Cloudify Environment can be in many flavors :
+{{< param product_name >}} Environment can be in many flavors :
 
 * As a Hosted Service
 * Installed on public network [SSL,Non-SSL] and in case of SSL with self-signed certificate
   {the certificate needs to be added to ServiceNow}
 * Installed on private network [mid-server needs to be configured]
 
-For more details on how to setup Cloudify manager please refer to [{{< param cfy_manager_name >}} setup]({{< relref "/trial_getting_started/set_trial_manager/_index.md" >}}) before moving on.
+For more details on how to setup {{< param product_name >}} manager please refer to [{{< param cfy_manager_name >}} setup]({{< relref "/trial_getting_started/set_trial_manager/_index.md" >}}) before moving on.
 
 
-## Adding Cloudify Manager External Certificate *Self-Signed*
+## Adding {{< param cfy_manager_name >}} External Certificate *Self-Signed*
 
 To add the certificate you will need to do the following:
 
@@ -43,9 +43,9 @@ You can watch this video that shows the mid-server installation and configuratio
 <iframe src="https://player.vimeo.com/video/672061772" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 
-## Getting Started Cloudify Environment
+## Getting Started {{< param product_name >}} Environment
 
-This video demonstrates how to setup Cloudify as a service and configure various flavors of Cloudify environments:
+This video demonstrates how to setup {{< param product_name >}} as a service and configure various flavors of {{< param product_name >}} environments:
 
 <iframe src="https://player.vimeo.com/video/664376837" width="500" height="300" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 

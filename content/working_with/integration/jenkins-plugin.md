@@ -1,6 +1,6 @@
 +++
 title = "Jenkins Plugin"
-description = "Introduction to Jenkins' Cloudify integration"
+description = "Introduction to Jenkins' integration"
 weight = 24
 alwaysopen = false
 +++

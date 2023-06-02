@@ -108,7 +108,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 
   * `cloudify.interfaces.host`:
     * `get_state`:
-      * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait before pulling the state info.
+      * `minimum_wait_time`: Sets the minimum time in seconds that {{< param product_name >}} will wait before pulling the state info.
 should be used when the os requires extra time to complete configuration and all the reported information to become available from vSphere.
       
       
