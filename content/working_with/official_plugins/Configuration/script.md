@@ -2,7 +2,7 @@
 title: Script Plugin
 category: Official Plugins
 draft: false
-abstract: "Cloudify script plugin description and configuration"
+abstract: "Script plugin description and configuration"
 description: "The Script plugin can be used to map node life-cycle operations and workflows to scripts that are included in your blueprint. Scripts can be written in Python, bash, ruby, and so on."
 weight: 100
 aliases:
@@ -45,7 +45,7 @@ imports:
 node_templates:
   example_web_server:
     # The web server type is only used for this example. The type used
-    # could be any valid cloudify type.
+    # could be any valid {{< param product_name >}} type.
     type: cloudify.nodes.WebServer
     interfaces:
       cloudify.interfaces.lifecycle:

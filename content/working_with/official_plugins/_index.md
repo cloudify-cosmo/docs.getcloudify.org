@@ -1,6 +1,6 @@
 ---
 title: Official Plugins
-description: Overview of Cloudify Plugins
+description: Plugins Overview
 weight: 40
 alwaysopen: false
 aliases:

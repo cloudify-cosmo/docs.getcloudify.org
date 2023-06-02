@@ -2,7 +2,7 @@
 title: Fabric (SSH) Plugin
 category: Official Plugins
 draft: false
-abstract: "Cloudify Fabric plugin description and configuration"
+abstract: "Fabric plugin description and configuration"
 description: You can use the Fabric plugin to map operations to SSH commands or Fabric tasks that are included in your blueprint.
 weight: 100
 aliases:

@@ -23,15 +23,15 @@ you should be able to define scan configurations and build custom policies and d
 
 Cloud Configuration Governance application contains a set of resource collectors [ AWS/Azure ] that will be triggered from the scan configuration setup, these collectors call specific REST apis based on the type of the resource to describe and fetch all the properties/settings that can be obtained and store the results inside servicenow tables, based on the stored settings you can build policies to report violations, then you can map each violation with remediation action [sub-flow]
 
-## Cloudify Application Integration
+## {{< param product_name >}} Application Integration
 
-In Cloudify application v2.5 we introduced integration with CCG application in the form of sub-flows that leverage the inputs that we get from CCG application in order to remediate the violation that will be detected based on the policy definition.
+In {{< param product_name >}} application v2.5 we introduced integration with CCG application in the form of sub-flows that leverage the inputs that we get from CCG application in order to remediate the violation that will be detected based on the policy definition.
 
-When you install Cloudify application it will include a custom table (x_clop2_cloudify_remediation_setups) which will contain an initial setup for all of the sub-flows defined in the application, there you should be able to link the flow with a config_name to use a specific Cloudify manager tenant to carry out the remediation -some sub-flows takes a value you can also modify that-.
+When you install {{< param product_name >}} application it will include a custom table (x_clop2_cloudify_remediation_setups) which will contain an initial setup for all of the sub-flows defined in the application, there you should be able to link the flow with a config_name to use a specific {{< param product_name >}} manager tenant to carry out the remediation -some sub-flows takes a value you can also modify that-.
 
 we offer a set of pre-defined most used remediations for various violation types:
 
-### Remediation of resources that is not strictly provisioned by Cloudify:
+### Remediation of resources that is not strictly provisioned by {{< param product_name >}}:
 
 * AWS EC2-Instances:
 
@@ -56,9 +56,9 @@ we offer a set of pre-defined most used remediations for various violation types
   * Delete-User-Profile
   * Attach-Predefined-Policy
 
-### Remediation of resources that is provisioned by Cloudify:
+### Remediation of resources that is provisioned by {{< param product_name >}}:
 
-You can leverage a sub-flow that can interact with Cloudify deployments where you can trigger cloudify-workflows on deployments that were deployed using Cloudify given that you have a tag that contains the deployment-id.
+You can leverage a sub-flow that can interact with {{< param product_name >}} deployments where you can trigger cloudify-workflows on deployments that were deployed using {{< param product_name >}} given that you have a tag that contains the deployment-id.
 
 
 ## Videos

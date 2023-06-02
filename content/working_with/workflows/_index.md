@@ -51,7 +51,7 @@ Queued executions will begin automatically when possible.
 {{% /note %}}
 
 # Scheduling Executions
-Cloudify allows the user to create schedules for running executions at specified times, both single-use and recurring.
+{{< param product_name >}} allows the user to create schedules for running executions at specified times, both single-use and recurring.
 Execution schedules, also known as deployment schedules, belong to a specific deployment and can be created in two ways:
 
 1. By using the dedicated CLI command: `cfy deployments schedule create`

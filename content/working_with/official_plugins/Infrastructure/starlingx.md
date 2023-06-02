@@ -43,7 +43,7 @@ The following are possible for a StarlingX system deployment:
 
 # Sites
 
-During installation the plugin requests a system's location (latitude and longitude) from the StarlingX API, and creates a [Site]({{< relref "working_with/console/widgets/sites.md" >}}) in Cloudify. You can see sites' location on the map on the Dashboard screen.
+During installation the plugin requests a system's location (latitude and longitude) from the StarlingX API, and creates a [Site]({{< relref "working_with/console/widgets/sites.md" >}}) in {{< param product_name >}}. You can see sites' location on the map on the Dashboard screen.
 
 # Node Types
 

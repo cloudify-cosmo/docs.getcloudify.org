@@ -1,6 +1,6 @@
 +++
 title = "GitLab CI/CD"
-description = "Introduction to Cloudify's GitLab CI/CD integration"
+description = "Introduction to GitLab CI/CD integration"
 weight = 25
 alwaysopen = false
 +++

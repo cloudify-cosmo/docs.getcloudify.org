@@ -1,6 +1,6 @@
 +++
 title = "GitHub Actions"
-description = "Introduction to Cloudify's GitHub Actions"
+description = "Introduction to GitHub Actions"
 weight = 25
 alwaysopen = false
 +++

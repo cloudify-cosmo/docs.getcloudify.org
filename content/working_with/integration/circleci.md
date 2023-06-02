@@ -1,6 +1,6 @@
 +++
 title = "CircleCI"
-description = "Introduction to Cloudify's CircleCI Integration"
+description = "Introduction to the CircleCI Integration"
 weight = 26
 alwaysopen = false
 +++

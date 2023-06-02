@@ -5,7 +5,7 @@ weight = 104
 alwaysopen = false
 +++
 
-Given that you have your Cloudify Environment configured (with version is 6.2 or above), we should be ready to go through certified environment example with the following next steps:
+Given that you have your {{< param product_name >}} Environment configured (with version is 6.2 or above), we should be ready to go through certified environment example with the following next steps:
 
 1. Create Cloud Account Setup -AWS/Azure-
 2. Create a certified environment from the catalog which could be one of the following flavors:

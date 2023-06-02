@@ -8,7 +8,7 @@ aliases: /manager/okta_authentication/
 
 {{< param product_name >}} enables integration with your local Okta system to authenticate users and provide Role-Based Access Control. This guide describes the configuration steps required to enable Okta authentication.
 
-Other SAML 2.0 authentication solutions can be integrated with Cloudify. However, only Okta is tested and officially supported.
+Other SAML 2.0 authentication solutions can be integrated with {{< param product_name >}}. However, only Okta is tested and officially supported.
 
 {{% tip title="openssl version" %}}
 To enable Okta integration, the openssl package on {{< param cfy_manager_name >}} needs to be of version 1.0.2. If you are running a {{< param product_name >}} image this is already the case, however if you are installing {{< param product_name >}} make sure to update the openssl package prior to the Okta configuration.
@@ -24,7 +24,7 @@ You'll need Okta administrator privileges and your {{< param product_name >}} IP
 1. Open the Okta Admin dashboard
 2. From the top menu, choose <b>Applications > Applications > Create App Integration</b>
 3. In the <b>Create a new app integration</b> form, choose **SAML 2.0** as sign-in method
-4. In the <b>General Settings</b> step, configure the application name, such as Cloudify Dev and add the logo.
+4. In the <b>General Settings</b> step, configure the application name, such as {{< param product_name >}} Dev and add the logo.
 5. In the <b>Configure SAML</b> step, configure the following in the **SAML Settings** section:
 
     * In <b>General</b> subsection:

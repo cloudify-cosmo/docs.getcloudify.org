@@ -1162,7 +1162,7 @@ You can use existing resources on Azure, regardless of whether they have been cr
 
 All {{< param product_name >}} Azure types have these properties that determine the behaviour:
 
-* `use_external_resource` - Indicate whether the resource exists or if Cloudify should create the resource.
+* `use_external_resource` - Indicate whether the resource exists or if {{< param product_name >}} should create the resource.
 * `create_if_missing` - If use_external_resource is true, and the resource does not exist, create it.
 * `use_if_exists`- If use_external_resource is false, but the resource does exist, use it.
 

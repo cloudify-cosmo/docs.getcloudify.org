@@ -870,7 +870,7 @@ For more information, and possible keyword arguments, see: [create_floating_ip](
         project_name: { get_input: project_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security_group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
   example-security-group-rule:
     type: cloudify.nodes.openstack.SecurityGroupRule
@@ -1052,7 +1052,7 @@ For more information, and possible keyword arguments, see: [create_floating_ip](
         project_name: { get_input: project_name }
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security_group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
   example-security-group-rule:
     type: cloudify.nodes.openstack.SecurityGroupRule
@@ -1360,7 +1360,7 @@ For more information, and possible keyword arguments, see: [create_port](https:/
           protocol: tcp
       resource_config:
         name: { concat: [ { get_input: name_prefix }, 'security-group' ] }
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
 
 
   example-network:
@@ -2358,7 +2358,7 @@ For more information, and possible keyword arguments, see: [create_security_grou
         project_name: { get_input: project_name }
       resource_config:
         name: example-security-group
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
       security_group_rules:
       - remote_ip_prefix: 0.0.0.0/0
         port_range_max: 22
@@ -2382,7 +2382,7 @@ For more information, and possible keyword arguments, see: [create_security_grou
       disable_default_egress_rules: true
       resource_config:
         name: example-security-group
-        description: 'A security group created by Cloudify OpenStack SDK plugin.'
+        description: 'A security group created by {{< param product_name >}} OpenStack SDK plugin.'
       security_group_rules:
        - remote_ip_prefix: 0.0.0.0/0
          port_range_max: 22
