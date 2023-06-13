@@ -18,6 +18,7 @@ You can access {{< param cfy_composer_name >}} from your browser directly via `h
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
 
+
 ## Main page
 
 When you have logged in, the default Topology page is displayed, with an empty blueprint for your use. The left side of the {{< param cfy_composer_name >}} screen displays:
