@@ -17,8 +17,6 @@ You can access {{< param cfy_composer_name >}} from your browser directly via `h
 `https://<manager-ip>/composer`.
 
 {{< param cfy_composer_name >}} uses the {{< param mgr_premium_title >}} user definitions and to access the {{< param cfy_composer_name >}}, you have to login to the {{< param cfy_console_name >}}.
-In any other case use {{< param mgr_premium_title >}} user credentials to log to {{< param cfy_composer_name >}}.
-
 
 ## Main page
 
