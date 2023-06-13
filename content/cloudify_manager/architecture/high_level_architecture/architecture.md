@@ -16,7 +16,7 @@ The {{< param cfy_manager_name >}} contains several open-source components. The 
 * [RabbitMQ](#rabbitmq)
 * [Pika](#pika)
 
-![Cloudify components]( /images/architecture/cloudify_advanced_architecture.png )
+![Cloudify components]( /images/architecture/cloudify_advanced_architecture.jpg )
 
 ## Nginx {#nginx}
 
