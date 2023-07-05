@@ -5,12 +5,8 @@ weight = 80
 alwaysopen = false
 +++
 
-## Upgrading a {{< param product_name >}} Fully Distributed Cluster (9 Nodes)
+## Upgrading an All-in-One Manager
         
-If the initial cluster installation was done using the Cloudify Cluster Manager, follow this simplified process.
-Updating a {{< param product_name >}} Fully Distributed Cluster leveraging the Cloudify Cluster Manager
-you can use the {{< param product_name >}} Cluster Manager tool to upgrade a fully distributed cluster.
-
 Upgrade your {{< param product_name >}} Cluster Manager by running:
 ```
 sudo yum install -y <Cluster Manager Installation RPM>
@@ -31,34 +27,15 @@ If the cluster was manually deployed, please follow this procedure instead:
 
 Manually updating a Fully Distributed Cluster
 Update steps:
-Install the new 7.1.0 cloudify-manager-install RPM on all the cluster nodes, by using the command: 
+Install the new 7.1.0 cloudify-manager-install RPM on the manager node, by using the command: 
 ```
 sudo yum install -y <Cloudify Manager Installation RPM> 
 ```
 
-Repeat this step on all 9 nodes.
-
-
-On all three database nodes run 
-```
-cfy_manager upgrade 
-```
-Do it one after the other, not in parallel.
-
-
-On all three RabbitMQ nodes run 
+Then run:
 ```
 cfy_manager upgrade
 ```
-Do it one after the other, not in parallel.
-
-
-On all manager nodes, run 
-```
-cfy_manager upgrade
-```
-Do it one after the other, not in parallel.
-
 
 If {{< param product_name >}} agents are used in your deployments, run the following command from just one of the manager nodes:
 ```
