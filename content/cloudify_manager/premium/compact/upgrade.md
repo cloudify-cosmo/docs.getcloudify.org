@@ -39,7 +39,7 @@ If the Cluster was manually deployed, please follow this procedure instead:
 
 ### Manually Updating a {{< param product_name >}} Compact Cluster
 
-Install the new 7.1.0 release `cloudify-manager-install` RPM on all 3 nodes of the cluster, by using the command: 
+Install the new 7 release `cloudify-manager-install` RPM on all 3 nodes of the cluster, by using the command: 
 
 ```
 sudo yum install -y <Cloudify Manager Installation RPM>
