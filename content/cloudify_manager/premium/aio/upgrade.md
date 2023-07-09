@@ -16,7 +16,7 @@ On the host that has {{< param product_name >}} Cluster Manager installed, run c
 Optional Arguments: 
 ```
 --config-path The completed cluster configuration file path. Default: ./cfy_cluster_config.yaml
---upgrade-rpm Path to a v7.1.0 cloudify-manager-install RPM. This can be either a local or remote path.
+--upgrade-rpm Path to a v7 cloudify-manager-install RPM. This can be either a local or remote path.
 Default: <Cloudify Manager Installation RPM>
 
 -v, --verbose Show verbose output
