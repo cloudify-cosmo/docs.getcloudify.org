@@ -27,7 +27,7 @@ If the cluster was manually deployed, please follow this procedure instead:
 
 Manually updating a Fully Distributed Cluster
 Update steps:
-Install the new 7.1.0 cloudify-manager-install RPM on the manager node, by using the command: 
+Install the new 7 cloudify-manager-install RPM on the manager node, by using the command: 
 ```
 sudo yum install -y <Cloudify Manager Installation RPM> 
 ```
