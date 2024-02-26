@@ -117,26 +117,26 @@ unsafe = true
 home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-question-circle'></i> <label>Product</label>"
-url = "https://cloudify.co/product"
-weight = 10
+#name = "<i class='fa fa-question-circle'></i> <label>Product</label>"
+#url = "https://cloudify.co/product"
+#weight = 10
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-address-card'></i> <label>About Us</label>"
-url = "https://cloudify.co/about"
-weight = 40
+#name = "<i class='fa fa-address-card'></i> <label>About Us</label>"
+#url = "https://cloudify.co/about"
+#weight = 40
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-phone-square'></i> <label>Support</label>"
-url = "https://cloudify.co/support"
-weight = 60
+#name = "<i class='fa fa-phone-square'></i> <label>Support</label>"
+#url = "https://cloudify.co/support"
+#weight = 60
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-cloud-download'></i> <label>Download</label>"
-url = "https://cloudify.co/download"
-weight = 70
+#name = "<i class='fa fa-cloud-download'></i> <label>Download</label>"
+#url = "https://cloudify.co/download"
+#weight = 70
 
 [[menu.shortcuts]]
-name = "<i class='fa fa-paper-plane'></i> <label>Feedback</label>"
-url = "mailto:docs@cloudify.co?subject=Cloudify Documentation Feedback"
-weight = 80
+#name = "<i class='fa fa-paper-plane'></i> <label>Feedback</label>"
+#url = "mailto:docs@cloudify.co?subject=Cloudify Documentation Feedback"
+#weight = 80
