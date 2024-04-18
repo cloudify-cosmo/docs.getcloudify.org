@@ -32,6 +32,11 @@ node_templates:
 {{< /highlight >}}
 
 See [Node Templates]({{< relref "developer/blueprints/spec-node-templates.md" >}}#capabilities-scalable-configuration) for additional details.
+{{% note title="Notes" %}}
+
+* scalable:default_instances is evaluated only on deployment creation and can't be updated.
+
+{{% /note %}}
 
 ## Scaling Policy and Scaling Groups Configuration
 To specify the initial number of instances a *group* of node templates will have as a single unit, use scaling policies and groups.
