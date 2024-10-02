@@ -62,8 +62,8 @@ The vSphere plugin requires credentials and endpoint setup information in order 
         username: { get_secret: vsphere_username }
         password: { get_secret: vcenter_password }
         host: { get_secret: vcenter_hostname_or_ip }
-        datacenter_name: { get_secret: datacenter_name }            
- {{< /highlight >}}   
+        datacenter_name: { get_secret: datacenter_name }
+ {{< /highlight >}}
 
 ## Providing Credentials as Environment Variables that are not Stored as Secrets
 If you do not use secret storage, you must provide the following credentials as environment variables:
@@ -73,8 +73,8 @@ If you do not use secret storage, you must provide the following credentials as 
         username: { vsphere_username }
         password: { vcenter_password }
         host: { vcenter_hostname_or_ip }
-        datacenter_name: { datacenter_name }        
- {{< /highlight >}}   
+        datacenter_name: { datacenter_name }
+ {{< /highlight >}}
 
 ## SSH Keys
 * You need SSH keys to be generated for both the Manager and the application VM's. If you are using the default key locations in the inputs, you can create them using the following commands:
@@ -100,7 +100,7 @@ Each type has a `connection_config` property. It can be used to pass parameters 
 {{% /tip %}}
 
 
-## cloudify.vsphere.nodes.Server
+## cloudify.nodes.vsphere.Server
 
 **Derived From:** cloudify.nodes.Compute
 
@@ -110,8 +110,22 @@ Each type has a `connection_config` property. It can be used to pass parameters 
     * `get_state`:
       * `minimum_wait_time`: Sets the minimum time in seconds that Cloudify will wait before pulling the state info.
 should be used when the os requires extra time to complete configuration and all the reported information to become available from vSphere.
-      
-      
+
+  * `cloudify.interfaces.snapshot`:
+    * `create`:
+      * `snapshot_name`: Sets the snapshot name when we create one.
+      * `snapshot_incremental`: should be true.
+      * `with_memory`: it can be either true/false.
+    * `apply`:
+      * `snapshot_name`: Sets the snapshot name that we want to apply to the server.
+      * `snapshot_incremental`: should be true.
+    * `delete`:
+      * `snapshot_name`: Sets the snapshot name that we want to delete from server snapshots.
+      * `snapshot_incremental`: should be true.
+
+**Note** when creating snapshot if with_memory is set to false which is the default value it will cause the VM to be shutdown.
+
+
 **Properties:**
 
 * `use_existing_resource` - Indicate that the VM has already been created you want to begin using it. Should be used together with the `server:name` property. _Note: {{< param cfy_manager_name >}} will not delete or perform any other lifecycle operations aside from monitoring and agent installation if configured._
@@ -120,6 +134,8 @@ should be used when the os requires extra time to complete configuration and all
     * `template` - The virtual machine template from which the server is spawned. For more information, see the [Misc section - Virtual machine template](#virtual-machine-template).
     * `cpus` - The number of CPUs.
     * `memory` - The amount of RAM, in MB.
+    * `clone_vm` - The name of virtual machines that you want to clone -don't use it with template as it will have precedence-
+    * `disk_provision_type` - Disk provisioning type if we are using datastore that is not vSan it can be one of these values [thickLazyZeroed, thickEagerZeroed, thin]
 
 * `networking` - The key-value server networking configuration.
     * `domain` - The DNS suffix to use on this server.
@@ -157,7 +173,7 @@ should be used when the os requires extra time to complete configuration and all
 
 __NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created the server during the start operation. 2.18.7 introduced the create operation. Usage of the start operation for Server creation will be disabled in a future version.__
 
-## cloudify.vsphere.nodes.WindowsServer
+## cloudify.nodes.vsphere.WindowsServer
 
 **Derived From:** cloudify.nodes.Compute
 
@@ -211,7 +227,7 @@ __NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created
     * `mac` - The MAC address of the NIC on this network.
     * `ip` - The IP address assigned to the NIC on this network, or `None` if there is no IP address.
 
-## cloudify.vsphere.nodes.Network
+## cloudify.nodes.vsphere.Network
 
 **Derived From:** cloudify.nodes.Network
 
@@ -221,14 +237,14 @@ __NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created
     * `name` - The network name.
     * `vlan_id` - The vLAN identifier that will be assigned to the network.
     * `vSwitch_name` - The vSwitch name to which the network will be connected
-* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
 
 **Runtime Properties:**
 
 * `network_name` - The name of the network on vSphere.
 * `switch_distributed` `True` if this is a distributed port group, `False` otherwise.
 
-## cloudify.vsphere.nodes.Storage
+## cloudify.nodes.vsphere.Storage
 
 **Derived From:** cloudify.nodes.Volume
 
@@ -236,7 +252,7 @@ __NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created
 
 * `storage` - The key-value storage disk configuration.
     * `storage_size` - The disk size in GB.
-* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.vsphere.server` type.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
 
 **Runtime Properties:**
 
@@ -244,6 +260,62 @@ __NOTE: {{< param product_name >}} VSphere Plugin versions before 2.18.7 created
 * `attached_vm_name` - The name of the attached server on vSphere and in the OS.
 * `datastore_file_name` - The datastore and filename on that datastore of this virtual disk. e.g. "[Datastore-1] myserver-a12b3/myserver-a12b3_1.vmdk".
 * `scsi_id` - The SCSI ID, in the form `bus_id:unit_id, e.g. "0:1"`
+
+
+## cloudify.nodes.vsphere.OvfDeployment
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+* `target` - The key-value install-target configuration.
+    * `resource_pool` - The resource pool name.
+    * `host` - The name of the target host on which the virtual machine or virtual appliance will run. Optional. If unset, the server will automatically select a target host from the resource pool.
+    * `folder` - The name of of the vCenter folder that should contain the virtual machine or virtual appliance. The folder must be virtual machine folder. Optional. If unset, the server will choose the datacenter default folder.
+* `ovf_name` - The Ovf Deployment name -would be the deployed vm name as well-.
+* `ovf_source` - The Ovf/Ova source it be local file or remote URL.
+* `datastore_name` - The Datastore name to use when deploying the Ovf.
+* `disk_provisioning` - The Disk provisioning type could be one of these values [ monolithicSparse,monolithicFlat,twoGbMaxExtentSparse,twoGbMaxExtentFlat,thin,thick,sparse,flat,seSparse ] , defaults to thin if not specified.
+* `network_mappings` - Specification of the target network to use for ovf:NetworkSection in the OVF descriptor. [key:value] list.
+* `memory` - The amount of RAM, in MB.
+* `cpus` - The cpus count.
+* `disk_size` - The disk size in GBs.
+* `cdrom_image` - the cdrom image path.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
+
+
+## cloudify.nodes.vsphere.PCIDevice
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+* `device_name` - The PCI Passthrough device name.
+* `turn_off_vm` - [true/false] control if we turn off the machine to attach PCI device.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
+
+
+## cloudify.nodes.vsphere.USBDevice
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+* `device_name` - The host usb device name.
+* `controller_type` - usb controller type associated with USB it can be [usb2/usb3] defaults to usb3.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
+
+
+## cloudify.nodes.vsphere.SerialPort
+
+**Derived From:** cloudify.nodes.Root
+
+**Properties:**
+
+* `device_name` - The PCI Passthrough device name it would be in this format [/dev/char/serial/uartX].
+* `turn_off_vm` - [true/false] control if we turn off the machine to attach PCI device.
+* `connection_config` - The `key-value` vSphere environment configuration. Same as for `cloudify.nodes.vsphere.Server` type.
+
 
 # Examples
 
@@ -306,3 +378,91 @@ example_storage:
 2. Creates a network. The network name is specified as `example_network`, the network vLAN ID as `101`, and an existing vSwitch name to connect to as `example_vSwitch`.
 
 3. Creates a virtual hard disk. The required storage size is specified as `1 GB` and this storage is added to the `example_server` vm.
+
+
+## Example 2
+
+This example will deploy ova to vSphere environment and customize cpu,memory and disk size.
+
+{{< highlight  yaml  >}}
+node_templates:
+  ova_deployment:
+    type: cloudify.nodes.vsphere.OvfDeployment
+    properties:
+      use_external_resource: false
+      connection_config: *connection_config
+      ovf_name: {get_input: ovf_name} #this would be the VM name after the deployment.
+      ovf_source: {get_input: ovf_source} #source can be URL/Local Ovf file on the manager.
+      datastore_name: {get_input: datastore_name}
+      disk_provisioning: thin
+      network_mappings:
+        - key: VM Network
+          value: vlan-1710 # network-name on vSphere environment
+      cpus: { get_input: cpus }
+      memory: { get_input: memory }
+      disk_size: 100 # this is the size of disk in GB
+      cdrom_image: { get_attribute: [ cloud_init_image, storage_image ] } # this would be the path to cloud_init_image inside the datastore.
+
+{{< /highlight >}}
+
+
+## Example 3
+
+This example will create a service on vSphere environment and attach usb, serial-port and PCI-Passthrough.
+
+{{< highlight  yaml  >}}
+node_templates:
+  vm:
+    type: cloudify.nodes.vsphere.Server
+    properties:
+      use_external_resource: false
+      connection_config: *connection_config
+      agent_config:
+        install_method: none
+      wait_ip: true
+      server:
+        name: { get_input: vm_name }
+        clone_vm: { get_input: clone_vm }
+        cpus: { get_input: cpus }
+        memory: { get_input: memory }
+      networking:
+        connect_networks:
+          - name: { get_input: external_network }
+            switch_distributed: { get_input: external_network_distributed }
+            management: false
+            use_dhcp: true
+
+  usb_device:
+    type: cloudify.nodes.vsphere.USBDevice
+    properties:
+      connection_config: *connection_config
+      device_name: 'Emtec USB DISK 3.0'
+    relationships:
+      - target: vm
+        type: cloudify.relationships.vsphere.usb_connected_to_server
+
+  serial_port:
+    type: cloudify.nodes.vsphere.SerialPort
+    properties:
+      connection_config: *connection_config
+      turn_off_vm: true
+      device_name: '/dev/char/serial/uart0'
+    relationships:
+      - target: usb_device
+        type: cloudify.relationships.depends_on
+      - target: vm
+        type: cloudify.relationships.vsphere.serial_connected_to_server
+
+  pci_device:
+    type: cloudify.nodes.vsphere.PCIDevice
+    properties:
+      connection_config: *connection_config
+      turn_off_vm: true
+      device_name: 'NetXtreme BCM5720 Gigabit Ethernet'
+    relationships:
+      - target: serial_port
+        type: cloudify.relationships.depends_on
+      - target: vm
+        type: cloudify.relationships.vsphere.pci_connected_to_server
+
+{{< /highlight >}}
